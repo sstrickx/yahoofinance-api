@@ -49,8 +49,8 @@ public class YahooFinance {
     
     /**
     * Sends a basic quotes request to Yahoo Finance. This will return a {@link Stock} object
-    * with its {@link yahoofinance.quotes.StockQuote}, {@link yahoofinance.quotes.StockStats} 
-    * and {@link yahoofinance.quotes.StockDividend} member fields 
+    * with its {@link yahoofinance.quotes.stock.StockQuote}, {@link yahoofinance.quotes.stock.StockStats} 
+    * and {@link yahoofinance.quotes.stock.StockDividend} member fields 
     * filled in with the available data.
     * Returns null if the data can't be retrieved from Yahoo Finance.
     * 
@@ -156,8 +156,8 @@ public class YahooFinance {
     /**
     * Sends a basic quotes request to Yahoo Finance. This will return a {@link Map} object
     * that links the symbols to their respective {@link Stock} objects.
-    * The Stock objects have their {@link yahoofinance.quotes.StockQuote}, {@link yahoofinance.quotes.StockStats} 
-    * and {@link yahoofinance.quotes.StockDividend} member fields 
+    * The Stock objects have their {@link yahoofinance.quotes.stock.StockQuote}, {@link yahoofinance.quotes.stock.StockStats} 
+    * and {@link yahoofinance.quotes.stock.StockDividend} member fields 
     * filled in with the available data.
     * <p>
     * All the information is retrieved in a single request to Yahoo Finance.
