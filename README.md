@@ -88,14 +88,14 @@ Stock intel = stocks.get("INTC");
 Stock airbus = stocks.get("AIR.PA");
 ```
 
-##Alternative for historical quotes on a single stock (1)
+##Alternatives for historical quotes
 If the historical quotes are not yet available, the getHistory() method will automatically send a new request to Yahoo Finance.
 ```java
 Stock google = YahooFinance.get("GOOG");
 List<HistoricalQuote> googleHistQuotes = google.getHistory();
 ```
-
-##Alternative for historical quotes on a single stock (2)
+Or you could explicitly define the from, to and Interval parameters to force a new request.
+Check the javadoc for more variations on the getHistory method
 ```java
 Calendar from = Calendar.getInstance();
 Calendar to = Calendar.getInstance();
@@ -106,4 +106,3 @@ List<HistoricalQuote> googleHistQuotes = google.getHistory(from, to, Interval.DA
 // googleHistQuotes is the same as google.getHistory() at this point
 // provide some parameters to the getHistory method to send a new request to Yahoo Finance
 ```
-
