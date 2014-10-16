@@ -14,7 +14,7 @@ double change = stock.getQuote().getChangeInPercent();
 double peg = stock.getStats().getPeg();
 double dividend = stock.getDividend().getAnnualYieldPercent();
 
-System.out.println(stock);
+stock.print();
 ```
 Output:
 ```
