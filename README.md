@@ -103,6 +103,7 @@ from.add(Calendar.YEAR, -1); // from 1 year ago
 
 Stock google = YahooFinance.get("GOOG");
 List<HistoricalQuote> googleHistQuotes = google.getHistory(from, to, Interval.DAILY);
-// googleHistQuotes == google.getHistory() at this point
+// googleHistQuotes is the same as google.getHistory() at this point
+// provide some parameters to the getHistory method to send a new request to Yahoo Finance
 ```
 
