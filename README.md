@@ -88,14 +88,14 @@ Stock intel = stocks.get("INTC");
 Stock airbus = stocks.get("AIR.PA");
 ```
 
-##Alternative to get historical quotes on a single stock (1)
+##Alternative for historical quotes on a single stock (1)
 If the historical quotes are not yet available, the getHistory() method will automatically send a new request to Yahoo Finance.
 ```java
 Stock google = YahooFinance.get("GOOG");
 List<HistoricalQuote> googleHistQuotes = google.getHistory();
 ```
 
-##Alternative to get historical quotes on a single stock (2)
+##Alternative for historical quotes on a single stock (2)
 ```java
 Calendar from = Calendar.getInstance();
 Calendar to = Calendar.getInstance();
