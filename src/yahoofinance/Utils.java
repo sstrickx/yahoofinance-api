@@ -55,6 +55,10 @@ public class Utils {
                     data = data.substring(0, data.length() - 1);
                     multiplier = 1000000;
                     break;
+                case 'K':
+                    data = data.substring(0, data.length() - 1);
+                    multiplier = 1000;
+                    break;
             }
             result = Double.parseDouble(data) * multiplier;
         } catch (NumberFormatException e) {
