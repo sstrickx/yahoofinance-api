@@ -121,7 +121,7 @@ public class Utils {
         try {
             Calendar today = Calendar.getInstance(TimeZone.getTimeZone(YahooFinance.TIMEZONE));
             Calendar parsedDate = Calendar.getInstance(TimeZone.getTimeZone(YahooFinance.TIMEZONE));
-            parsedDate.setTime(format.parse(date));
+            parsedDate.setTime(format.parse(date.trim()));
             
             if(parsedDate.get(Calendar.YEAR) == 1970) {
                 parsedDate.set(Calendar.YEAR, today.get(Calendar.YEAR));
