@@ -28,7 +28,7 @@ public class FxQuotesRequest extends QuotesRequest<FxQuote> {
     protected FxQuote parseCSVLine(String line) {
         String[] split = Utils.stripOverhead(line).split(YahooFinance.QUOTES_CSV_DELIMITER);
         if(split.length >= 2) {
-            return new FxQuote(split[0], Utils.getDouble(split[1]));
+            return new FxQuote(split[0], Utils.getBigDecimal(split[1]));
         }
         return null;
     }
