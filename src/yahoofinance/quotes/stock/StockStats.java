@@ -1,6 +1,8 @@
 
 package yahoofinance.quotes.stock;
 
+import java.math.BigDecimal;
+
 import yahoofinance.Utils;
 
 /**
@@ -11,32 +13,32 @@ public class StockStats {
     
     private final String symbol;
     
-    private double marketCap;
+    private BigDecimal marketCap;
     private long sharesFloat;
     private long sharesOutstanding;
     private long sharesOwned;
     
-    private double eps;
-    private double pe;
-    private double peg;
+    private BigDecimal eps;
+    private BigDecimal pe;
+    private BigDecimal peg;
     
-    private double epsEstimateCurrentYear;
-    private double epsEstimateNextQuarter;
-    private double epsEstimateNextYear;
+    private BigDecimal epsEstimateCurrentYear;
+    private BigDecimal epsEstimateNextQuarter;
+    private BigDecimal epsEstimateNextYear;
     
-    private double priceBook;
-    private double priceSales;
-    private double bookValuePerShare;
+    private BigDecimal priceBook;
+    private BigDecimal priceSales;
+    private BigDecimal bookValuePerShare;
     
-    private double revenue; // ttm
-    private double EBITDA; // ttm
-    private double oneYearTargetPrice;
+    private BigDecimal revenue; // ttm
+    private BigDecimal EBITDA; // ttm
+    private BigDecimal oneYearTargetPrice;
     
     public StockStats(String symbol) {
         this.symbol = symbol;
     }
     
-    public double getROE() {
+    public BigDecimal getROE() {
         return Utils.getPercent(this.EBITDA, this.marketCap);
     }
 
@@ -44,11 +46,11 @@ public class StockStats {
         return symbol;
     }
     
-    public double getMarketCap() {
+    public BigDecimal getMarketCap() {
         return marketCap;
     }
 
-    public void setMarketCap(double marketCap) {
+    public void setMarketCap(BigDecimal marketCap) {
         this.marketCap = marketCap;
     }
 
@@ -76,99 +78,99 @@ public class StockStats {
         this.sharesOwned = sharesOwned;
     }
 
-    public double getEps() {
+    public BigDecimal getEps() {
         return eps;
     }
 
-    public void setEps(double eps) {
+    public void setEps(BigDecimal eps) {
         this.eps = eps;
     }
 
-    public double getPe() {
+    public BigDecimal getPe() {
         return pe;
     }
 
-    public void setPe(double pe) {
+    public void setPe(BigDecimal pe) {
         this.pe = pe;
     }
 
-    public double getPeg() {
+    public BigDecimal getPeg() {
         return peg;
     }
 
-    public void setPeg(double peg) {
+    public void setPeg(BigDecimal peg) {
         this.peg = peg;
     }
 
-    public double getEpsEstimateCurrentYear() {
+    public BigDecimal getEpsEstimateCurrentYear() {
         return epsEstimateCurrentYear;
     }
 
-    public void setEpsEstimateCurrentYear(double epsEstimateCurrentYear) {
+    public void setEpsEstimateCurrentYear(BigDecimal epsEstimateCurrentYear) {
         this.epsEstimateCurrentYear = epsEstimateCurrentYear;
     }
 
-    public double getEpsEstimateNextQuarter() {
+    public BigDecimal getEpsEstimateNextQuarter() {
         return epsEstimateNextQuarter;
     }
 
-    public void setEpsEstimateNextQuarter(double epsEstimateNextQuarter) {
+    public void setEpsEstimateNextQuarter(BigDecimal epsEstimateNextQuarter) {
         this.epsEstimateNextQuarter = epsEstimateNextQuarter;
     }
 
-    public double getEpsEstimateNextYear() {
+    public BigDecimal getEpsEstimateNextYear() {
         return epsEstimateNextYear;
     }
 
-    public void setEpsEstimateNextYear(double epsEstimateNextYear) {
+    public void setEpsEstimateNextYear(BigDecimal epsEstimateNextYear) {
         this.epsEstimateNextYear = epsEstimateNextYear;
     }
 
-    public double getPriceBook() {
+    public BigDecimal getPriceBook() {
         return priceBook;
     }
 
-    public void setPriceBook(double priceBook) {
+    public void setPriceBook(BigDecimal priceBook) {
         this.priceBook = priceBook;
     }
 
-    public double getPriceSales() {
+    public BigDecimal getPriceSales() {
         return priceSales;
     }
 
-    public void setPriceSales(double priceSales) {
+    public void setPriceSales(BigDecimal priceSales) {
         this.priceSales = priceSales;
     }
 
-    public double getBookValuePerShare() {
+    public BigDecimal getBookValuePerShare() {
         return bookValuePerShare;
     }
 
-    public void setBookValuePerShare(double bookValuePerShare) {
+    public void setBookValuePerShare(BigDecimal bookValuePerShare) {
         this.bookValuePerShare = bookValuePerShare;
     }
 
-    public double getRevenue() {
+    public BigDecimal getRevenue() {
         return revenue;
     }
 
-    public void setRevenue(double revenue) {
+    public void setRevenue(BigDecimal revenue) {
         this.revenue = revenue;
     }
 
-    public double getEBITDA() {
+    public BigDecimal getEBITDA() {
         return EBITDA;
     }
 
-    public void setEBITDA(double EBITDA) {
+    public void setEBITDA(BigDecimal EBITDA) {
         this.EBITDA = EBITDA;
     }
 
-    public double getOneYearTargetPrice() {
+    public BigDecimal getOneYearTargetPrice() {
         return oneYearTargetPrice;
     }
 
-    public void setOneYearTargetPrice(double oneYearTargetPrice) {
+    public void setOneYearTargetPrice(BigDecimal oneYearTargetPrice) {
         this.oneYearTargetPrice = oneYearTargetPrice;
     }
     

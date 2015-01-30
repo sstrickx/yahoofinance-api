@@ -116,11 +116,11 @@ public class HistQuotesRequest {
         String[] data = line.split(YahooFinance.QUOTES_CSV_DELIMITER);
         return new HistoricalQuote(this.symbol,
                 Utils.parseHistDate(data[0]),
-                Utils.getDouble(data[1]),
-                Utils.getDouble(data[3]),
-                Utils.getDouble(data[2]),
-                Utils.getDouble(data[4]),
-                Utils.getDouble(data[6]),
+                Utils.getBigDecimal(data[1]),
+                Utils.getBigDecimal(data[3]),
+                Utils.getBigDecimal(data[2]),
+                Utils.getBigDecimal(data[4]),
+                Utils.getBigDecimal(data[6]),
                 Utils.getLong(data[5])
         );
     }

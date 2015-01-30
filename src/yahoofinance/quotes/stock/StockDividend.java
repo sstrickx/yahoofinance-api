@@ -1,6 +1,7 @@
 
 package yahoofinance.quotes.stock;
 
+import java.math.BigDecimal;
 import java.util.Calendar;
 
 /**
@@ -13,14 +14,14 @@ public class StockDividend {
     
     private Calendar payDate;
     private Calendar exDate;
-    private double annualYield;
-    private double annualYieldPercent;
+    private BigDecimal annualYield;
+    private BigDecimal annualYieldPercent;
     
     public StockDividend(String symbol) {
         this.symbol = symbol;
     }
     
-    public StockDividend(String symbol, Calendar payDate, Calendar exDate, double annualYield, double annualYieldPercent) {
+    public StockDividend(String symbol, Calendar payDate, Calendar exDate, BigDecimal annualYield, BigDecimal annualYieldPercent) {
         this(symbol);
         this.payDate = payDate;
         this.exDate = exDate;
@@ -48,19 +49,19 @@ public class StockDividend {
         this.exDate = exDate;
     }
     
-    public double getAnnualYield() {
+    public BigDecimal getAnnualYield() {
         return annualYield;
     }
     
-    public void setAnnualYield(double annualYield) {
+    public void setAnnualYield(BigDecimal annualYield) {
         this.annualYield = annualYield;
     }
     
-    public double getAnnualYieldPercent() {
+    public BigDecimal getAnnualYieldPercent() {
         return annualYieldPercent;
     }
     
-    public void setAnnualYieldPercent(double annualYieldPercent) {
+    public void setAnnualYieldPercent(BigDecimal annualYieldPercent) {
         this.annualYieldPercent = annualYieldPercent;
     }
     

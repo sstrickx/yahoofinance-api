@@ -1,6 +1,7 @@
 package yahoofinance;
 
 import java.io.UnsupportedEncodingException;
+import java.math.BigDecimal;
 import java.net.URLEncoder;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -35,6 +36,32 @@ public class Utils {
     
     private static boolean isParseable(String data) {
         return !(data == null || data.equals("N/A") || data.equals("-") || data.equals(""));
+    }
+    
+    public static BigDecimal getBigDecimal(String data) {
+    	BigDecimal result = new BigDecimal("0.00");
+    	if (!Utils.isParseable(data)) {
+            return result;
+        }
+    	try {
+            data = Utils.cleanNumberString(data);
+            char lastChar = data.charAt(data.length() - 1);
+            BigDecimal multiplier = new BigDecimal(1);
+            switch (lastChar) {
+                case 'B':
+                    data = data.substring(0, data.length() - 1);
+                    multiplier = new BigDecimal(1000000000);
+                    break;
+                case 'M':
+                    data = data.substring(0, data.length() - 1);
+                    multiplier = new BigDecimal(1000000);
+                    break;
+            }
+            result = new BigDecimal(data).multiply(multiplier);
+        } catch (NumberFormatException e) {
+            YahooFinance.logger.log(Level.INFO, "Failed to parse: " + data, e);
+        }
+    	return result;
     }
     
     public static double getDouble(String data) {
@@ -93,6 +120,14 @@ public class Utils {
             YahooFinance.logger.log(Level.INFO, "Failed to parse: " + data, e);
         }
         return result;
+    }
+    
+    public static BigDecimal getPercent(BigDecimal numerator, BigDecimal denominator) {
+    	final BigDecimal zero = new BigDecimal(0);
+        if(denominator.equals(zero)) {
+            return zero;
+        }
+        return numerator.divide(denominator, 2, BigDecimal.ROUND_DOWN);
     }
     
     public static double getPercent(double numerator, double denominator) {
