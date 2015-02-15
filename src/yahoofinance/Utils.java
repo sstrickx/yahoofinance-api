@@ -1,6 +1,7 @@
 package yahoofinance;
 
 import java.io.UnsupportedEncodingException;
+import java.math.BigDecimal;
 import java.net.URLEncoder;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -16,6 +17,11 @@ import java.util.logging.Level;
  */
 public class Utils {
 
+    public static final BigDecimal HUNDRED = new BigDecimal(100);
+    public static final BigDecimal THOUSAND = new BigDecimal(1000);
+    public static final BigDecimal MILLION = new BigDecimal(1000000);
+    public static final BigDecimal BILLION = new BigDecimal(1000000000);
+        
     public static String join(String[] data, String d) {
         if (data.length == 0) {
             return "";
@@ -28,15 +34,45 @@ public class Utils {
         }
         return sb.append(data[i]).toString();
     }
-    
+
     private static String cleanNumberString(String data) {
         return Utils.join(data.trim().split(","), "");
     }
-    
+
     private static boolean isParseable(String data) {
         return !(data == null || data.equals("N/A") || data.equals("-") || data.equals(""));
     }
-    
+
+    public static BigDecimal getBigDecimal(String data) {
+        BigDecimal result = BigDecimal.ZERO;
+        if (!Utils.isParseable(data)) {
+            return result;
+        }
+        try {
+            data = Utils.cleanNumberString(data);
+            char lastChar = data.charAt(data.length() - 1);
+            BigDecimal multiplier = BigDecimal.ONE;
+            switch (lastChar) {
+                case 'B':
+                    data = data.substring(0, data.length() - 1);
+                    multiplier = BILLION;
+                    break;
+                case 'M':
+                    data = data.substring(0, data.length() - 1);
+                    multiplier = MILLION;
+                    break;
+                case 'K':
+                    data = data.substring(0, data.length() - 1);
+                    multiplier = THOUSAND;
+                    break;
+            }
+            result = new BigDecimal(data).multiply(multiplier);
+        } catch (NumberFormatException e) {
+            YahooFinance.logger.log(Level.INFO, "Failed to parse: " + data, e);
+        }
+        return result;
+    }
+
     public static double getDouble(String data) {
         double result = 0.00;
         if (!Utils.isParseable(data)) {
@@ -80,43 +116,52 @@ public class Utils {
         }
         return result;
     }
-    
+
     public static long getLong(String data) {
         long result = 0;
         if (!Utils.isParseable(data)) {
             return result;
         }
         try {
-            data  = Utils.cleanNumberString(data);
+            data = Utils.cleanNumberString(data);
             result = Long.parseLong(data);
         } catch (NumberFormatException e) {
             YahooFinance.logger.log(Level.INFO, "Failed to parse: " + data, e);
         }
         return result;
     }
+
+    public static BigDecimal getPercent(BigDecimal numerator, BigDecimal denominator) {
+        if (denominator.equals(BigDecimal.ZERO)) {
+            return BigDecimal.ZERO;
+        }
+        return numerator.divide(denominator, 4, BigDecimal.ROUND_HALF_EVEN)
+                .multiply(HUNDRED).setScale(2, BigDecimal.ROUND_HALF_EVEN);
+    }
     
     public static double getPercent(double numerator, double denominator) {
-        if(denominator == 0) {
+        if (denominator == 0) {
             return 0;
         }
-        return numerator / denominator;
+        return (numerator / denominator) * 100;
     }
 
     private static String getDividendDateFormat(String date) {
-        if(date.matches("[0-9][0-9]-...-[0-9][0-9]")) {
+        if (date.matches("[0-9][0-9]-...-[0-9][0-9]")) {
             return "dd-MMM-yy";
-        } else if(date.matches("[0-9]-...-[0-9][0-9]")) {
+        } else if (date.matches("[0-9]-...-[0-9][0-9]")) {
             return "d-MMM-yy";
         } else {
             return "MMM d";
         }
     }
+
     /**
-     * Used to parse the dividend dates.
-     * Returns null if the date cannot be parsed.
-     * 
-     * @param date      String received that represents the date
-     * @return          Calendar object representing the parsed date
+     * Used to parse the dividend dates. Returns null if the date cannot be
+     * parsed.
+     *
+     * @param date String received that represents the date
+     * @return Calendar object representing the parsed date
      */
     public static Calendar parseDividendDate(String date) {
         if (!Utils.isParseable(date)) {
@@ -129,40 +174,40 @@ public class Utils {
             Calendar today = Calendar.getInstance(TimeZone.getTimeZone(YahooFinance.TIMEZONE));
             Calendar parsedDate = Calendar.getInstance(TimeZone.getTimeZone(YahooFinance.TIMEZONE));
             parsedDate.setTime(format.parse(date));
-            
-            if(parsedDate.get(Calendar.YEAR) == 1970) {
+
+            if (parsedDate.get(Calendar.YEAR) == 1970) {
                 // Not really clear which year the dividend date is... making a reasonable guess.
                 int monthDiff = parsedDate.get(Calendar.MONTH) - today.get(Calendar.MONTH);
                 int year = today.get(Calendar.YEAR);
-                if(monthDiff > 6) {
+                if (monthDiff > 6) {
                     year -= 1;
-                } else if(monthDiff < -6) {
+                } else if (monthDiff < -6) {
                     year += 1;
                 }
                 parsedDate.set(Calendar.YEAR, year);
             }
-            
+
             return parsedDate;
-        } catch(ParseException ex) {
+        } catch (ParseException ex) {
             YahooFinance.logger.log(Level.SEVERE, ex.getMessage(), ex);
             return null;
         }
     }
-    
+
     /**
-     * Used to parse the last trade date / time.
-     * Returns null if the date / time cannot be parsed.
-     * 
-     * @param date      String received that represents the date
-     * @param time      String received that represents the time
-     * @return          Calendar object with the parsed datetime
+     * Used to parse the last trade date / time. Returns null if the date / time
+     * cannot be parsed.
+     *
+     * @param date String received that represents the date
+     * @param time String received that represents the time
+     * @return Calendar object with the parsed datetime
      */
     public static Calendar parseDateTime(String date, String time) {
         String datetime = date + " " + time;
         SimpleDateFormat format = new SimpleDateFormat("M/d/yyyy h:mma");
         format.setTimeZone(TimeZone.getTimeZone(YahooFinance.TIMEZONE));
         try {
-            if(Utils.isParseable(date) && Utils.isParseable(time)) {
+            if (Utils.isParseable(date) && Utils.isParseable(time)) {
                 Calendar c = Calendar.getInstance();
                 c.setTime(format.parse(datetime));
                 return c;
@@ -172,12 +217,12 @@ public class Utils {
         }
         return null;
     }
-    
+
     public static Calendar parseHistDate(String date) {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         format.setTimeZone(TimeZone.getTimeZone(YahooFinance.TIMEZONE));
         try {
-            if(Utils.isParseable(date)) {
+            if (Utils.isParseable(date)) {
                 Calendar c = Calendar.getInstance();
                 c.setTime(format.parse(date));
                 return c;
@@ -187,11 +232,11 @@ public class Utils {
         }
         return null;
     }
-    
+
     public static String getURLParameters(Map<String, String> params) {
         StringBuilder sb = new StringBuilder();
-        
-        for(Entry<String, String> entry : params.entrySet()) {
+
+        for (Entry<String, String> entry : params.entrySet()) {
             if (sb.length() > 0) {
                 sb.append("&");
             }
@@ -206,20 +251,20 @@ public class Utils {
             }
             sb.append(String.format("%s=%s", key, value));
         }
-        return sb.toString();     
+        return sb.toString();
     }
-    
+
     /**
-     * Strips the unwanted chars from a line returned in the CSV
+     * Strips the unwanted chars from a line returned in the CSV 
      * Used for parsing the FX CSV lines
-     * 
-     * @param line      the original CSV line
-     * @return          the stripped line
+     *
+     * @param line the original CSV line
+     * @return the stripped line
      */
     public static String stripOverhead(String line) {
         return line.replaceAll("\"", "");
     }
-    
+
     public static String unescape(String data) {
         StringBuilder buffer = new StringBuilder(data.length());
         for (int i = 0; i < data.length(); i++) {

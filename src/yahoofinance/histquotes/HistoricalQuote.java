@@ -1,6 +1,7 @@
 
 package yahoofinance.histquotes;
 
+import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
@@ -14,18 +15,18 @@ public class HistoricalQuote {
     
     private Calendar date;
     
-    private double open;
-    private double low;
-    private double high;
-    private double close;
+    private BigDecimal open;
+    private BigDecimal low;
+    private BigDecimal high;
+    private BigDecimal close;
     
-    private double adjClose;
+    private BigDecimal adjClose;
     
     private long volume;
     
     public HistoricalQuote() {}
 
-    public HistoricalQuote(String symbol, Calendar date, double open, double low, double high, double close, double adjClose, long volume) {
+    public HistoricalQuote(String symbol, Calendar date, BigDecimal open, BigDecimal low, BigDecimal high, BigDecimal close, BigDecimal adjClose, long volume) {
         this.symbol = symbol;
         this.date = date;
         this.open = open;
@@ -52,11 +53,11 @@ public class HistoricalQuote {
         this.date = date;
     }
 
-    public double getOpen() {
+    public BigDecimal getOpen() {
         return open;
     }
 
-    public void setOpen(double open) {
+    public void setOpen(BigDecimal open) {
         this.open = open;
     }
 
@@ -64,11 +65,11 @@ public class HistoricalQuote {
      * 
      * @return      the intra-day low
      */
-    public double getLow() {
+    public BigDecimal getLow() {
         return low;
     }
 
-    public void setLow(double low) {
+    public void setLow(BigDecimal low) {
         this.low = low;
     }
     
@@ -76,19 +77,19 @@ public class HistoricalQuote {
      * 
      * @return      the intra-day high
      */
-    public double getHigh() {
+    public BigDecimal getHigh() {
         return high;
     }
 
-    public void setHigh(double high) {
+    public void setHigh(BigDecimal high) {
         this.high = high;
     }
 
-    public double getClose() {
+    public BigDecimal getClose() {
         return close;
     }
 
-    public void setClose(double close) {
+    public void setClose(BigDecimal close) {
         this.close = close;
     }
 
@@ -100,11 +101,11 @@ public class HistoricalQuote {
      * that an investor earned if shares were purchased on that date.
      * @return      the adjusted close price
      */
-    public double getAdjClose() {
+    public BigDecimal getAdjClose() {
         return adjClose;
     }
 
-    public void setAdjClose(double adjClose) {
+    public void setAdjClose(BigDecimal adjClose) {
         this.adjClose = adjClose;
     }
 

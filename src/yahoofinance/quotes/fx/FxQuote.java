@@ -1,6 +1,8 @@
 
 package yahoofinance.quotes.fx;
 
+import java.math.BigDecimal;
+
 /**
  *
  * @author Stijn Strickx
@@ -8,14 +10,14 @@ package yahoofinance.quotes.fx;
 public class FxQuote {
     
     private String symbol;
-    private double price;
+    private BigDecimal price;
     
     public FxQuote(String symbol) {
         this.symbol = symbol;
-        this.price = 0;
+        this.price = BigDecimal.ZERO;
     }
     
-    public FxQuote(String symbol, double price) {
+    public FxQuote(String symbol, BigDecimal price) {
         this.symbol = symbol;
         this.price = price;
     }
@@ -34,8 +36,8 @@ public class FxQuote {
      * 
      * @return  the requested FX rate
      */
-    public double getPrice() {
-        if(price == 0) {
+    public BigDecimal getPrice() {
+        if(price.equals(BigDecimal.ZERO)) {
             return this.getPrice(true);
         }
         return price;
@@ -54,7 +56,7 @@ public class FxQuote {
      * @param refresh   indicates whether the data should be requested again to Yahoo Finance
      * @return          the requested FX rate
      */
-    public double getPrice(boolean refresh) {
+    public BigDecimal getPrice(boolean refresh) {
         if(refresh) {
             FxQuotesRequest request = new FxQuotesRequest(this.symbol);
             this.price = request.getSingleResult().getPrice();
@@ -62,7 +64,7 @@ public class FxQuote {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
     

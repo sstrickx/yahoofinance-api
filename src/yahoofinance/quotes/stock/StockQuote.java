@@ -1,7 +1,9 @@
 
 package yahoofinance.quotes.stock;
 
+import java.math.BigDecimal;
 import java.util.Calendar;
+
 import yahoofinance.Utils;
 
 /**
@@ -12,22 +14,22 @@ public class StockQuote {
     
     private final String symbol;
     
-    private double ask;
+    private BigDecimal ask;
     private int askSize;
-    private double bid;
+    private BigDecimal bid;
     private int bidSize;
-    private double price;
+    private BigDecimal price;
     private int lastTradeSize;
     private Calendar lastTradeTime;
-    private double open;
-    private double previousClose;
-    private double dayLow;
-    private double dayHigh;
+    private BigDecimal open;
+    private BigDecimal previousClose;
+    private BigDecimal dayLow;
+    private BigDecimal dayHigh;
     
-    private double yearLow;
-    private double yearHigh;
-    private double priceAvg50;
-    private double priceAvg200;
+    private BigDecimal yearLow;
+    private BigDecimal yearHigh;
+    private BigDecimal priceAvg50;
+    private BigDecimal priceAvg200;
     
     private long volume;
     private long avgVolume;
@@ -40,15 +42,15 @@ public class StockQuote {
      * 
      * @return      difference between current price and previous close
      */
-    public double getChange() {
-        return this.price - this.previousClose;
+    public BigDecimal getChange() {
+        return this.price.subtract(this.previousClose);
     }
     
     /**
      * 
      * @return      change relative to previous close
      */
-    public double getChangeInPercent() {
+    public BigDecimal getChangeInPercent() {
         return Utils.getPercent(this.getChange(), this.previousClose);
     }
     
@@ -56,15 +58,15 @@ public class StockQuote {
      * 
      * @return      difference between current price and year low
      */
-    public double getChangeFromYearLow() {
-        return this.price - this.yearLow;
+    public BigDecimal getChangeFromYearLow() {
+        return this.price.subtract(this.yearLow);
     }
     
     /**
      * 
      * @return      change from year low relative to year low
      */
-    public double getChangeFromYearLowInPercent() {
+    public BigDecimal getChangeFromYearLowInPercent() {
         return Utils.getPercent(this.getChangeFromYearLow(), this.yearLow);
     }
     
@@ -72,15 +74,15 @@ public class StockQuote {
      * 
      * @return      difference between current price and year high
      */
-    public double getChangeFromYearHigh() {
-        return this.price - this.yearHigh;
+    public BigDecimal getChangeFromYearHigh() {
+        return this.price.subtract(this.yearHigh);
     }
     
     /**
      * 
      * @return      change from year high relative to year high
      */
-    public double getChangeFromYearHighInPercent() {
+    public BigDecimal getChangeFromYearHighInPercent() {
         return Utils.getPercent(this.getChangeFromYearHigh(), this.yearHigh);
     }
     
@@ -88,15 +90,15 @@ public class StockQuote {
      * 
      * @return      difference between current price and 50 day moving average
      */
-    public double getChangeFromAvg50() {
-        return this.price - this.priceAvg50;
+    public BigDecimal getChangeFromAvg50() {
+        return this.price.subtract(this.priceAvg50);
     }
     
     /**
      * 
      * @return      change from 50 day moving average relative to 50 day moving average
      */
-    public double getChangeFromAvg50InPercent() {
+    public BigDecimal getChangeFromAvg50InPercent() {
         return Utils.getPercent(this.getChangeFromAvg50(), this.priceAvg50);
     }
     
@@ -104,15 +106,15 @@ public class StockQuote {
      * 
      * @return      difference between current price and 200 day moving average
      */
-    public double getChangeFromAvg200() {
-        return this.price - this.priceAvg200;
+    public BigDecimal getChangeFromAvg200() {
+        return this.price.subtract(this.priceAvg200);
     }
     
     /**
      * 
      * @return      change from 200 day moving average relative to 200 day moving average
      */
-    public double getChangeFromAvg200InPercent() {
+    public BigDecimal getChangeFromAvg200InPercent() {
         return Utils.getPercent(this.getChangeFromAvg200(), this.priceAvg200);
     }
     
@@ -120,11 +122,11 @@ public class StockQuote {
         return symbol;
     }
     
-    public double getAsk() {
+    public BigDecimal getAsk() {
         return ask;
     }
     
-    public void setAsk(double ask) {
+    public void setAsk(BigDecimal ask) {
         this.ask = ask;
     }
     
@@ -136,11 +138,11 @@ public class StockQuote {
         this.askSize = askSize;
     }
     
-    public double getBid() {
+    public BigDecimal getBid() {
         return bid;
     }
     
-    public void setBid(double bid) {
+    public void setBid(BigDecimal bid) {
         this.bid = bid;
     }
     
@@ -152,11 +154,11 @@ public class StockQuote {
         this.bidSize = bidSize;
     }
     
-    public double getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
     
-    public void setPrice(double price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
     
@@ -176,51 +178,51 @@ public class StockQuote {
         this.lastTradeTime = lastTradeTime;
     }
     
-    public double getOpen() {
+    public BigDecimal getOpen() {
         return open;
     }
     
-    public void setOpen(double open) {
+    public void setOpen(BigDecimal open) {
         this.open = open;
     }
     
-    public double getPreviousClose() {
+    public BigDecimal getPreviousClose() {
         return previousClose;
     }
     
-    public void setPreviousClose(double previousClose) {
+    public void setPreviousClose(BigDecimal previousClose) {
         this.previousClose = previousClose;
     }
     
-    public double getDayLow() {
+    public BigDecimal getDayLow() {
         return dayLow;
     }
     
-    public void setDayLow(double dayLow) {
+    public void setDayLow(BigDecimal dayLow) {
         this.dayLow = dayLow;
     }
     
-    public double getDayHigh() {
+    public BigDecimal getDayHigh() {
         return dayHigh;
     }
     
-    public void setDayHigh(double dayHigh) {
+    public void setDayHigh(BigDecimal dayHigh) {
         this.dayHigh = dayHigh;
     }
     
-    public double getYearLow() {
+    public BigDecimal getYearLow() {
         return yearLow;
     }
     
-    public void setYearLow(double yearLow) {
+    public void setYearLow(BigDecimal yearLow) {
         this.yearLow = yearLow;
     }
     
-    public double getYearHigh() {
+    public BigDecimal getYearHigh() {
         return yearHigh;
     }
     
-    public void setYearHigh(double yearHigh) {
+    public void setYearHigh(BigDecimal yearHigh) {
         this.yearHigh = yearHigh;
     }
     
@@ -228,11 +230,11 @@ public class StockQuote {
      * 
      * @return      50 day moving average
      */
-    public double getPriceAvg50() {
+    public BigDecimal getPriceAvg50() {
         return priceAvg50;
     }
     
-    public void setPriceAvg50(double priceAvg50) {
+    public void setPriceAvg50(BigDecimal priceAvg50) {
         this.priceAvg50 = priceAvg50;
     }
     
@@ -240,11 +242,11 @@ public class StockQuote {
      * 
      * @return      200 day moving average
      */
-    public double getPriceAvg200() {
+    public BigDecimal getPriceAvg200() {
         return priceAvg200;
     }
     
-    public void setPriceAvg200(double priceAvg200) {
+    public void setPriceAvg200(BigDecimal priceAvg200) {
         this.priceAvg200 = priceAvg200;
     }
     
