@@ -14,7 +14,7 @@ public class FxQuote {
     
     public FxQuote(String symbol) {
         this.symbol = symbol;
-        this.price = new BigDecimal(0);
+        this.price = BigDecimal.ZERO;
     }
     
     public FxQuote(String symbol, BigDecimal price) {
@@ -37,8 +37,7 @@ public class FxQuote {
      * @return  the requested FX rate
      */
     public BigDecimal getPrice() {
-    	final BigDecimal zero = new BigDecimal(0);
-        if(price.equals(zero)) {
+        if(price.equals(BigDecimal.ZERO)) {
             return this.getPrice(true);
         }
         return price;
