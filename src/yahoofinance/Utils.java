@@ -17,6 +17,11 @@ import java.util.logging.Level;
  */
 public class Utils {
 
+    public static final BigDecimal HUNDRED = new BigDecimal(100);
+    public static final BigDecimal THOUSAND = new BigDecimal(1000);
+    public static final BigDecimal MILLION = new BigDecimal(1000000);
+    public static final BigDecimal BILLION = new BigDecimal(1000000000);
+        
     public static String join(String[] data, String d) {
         if (data.length == 0) {
             return "";
@@ -50,15 +55,15 @@ public class Utils {
             switch (lastChar) {
                 case 'B':
                     data = data.substring(0, data.length() - 1);
-                    multiplier = new BigDecimal(1000000000);
+                    multiplier = BILLION;
                     break;
                 case 'M':
                     data = data.substring(0, data.length() - 1);
-                    multiplier = new BigDecimal(1000000);
+                    multiplier = MILLION;
                     break;
                 case 'K':
                     data = data.substring(0, data.length() - 1);
-                    multiplier = new BigDecimal(1000);
+                    multiplier = THOUSAND;
                     break;
             }
             result = new BigDecimal(data).multiply(multiplier);
@@ -130,14 +135,15 @@ public class Utils {
         if (denominator.equals(BigDecimal.ZERO)) {
             return BigDecimal.ZERO;
         }
-        return numerator.divide(denominator, 2, BigDecimal.ROUND_HALF_UP);
+        return numerator.divide(denominator, 4, BigDecimal.ROUND_HALF_EVEN)
+                .multiply(HUNDRED).setScale(2, BigDecimal.ROUND_HALF_EVEN);
     }
-
+    
     public static double getPercent(double numerator, double denominator) {
         if (denominator == 0) {
             return 0;
         }
-        return numerator / denominator;
+        return (numerator / denominator) * 100;
     }
 
     private static String getDividendDateFormat(String date) {
