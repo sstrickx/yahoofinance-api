@@ -11,10 +11,10 @@ Please check the javadoc (available in dist directory) to get a complete overvie
 ```java
 Stock stock = YahooFinance.get("INTC");
 
-double price = stock.getQuote().getPrice();
-double change = stock.getQuote().getChangeInPercent();
-double peg = stock.getStats().getPeg();
-double dividend = stock.getDividend().getAnnualYieldPercent();
+BigDecimal price = stock.getQuote().getPrice();
+BigDecimal change = stock.getQuote().getChangeInPercent();
+BigDecimal peg = stock.getStats().getPeg();
+BigDecimal dividend = stock.getDividend().getAnnualYieldPercent();
 
 stock.print();
 ```

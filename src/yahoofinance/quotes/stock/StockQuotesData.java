@@ -28,23 +28,23 @@ public class StockQuotesData {
         String symbol = this.getValue(QuotesProperty.Symbol);
         StockQuote quote = new StockQuote(symbol);
         
-        quote.setPrice(Utils.getDouble(this.getValue(QuotesProperty.LastTradePriceOnly)));
+        quote.setPrice(Utils.getBigDecimal(this.getValue(QuotesProperty.LastTradePriceOnly)));
         quote.setLastTradeSize(Utils.getInt(this.getValue(QuotesProperty.LastTradeSize)));
-        quote.setAsk(Utils.getDouble(this.getValue(QuotesProperty.AskRealtime)));
+        quote.setAsk(Utils.getBigDecimal(this.getValue(QuotesProperty.AskRealtime)));
         quote.setAskSize(Utils.getInt(this.getValue(QuotesProperty.AskSize)));
-        quote.setBid(Utils.getDouble(this.getValue(QuotesProperty.BidRealtime)));
+        quote.setBid(Utils.getBigDecimal(this.getValue(QuotesProperty.BidRealtime)));
         quote.setBidSize(Utils.getInt(this.getValue(QuotesProperty.BidSize)));
-        quote.setOpen(Utils.getDouble(this.getValue(QuotesProperty.Open)));
-        quote.setPreviousClose(Utils.getDouble(this.getValue(QuotesProperty.PreviousClose)));
-        quote.setDayHigh(Utils.getDouble(this.getValue(QuotesProperty.DaysHigh)));
-        quote.setDayLow(Utils.getDouble(this.getValue(QuotesProperty.DaysLow)));
+        quote.setOpen(Utils.getBigDecimal(this.getValue(QuotesProperty.Open)));
+        quote.setPreviousClose(Utils.getBigDecimal(this.getValue(QuotesProperty.PreviousClose)));
+        quote.setDayHigh(Utils.getBigDecimal(this.getValue(QuotesProperty.DaysHigh)));
+        quote.setDayLow(Utils.getBigDecimal(this.getValue(QuotesProperty.DaysLow)));
         
         quote.setLastTradeTime(Utils.parseDateTime(this.getValue(QuotesProperty.LastTradeDate), this.getValue(QuotesProperty.LastTradeTime)));
         
-        quote.setYearHigh(Utils.getDouble(this.getValue(QuotesProperty.YearHigh)));
-        quote.setYearLow(Utils.getDouble(this.getValue(QuotesProperty.YearLow)));
-        quote.setPriceAvg50(Utils.getDouble(this.getValue(QuotesProperty.FiftydayMovingAverage)));
-        quote.setPriceAvg200(Utils.getDouble(this.getValue(QuotesProperty.TwoHundreddayMovingAverage)));
+        quote.setYearHigh(Utils.getBigDecimal(this.getValue(QuotesProperty.YearHigh)));
+        quote.setYearLow(Utils.getBigDecimal(this.getValue(QuotesProperty.YearLow)));
+        quote.setPriceAvg50(Utils.getBigDecimal(this.getValue(QuotesProperty.FiftydayMovingAverage)));
+        quote.setPriceAvg200(Utils.getBigDecimal(this.getValue(QuotesProperty.TwoHundreddayMovingAverage)));
         
         quote.setVolume(Utils.getLong(this.getValue(QuotesProperty.Volume)));
         quote.setAvgVolume(Utils.getLong(this.getValue(QuotesProperty.AverageDailyVolume)));
@@ -56,26 +56,26 @@ public class StockQuotesData {
         String symbol = this.getValue(QuotesProperty.Symbol);
         StockStats stats = new StockStats(symbol);
         
-        stats.setMarketCap(Utils.getDouble(this.getValue(QuotesProperty.MarketCapitalization)));
+        stats.setMarketCap(Utils.getBigDecimal(this.getValue(QuotesProperty.MarketCapitalization)));
         stats.setSharesFloat(Utils.getLong(this.getValue(QuotesProperty.SharesFloat)));
         stats.setSharesOutstanding(Utils.getLong(this.getValue(QuotesProperty.SharesOutstanding)));
         stats.setSharesOwned(Utils.getLong(this.getValue(QuotesProperty.SharesOwned)));
         
-        stats.setEps(Utils.getDouble(this.getValue(QuotesProperty.DilutedEPS)));
-        stats.setPe(Utils.getDouble(this.getValue(QuotesProperty.PERatio)));
-        stats.setPeg(Utils.getDouble(this.getValue(QuotesProperty.PEGRatio)));
+        stats.setEps(Utils.getBigDecimal(this.getValue(QuotesProperty.DilutedEPS)));
+        stats.setPe(Utils.getBigDecimal(this.getValue(QuotesProperty.PERatio)));
+        stats.setPeg(Utils.getBigDecimal(this.getValue(QuotesProperty.PEGRatio)));
         
-        stats.setEpsEstimateCurrentYear(Utils.getDouble(this.getValue(QuotesProperty.EPSEstimateCurrentYear)));
-        stats.setEpsEstimateNextQuarter(Utils.getDouble(this.getValue(QuotesProperty.EPSEstimateNextQuarter)));
-        stats.setEpsEstimateNextYear(Utils.getDouble(this.getValue(QuotesProperty.EPSEstimateNextYear)));
+        stats.setEpsEstimateCurrentYear(Utils.getBigDecimal(this.getValue(QuotesProperty.EPSEstimateCurrentYear)));
+        stats.setEpsEstimateNextQuarter(Utils.getBigDecimal(this.getValue(QuotesProperty.EPSEstimateNextQuarter)));
+        stats.setEpsEstimateNextYear(Utils.getBigDecimal(this.getValue(QuotesProperty.EPSEstimateNextYear)));
         
-        stats.setPriceBook(Utils.getDouble(this.getValue(QuotesProperty.PriceBook)));
-        stats.setPriceSales(Utils.getDouble(this.getValue(QuotesProperty.PriceSales)));
-        stats.setBookValuePerShare(Utils.getDouble(this.getValue(QuotesProperty.BookValuePerShare)));
+        stats.setPriceBook(Utils.getBigDecimal(this.getValue(QuotesProperty.PriceBook)));
+        stats.setPriceSales(Utils.getBigDecimal(this.getValue(QuotesProperty.PriceSales)));
+        stats.setBookValuePerShare(Utils.getBigDecimal(this.getValue(QuotesProperty.BookValuePerShare)));
         
-        stats.setOneYearTargetPrice(Utils.getDouble(this.getValue(QuotesProperty.OneyrTargetPrice)));
-        stats.setEBITDA(Utils.getDouble(this.getValue(QuotesProperty.EBITDA)));
-        stats.setRevenue(Utils.getDouble(this.getValue(QuotesProperty.Revenue)));
+        stats.setOneYearTargetPrice(Utils.getBigDecimal(this.getValue(QuotesProperty.OneyrTargetPrice)));
+        stats.setEBITDA(Utils.getBigDecimal(this.getValue(QuotesProperty.EBITDA)));
+        stats.setRevenue(Utils.getBigDecimal(this.getValue(QuotesProperty.Revenue)));
         
         return stats;
     }
@@ -86,8 +86,8 @@ public class StockQuotesData {
         
         dividend.setPayDate(Utils.parseDividendDate(this.getValue(QuotesProperty.DividendPayDate)));
         dividend.setExDate(Utils.parseDividendDate(this.getValue(QuotesProperty.ExDividendDate)));
-        dividend.setAnnualYield(Utils.getDouble(this.getValue(QuotesProperty.TrailingAnnualDividendYield)));
-        dividend.setAnnualYieldPercent(Utils.getDouble(this.getValue(QuotesProperty.TrailingAnnualDividendYieldInPercent)));
+        dividend.setAnnualYield(Utils.getBigDecimal(this.getValue(QuotesProperty.TrailingAnnualDividendYield)));
+        dividend.setAnnualYieldPercent(Utils.getBigDecimal(this.getValue(QuotesProperty.TrailingAnnualDividendYieldInPercent)));
         
         return dividend;
     }
