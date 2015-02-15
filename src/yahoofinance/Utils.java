@@ -82,6 +82,10 @@ public class Utils {
                     data = data.substring(0, data.length() - 1);
                     multiplier = 1000000;
                     break;
+                case 'K':
+                    data = data.substring(0, data.length() - 1);
+                    multiplier = 1000;
+                    break;
             }
             result = Double.parseDouble(data) * multiplier;
         } catch (NumberFormatException e) {
@@ -136,6 +140,8 @@ public class Utils {
     private static String getDividendDateFormat(String date) {
         if(date.matches("[0-9][0-9]-...-[0-9][0-9]")) {
             return "dd-MMM-yy";
+        } else if(date.matches("[0-9]-...-[0-9][0-9]")) {
+            return "d-MMM-yy";
         } else {
             return "MMM d";
         }
@@ -151,6 +157,7 @@ public class Utils {
         if (!Utils.isParseable(date)) {
             return null;
         }
+        date = date.trim();
         SimpleDateFormat format = new SimpleDateFormat(Utils.getDividendDateFormat(date));
         format.setTimeZone(TimeZone.getTimeZone(YahooFinance.TIMEZONE));
         try {
@@ -159,7 +166,15 @@ public class Utils {
             parsedDate.setTime(format.parse(date));
             
             if(parsedDate.get(Calendar.YEAR) == 1970) {
-                parsedDate.set(Calendar.YEAR, today.get(Calendar.YEAR));
+                // Not really clear which year the dividend date is... making a reasonable guess.
+                int monthDiff = parsedDate.get(Calendar.MONTH) - today.get(Calendar.MONTH);
+                int year = today.get(Calendar.YEAR);
+                if(monthDiff > 6) {
+                    year -= 1;
+                } else if(monthDiff < -6) {
+                    year += 1;
+                }
+                parsedDate.set(Calendar.YEAR, year);
             }
             
             return parsedDate;
