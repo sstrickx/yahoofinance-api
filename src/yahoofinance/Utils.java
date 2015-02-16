@@ -132,7 +132,7 @@ public class Utils {
     }
 
     public static BigDecimal getPercent(BigDecimal numerator, BigDecimal denominator) {
-        if (denominator.equals(BigDecimal.ZERO)) {
+        if (denominator.compareTo(BigDecimal.ZERO) == 0) {
             return BigDecimal.ZERO;
         }
         return numerator.divide(denominator, 4, BigDecimal.ROUND_HALF_EVEN)
