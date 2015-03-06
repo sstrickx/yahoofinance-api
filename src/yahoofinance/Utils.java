@@ -6,6 +6,7 @@ import java.net.URLEncoder;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.TimeZone;
@@ -168,7 +169,7 @@ public class Utils {
             return null;
         }
         date = date.trim();
-        SimpleDateFormat format = new SimpleDateFormat(Utils.getDividendDateFormat(date));
+        SimpleDateFormat format = new SimpleDateFormat(Utils.getDividendDateFormat(date), Locale.US);
         format.setTimeZone(TimeZone.getTimeZone(YahooFinance.TIMEZONE));
         try {
             Calendar today = Calendar.getInstance(TimeZone.getTimeZone(YahooFinance.TIMEZONE));
@@ -204,7 +205,7 @@ public class Utils {
      */
     public static Calendar parseDateTime(String date, String time) {
         String datetime = date + " " + time;
-        SimpleDateFormat format = new SimpleDateFormat("M/d/yyyy h:mma");
+        SimpleDateFormat format = new SimpleDateFormat("M/d/yyyy h:mma", Locale.US);
         format.setTimeZone(TimeZone.getTimeZone(YahooFinance.TIMEZONE));
         try {
             if (Utils.isParseable(date) && Utils.isParseable(time)) {
@@ -219,7 +220,7 @@ public class Utils {
     }
 
     public static Calendar parseHistDate(String date) {
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
         format.setTimeZone(TimeZone.getTimeZone(YahooFinance.TIMEZONE));
         try {
             if (Utils.isParseable(date)) {
