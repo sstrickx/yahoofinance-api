@@ -152,8 +152,10 @@ public class Utils {
             return "dd-MMM-yy";
         } else if (date.matches("[0-9]-...-[0-9][0-9]")) {
             return "d-MMM-yy";
-        } else {
+        } else if (date.matches("...[ ]+[0-9]+")) {
             return "MMM d";
+        } else {
+            return "M/d/yy";
         }
     }
 
