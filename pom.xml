@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" 
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.yahoofinance-api</groupId>
+    <artifactId>YahooFinanceAPI</artifactId>
+    <version>1.3.0</version>  
+    <packaging>jar</packaging>
+    <name>YahooFinanceAPI</name>
+    <description>This library provides some methods that should make it easy
+        to communicate with the Yahoo Finance API. 
+        It allows you to request detailed information, some statistics 
+        and historical quotes on stocks. 
+        Separate functionality is available to request a simple FX quote. 
+        Please check the javadoc to get a complete overview of the available methods 
+        and to get an idea of which data is available from Yahoo Finance.</description>
+    <url>http://yahoofinance-api.com</url>
+    <licenses>
+        <license>
+            <name>MIT License</name>
+            <url>http://opensource.org/licenses/MIT</url>
+        </license>
+    </licenses>
+    <developers>
+        <developer>
+            <name>Stijn Strickx</name>
+            <email>api.yahoofinance@gmail.com</email>
+            <organization>YahooFinanceAPI</organization>
+            <organizationUrl>http://yahoofinance-api.com</organizationUrl>
+        </developer>
+    </developers>
+    <issueManagement>
+        <url>https://github.com/sstrickx/yahoofinance-api/issues</url>
+        <system>GitHub Issues</system>
+    </issueManagement>
+    <scm>
+        <connection>scm:git:git://github.com/sstrickx/yahoofinance-api.git</connection>
+        <developerConnection>scm:git:git@github.com:sstrickx/yahoofinance-api.git</developerConnection>
+        <url>https://github.com/sstrickx/yahoofinance-api</url>
+    </scm>
+</project>
