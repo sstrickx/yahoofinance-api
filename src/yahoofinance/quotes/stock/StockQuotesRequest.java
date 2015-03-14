@@ -108,10 +108,20 @@ public class StockQuotesRequest extends QuotesRequest<StockQuotesData> {
         List<String> parsedLine = new ArrayList<String>();
 
         // first get company name and symbol, because we need the symbol!
-        int pos1 = 1; // skip first \"
-        int pos2 = line.indexOf('\"', 1);
+        int pos1 = 0;
+        int pos2 = 0;
+        int skip = 2;
+        
+        if(line.startsWith("\"")) {
+            pos1 = 1; // skip first \"
+            pos2 = line.indexOf('\"', 1);
+        } else {
+            pos2 = line.indexOf(",\""); // last comma before the first symbol (hopefully)
+            skip = 1;
+        }
+        
         String name = line.substring(pos1, pos2);
-        pos1 = pos2 + 2; // skip \",
+        pos1 = pos2 + skip; // skip \",
         pos2 = line.indexOf('\"', pos1 + 1);
         String fullSymbol = line.substring(pos1, pos2 + 1);
         String symbol = fullSymbol.substring(1, fullSymbol.length() - 1);
