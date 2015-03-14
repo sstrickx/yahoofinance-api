@@ -1,5 +1,6 @@
 package yahoofinance.quotes.stock;
 
+import java.math.BigDecimal;
 import yahoofinance.Stock;
 import yahoofinance.Utils;
 import yahoofinance.quotes.QuotesProperty;
@@ -30,9 +31,9 @@ public class StockQuotesData {
         
         quote.setPrice(Utils.getBigDecimal(this.getValue(QuotesProperty.LastTradePriceOnly)));
         quote.setLastTradeSize(Utils.getInt(this.getValue(QuotesProperty.LastTradeSize)));
-        quote.setAsk(Utils.getBigDecimal(this.getValue(QuotesProperty.AskRealtime)));
+        quote.setAsk(Utils.getBigDecimal(this.getValue(QuotesProperty.AskRealtime), this.getValue(QuotesProperty.Ask)));
         quote.setAskSize(Utils.getInt(this.getValue(QuotesProperty.AskSize)));
-        quote.setBid(Utils.getBigDecimal(this.getValue(QuotesProperty.BidRealtime)));
+        quote.setBid(Utils.getBigDecimal(this.getValue(QuotesProperty.BidRealtime), this.getValue(QuotesProperty.Bid)));
         quote.setBidSize(Utils.getInt(this.getValue(QuotesProperty.BidSize)));
         quote.setOpen(Utils.getBigDecimal(this.getValue(QuotesProperty.Open)));
         quote.setPreviousClose(Utils.getBigDecimal(this.getValue(QuotesProperty.PreviousClose)));

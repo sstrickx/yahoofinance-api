@@ -73,6 +73,15 @@ public class Utils {
         }
         return result;
     }
+    
+    public static BigDecimal getBigDecimal(String dataMain, String dataSub) {
+        BigDecimal main = getBigDecimal(dataMain);
+        BigDecimal sub = getBigDecimal(dataSub);
+        if(main.compareTo(BigDecimal.ZERO) == 0) {
+            return sub;
+        }
+        return main;
+    }
 
     public static double getDouble(String data) {
         double result = 0.00;
