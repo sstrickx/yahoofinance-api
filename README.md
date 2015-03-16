@@ -15,13 +15,13 @@ Please check the javadoc (available in dist directory) to get a complete overvie
     <version>x.y.z</version>
 </dependency>
 ```
-##Gradle
+###Gradle
 ```groovy
 dependencies {
     compile group: 'com.yahoofinance-api', name: 'YahooFinanceAPI', version: 'x.y.z'
 }
 ```
-##Ivy
+###Ivy
 ```xml
 <dependency org="com.yahoofinance-api" name="YahooFinanceAPI" rev="x.y.z" />
 ```
