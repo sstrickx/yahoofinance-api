@@ -6,6 +6,26 @@ Yahoo Finance API (Java)
 This library provides some methods that should make it easy to communicate with the Yahoo Finance API. It allows you to request detailed information, some statistics and historical quotes on stocks. Separate functionality is available to request a simple FX quote.
 Please check the javadoc (available in dist directory) to get a complete overview of the available methods and to get an idea of which data is available from Yahoo Finance.
 
+##Add to your project as a dependency
+###Maven
+```xml
+<dependency>
+    <groupId>com.yahoofinance-api</groupId>
+    <artifactId>YahooFinanceAPI</artifactId>
+    <version>x.y.z</version>
+</dependency>
+```
+##Gradle
+```groovy
+dependencies {
+    compile group: 'com.yahoofinance-api', name: 'YahooFinanceAPI', version: 'x.y.z'
+}
+```
+##Ivy
+```xml
+<dependency org="com.yahoofinance-api" name="YahooFinanceAPI" rev="x.y.z" />
+```
+
 #Examples
 ##Single stock
 ```java
