@@ -1,10 +1,12 @@
-Yahoo Finance API (Java)
+Finance Quotes API for Yahoo Finance (Java)
 ================
 
-[Website](http://yahoofinance-api.com)
+[Website](http://financequotes-api.com)
 
 This library provides some methods that should make it easy to communicate with the Yahoo Finance API. It allows you to request detailed information, some statistics and historical quotes on stocks. Separate functionality is available to request a simple FX quote.
 Please check the javadoc (available in dist directory) to get a complete overview of the available methods and to get an idea of which data is available from Yahoo Finance.
+
+> This project is not associated with nor sponsored by Yahoo! Inc. Yahoo! Inc. is the exclusive owner of all trademark and other intellectual property rights in and to the YAHOO! and Y! trademarks (the "Trademarks"), including the stylized YAHOO! and Y! logos. Yahoo! Inc. owns trademark registrations for the Trademarks.
 
 ##Add to your project as a dependency
 ###Maven
