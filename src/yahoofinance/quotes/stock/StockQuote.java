@@ -3,7 +3,7 @@ package yahoofinance.quotes.stock;
 
 import java.math.BigDecimal;
 import java.util.Calendar;
-
+import java.util.TimeZone;
 import yahoofinance.Utils;
 
 /**
@@ -14,13 +14,19 @@ public class StockQuote {
     
     private final String symbol;
     
+    private TimeZone timeZone;
+    
     private BigDecimal ask;
     private int askSize;
     private BigDecimal bid;
     private int bidSize;
     private BigDecimal price;
+    
     private int lastTradeSize;
+    private String lastTradeDateStr;
+    private String lastTradeTimeStr;
     private Calendar lastTradeTime;
+    
     private BigDecimal open;
     private BigDecimal previousClose;
     private BigDecimal dayLow;
@@ -169,13 +175,54 @@ public class StockQuote {
     public void setLastTradeSize(int lastTradeSize) {
         this.lastTradeSize = lastTradeSize;
     }
+
+    public String getLastTradeDateStr() {
+        return lastTradeDateStr;
+    }
+
+    public void setLastTradeDateStr(String lastTradeDateStr) {
+        this.lastTradeDateStr = lastTradeDateStr;
+    }
+
+    public String getLastTradeTimeStr() {
+        return lastTradeTimeStr;
+    }
+
+    public void setLastTradeTimeStr(String lastTradeTimeStr) {
+        this.lastTradeTimeStr = lastTradeTimeStr;
+    }
     
+    /**
+     * Will derive the time zone from the exchange to parse the date time into a Calendar object.
+     * This will not react to changes in the lastTradeDateStr and lastTradeTimeStr
+     * 
+     * @return last trade date time
+     */
     public Calendar getLastTradeTime() {
         return lastTradeTime;
     }
     
     public void setLastTradeTime(Calendar lastTradeTime) {
         this.lastTradeTime = lastTradeTime;
+    }
+    
+    /**
+     * Will use the provided time zone to parse the date time into a Calendar object
+     * Reacts to changes in the lastTradeDateStr and lastTradeTimeStr
+     * 
+     * @param timeZone time zone where the stock is traded
+     * @return last trade date time
+     */
+    public Calendar getLastTradeTime(TimeZone timeZone) {
+        return Utils.parseDateTime(this.lastTradeDateStr, this.lastTradeTimeStr, timeZone);
+    }
+
+    public TimeZone getTimeZone() {
+        return timeZone;
+    }
+
+    public void setTimeZone(TimeZone timeZone) {
+        this.timeZone = timeZone;
     }
     
     public BigDecimal getOpen() {
