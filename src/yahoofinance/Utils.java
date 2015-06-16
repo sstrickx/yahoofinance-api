@@ -212,12 +212,14 @@ public class Utils {
      *
      * @param date String received that represents the date
      * @param time String received that represents the time
+     * @param timeZone time zone to use for parsing the date time
      * @return Calendar object with the parsed datetime
      */
-    public static Calendar parseDateTime(String date, String time) {
+    public static Calendar parseDateTime(String date, String time, TimeZone timeZone) {
         String datetime = date + " " + time;
         SimpleDateFormat format = new SimpleDateFormat("M/d/yyyy h:mma", Locale.US);
-        format.setTimeZone(TimeZone.getTimeZone(YahooFinance.TIMEZONE));
+        
+        format.setTimeZone(timeZone);
         try {
             if (Utils.isParseable(date) && Utils.isParseable(time)) {
                 Calendar c = Calendar.getInstance();

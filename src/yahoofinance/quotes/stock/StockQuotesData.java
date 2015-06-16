@@ -3,6 +3,7 @@ package yahoofinance.quotes.stock;
 import java.math.BigDecimal;
 import yahoofinance.Stock;
 import yahoofinance.Utils;
+import yahoofinance.exchanges.ExchangeTimeZone;
 import yahoofinance.quotes.QuotesProperty;
 
 /**
@@ -40,7 +41,8 @@ public class StockQuotesData {
         quote.setDayHigh(Utils.getBigDecimal(this.getValue(QuotesProperty.DaysHigh)));
         quote.setDayLow(Utils.getBigDecimal(this.getValue(QuotesProperty.DaysLow)));
         
-        quote.setLastTradeTime(Utils.parseDateTime(this.getValue(QuotesProperty.LastTradeDate), this.getValue(QuotesProperty.LastTradeTime)));
+        quote.setTimeZone(ExchangeTimeZone.getStockTimeZone(symbol));
+        quote.setLastTradeTime(Utils.parseDateTime(this.getValue(QuotesProperty.LastTradeDate), this.getValue(QuotesProperty.LastTradeTime), quote.getTimeZone()));
         
         quote.setYearHigh(Utils.getBigDecimal(this.getValue(QuotesProperty.YearHigh)));
         quote.setYearLow(Utils.getBigDecimal(this.getValue(QuotesProperty.YearLow)));
