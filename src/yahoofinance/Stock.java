@@ -75,7 +75,7 @@ public class Stock {
      * 
      * @param refresh   indicates whether the data should be requested again to Yahoo Finance
      * @return          basic quotes data available for this stock
-     * @throws java.io.IOException
+     * @throws java.io.IOException when there's a connection problem
      */
     public StockQuote getQuote(boolean refresh) throws IOException {
         if(refresh) {
@@ -114,7 +114,7 @@ public class Stock {
      * 
      * @param refresh   indicates whether the data should be requested again to Yahoo Finance
      * @return          statistics available for this stock
-     * @throws java.io.IOException
+     * @throws java.io.IOException when there's a connection problem
      */
     public StockStats getStats(boolean refresh) throws IOException {
         if(refresh) {
@@ -154,7 +154,7 @@ public class Stock {
      * 
      * @param refresh   indicates whether the data should be requested again to Yahoo Finance
      * @return          dividend data available for this stock
-     * @throws java.io.IOException
+     * @throws java.io.IOException when there's a connection problem
      */
     public StockDividend getDividend(boolean refresh) throws IOException {
         if(refresh) {
