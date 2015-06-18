@@ -52,6 +52,7 @@ public class FxQuote {
      * 
      * @param refresh   indicates whether the data should be requested again to Yahoo Finance
      * @return          the requested FX rate
+     * @throws java.io.IOException when there's a connection problem
      */
     public BigDecimal getPrice(boolean refresh) throws IOException {
         if(refresh) {
