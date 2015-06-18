@@ -40,9 +40,9 @@ public abstract class QuotesRequest<T> {
     public void setProperties(List<QuotesProperty> properties) {
         this.properties = properties;
     }
-    
+
     protected abstract T parseCSVLine(String line);
-    
+
     private String getFieldsString() {
         StringBuilder result = new StringBuilder();
         for (QuotesProperty property : this.properties) {
@@ -50,8 +50,8 @@ public abstract class QuotesRequest<T> {
         }
         return result.toString();
     }
-    
-    public T getSingleResult() {
+
+    public T getSingleResult() throws IOException {
         List<T> results = this.getResult();
         if (results.size() > 0) {
             return results.get(0);
@@ -63,39 +63,36 @@ public abstract class QuotesRequest<T> {
      * Sends the request to Yahoo Finance and parses the result
      *
      * @return List of parsed objects resulting from the Yahoo Finance request
+     * @throws java.io.IOException when there's a connection problem or the request is incorrect
      */
-    public List<T> getResult() {
+    public List<T> getResult() throws IOException {
         List<T> result = new ArrayList<T>();
 
-        try {
-            Map<String, String> params = new LinkedHashMap<String, String>();
-            params.put("s", this.query);
-            params.put("f", this.getFieldsString());
-            params.put("e", ".csv");
+        Map<String, String> params = new LinkedHashMap<String, String>();
+        params.put("s", this.query);
+        params.put("f", this.getFieldsString());
+        params.put("e", ".csv");
 
-            String url = YahooFinance.QUOTES_BASE_URL + "?" + Utils.getURLParameters(params);
-            
-            // Get CSV from Yahoo
-            YahooFinance.logger.log(Level.INFO, ("Sending request: " + url));
-            
-            URL request = new URL(url);
-            URLConnection connection = request.openConnection();
-            InputStreamReader is = new InputStreamReader(connection.getInputStream());
-            BufferedReader br = new BufferedReader(is);
-            
-            // Parse CSV
-            for (String line = br.readLine(); line != null; line = br.readLine()) {
-                if (line.equals("Missing Symbols List.")) {
-                    YahooFinance.logger.log(Level.SEVERE, "The requested symbol was not recognized by Yahoo Finance");
-                } else {
-                    YahooFinance.logger.log(Level.INFO, ("Parsing CSV line: " + Utils.unescape(line)));
+        String url = YahooFinance.QUOTES_BASE_URL + "?" + Utils.getURLParameters(params);
 
-                    T data = this.parseCSVLine(line);
-                    result.add(data);
-                }
+        // Get CSV from Yahoo
+        YahooFinance.logger.log(Level.INFO, ("Sending request: " + url));
+
+        URL request = new URL(url);
+        URLConnection connection = request.openConnection();
+        InputStreamReader is = new InputStreamReader(connection.getInputStream());
+        BufferedReader br = new BufferedReader(is);
+
+        // Parse CSV
+        for (String line = br.readLine(); line != null; line = br.readLine()) {
+            if (line.equals("Missing Symbols List.")) {
+                YahooFinance.logger.log(Level.SEVERE, "The requested symbol was not recognized by Yahoo Finance");
+            } else {
+                YahooFinance.logger.log(Level.INFO, ("Parsing CSV line: " + Utils.unescape(line)));
+
+                T data = this.parseCSVLine(line);
+                result.add(data);
             }
-        } catch (IOException ex) {
-            YahooFinance.logger.log(Level.SEVERE, ex.toString(), ex);
         }
 
         return result;

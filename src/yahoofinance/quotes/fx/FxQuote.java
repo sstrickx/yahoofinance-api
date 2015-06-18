@@ -1,6 +1,7 @@
 
 package yahoofinance.quotes.fx;
 
+import java.io.IOException;
 import java.math.BigDecimal;
 
 /**
@@ -32,14 +33,10 @@ public class FxQuote {
 
     /**
      * Returns the requested FX rate.
-     * If the data is not available yet, it will first be requested from Yahoo Finance.
      * 
      * @return  the requested FX rate
      */
     public BigDecimal getPrice() {
-        if(price.equals(BigDecimal.ZERO)) {
-            return this.getPrice(true);
-        }
         return price;
     }
     
@@ -56,7 +53,7 @@ public class FxQuote {
      * @param refresh   indicates whether the data should be requested again to Yahoo Finance
      * @return          the requested FX rate
      */
-    public BigDecimal getPrice(boolean refresh) {
+    public BigDecimal getPrice(boolean refresh) throws IOException {
         if(refresh) {
             FxQuotesRequest request = new FxQuotesRequest(this.symbol);
             this.price = request.getSingleResult().getPrice();
