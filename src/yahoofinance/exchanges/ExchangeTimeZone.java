@@ -67,6 +67,7 @@ public class ExchangeTimeZone {
         SUFFIX_TIMEZONES.put("MA", TimeZone.getTimeZone("Europe/Madrid"));
         SUFFIX_TIMEZONES.put("ST", TimeZone.getTimeZone("Europe/Stockholm"));
         SUFFIX_TIMEZONES.put("SW", TimeZone.getTimeZone("Europe/Zurich"));
+        SUFFIX_TIMEZONES.put("Z", TimeZone.getTimeZone("Europe/Zurich"));
         SUFFIX_TIMEZONES.put("TWO", TimeZone.getTimeZone("Asia/Taipei"));
         SUFFIX_TIMEZONES.put("TW", TimeZone.getTimeZone("Asia/Taipei"));
         SUFFIX_TIMEZONES.put("L", TimeZone.getTimeZone("Europe/London"));
