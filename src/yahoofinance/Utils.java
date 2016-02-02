@@ -69,7 +69,8 @@ public class Utils {
             }
             result = new BigDecimal(data).multiply(multiplier);
         } catch (NumberFormatException e) {
-            YahooFinance.logger.log(Level.INFO, "Failed to parse: " + data, e);
+            YahooFinance.logger.log(Level.WARNING, "Failed to parse: " + data);
+            YahooFinance.logger.log(Level.FINEST, "Failed to parse: " + data, e);
         }
         return result;
     }
@@ -108,7 +109,8 @@ public class Utils {
             }
             result = Double.parseDouble(data) * multiplier;
         } catch (NumberFormatException e) {
-            YahooFinance.logger.log(Level.INFO, "Failed to parse: " + data, e);
+            YahooFinance.logger.log(Level.WARNING, "Failed to parse: " + data);
+            YahooFinance.logger.log(Level.FINEST, "Failed to parse: " + data, e);
         }
         return result;
     }
@@ -122,7 +124,8 @@ public class Utils {
             data = Utils.cleanNumberString(data);
             result = Integer.parseInt(data);
         } catch (NumberFormatException e) {
-            YahooFinance.logger.log(Level.INFO, "Failed to parse: " + data, e);
+            YahooFinance.logger.log(Level.WARNING, "Failed to parse: " + data);
+            YahooFinance.logger.log(Level.FINEST, "Failed to parse: " + data, e);
         }
         return result;
     }
@@ -136,7 +139,8 @@ public class Utils {
             data = Utils.cleanNumberString(data);
             result = Long.parseLong(data);
         } catch (NumberFormatException e) {
-            YahooFinance.logger.log(Level.INFO, "Failed to parse: " + data, e);
+            YahooFinance.logger.log(Level.WARNING, "Failed to parse: " + data);
+            YahooFinance.logger.log(Level.FINEST, "Failed to parse: " + data, e);
         }
         return result;
     }
@@ -201,7 +205,8 @@ public class Utils {
 
             return parsedDate;
         } catch (ParseException ex) {
-            YahooFinance.logger.log(Level.SEVERE, ex.getMessage(), ex);
+            YahooFinance.logger.log(Level.WARNING, "Failed to parse dividend date: " + date);
+            YahooFinance.logger.log(Level.FINEST, "Failed to parse dividend date: " + date, ex);
             return null;
         }
     }
@@ -227,7 +232,8 @@ public class Utils {
                 return c;
             }
         } catch (ParseException ex) {
-            YahooFinance.logger.log(Level.SEVERE, ex.getMessage(), ex);
+            YahooFinance.logger.log(Level.WARNING, "Failed to parse datetime: " + datetime);
+            YahooFinance.logger.log(Level.FINEST, "Failed to parse datetime: " + datetime, ex);
         }
         return null;
     }
@@ -242,7 +248,8 @@ public class Utils {
                 return c;
             }
         } catch (ParseException ex) {
-            YahooFinance.logger.log(Level.SEVERE, ex.getMessage(), ex);
+            YahooFinance.logger.log(Level.WARNING, "Failed to parse hist date: " + date);
+            YahooFinance.logger.log(Level.FINEST, "Failed to parse hist date: " + date, ex);
         }
         return null;
     }
