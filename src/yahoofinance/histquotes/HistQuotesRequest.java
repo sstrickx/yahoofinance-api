@@ -72,7 +72,7 @@ public class HistQuotesRequest {
     public List<HistoricalQuote> getResult() throws IOException {
 
         List<HistoricalQuote> result = new ArrayList<HistoricalQuote>();
-
+        
         Map<String, String> params = new LinkedHashMap<String, String>();
         params.put("s", this.symbol);
 
@@ -95,6 +95,8 @@ public class HistQuotesRequest {
 
         URL request = new URL(url);
         URLConnection connection = request.openConnection();
+        connection.setConnectTimeout(YahooFinance.CONNECTION_TIMEOUT);
+        connection.setReadTimeout(YahooFinance.CONNECTION_TIMEOUT);
         InputStreamReader is = new InputStreamReader(connection.getInputStream());
         BufferedReader br = new BufferedReader(is);
         br.readLine(); // skip the first line

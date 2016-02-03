@@ -80,6 +80,8 @@ public abstract class QuotesRequest<T> {
 
         URL request = new URL(url);
         URLConnection connection = request.openConnection();
+        connection.setConnectTimeout(YahooFinance.CONNECTION_TIMEOUT);
+        connection.setReadTimeout(YahooFinance.CONNECTION_TIMEOUT);
         InputStreamReader is = new InputStreamReader(connection.getInputStream());
         BufferedReader br = new BufferedReader(is);
 

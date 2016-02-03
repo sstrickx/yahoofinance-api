@@ -27,6 +27,9 @@ import yahoofinance.quotes.stock.StockQuotesRequest;
  * all of the required information in the least amount of 
  * requests possible towards Yahoo Finance.
  * <p>
+ * You can change the default timeout of 10s for requests to Yahoo Finance by
+ * setting the yahoofinance.connection.timeout system property.
+ * <p>
  * Please be aware that the data received from Yahoo Finance is not always 
  * complete for every single stock. Stocks on the American stock exchanges
  * usually have a lot more data available than stocks on other exchanges.
@@ -45,6 +48,9 @@ public class YahooFinance {
     public static final String HISTQUOTES_BASE_URL = "http://ichart.yahoo.com/table.csv";
     public static final String QUOTES_CSV_DELIMITER = ",";
     public static final String TIMEZONE = "America/New_York";
+    
+    public static final int CONNECTION_TIMEOUT = 
+            Integer.parseInt(System.getProperty("yahoofinance.connection.timeout", "10000"));
     
     public static final Logger logger = Logger.getLogger(YahooFinance.class.getName());
     
