@@ -41,11 +41,7 @@ public class HistQuotesRequest {
     }
 
     public HistQuotesRequest(String symbol, Interval interval) {
-        this.symbol = symbol;
-        this.interval = interval;
-
-        this.from = DEFAULT_FROM;
-        this.to = DEFAULT_TO;
+        this(symbol, DEFAULT_FROM, DEFAULT_TO, interval);
     }
 
     public HistQuotesRequest(String symbol, Calendar from, Calendar to) {
@@ -54,8 +50,8 @@ public class HistQuotesRequest {
 
     public HistQuotesRequest(String symbol, Calendar from, Calendar to, Interval interval) {
         this.symbol = symbol;
-        this.from = from;
-        this.to = to;
+        this.from = this.cleanHistCalendar(from);
+        this.to = this.cleanHistCalendar(to);
         this.interval = interval;
     }
 
@@ -66,12 +62,33 @@ public class HistQuotesRequest {
     public HistQuotesRequest(String symbol, Date from, Date to, Interval interval) {
         this(symbol, interval);
         this.from.setTime(from);
-        this.to.setTime(to);
+        this.to.setTime(from);
+        this.cleanHistCalendar(this.from);
+        this.cleanHistCalendar(this.to);
+    }
+    
+    /**
+     * Put everything smaller than days at 0
+     * @param cal calendar to be cleaned
+     */
+    private Calendar cleanHistCalendar(Calendar cal) {
+        cal.set(Calendar.MILLISECOND, 0);
+        cal.set(Calendar.SECOND, 0);
+        cal.set(Calendar.MINUTE, 0);
+        cal.set(Calendar.HOUR, 0);
+        return cal;
     }
 
     public List<HistoricalQuote> getResult() throws IOException {
 
         List<HistoricalQuote> result = new ArrayList<HistoricalQuote>();
+        
+        if(this.from.equals(this.to) || this.from.after(this.to)) {
+            YahooFinance.logger.log(Level.WARNING, "Unable to retrieve historical quotes. "
+                    + "From-date should be at least 1 day before to-date. From: " 
+                    + this.from.getTime() + ", to: " + this.to.getTime());
+            return result;
+        }
         
         Map<String, String> params = new LinkedHashMap<String, String>();
         params.put("s", this.symbol);
