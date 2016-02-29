@@ -41,7 +41,8 @@ public class Utils {
     }
 
     private static boolean isParseable(String data) {
-        return !(data == null || data.equals("N/A") || data.equals("-") || data.equals(""));
+        return !(data == null || data.equals("N/A") || data.equals("-") 
+                || data.equals("") || data.equals("nan"));
     }
 
     public static BigDecimal getBigDecimal(String data) {
