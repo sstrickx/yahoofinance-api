@@ -1,6 +1,5 @@
 package yahoofinance.quotes.stock;
 
-import java.math.BigDecimal;
 import yahoofinance.Stock;
 import yahoofinance.Utils;
 import yahoofinance.exchanges.ExchangeTimeZone;
@@ -79,6 +78,8 @@ public class StockQuotesData {
         stats.setOneYearTargetPrice(Utils.getBigDecimal(this.getValue(QuotesProperty.OneyrTargetPrice)));
         stats.setEBITDA(Utils.getBigDecimal(this.getValue(QuotesProperty.EBITDA)));
         stats.setRevenue(Utils.getBigDecimal(this.getValue(QuotesProperty.Revenue)));
+        
+        stats.setShortRatio(Utils.getBigDecimal(this.getValue(QuotesProperty.ShortRatio)));
         
         return stats;
     }

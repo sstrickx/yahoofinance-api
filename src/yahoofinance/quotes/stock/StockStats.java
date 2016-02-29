@@ -34,6 +34,8 @@ public class StockStats {
     private BigDecimal EBITDA; // ttm
     private BigDecimal oneYearTargetPrice;
     
+    private BigDecimal shortRatio;
+    
     public StockStats(String symbol) {
         this.symbol = symbol;
     }
@@ -172,6 +174,14 @@ public class StockStats {
 
     public void setOneYearTargetPrice(BigDecimal oneYearTargetPrice) {
         this.oneYearTargetPrice = oneYearTargetPrice;
+    }
+
+    public BigDecimal getShortRatio() {
+        return shortRatio;
+    }
+
+    public void setShortRatio(BigDecimal shortRatio) {
+        this.shortRatio = shortRatio;
     }
     
     @Override

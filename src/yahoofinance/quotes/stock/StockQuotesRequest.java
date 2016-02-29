@@ -96,7 +96,8 @@ public class StockQuotesRequest extends QuotesRequest<StockQuotesData> {
         DEFAULT_PROPERTIES.add(QuotesProperty.Revenue);
         DEFAULT_PROPERTIES.add(QuotesProperty.EBITDA);
         DEFAULT_PROPERTIES.add(QuotesProperty.OneyrTargetPrice);
-
+        
+        DEFAULT_PROPERTIES.add(QuotesProperty.ShortRatio);
     }
     
     public StockQuotesRequest(String query) {
