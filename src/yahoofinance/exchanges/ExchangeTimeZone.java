@@ -47,6 +47,9 @@ public class ExchangeTimeZone {
         SUFFIX_TIMEZONES.put("MU", TimeZone.getTimeZone("Europe/Berlin"));
         SUFFIX_TIMEZONES.put("SG", TimeZone.getTimeZone("Europe/Berlin"));
         SUFFIX_TIMEZONES.put("DE", TimeZone.getTimeZone("Europe/Berlin"));
+        SUFFIX_TIMEZONES.put("IR", TimeZone.getTimeZone("Europe/Dublin"));
+        SUFFIX_TIMEZONES.put("BR", TimeZone.getTimeZone("Europe/Brussels"));
+        SUFFIX_TIMEZONES.put("HE", TimeZone.getTimeZone("Europe/Helsinki"));
         SUFFIX_TIMEZONES.put("HK", TimeZone.getTimeZone("Asia/Hong_Kong"));
         SUFFIX_TIMEZONES.put("BO", TimeZone.getTimeZone("Asia/Kolkata"));
         SUFFIX_TIMEZONES.put("NS", TimeZone.getTimeZone("Asia/Kolkata"));
@@ -60,6 +63,7 @@ public class ExchangeTimeZone {
         SUFFIX_TIMEZONES.put("SI", TimeZone.getTimeZone("Asia/Singapore"));
         SUFFIX_TIMEZONES.put("KS", TimeZone.getTimeZone("Asia/Seoul"));
         SUFFIX_TIMEZONES.put("KQ", TimeZone.getTimeZone("Asia/Seoul"));
+        SUFFIX_TIMEZONES.put("KL", TimeZone.getTimeZone("Asia/Kuala_Lumpur"));
         SUFFIX_TIMEZONES.put("BC", TimeZone.getTimeZone("Europe/Madrid"));
         SUFFIX_TIMEZONES.put("BI", TimeZone.getTimeZone("Europe/Madrid"));
         SUFFIX_TIMEZONES.put("MF", TimeZone.getTimeZone("Europe/Madrid"));
@@ -75,6 +79,7 @@ public class ExchangeTimeZone {
         SUFFIX_TIMEZONES.put("PR", TimeZone.getTimeZone("Europe/Prague"));
         SUFFIX_TIMEZONES.put("ME", TimeZone.getTimeZone("Europe/Moscow"));
         SUFFIX_TIMEZONES.put("AT", TimeZone.getTimeZone("Europe/Athens"));
+        SUFFIX_TIMEZONES.put("LS", TimeZone.getTimeZone("Europe/Lisbon"));
         
         INDEX_TIMEZONES.put("^FTSE", TimeZone.getTimeZone("Europe/London"));
         INDEX_TIMEZONES.put("^GDAXI", TimeZone.getTimeZone("Europe/Berlin"));
