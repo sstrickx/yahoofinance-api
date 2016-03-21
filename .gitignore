@@ -6,7 +6,6 @@ yahoofinance-api.iml
 .idea/vcs.xml
 .idea/workspace.xml
 .idea/copyright/profiles_settings.xml
-target/classes/Test.class
 target/classes/yahoofinance/Stock.class
 target/classes/yahoofinance/Utils.class
 target/classes/yahoofinance/YahooFinance.class
