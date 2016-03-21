@@ -17,12 +17,12 @@ public class StockQuote {
     private TimeZone timeZone;
     
     private BigDecimal ask;
-    private int askSize;
+    private long askSize;
     private BigDecimal bid;
-    private int bidSize;
+    private long bidSize;
     private BigDecimal price;
     
-    private int lastTradeSize;
+    private long lastTradeSize;
     private String lastTradeDateStr;
     private String lastTradeTimeStr;
     private Calendar lastTradeTime;
@@ -136,11 +136,11 @@ public class StockQuote {
         this.ask = ask;
     }
     
-    public int getAskSize() {
+    public long getAskSize() {
         return askSize;
     }
     
-    public void setAskSize(int askSize) {
+    public void setAskSize(long askSize) {
         this.askSize = askSize;
     }
     
@@ -152,11 +152,11 @@ public class StockQuote {
         this.bid = bid;
     }
     
-    public int getBidSize() {
+    public long getBidSize() {
         return bidSize;
     }
     
-    public void setBidSize(int bidSize) {
+    public void setBidSize(long bidSize) {
         this.bidSize = bidSize;
     }
     
@@ -168,11 +168,11 @@ public class StockQuote {
         this.price = price;
     }
     
-    public int getLastTradeSize() {
+    public long getLastTradeSize() {
         return lastTradeSize;
     }
     
-    public void setLastTradeSize(int lastTradeSize) {
+    public void setLastTradeSize(long lastTradeSize) {
         this.lastTradeSize = lastTradeSize;
     }
 
