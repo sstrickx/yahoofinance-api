@@ -100,9 +100,9 @@ public class StockQuotesData {
         String symbol = this.getValue(QuotesProperty.Symbol);
         Stock stock = new Stock(symbol);
         
-        stock.setName(this.getValue(QuotesProperty.Name));
-        stock.setCurrency(this.getValue(QuotesProperty.Currency));
-        stock.setStockExchange(this.getValue(QuotesProperty.StockExchange));
+        stock.setName(Utils.getString(this.getValue(QuotesProperty.Name)));
+        stock.setCurrency(Utils.getString(this.getValue(QuotesProperty.Currency)));
+        stock.setStockExchange(Utils.getString(this.getValue(QuotesProperty.StockExchange)));
         
         stock.setQuote(this.getQuote());
         stock.setStats(this.getStats());

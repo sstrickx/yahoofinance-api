@@ -45,6 +45,13 @@ public class Utils {
                 || data.equals("") || data.equals("nan"));
     }
 
+    public static String getString(String data) {
+        if(!Utils.isParseable(data)) {
+            return null;
+        }
+        return data;
+    }
+    
     public static BigDecimal getBigDecimal(String data) {
         BigDecimal result = BigDecimal.ZERO;
         if (!Utils.isParseable(data)) {
