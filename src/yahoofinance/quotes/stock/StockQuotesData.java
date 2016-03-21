@@ -58,7 +58,8 @@ public class StockQuotesData {
         String symbol = this.getValue(QuotesProperty.Symbol);
         StockStats stats = new StockStats(symbol);
         
-        stats.setMarketCap(Utils.getBigDecimal(this.getValue(QuotesProperty.MarketCapitalization)));
+        stats.setMarketCap(!(this.getValue(QuotesProperty.MarketCapitalization).equals("N/A")) ? Utils.getBigDecimal(this.getValue(QuotesProperty.MarketCapitalization)) : null);
+
         stats.setSharesFloat(Utils.getLong(this.getValue(QuotesProperty.SharesFloat)));
         stats.setSharesOutstanding(Utils.getLong(this.getValue(QuotesProperty.SharesOutstanding)));
         stats.setSharesOwned(Utils.getLong(this.getValue(QuotesProperty.SharesOwned)));
@@ -99,8 +100,9 @@ public class StockQuotesData {
     public Stock getStock() {
         String symbol = this.getValue(QuotesProperty.Symbol);
         Stock stock = new Stock(symbol);
-        
-        stock.setName(this.getValue(QuotesProperty.Name));
+
+        stock.setName(!this.getValue(QuotesProperty.Name).equals("N/A") ? this.getValue(QuotesProperty.Name) : null);
+
         stock.setCurrency(this.getValue(QuotesProperty.Currency));
         stock.setStockExchange(this.getValue(QuotesProperty.StockExchange));
         
