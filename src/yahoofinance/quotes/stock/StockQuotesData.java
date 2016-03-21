@@ -58,7 +58,7 @@ public class StockQuotesData {
         String symbol = this.getValue(QuotesProperty.Symbol);
         StockStats stats = new StockStats(symbol);
         
-        stats.setMarketCap(Utils.getBigDecimal(this.getValue(QuotesProperty.MarketCapitalization)));
+        stats.setMarketCap((this.getValue(QuotesProperty.MarketCapitalization) == null) ? Utils.getBigDecimal(this.getValue(QuotesProperty.MarketCapitalization)) : null);
         stats.setSharesFloat(Utils.getLong(this.getValue(QuotesProperty.SharesFloat)));
         stats.setSharesOutstanding(Utils.getLong(this.getValue(QuotesProperty.SharesOutstanding)));
         stats.setSharesOwned(Utils.getLong(this.getValue(QuotesProperty.SharesOwned)));
