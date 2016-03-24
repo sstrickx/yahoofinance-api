@@ -7,7 +7,8 @@ import java.util.TimeZone;
 import yahoofinance.Utils;
 
 /**
- *
+ * All getters can return null in case the data is not available from Yahoo Finance.
+ * 
  * @author Stijn Strickx
  */
 public class StockQuote {
@@ -17,12 +18,12 @@ public class StockQuote {
     private TimeZone timeZone;
     
     private BigDecimal ask;
-    private long askSize;
+    private Long askSize;
     private BigDecimal bid;
-    private long bidSize;
+    private Long bidSize;
     private BigDecimal price;
     
-    private long lastTradeSize;
+    private Long lastTradeSize;
     private String lastTradeDateStr;
     private String lastTradeTimeStr;
     private Calendar lastTradeTime;
@@ -37,8 +38,8 @@ public class StockQuote {
     private BigDecimal priceAvg50;
     private BigDecimal priceAvg200;
     
-    private long volume;
-    private long avgVolume;
+    private Long volume;
+    private Long avgVolume;
     
     public StockQuote(String symbol) {
         this.symbol = symbol;
@@ -136,11 +137,11 @@ public class StockQuote {
         this.ask = ask;
     }
     
-    public long getAskSize() {
+    public Long getAskSize() {
         return askSize;
     }
     
-    public void setAskSize(long askSize) {
+    public void setAskSize(Long askSize) {
         this.askSize = askSize;
     }
     
@@ -152,11 +153,11 @@ public class StockQuote {
         this.bid = bid;
     }
     
-    public long getBidSize() {
+    public Long getBidSize() {
         return bidSize;
     }
     
-    public void setBidSize(long bidSize) {
+    public void setBidSize(Long bidSize) {
         this.bidSize = bidSize;
     }
     
@@ -168,11 +169,11 @@ public class StockQuote {
         this.price = price;
     }
     
-    public long getLastTradeSize() {
+    public Long getLastTradeSize() {
         return lastTradeSize;
     }
     
-    public void setLastTradeSize(long lastTradeSize) {
+    public void setLastTradeSize(Long lastTradeSize) {
         this.lastTradeSize = lastTradeSize;
     }
 
@@ -297,19 +298,19 @@ public class StockQuote {
         this.priceAvg200 = priceAvg200;
     }
     
-    public long getVolume() {
+    public Long getVolume() {
         return volume;
     }
     
-    public void setVolume(long volume) {
+    public void setVolume(Long volume) {
         this.volume = volume;
     }
     
-    public long getAvgVolume() {
+    public Long getAvgVolume() {
         return avgVolume;
     }
     
-    public void setAvgVolume(long avgVolume) {
+    public void setAvgVolume(Long avgVolume) {
         this.avgVolume = avgVolume;
     }
     

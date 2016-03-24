@@ -6,7 +6,8 @@ import java.math.BigDecimal;
 import yahoofinance.Utils;
 
 /**
- *
+ * All getters can return null in case the data is not available from Yahoo Finance.
+ * 
  * @author Stijn Strickx
  */
 public class StockStats {
@@ -14,9 +15,9 @@ public class StockStats {
     private final String symbol;
     
     private BigDecimal marketCap;
-    private long sharesFloat;
-    private long sharesOutstanding;
-    private long sharesOwned;
+    private Long sharesFloat;
+    private Long sharesOutstanding;
+    private Long sharesOwned;
     
     private BigDecimal eps;
     private BigDecimal pe;
@@ -56,27 +57,27 @@ public class StockStats {
         this.marketCap = marketCap;
     }
 
-    public long getSharesFloat() {
+    public Long getSharesFloat() {
         return sharesFloat;
     }
 
-    public void setSharesFloat(long sharesFloat) {
+    public void setSharesFloat(Long sharesFloat) {
         this.sharesFloat = sharesFloat;
     }
 
-    public long getSharesOutstanding() {
+    public Long getSharesOutstanding() {
         return sharesOutstanding;
     }
 
-    public void setSharesOutstanding(long sharesOutstanding) {
+    public void setSharesOutstanding(Long sharesOutstanding) {
         this.sharesOutstanding = sharesOutstanding;
     }
 
-    public long getSharesOwned() {
+    public Long getSharesOwned() {
         return sharesOwned;
     }
 
-    public void setSharesOwned(long sharesOwned) {
+    public void setSharesOwned(Long sharesOwned) {
         this.sharesOwned = sharesOwned;
     }
 

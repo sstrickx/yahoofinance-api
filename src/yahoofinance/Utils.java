@@ -53,7 +53,7 @@ public class Utils {
     }
     
     public static BigDecimal getBigDecimal(String data) {
-        BigDecimal result = BigDecimal.ZERO;
+        BigDecimal result = null;
         if (!Utils.isParseable(data)) {
             return result;
         }
@@ -93,7 +93,7 @@ public class Utils {
     }
 
     public static double getDouble(String data) {
-        double result = 0.00;
+        double result = Double.NaN;
         if (!Utils.isParseable(data)) {
             return result;
         }
@@ -123,8 +123,8 @@ public class Utils {
         return result;
     }
 
-    public static int getInt(String data) {
-        int result = 0;
+    public static Integer getInt(String data) {
+        Integer result = null;
         if (!Utils.isParseable(data)) {
             return result;
         }
@@ -138,8 +138,8 @@ public class Utils {
         return result;
     }
 
-    public static long getLong(String data) {
-        long result = 0;
+    public static Long getLong(String data) {
+        Long result = null;
         if (!Utils.isParseable(data)) {
             return result;
         }

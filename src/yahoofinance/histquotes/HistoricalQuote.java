@@ -6,7 +6,8 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 /**
- *
+ * All getters can return null in case the data is not available from Yahoo Finance.
+ * 
  * @author Stijn Strickx
  */
 public class HistoricalQuote {
@@ -22,11 +23,11 @@ public class HistoricalQuote {
     
     private BigDecimal adjClose;
     
-    private long volume;
+    private Long volume;
     
     public HistoricalQuote() {}
 
-    public HistoricalQuote(String symbol, Calendar date, BigDecimal open, BigDecimal low, BigDecimal high, BigDecimal close, BigDecimal adjClose, long volume) {
+    public HistoricalQuote(String symbol, Calendar date, BigDecimal open, BigDecimal low, BigDecimal high, BigDecimal close, BigDecimal adjClose, Long volume) {
         this.symbol = symbol;
         this.date = date;
         this.open = open;
@@ -109,11 +110,11 @@ public class HistoricalQuote {
         this.adjClose = adjClose;
     }
 
-    public long getVolume() {
+    public Long getVolume() {
         return volume;
     }
 
-    public void setVolume(long volume) {
+    public void setVolume(Long volume) {
         this.volume = volume;
     }
     

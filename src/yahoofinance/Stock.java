@@ -299,6 +299,11 @@ public class Stock {
         return symbol;
     }
     
+    /**
+     * Get the full name of the stock
+     * 
+     * @return the name or null if the data is not available
+     */
     public String getName() {
         return name;
     }
@@ -307,6 +312,11 @@ public class Stock {
         this.name = name;
     }
     
+    /**
+     * Get the currency of the stock
+     * 
+     * @return the currency or null if the data is not available
+     */
     public String getCurrency() {
         return currency;
     }
@@ -315,6 +325,11 @@ public class Stock {
         this.currency = currency;
     }
     
+    /**
+     * Get the exchange on which the stock is traded
+     * 
+     * @return the exchange or null if the data is not available
+     */
     public String getStockExchange() {
         return stockExchange;
     }

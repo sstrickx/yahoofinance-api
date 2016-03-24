@@ -5,7 +5,8 @@ import java.math.BigDecimal;
 import java.util.Calendar;
 
 /**
- *
+ * All getters can return null in case the data is not available from Yahoo Finance.
+ * 
  * @author Stijn Strickx
  */
 public class StockDividend {
