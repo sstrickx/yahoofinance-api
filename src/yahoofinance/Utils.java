@@ -86,7 +86,7 @@ public class Utils {
     public static BigDecimal getBigDecimal(String dataMain, String dataSub) {
         BigDecimal main = getBigDecimal(dataMain);
         BigDecimal sub = getBigDecimal(dataSub);
-        if(main.compareTo(BigDecimal.ZERO) == 0) {
+        if(main == null || main.compareTo(BigDecimal.ZERO) == 0) {
             return sub;
         }
         return main;
@@ -154,7 +154,7 @@ public class Utils {
     }
 
     public static BigDecimal getPercent(BigDecimal numerator, BigDecimal denominator) {
-        if (denominator.compareTo(BigDecimal.ZERO) == 0) {
+        if (denominator == null || numerator == null || denominator.compareTo(BigDecimal.ZERO) == 0) {
             return BigDecimal.ZERO;
         }
         return numerator.divide(denominator, 4, BigDecimal.ROUND_HALF_EVEN)
