@@ -70,13 +70,17 @@ public class StockDividend {
     public String toString() {
         String payDateStr = "/";
         String exDateStr = "/";
+        String annualYieldStr = "/";
         if(this.payDate != null) {
             payDateStr = this.payDate.getTime().toString();
         }
         if(this.exDate != null) {
             exDateStr = this.exDate.getTime().toString();
         }
-        return "Pay date: " + payDateStr + ", Ex date: " + exDateStr + ", Annual yield: " + this.getAnnualYieldPercent() + "%";
+        if(this.annualYieldPercent != null) {
+            annualYieldStr = this.annualYieldPercent.toString() + "%";
+        }
+        return "Pay date: " + payDateStr + ", Ex date: " + exDateStr + ", Annual yield: " + annualYieldStr + "%";
     }
     
 }
