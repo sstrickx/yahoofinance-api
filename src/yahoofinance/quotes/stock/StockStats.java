@@ -10,7 +10,7 @@ import yahoofinance.Utils;
  * 
  * @author Stijn Strickx
  */
-public class StockStats {
+public class StockStats implements Serializable{
     
     private final String symbol;
     

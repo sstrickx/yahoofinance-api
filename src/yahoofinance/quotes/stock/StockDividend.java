@@ -9,7 +9,7 @@ import java.util.Calendar;
  * 
  * @author Stijn Strickx
  */
-public class StockDividend {
+public class StockDividend implements Serializable{
     
     private final String symbol;
     

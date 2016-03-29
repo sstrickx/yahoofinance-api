@@ -11,7 +11,7 @@ import yahoofinance.Utils;
  * 
  * @author Stijn Strickx
  */
-public class StockQuote {
+public class StockQuote  implements Serializable{
     
     private final String symbol;
     

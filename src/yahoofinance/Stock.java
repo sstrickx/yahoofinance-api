@@ -19,7 +19,7 @@ import yahoofinance.quotes.stock.StockStats;
  *
  * @author Stijn Strickx
  */
-public class Stock {
+public class Stock implements Serializable {
 
     private final String symbol;
     private String name;

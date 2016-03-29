@@ -10,7 +10,7 @@ import java.util.Calendar;
  * 
  * @author Stijn Strickx
  */
-public class HistoricalQuote {
+public class HistoricalQuote implements Serializable {
     
     private String symbol;
     

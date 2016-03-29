@@ -9,7 +9,7 @@ import yahoofinance.quotes.QuotesProperty;
  *
  * @author Stijn Strickx
  */
-public class StockQuotesData {
+public class StockQuotesData implements Serializable {
     
     private final String[] data;
     
