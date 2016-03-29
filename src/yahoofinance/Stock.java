@@ -1,6 +1,7 @@
 package yahoofinance;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.lang.reflect.Field;
 import java.util.Calendar;
 import java.util.List;

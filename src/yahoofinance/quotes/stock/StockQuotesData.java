@@ -4,7 +4,7 @@ import yahoofinance.Stock;
 import yahoofinance.Utils;
 import yahoofinance.exchanges.ExchangeTimeZone;
 import yahoofinance.quotes.QuotesProperty;
-
+import java.io.Serializable;
 /**
  *
  * @author Stijn Strickx

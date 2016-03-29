@@ -2,6 +2,7 @@
 package yahoofinance.quotes.stock;
 
 import java.math.BigDecimal;
+import java.io.Serializable;
 import java.util.Calendar;
 
 /**

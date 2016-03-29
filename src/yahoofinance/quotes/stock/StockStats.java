@@ -4,7 +4,7 @@ package yahoofinance.quotes.stock;
 import java.math.BigDecimal;
 
 import yahoofinance.Utils;
-
+import java.io.Serializable;
 /**
  * All getters can return null in case the data is not available from Yahoo Finance.
  * 
