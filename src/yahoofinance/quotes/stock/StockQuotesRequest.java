@@ -107,8 +107,10 @@ public class StockQuotesRequest extends QuotesRequest<StockQuotesData> {
     @Override
     protected StockQuotesData parseCSVLine(String line) {
         List<String> parsedLine = new ArrayList<String>();
-
-        // first get company name and symbol, because we need the symbol!
+        
+        // first get company name, symbol, currency and exchange
+        // because we need the symbol and currency or exchange might be the same as the symbol!
+        // pretty ugly code due to the bad format of the csv
         int pos1 = 0;
         int pos2 = 0;
         int skip = 2;
@@ -124,13 +126,38 @@ public class StockQuotesRequest extends QuotesRequest<StockQuotesData> {
         String name = line.substring(pos1, pos2);
         pos1 = pos2 + skip; // skip \",
         pos2 = line.indexOf('\"', pos1 + 1);
+        skip = 2;
         String fullSymbol = line.substring(pos1, pos2 + 1);
         String symbol = fullSymbol.substring(1, fullSymbol.length() - 1);
 
+        pos1 = pos2 + skip;
+        if (line.charAt(pos1) == '\"') {
+            pos1 += 1;
+            pos2 = line.indexOf('\"', pos1);
+            skip = 2;
+        } else {
+            pos2 = line.indexOf(',', pos1);
+            skip = 1;
+        }
+        String currency = line.substring(pos1, pos2);
+        
+        pos1 = pos2 + skip;
+        if (line.charAt(pos1) == '\"') {
+            pos1 += 1;
+            pos2 = line.indexOf('\"', pos1);
+            skip = 2;
+        } else {
+            pos2 = line.indexOf(',', pos1);
+            skip = 1;
+        }
+        String exchange = line.substring(pos1, pos2);
+        
         parsedLine.add(name);
         parsedLine.add(symbol);
+        parsedLine.add(currency);
+        parsedLine.add(exchange);
 
-        pos1 = pos2 + 2; // skip \",
+        pos1 = pos2 + skip; // skip \",
         for (; pos1 < line.length(); pos1++) {
             if (line.startsWith(fullSymbol, pos1)) {
                 parsedLine.add(symbol);
