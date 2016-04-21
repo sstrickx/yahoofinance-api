@@ -2,6 +2,7 @@
 package yahoofinance.quotes.stock;
 
 import java.math.BigDecimal;
+import java.io.Serializable;
 import java.util.Calendar;
 
 /**
@@ -9,7 +10,7 @@ import java.util.Calendar;
  * 
  * @author Stijn Strickx
  */
-public class StockDividend {
+public class StockDividend implements Serializable{
     
     private final String symbol;
     

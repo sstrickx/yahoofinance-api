@@ -4,13 +4,13 @@ package yahoofinance.histquotes;
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-
+import java.io.Serializable;
 /**
  * All getters can return null in case the data is not available from Yahoo Finance.
  * 
  * @author Stijn Strickx
  */
-public class HistoricalQuote {
+public class HistoricalQuote implements Serializable {
     
     private String symbol;
     

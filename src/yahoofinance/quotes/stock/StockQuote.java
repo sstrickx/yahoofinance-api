@@ -5,13 +5,13 @@ import java.math.BigDecimal;
 import java.util.Calendar;
 import java.util.TimeZone;
 import yahoofinance.Utils;
-
+import java.io.Serializable;
 /**
  * All getters can return null in case the data is not available from Yahoo Finance.
  * 
  * @author Stijn Strickx
  */
-public class StockQuote {
+public class StockQuote  implements Serializable{
     
     private final String symbol;
     
