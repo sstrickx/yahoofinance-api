@@ -41,6 +41,8 @@ public class StockQuotesData {
         quote.setDayLow(Utils.getBigDecimal(this.getValue(QuotesProperty.DaysLow)));
         
         quote.setTimeZone(ExchangeTimeZone.getStockTimeZone(symbol));
+        quote.setLastTradeDateStr(this.getValue(QuotesProperty.LastTradeDate));
+        quote.setLastTradeTimeStr(this.getValue(QuotesProperty.LastTradeTime));
         quote.setLastTradeTime(Utils.parseDateTime(this.getValue(QuotesProperty.LastTradeDate), this.getValue(QuotesProperty.LastTradeTime), quote.getTimeZone()));
         
         quote.setYearHigh(Utils.getBigDecimal(this.getValue(QuotesProperty.YearHigh)));
