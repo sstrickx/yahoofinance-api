@@ -173,9 +173,10 @@
                         <artifactId>github-release-plugin</artifactId>
                         <version>1.1.1</version>
                         <configuration>
-                            <description></description>
+                            <description>Release version ${project.version}</description>
                             <releaseName>${project.artifactId}-${project.version}</releaseName>
                             <tag>v${project.version}</tag>
+                            <repositoryId>sstrickx/yahoofinance-api</repositoryId>
                             <fileSets>
                                 <fileSet>
                                     <directory>${project.build.directory}/archive</directory>
@@ -187,6 +188,14 @@
                                 </fileSet>
                             </fileSets>
                         </configuration>
+                        <executions>
+                            <execution>
+                                <phase>deploy</phase>
+                                <goals>
+                                    <goal>release</goal>
+                                </goals>
+                            </execution>
+                        </executions>
                     </plugin>
 
                     <!-- Update website -->
@@ -202,9 +211,11 @@
                                     <goal>upload</goal>
                                 </goals>
                                 <configuration>
-                                    <url>scp://laythe/</url>
+                                    <serverId>financequotes-api</serverId>
+                                    <url>${yahoofinance.ssh.url}</url>
+                                    <followSymLink>true</followSymLink>
                                     <fromDir>${project.build.directory}/apidocs</fromDir>
-                                    <includes>*</includes>
+                                    <includes>**</includes>
                                     <toDir>www/yahoofinance/javadoc</toDir>
                                 </configuration>
                             </execution>
@@ -215,10 +226,10 @@
                                     <goal>sshexec</goal>
                                 </goals>
                                 <configuration>
-                                    <url>ssh://laythe/</url>
+                                    <serverId>financequotes-api</serverId>
+                                    <url>${yahoofinance.ssh.url}</url>
                                     <commands>
-                                        <command>cd www/yahoofinance/release</command>
-                                        <command>./release.sh ${project.version}</command>
+                                        <command>www/yahoofinance/release/release.sh ${project.version}</command>
                                     </commands>
                                 </configuration>
                             </execution>
