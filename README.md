@@ -1,5 +1,6 @@
-Finance Quotes API for Yahoo Finance (Java)
-================
+# Finance Quotes API for Yahoo Finance (Java)
+
+[![Build Status](https://travis-ci.org/sstrickx/yahoofinance-api.svg?branch=master)](https://travis-ci.org/sstrickx/yahoofinance-api)
 
 [Website](http://financequotes-api.com)
 
