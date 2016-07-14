@@ -248,7 +248,6 @@ public class Utils {
 
     public static Calendar parseHistDate(String date) {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
-        format.setTimeZone(TimeZone.getTimeZone(YahooFinance.TIMEZONE));
         try {
             if (Utils.isParseable(date)) {
                 Calendar c = Calendar.getInstance();
