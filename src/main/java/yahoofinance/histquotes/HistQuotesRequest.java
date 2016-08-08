@@ -62,7 +62,7 @@ public class HistQuotesRequest {
     public HistQuotesRequest(String symbol, Date from, Date to, Interval interval) {
         this(symbol, interval);
         this.from.setTime(from);
-        this.to.setTime(from);
+        this.to.setTime(to);
         this.cleanHistCalendar(this.from);
         this.cleanHistCalendar(this.to);
     }
