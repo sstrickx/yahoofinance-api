@@ -1,0 +1,17 @@
+
+requests:
+    - url: /d/quotes.csv?s=AIR.PA&f=nsc4xab2sa5sbb3sb6sl1sk3sd1t1opghva2kjm3m4sj2sss1sj1sf6sr1qdyee7e9e8rr5p6p5b4s6j4t8s7&e=.csv
+      responseCode: 200
+      responseResource: simpleQuoteRequest/AIR.PA.csv
+
+    - url: /d/quotes.csv?s=TSLA&f=nsc4xab2sa5sbb3sb6sl1sk3sd1t1opghva2kjm3m4sj2sss1sj1sf6sr1qdyee7e9e8rr5p6p5b4s6j4t8s7&e=.csv
+      responseCode: 200
+      responseResource: simpleQuoteRequest/TSLA.csv
+
+    - url: /d/quotes.csv?s=INTC&f=nsc4xab2sa5sbb3sb6sl1sk3sd1t1opghva2kjm3m4sj2sss1sj1sf6sr1qdyee7e9e8rr5p6p5b4s6j4t8s7&e=.csv
+      responseCode: 200
+      responseResource: simpleQuoteRequest/INTC.csv
+
+    - url: /d/quotes.csv?s=C6L.SI&f=nsc4xab2sa5sbb3sb6sl1sk3sd1t1opghva2kjm3m4sj2sss1sj1sf6sr1qdyee7e9e8rr5p6p5b4s6j4t8s7&e=.csv
+      responseCode: 200
+      responseResource: simpleQuoteRequest/C6L.SI.csv

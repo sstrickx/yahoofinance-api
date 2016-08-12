@@ -1,10 +1,15 @@
 package yahoofinance.mock;
 
+import com.google.common.base.Charsets;
+import com.google.common.io.Resources;
 import okhttp3.mockwebserver.Dispatcher;
 import okhttp3.mockwebserver.MockResponse;
 import okhttp3.mockwebserver.RecordedRequest;
+import org.yaml.snakeyaml.Yaml;
 
+import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -21,29 +26,38 @@ public class YahooFinanceDispatcher extends Dispatcher {
 
     public YahooFinanceDispatcher() {
         this.pathToResponseResource = new HashMap<String, ResponseResource>();
-        this.pathToResponseResource.put(
-                "/d/quotes.csv?s=AIR.PA&f=nsc4xab2sa5sbb3sb6sl1sk3sd1t1opghva2kjm3m4sj2sss1sj1sf6sr1qdyee7e9e8rr5p6p5b4s6j4t8s7&e=.csv",
-                new ResponseResource("simpleQuoteRequest/AIR.PA.csv")
-        );
-        this.pathToResponseResource.put(
-                "/d/quotes.csv?s=TSLA&f=nsc4xab2sa5sbb3sb6sl1sk3sd1t1opghva2kjm3m4sj2sss1sj1sf6sr1qdyee7e9e8rr5p6p5b4s6j4t8s7&e=.csv",
-                new ResponseResource("simpleQuoteRequest/TSLA.csv")
-        );
-        this.pathToResponseResource.put(
-                "/d/quotes.csv?s=INTC&f=nsc4xab2sa5sbb3sb6sl1sk3sd1t1opghva2kjm3m4sj2sss1sj1sf6sr1qdyee7e9e8rr5p6p5b4s6j4t8s7&e=.csv",
-                new ResponseResource("simpleQuoteRequest/INTC.csv")
-        );
+        this.loadRequests();
     }
 
     @Override
     public MockResponse dispatch(RecordedRequest request) throws InterruptedException {
-        LOG.log(Level.INFO, "Getting MockResponse for path: " + request.getPath());
         if(this.pathToResponseResource.containsKey(request.getPath())) {
             return this.pathToResponseResource.get(request.getPath()).get();
         } else {
-            LOG.log(Level.WARNING, "Requested path not configured. Cannot provide MockResponse");
+            LOG.log(Level.WARNING, "Requested path not configured. Cannot provide MockResponse for " + request.getPath());
         }
         return null;
+    }
+
+    private void loadRequests() {
+        Yaml yaml = new Yaml();
+        Map<String, List<Map<String, Object>>> requests;
+        try {
+            String requestsYaml = Resources.toString(Resources.getResource("requests.yml"), Charsets.UTF_8);
+            requests = (Map<String, List<Map<String, Object>>>) yaml.load(requestsYaml);
+        } catch (IOException e) {
+            LOG.log(Level.WARNING, "Unable to process requests.yml. No requests mocked.", e);
+            return;
+        }
+        for(Map<String, Object> request : requests.get("requests")) {
+            this.pathToResponseResource.put(
+                    (String) request.get("url"),
+                    new ResponseResource(
+                            (String) request.get("responseResource"),
+                            (Integer) request.get("responseCode")
+                    )
+            );
+        }
     }
 
 
