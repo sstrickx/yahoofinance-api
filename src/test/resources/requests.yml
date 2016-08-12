@@ -15,3 +15,8 @@ requests:
     - url: /d/quotes.csv?s=C6L.SI&f=nsc4xab2sa5sbb3sb6sl1sk3sd1t1opghva2kjm3m4sj2sss1sj1sf6sr1qdyee7e9e8rr5p6p5b4s6j4t8s7&e=.csv
       responseCode: 200
       responseResource: simpleQuoteRequest/C6L.SI.csv
+
+    - url: /d/quotes.csv?s=AIR.PA%2CINTC%2CC6L.SI&f=nsc4xab2sa5sbb3sb6sl1sk3sd1t1opghva2kjm3m4sj2sss1sj1sf6sr1qdyee7e9e8rr5p6p5b4s6j4t8s7&e=.csv
+      responseCode: 200
+      responseResource: multiQuoteRequest/AIR.PA_INTC_C6L.SI.csv
+
