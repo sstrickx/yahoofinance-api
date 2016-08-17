@@ -83,13 +83,16 @@ public class HistQuotesRequest {
 
         List<HistoricalQuote> result = new ArrayList<HistoricalQuote>();
         
-        if(this.from.equals(this.to) || this.from.after(this.to)) {
-            YahooFinance.logger.log(Level.WARNING, "Unable to retrieve historical quotes. "
-                    + "From-date should be at least 1 day before to-date. From: " 
-                    + this.from.getTime() + ", to: " + this.to.getTime());
-            return result;
-        }
+        /*
+            It's not necessary, because I can want the quote for a specific date.
         
+            if(this.from.equals(this.to) || this.from.after(this.to)) {
+                YahooFinance.logger.log(Level.WARNING, "Unable to retrieve historical quotes. "
+                        + "From-date should be at least 1 day before to-date. From: " 
+                        + this.from.getTime() + ", to: " + this.to.getTime());
+                return result;
+            }
+        */
         Map<String, String> params = new LinkedHashMap<String, String>();
         params.put("s", this.symbol);
 
