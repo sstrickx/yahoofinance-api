@@ -100,19 +100,19 @@ public class HistoricalQuoteRequestTest extends MockedServersTest {
     @Test
     public void historicalFlowTest() throws IOException {
         Stock goog = YahooFinance.get("GOOG");
-        int requestCount = this.histQuotesServer.getRequestCount();
+        int requestCount = MockedServersTest.histQuotesServer.getRequestCount();
         assertNotNull(goog.getHistory());
         requestCount += 1;
-        assertEquals(requestCount, this.histQuotesServer.getRequestCount());
+        assertEquals(requestCount, MockedServersTest.histQuotesServer.getRequestCount());
         assertEquals(13, goog.getHistory().size());
-        assertEquals(requestCount, this.histQuotesServer.getRequestCount());
+        assertEquals(requestCount, MockedServersTest.histQuotesServer.getRequestCount());
 
         Calendar from = Calendar.getInstance();
         Calendar to = Calendar.getInstance();
         from.add(Calendar.YEAR, -5); // from 5 years ago
         assertNotNull(goog.getHistory(from, to, Interval.WEEKLY));
         requestCount += 1;
-        assertEquals(requestCount, this.histQuotesServer.getRequestCount());
+        assertEquals(requestCount, MockedServersTest.histQuotesServer.getRequestCount());
         assertEquals(261, goog.getHistory().size());
     }
 
@@ -125,14 +125,14 @@ public class HistoricalQuoteRequestTest extends MockedServersTest {
 
         Stock goog = YahooFinance.get("GOOG");
         List<HistoricalQuote> histQuotes = null;
-        int requestCount = this.histQuotesServer.getRequestCount();
+        int requestCount = MockedServersTest.histQuotesServer.getRequestCount();
         try {
             histQuotes = goog.getHistory(from, to);
         } catch (IOException ex) {
             reqEx = ex;
         }
         // Didn't send any requests since the problem was detected
-        assertEquals(requestCount, this.histQuotesServer.getRequestCount());
+        assertEquals(requestCount, MockedServersTest.histQuotesServer.getRequestCount());
         assertNull(reqEx);
         assertEquals(0, histQuotes.size());
     }
