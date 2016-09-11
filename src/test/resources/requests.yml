@@ -33,6 +33,21 @@ requests:
       responseResource: multiQuoteRequest/INTC_AIR.PA.csv
 
     #
+    # FX QUOTE REQUESTS
+    #
+    - url: /d/quotes.csv?s=GBPEUR%3DX&f=sl1&e=.csv
+      responseCode: 200
+      responseResource: fxQuoteRequest/GBPEUR.csv
+
+    - url: /d/quotes.csv?s=USDEUR%3DX&f=sl1&e=.csv
+      responseCode: 200
+      responseResource: fxQuoteRequest/USDEUR.csv
+
+    - url: /d/quotes.csv?s=EURUSD%3DX%2CEURCHF%3DX&f=sl1&e=.csv
+      responseCode: 200
+      responseResource: fxQuoteRequest/EURUSD_EURCHF.csv
+
+    #
     # HISTORICAL QUOTE REQUESTS
     #
 
