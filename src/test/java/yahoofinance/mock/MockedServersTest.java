@@ -2,7 +2,9 @@ package yahoofinance.mock;
 
 import okhttp3.mockwebserver.Dispatcher;
 import okhttp3.mockwebserver.MockWebServer;
+import org.junit.AfterClass;
 import org.junit.Before;
+import org.junit.BeforeClass;
 
 import java.io.IOException;
 import java.util.logging.Level;
@@ -16,11 +18,17 @@ public class MockedServersTest {
 
     public static final Logger LOG = Logger.getLogger(MockedServersTest.class.getName());
 
-    private MockWebServer quotesServer;
-    private MockWebServer histQuotesServer;
+    private static boolean started = false;
 
-    @Before
-    public void setup() {
+    public static MockWebServer quotesServer;
+    public static MockWebServer histQuotesServer;
+
+    @BeforeClass
+    public static void startServers() {
+        if(started) {
+            return;
+        }
+        started = true;
         quotesServer = new MockWebServer();
         histQuotesServer = new MockWebServer();
         try {
@@ -29,7 +37,6 @@ public class MockedServersTest {
         } catch (IOException e) {
             LOG.log(Level.SEVERE, "Unable to start mock web server", e);
         }
-
         String quotesBaseUrl = "http://localhost:" + quotesServer.getPort() + "/d/quotes.csv";
         String histQuotesBaseUrl = "http://localhost:" + histQuotesServer.getPort() + "/table.csv";
 

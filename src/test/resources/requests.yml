@@ -20,3 +20,43 @@ requests:
       responseCode: 200
       responseResource: multiQuoteRequest/AIR.PA_INTC_C6L.SI.csv
 
+    - url: /d/quotes.csv?s=GOOG&f=nsc4xab2sa5sbb3sb6sl1sk3sd1t1opghva2kjm3m4sj2sss1sj1sf6sr1qdyee7e9e8rr5p6p5b4s6j4t8s7&e=.csv
+      responseCode: 200
+      responseResource: simpleQuoteRequest/GOOG.csv
+
+    - url: /d/quotes.csv?s=SCTY&f=nsc4xab2sa5sbb3sb6sl1sk3sd1t1opghva2kjm3m4sj2sss1sj1sf6sr1qdyee7e9e8rr5p6p5b4s6j4t8s7&e=.csv
+      responseCode: 200
+      responseResource: simpleQuoteRequest/SCTY.csv
+
+    - url: /d/quotes.csv?s=INTC%2CAIR.PA&f=nsc4xab2sa5sbb3sb6sl1sk3sd1t1opghva2kjm3m4sj2sss1sj1sf6sr1qdyee7e9e8rr5p6p5b4s6j4t8s7&e=.csv
+      responseCode: 200
+      responseResource: multiQuoteRequest/INTC_AIR.PA.csv
+
+    #
+    # HISTORICAL QUOTE REQUESTS
+    #
+
+    - url: /table.csv?s=GOOG&a=8&b=11&c=2015&d=8&e=11&f=2016&g=m&ignore=.csv
+      responseCode: 200
+      responseResource: historicalQuoteRequest/GOOG_1Y_M.csv
+
+    - url: /table.csv?s=TSLA&a=8&b=11&c=2015&d=8&e=11&f=2016&g=d&ignore=.csv
+      responseCode: 200
+      responseResource: historicalQuoteRequest/TSLA_1Y_D.csv
+
+    - url: /table.csv?s=SCTY&a=8&b=11&c=2015&d=8&e=11&f=2016&g=w&ignore=.csv
+      responseCode: 200
+      responseResource: historicalQuoteRequest/SCTY_1Y_W.csv
+
+    - url: /table.csv?s=GOOG&a=8&b=11&c=2011&d=8&e=11&f=2016&g=w&ignore=.csv
+      responseCode: 200
+      responseResource: historicalQuoteRequest/GOOG_5Y_W.csv
+
+    - url: /table.csv?s=AIR.PA&a=8&b=11&c=2015&d=8&e=11&f=2016&g=m&ignore=.csv
+      responseCode: 200
+      responseResource: historicalQuoteRequest/AIR.PA_1Y_M.csv
+
+    - url: /table.csv?s=INTC&a=8&b=11&c=2015&d=8&e=11&f=2016&g=m&ignore=.csv
+      responseCode: 200
+      responseResource: historicalQuoteRequest/INTC_1Y_M.csv
+
