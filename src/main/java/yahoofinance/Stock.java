@@ -48,6 +48,14 @@ public class Stock {
             YahooFinance.logger.log(Level.SEVERE, "Failed to update Stock with symbol: {0}", this.symbol);
         }
     }
+
+    /**
+     * Checks if the returned name is null. This probably means that the symbol was not recognized by Yahoo Finance.
+     * @return whether this stock's symbol is known by Yahoo Finance (true) or not (false)
+     */
+    public boolean isValid() {
+        return this.name != null;
+    }
     
     /**
      * Returns the basic quotes data available for this stock.
