@@ -12,6 +12,7 @@ import java.util.Map;
 import java.util.logging.Level;
 import yahoofinance.Utils;
 import yahoofinance.YahooFinance;
+import yahoofinance.util.RedirectableRequest;
 
 /**
  *
@@ -79,9 +80,11 @@ public abstract class QuotesRequest<T> {
         YahooFinance.logger.log(Level.INFO, ("Sending request: " + url));
 
         URL request = new URL(url);
-        URLConnection connection = request.openConnection();
-        connection.setConnectTimeout(YahooFinance.CONNECTION_TIMEOUT);
-        connection.setReadTimeout(YahooFinance.CONNECTION_TIMEOUT);
+        RedirectableRequest redirectableRequest = new RedirectableRequest(request, 5);
+        redirectableRequest.setConnectTimeout(YahooFinance.CONNECTION_TIMEOUT);
+        redirectableRequest.setReadTimeout(YahooFinance.CONNECTION_TIMEOUT);
+        URLConnection connection = redirectableRequest.openConnection();
+
         InputStreamReader is = new InputStreamReader(connection.getInputStream());
         BufferedReader br = new BufferedReader(is);
 

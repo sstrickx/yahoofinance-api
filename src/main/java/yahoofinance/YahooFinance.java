@@ -44,8 +44,8 @@ import yahoofinance.quotes.stock.StockQuotesRequest;
  */
 public class YahooFinance {
     
-    public static final String QUOTES_BASE_URL = System.getProperty("yahoofinance.baseurl.quotes", "http://finance.yahoo.com/d/quotes.csv");
-    public static final String HISTQUOTES_BASE_URL = System.getProperty("yahoofinance.baseurl.histquotes", "http://ichart.yahoo.com/table.csv");
+    public static final String QUOTES_BASE_URL = System.getProperty("yahoofinance.baseurl.quotes", "http://download.finance.yahoo.com/d/quotes.csv");
+    public static final String HISTQUOTES_BASE_URL = System.getProperty("yahoofinance.baseurl.histquotes", "https://ichart.yahoo.com/table.csv");
     public static final String QUOTES_CSV_DELIMITER = ",";
     public static final String TIMEZONE = "America/New_York";
     
