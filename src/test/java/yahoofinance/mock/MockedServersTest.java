@@ -42,6 +42,7 @@ public class MockedServersTest {
 
         System.setProperty("yahoofinance.baseurl.quotes", quotesBaseUrl);
         System.setProperty("yahoofinance.baseurl.histquotes", histQuotesBaseUrl);
+        System.setProperty("yahoofinance.histquotes2.enabled", "false");
 
         final Dispatcher dispatcher = new YahooFinanceDispatcher();
         quotesServer.setDispatcher(dispatcher);

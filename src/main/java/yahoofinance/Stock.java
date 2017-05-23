@@ -295,8 +295,13 @@ public class Stock {
      * @see                 #getHistory() 
      */
     public List<HistoricalQuote> getHistory(Calendar from, Calendar to, Interval interval) throws IOException {
-        HistQuotes2Request hist = new HistQuotes2Request(this.symbol, from, to, interval);
-        this.setHistory(hist.getResult());
+        if(YahooFinance.HISTQUOTES2_ENABLED.equalsIgnoreCase("true")) {
+            HistQuotes2Request hist = new HistQuotes2Request(this.symbol, from, to, interval);
+            this.setHistory(hist.getResult());
+        } else {
+            HistQuotesRequest hist = new HistQuotesRequest(this.symbol, from, to, interval);
+            this.setHistory(hist.getResult());
+        }
         return this.history;
     }
     
