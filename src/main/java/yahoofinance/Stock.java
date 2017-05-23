@@ -9,6 +9,7 @@ import java.util.logging.Logger;
 import yahoofinance.histquotes.HistQuotesRequest;
 import yahoofinance.histquotes.HistoricalQuote;
 import yahoofinance.histquotes.Interval;
+import yahoofinance.histquotes2.HistQuotes2Request;
 import yahoofinance.quotes.stock.StockDividend;
 import yahoofinance.quotes.stock.StockQuote;
 import yahoofinance.quotes.stock.StockQuotesData;
@@ -294,7 +295,7 @@ public class Stock {
      * @see                 #getHistory() 
      */
     public List<HistoricalQuote> getHistory(Calendar from, Calendar to, Interval interval) throws IOException {
-        HistQuotesRequest hist = new HistQuotesRequest(this.symbol, from, to, interval);
+        HistQuotes2Request hist = new HistQuotes2Request(this.symbol, from, to, interval);
         this.setHistory(hist.getResult());
         return this.history;
     }

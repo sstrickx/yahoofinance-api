@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  *
@@ -29,6 +31,10 @@ public class RedirectableRequest {
     }
 
     public URLConnection openConnection() throws IOException {
+        return openConnection(new HashMap<String, String>());
+    }
+
+    public URLConnection openConnection(Map<String, String> requestProperties) throws IOException {
         int redirectCount = 0;
         boolean hasResponse = false;
         HttpURLConnection connection = null;
@@ -37,6 +43,10 @@ public class RedirectableRequest {
             connection = (HttpURLConnection) currentRequest.openConnection();
             connection.setConnectTimeout(this.connectTimeout);
             connection.setReadTimeout(this.readTimeout);
+
+            for(String requestProperty : requestProperties.keySet()) {
+                connection.addRequestProperty(requestProperty, requestProperties.get(requestProperty));
+            }
 
             // only handle protocol redirects manually...
             connection.setInstanceFollowRedirects(true);
