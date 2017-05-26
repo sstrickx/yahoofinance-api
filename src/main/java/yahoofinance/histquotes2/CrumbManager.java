@@ -34,18 +34,20 @@ public class CrumbManager {
         redirectableRequest.setReadTimeout(YahooFinance.CONNECTION_TIMEOUT);
         URLConnection connection = redirectableRequest.openConnection();
 
-        List<String> cookies = connection.getHeaderFields().get("Set-Cookie");
-        if(cookies != null && cookies.size() > 0) {
-            for(String cookieValue : cookies) {
-                if(cookieValue.matches("B=.*")) {
-                    cookie = cookieValue.split(";")[0];
-                    YahooFinance.logger.log(Level.FINE, "Set cookie from http request: " + cookie);
-                    return;
+        for(String headerKey : connection.getHeaderFields().keySet()) {
+            if("Set-Cookie".equalsIgnoreCase(headerKey)) {
+                for(String cookieField : connection.getHeaderFields().get(headerKey)) {
+                    for(String cookieValue : cookieField.split(";")) {
+                        if(cookieValue.matches("B=.*")) {
+                            cookie = cookieValue;
+                            YahooFinance.logger.log(Level.FINE, "Set cookie from http request: " + cookie);
+                            return;
+                        }
+                    }
                 }
             }
-        } else {
-            YahooFinance.logger.log(Level.WARNING, "Failed to set cookie from http request. Set-Cookie header not available. Historical quote requests will most likely fail.");
         }
+        YahooFinance.logger.log(Level.WARNING, "Failed to set cookie from http request. Historical quote requests will most likely fail.");
     }
 
     private static void setCrumb() throws IOException {
