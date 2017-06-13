@@ -84,7 +84,7 @@ public class CrumbManager {
         setCrumb();
     }
 
-    public static String getCrumb() throws IOException {
+    public static synchronized String getCrumb() throws IOException {
         if(crumb == null || crumb.isEmpty()) {
             refresh();
         }
