@@ -1,4 +1,3 @@
-
 package yahoofinance;
 
 import java.io.IOException;
@@ -6,7 +5,6 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Logger;
 import yahoofinance.histquotes.HistQuotesRequest;
 import yahoofinance.histquotes.Interval;
 import yahoofinance.quotes.fx.FxQuote;
@@ -57,8 +55,6 @@ public class YahooFinance {
     
     public static final int CONNECTION_TIMEOUT = 
             Integer.parseInt(System.getProperty("yahoofinance.connection.timeout", "10000"));
-    
-    public static final Logger logger = Logger.getLogger(YahooFinance.class.getName());
     
     /**
     * Sends a basic quotes request to Yahoo Finance. This will return a {@link Stock} object

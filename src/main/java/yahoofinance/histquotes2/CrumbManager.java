@@ -1,30 +1,33 @@
 package yahoofinance.histquotes2;
 
-import yahoofinance.YahooFinance;
-import yahoofinance.util.RedirectableRequest;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import yahoofinance.YahooFinance;
+import yahoofinance.util.RedirectableRequest;
 
 /**
  * Created by Stijn on 23/05/2017.
  */
 public class CrumbManager {
 
+    private static final Logger log = LoggerFactory.getLogger(CrumbManager.class);
+  
     private static String crumb = "";
     private static String cookie = "";
 
     private static void setCookie() throws IOException {
         if(YahooFinance.HISTQUOTES2_COOKIE != null && !YahooFinance.HISTQUOTES2_COOKIE.isEmpty()) {
             cookie = YahooFinance.HISTQUOTES2_COOKIE;
-            YahooFinance.logger.log(Level.FINE, "Set cookie from system property: " + cookie);
+            log.debug("Set cookie from system property: {}", cookie);
             return;
         }
 
@@ -40,20 +43,20 @@ public class CrumbManager {
                     for(String cookieValue : cookieField.split(";")) {
                         if(cookieValue.matches("B=.*")) {
                             cookie = cookieValue;
-                            YahooFinance.logger.log(Level.FINE, "Set cookie from http request: " + cookie);
+                            log.debug("Set cookie from http request: {}", cookie);
                             return;
                         }
                     }
                 }
             }
         }
-        YahooFinance.logger.log(Level.WARNING, "Failed to set cookie from http request. Historical quote requests will most likely fail.");
+        log.warn("Failed to set cookie from http request. Historical quote requests will most likely fail.");
     }
 
     private static void setCrumb() throws IOException {
         if(YahooFinance.HISTQUOTES2_CRUMB != null && !YahooFinance.HISTQUOTES2_CRUMB.isEmpty()) {
             crumb = YahooFinance.HISTQUOTES2_CRUMB;
-            YahooFinance.logger.log(Level.FINE, "Set crumb from system property: " + crumb);
+            log.debug("Set crumb from system property: {}", crumb);
             return;
         }
 
@@ -73,9 +76,9 @@ public class CrumbManager {
 
         if(crumbResult != null && !crumbResult.isEmpty()) {
             crumb = crumbResult.trim();
-            YahooFinance.logger.log(Level.FINE, "Set crumb from http request: " + crumb);
+            log.debug("Set crumb from http request: {}", crumb);
         } else {
-            YahooFinance.logger.log(Level.WARNING, "Failed to set crumb from http request. Historical quote requests will most likely fail.");
+            log.warn("Failed to set crumb from http request. Historical quote requests will most likely fail.");
         }
     }
 

@@ -4,8 +4,10 @@ import java.io.IOException;
 import java.lang.reflect.Field;
 import java.util.Calendar;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import yahoofinance.histquotes.HistQuotesRequest;
 import yahoofinance.histquotes.HistoricalQuote;
 import yahoofinance.histquotes.Interval;
@@ -22,6 +24,8 @@ import yahoofinance.quotes.stock.StockStats;
  */
 public class Stock {
 
+    private static final Logger log = LoggerFactory.getLogger(Stock.class);
+  
     private final String symbol;
     private String name;
     private String currency;
@@ -44,9 +48,9 @@ public class Stock {
             this.setQuote(data.getQuote());
             this.setStats(data.getStats());
             this.setDividend(data.getDividend());
-            YahooFinance.logger.log(Level.INFO, "Updated Stock with symbol: {0}", this.symbol);
+            log.info("Updated Stock with symbol: {}", this.symbol);
         } else {
-            YahooFinance.logger.log(Level.SEVERE, "Failed to update Stock with symbol: {0}", this.symbol);
+            log.error("Failed to update Stock with symbol: {}", this.symbol);
         }
     }
 
@@ -364,9 +368,9 @@ public class Stock {
             try {
                 System.out.println(f.getName() + ": " + f.get(this));
             } catch (IllegalArgumentException ex) {
-                Logger.getLogger(Stock.class.getName()).log(Level.SEVERE, null, ex);
+                log.error(null, ex);
             } catch (IllegalAccessException ex) {
-                Logger.getLogger(Stock.class.getName()).log(Level.SEVERE, null, ex);
+                log.error(null, ex);
             }
         }
         System.out.println("--------------------------------");
