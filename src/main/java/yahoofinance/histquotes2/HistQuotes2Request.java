@@ -13,7 +13,9 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
 import java.util.*;
-import java.util.logging.Level;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *
@@ -21,6 +23,8 @@ import java.util.logging.Level;
  */
 public class HistQuotes2Request {
 
+
+    private static final Logger log = LoggerFactory.getLogger(HistQuotes2Request.class);
     private final String symbol;
 
     private final Calendar from;
@@ -98,7 +102,7 @@ public class HistQuotes2Request {
         List<HistoricalQuote> result = new ArrayList<HistoricalQuote>();
         
         if(this.from.after(this.to)) {
-            YahooFinance.logger.log(Level.WARNING, "Unable to retrieve historical quotes. "
+            log.warn("Unable to retrieve historical quotes. "
                     + "From-date should not be after to-date. From: "
                     + this.from.getTime() + ", to: " + this.to.getTime());
             return result;
@@ -115,7 +119,7 @@ public class HistQuotes2Request {
         String url = YahooFinance.HISTQUOTES2_BASE_URL + URLEncoder.encode(this.symbol , "UTF-8") + "?" + Utils.getURLParameters(params);
 
         // Get CSV from Yahoo
-        YahooFinance.logger.log(Level.INFO, ("Sending request: " + url));
+        log.info("Sending request: " + url);
 
         URL request = new URL(url);
         RedirectableRequest redirectableRequest = new RedirectableRequest(request, 5);
@@ -131,7 +135,7 @@ public class HistQuotes2Request {
         // Parse CSV
         for (String line = br.readLine(); line != null; line = br.readLine()) {
 
-            YahooFinance.logger.log(Level.INFO, ("Parsing CSV line: " + Utils.unescape(line)));
+            log.info("Parsing CSV line: " + Utils.unescape(line));
             HistoricalQuote quote = this.parseCSVLine(line);
             result.add(quote);
         }

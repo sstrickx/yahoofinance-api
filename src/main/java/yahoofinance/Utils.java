@@ -10,7 +10,9 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.TimeZone;
-import java.util.logging.Level;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *
@@ -18,6 +20,8 @@ import java.util.logging.Level;
  */
 public class Utils {
 
+    private static final Logger log = LoggerFactory.getLogger(Utils.class);
+  
     public static final BigDecimal HUNDRED = new BigDecimal(100);
     public static final BigDecimal THOUSAND = new BigDecimal(1000);
     public static final BigDecimal MILLION = new BigDecimal(1000000);
@@ -77,8 +81,8 @@ public class Utils {
             }
             result = new BigDecimal(data).multiply(multiplier);
         } catch (NumberFormatException e) {
-            YahooFinance.logger.log(Level.WARNING, "Failed to parse: " + data);
-            YahooFinance.logger.log(Level.FINEST, "Failed to parse: " + data, e);
+            log.warn("Failed to parse: " + data);
+            log.debug("Failed to parse: " + data, e);
         }
         return result;
     }
@@ -117,8 +121,8 @@ public class Utils {
             }
             result = Double.parseDouble(data) * multiplier;
         } catch (NumberFormatException e) {
-            YahooFinance.logger.log(Level.WARNING, "Failed to parse: " + data);
-            YahooFinance.logger.log(Level.FINEST, "Failed to parse: " + data, e);
+            log.warn("Failed to parse: " + data);
+            log.debug("Failed to parse: " + data, e);
         }
         return result;
     }
@@ -132,8 +136,8 @@ public class Utils {
             data = Utils.cleanNumberString(data);
             result = Integer.parseInt(data);
         } catch (NumberFormatException e) {
-            YahooFinance.logger.log(Level.WARNING, "Failed to parse: " + data);
-            YahooFinance.logger.log(Level.FINEST, "Failed to parse: " + data, e);
+            log.warn("Failed to parse: " + data);
+            log.debug("Failed to parse: " + data, e);
         }
         return result;
     }
@@ -147,8 +151,8 @@ public class Utils {
             data = Utils.cleanNumberString(data);
             result = Long.parseLong(data);
         } catch (NumberFormatException e) {
-            YahooFinance.logger.log(Level.WARNING, "Failed to parse: " + data);
-            YahooFinance.logger.log(Level.FINEST, "Failed to parse: " + data, e);
+            log.warn("Failed to parse: " + data);
+            log.debug("Failed to parse: " + data, e);
         }
         return result;
     }
@@ -213,8 +217,8 @@ public class Utils {
 
             return parsedDate;
         } catch (ParseException ex) {
-            YahooFinance.logger.log(Level.WARNING, "Failed to parse dividend date: " + date);
-            YahooFinance.logger.log(Level.FINEST, "Failed to parse dividend date: " + date, ex);
+            log.warn("Failed to parse dividend date: " + date);
+            log.debug("Failed to parse dividend date: " + date, ex);
             return null;
         }
     }
@@ -240,8 +244,8 @@ public class Utils {
                 return c;
             }
         } catch (ParseException ex) {
-            YahooFinance.logger.log(Level.WARNING, "Failed to parse datetime: " + datetime);
-            YahooFinance.logger.log(Level.FINEST, "Failed to parse datetime: " + datetime, ex);
+            log.warn("Failed to parse datetime: " + datetime);
+            log.debug("Failed to parse datetime: " + datetime, ex);
         }
         return null;
     }
@@ -255,8 +259,8 @@ public class Utils {
                 return c;
             }
         } catch (ParseException ex) {
-            YahooFinance.logger.log(Level.WARNING, "Failed to parse hist date: " + date);
-            YahooFinance.logger.log(Level.FINEST, "Failed to parse hist date: " + date, ex);
+            log.warn("Failed to parse hist date: " + date);
+            log.debug("Failed to parse hist date: " + date, ex);
         }
         return null;
     }
@@ -274,7 +278,7 @@ public class Utils {
                 key = URLEncoder.encode(key, "UTF-8");
                 value = URLEncoder.encode(value, "UTF-8");
             } catch (UnsupportedEncodingException ex) {
-                YahooFinance.logger.log(Level.SEVERE, ex.getMessage(), ex);
+                log.error(ex.getMessage(), ex);
                 // Still try to continue with unencoded values
             }
             sb.append(String.format("%s=%s", key, value));

@@ -9,7 +9,10 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import yahoofinance.Utils;
 import yahoofinance.YahooFinance;
 import yahoofinance.util.RedirectableRequest;
@@ -21,6 +24,8 @@ import yahoofinance.util.RedirectableRequest;
  * quotes request
  */
 public abstract class QuotesRequest<T> {
+
+    private static final Logger log = LoggerFactory.getLogger(QuotesRequest.class);
 
     protected final String query;
     protected List<QuotesProperty> properties;
@@ -77,7 +82,7 @@ public abstract class QuotesRequest<T> {
         String url = YahooFinance.QUOTES_BASE_URL + "?" + Utils.getURLParameters(params);
 
         // Get CSV from Yahoo
-        YahooFinance.logger.log(Level.INFO, ("Sending request: " + url));
+        log.info("Sending request: " + url);
 
         URL request = new URL(url);
         RedirectableRequest redirectableRequest = new RedirectableRequest(request, 5);
@@ -91,9 +96,9 @@ public abstract class QuotesRequest<T> {
         // Parse CSV
         for (String line = br.readLine(); line != null; line = br.readLine()) {
             if (line.equals("Missing Symbols List.")) {
-                YahooFinance.logger.log(Level.SEVERE, "The requested symbol was not recognized by Yahoo Finance");
+                log.error("The requested symbol was not recognized by Yahoo Finance");
             } else {
-                YahooFinance.logger.log(Level.INFO, ("Parsing CSV line: " + Utils.unescape(line)));
+                log.info("Parsing CSV line: " + Utils.unescape(line));
 
                 T data = this.parseCSVLine(line);
                 result.add(data);

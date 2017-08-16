@@ -4,16 +4,18 @@ package yahoofinance.exchanges;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.TimeZone;
-import java.util.logging.Level;
-import yahoofinance.YahooFinance;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *
  * @author Stijn Strickx
  */
 public class ExchangeTimeZone {
-    
-    
+
+    private static final Logger log = LoggerFactory.getLogger(ExchangeTimeZone.class);
+
     public static final Map<String, TimeZone> SUFFIX_TIMEZONES = new HashMap<String, TimeZone>();
     public static final Map<String, TimeZone> INDEX_TIMEZONES = new HashMap<String, TimeZone>();
     
@@ -163,12 +165,11 @@ public class ExchangeTimeZone {
      * @param suffix suffix for the exchange in YahooFinance
      * @return time zone of the exchange
      */
-    @SuppressWarnings("LoggerStringConcat")
     public static TimeZone get(String suffix) {
         if(SUFFIX_TIMEZONES.containsKey(suffix)) {
             return SUFFIX_TIMEZONES.get(suffix);
         }
-        YahooFinance.logger.log(Level.WARNING, "Cannot find time zone for exchange suffix: '" + suffix + "'. Using default: America/New_York");
+        log.warn("Cannot find time zone for exchange suffix: '{}'. Using default: America/New_York", suffix);
         return SUFFIX_TIMEZONES.get("");
     }
     
