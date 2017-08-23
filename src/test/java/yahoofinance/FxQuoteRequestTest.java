@@ -1,16 +1,12 @@
 package yahoofinance;
 
 import org.junit.Test;
-import yahoofinance.histquotes.HistoricalQuote;
-import yahoofinance.histquotes.Interval;
 import yahoofinance.mock.MockedServersTest;
 import yahoofinance.quotes.fx.FxQuote;
 import yahoofinance.quotes.fx.FxSymbols;
 
 import java.io.IOException;
 import java.math.BigDecimal;
-import java.util.Calendar;
-import java.util.List;
 import java.util.Map;
 
 import static org.junit.Assert.*;
