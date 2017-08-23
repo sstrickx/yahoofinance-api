@@ -5,12 +5,11 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -84,17 +83,13 @@ public class HistQuotesRequest {
         return cal;
     }
 
-    public List<HistoricalQuote> getResult() throws IOException {
-
-        List<HistoricalQuote> result = new ArrayList<HistoricalQuote>();
-        
+    public String getResult() throws IOException {        
         if(this.from.after(this.to)) {
-            log.warn("Unable to retrieve historical quotes. "
+            throw new IllegalArgumentException("Unable to retrieve historical quotes. "
                     + "From-date should not be after to-date. From: "
                     + this.from.getTime() + ", to: " + this.to.getTime());
-            return result;
         }
-        
+
         Map<String, String> params = new LinkedHashMap<String, String>();
         params.put("s", this.symbol);
 
@@ -121,30 +116,8 @@ public class HistQuotesRequest {
         redirectableRequest.setReadTimeout(YahooFinance.CONNECTION_TIMEOUT);
         URLConnection connection = redirectableRequest.openConnection();
 
-        InputStreamReader is = new InputStreamReader(connection.getInputStream());
-        BufferedReader br = new BufferedReader(is);
-        br.readLine(); // skip the first line
-        // Parse CSV
-        for (String line = br.readLine(); line != null; line = br.readLine()) {
-
-            log.info("Parsing CSV line: " + Utils.unescape(line));
-            HistoricalQuote quote = this.parseCSVLine(line);
-            result.add(quote);
-        }
-        return result;
-    }
-
-    private HistoricalQuote parseCSVLine(String line) {
-        String[] data = line.split(YahooFinance.QUOTES_CSV_DELIMITER);
-        return new HistoricalQuote(this.symbol,
-                Utils.parseHistDate(data[0]),
-                Utils.getBigDecimal(data[1]),
-                Utils.getBigDecimal(data[3]),
-                Utils.getBigDecimal(data[2]),
-                Utils.getBigDecimal(data[4]),
-                Utils.getBigDecimal(data[6]),
-                Utils.getLong(data[5])
-        );
+        return new BufferedReader(new InputStreamReader(connection.getInputStream()))
+            .lines().collect(Collectors.joining("\n"));
     }
 
 }
