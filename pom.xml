@@ -41,8 +41,8 @@
     </scm>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>1.6</maven.compiler.source>
-        <maven.compiler.target>1.6</maven.compiler.target>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
     </properties>
 
     <distributionManagement>
@@ -58,9 +58,15 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.slf4j </groupId>
-            <artifactId>slf4j-api </artifactId>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
             <version>1.7.25</version>
+        </dependency>
+        <dependency>
+            <groupId>tech.tablesaw</groupId>
+            <artifactId>tablesaw-core</artifactId>
+            <version>0.9.0</version>
+            <optional>true</optional>
         </dependency>
         <dependency>
             <groupId>org.slf4j </groupId>
