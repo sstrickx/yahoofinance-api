@@ -102,10 +102,9 @@ public class HistQuotes2Request {
         List<HistoricalQuote> result = new ArrayList<HistoricalQuote>();
         
         if(this.from.after(this.to)) {
-            log.warn("Unable to retrieve historical quotes. "
+            throw new IllegalArgumentException("Unable to retrieve historical quotes. "
                     + "From-date should not be after to-date. From: "
                     + this.from.getTime() + ", to: " + this.to.getTime());
-            return result;
         }
 
         Map<String, String> params = new LinkedHashMap<String, String>();
