@@ -9,7 +9,6 @@ import yahoofinance.mock.MockedServersTest;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.Calendar;
-import java.util.List;
 import java.util.Map;
 
 import static org.junit.Assert.*;
@@ -131,25 +130,14 @@ public class HistoricalQuoteRequestTest extends MockedServersTest {
         assertEquals(261, goog.getHistory().size());
     }
 
-    @Test
+    @Test(expected = IllegalArgumentException.class)
     public void impossibleRequestTest() throws IOException {
         Calendar from = Calendar.getInstance();
         Calendar to = Calendar.getInstance();
         from.add(Calendar.DATE, 2); // from > to
-        Exception reqEx = null;
 
         Stock goog = YahooFinance.get("GOOG");
-        List<HistoricalQuote> histQuotes = null;
-        int requestCount = MockedServersTest.histQuotesServer.getRequestCount();
-        try {
-            histQuotes = goog.getHistory(from, to);
-        } catch (IOException ex) {
-            reqEx = ex;
-        }
-        // Didn't send any requests since the problem was detected
-        assertEquals(requestCount, MockedServersTest.histQuotesServer.getRequestCount());
-        assertNull(reqEx);
-        assertEquals(0, histQuotes.size());
+        goog.getHistory(from, to);
     }
 
 }
