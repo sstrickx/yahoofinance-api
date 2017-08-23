@@ -85,14 +85,21 @@ public class HistQuotesRequest {
     }
 
     public List<HistoricalQuote> getResult() throws IOException {
+      String[] lines = getCsv().split("\\r?\\n");
+      List<HistoricalQuote> result = new ArrayList<HistoricalQuote>();
+      for (int i = 1; i < lines.length; i++) {
+        log.info("Parsing CSV line: " + Utils.unescape(lines[i]));
+        result.add(parseCSVLine(lines[i]));
+      }
+      return result;
+    }
 
-        List<HistoricalQuote> result = new ArrayList<HistoricalQuote>();
-        
+    public String getCsv() throws IOException {
         if(this.from.after(this.to)) {
             log.warn("Unable to retrieve historical quotes. "
                     + "From-date should not be after to-date. From: "
                     + this.from.getTime() + ", to: " + this.to.getTime());
-            return result;
+            return "";
         }
         
         Map<String, String> params = new LinkedHashMap<String, String>();
@@ -121,17 +128,16 @@ public class HistQuotesRequest {
         redirectableRequest.setReadTimeout(YahooFinance.CONNECTION_TIMEOUT);
         URLConnection connection = redirectableRequest.openConnection();
 
-        InputStreamReader is = new InputStreamReader(connection.getInputStream());
-        BufferedReader br = new BufferedReader(is);
-        br.readLine(); // skip the first line
-        // Parse CSV
+        BufferedReader br = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+        StringBuilder result = new StringBuilder();
         for (String line = br.readLine(); line != null; line = br.readLine()) {
-
-            log.info("Parsing CSV line: " + Utils.unescape(line));
-            HistoricalQuote quote = this.parseCSVLine(line);
-            result.add(quote);
+          if (result.length() > 0) {
+            result.append("\n");
+          }
+          result.append(line);
         }
-        return result;
+        br.close();
+        return result.toString();
     }
 
     private HistoricalQuote parseCSVLine(String line) {
