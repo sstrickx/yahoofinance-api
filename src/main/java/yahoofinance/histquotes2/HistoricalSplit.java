@@ -1,6 +1,7 @@
 package yahoofinance.histquotes2;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
@@ -16,15 +17,15 @@ public class HistoricalSplit {
     private Calendar date;
     
     private BigDecimal numerator;
-    private BigDecimal denumerator;
+    private BigDecimal denominator;
     
     public HistoricalSplit() {}
 
-    public HistoricalSplit(String symbol, Calendar date, BigDecimal numerator, BigDecimal denumerator) {
+    public HistoricalSplit(String symbol, Calendar date, BigDecimal numerator, BigDecimal denominator) {
         this.symbol = symbol;
         this.date = date;
         this.numerator = numerator;
-        this.denumerator = denumerator;
+        this.denominator = denominator;
     }
 
     public String getSymbol() {
@@ -51,27 +52,27 @@ public class HistoricalSplit {
         this.numerator = numerator;
     }
 
-    public BigDecimal getDenumerator() {
-        return denumerator;
+    public BigDecimal getDenominator() {
+        return denominator;
     }
 
-    public void setDenumerator(BigDecimal denumerator) {
-        this.denumerator = denumerator;
+    public void setDenominator(BigDecimal denominator) {
+        this.denominator = denominator;
     }
 
     /**
      * 
-     * @return      a calculated split factor value which is equal to numerator divided by denumerator
+     * @return      a calculated split factor value which is equal to numerator divided by denominator
      */
     public BigDecimal getSplitFactor() {
-        return numerator.divide(denumerator);
+        return numerator.divide(denominator, 10, RoundingMode.HALF_UP);  
     }
 
     @Override
     public String toString() {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         String dateStr = dateFormat.format(this.date.getTime());
-        return "SPLIT: " + this.symbol + "@" + dateStr + ": " + this.numerator + " / " + this.denumerator;
+        return "SPLIT: " + this.symbol + "@" + dateStr + ": " + this.numerator + " / " + this.denominator;
     }
 
 }
