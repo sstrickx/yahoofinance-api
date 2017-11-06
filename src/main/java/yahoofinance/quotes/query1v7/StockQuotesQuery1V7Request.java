@@ -27,9 +27,14 @@ public class StockQuotesQuery1V7Request extends QuotesRequest<Stock> {
         String symbol = node.get("symbol").asText();
         Stock stock = new Stock(symbol);
 
-        stock.setName(node.get("longName").asText());
-        stock.setCurrency(node.get("currency").asText());
-        stock.setStockExchange(node.get("fullExchangeName").asText());
+        if(node.has("longName")) {
+            stock.setName(node.get("longName").asText());
+        } else {
+            stock.setName(getStringValue(node, "shortName"));
+        }
+
+        stock.setCurrency(getStringValue(node, "currency"));
+        stock.setStockExchange(getStringValue(node, "fullExchangeName"));
 
         stock.setQuote(this.getQuote(node));
         stock.setStats(this.getStats(node));
