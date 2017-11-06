@@ -16,10 +16,11 @@ import yahoofinance.histquotes2.HistQuotes2Request;
 import yahoofinance.histquotes2.HistSplitsRequest;
 import yahoofinance.histquotes2.HistoricalDividend;
 import yahoofinance.histquotes2.HistoricalSplit;
+import yahoofinance.quotes.query1v7.StockQuotesQuery1V7Request;
 import yahoofinance.quotes.stock.StockDividend;
 import yahoofinance.quotes.stock.StockQuote;
-import yahoofinance.quotes.stock.StockQuotesData;
-import yahoofinance.quotes.stock.StockQuotesRequest;
+import yahoofinance.quotes.csv.StockQuotesData;
+import yahoofinance.quotes.csv.StockQuotesRequest;
 import yahoofinance.quotes.stock.StockStats;
 
 /**
@@ -48,15 +49,31 @@ public class Stock {
     }
     
     private void update() throws IOException {
-        StockQuotesRequest request = new StockQuotesRequest(this.symbol);
-        StockQuotesData data = request.getSingleResult();
-        if(data != null) {
-            this.setQuote(data.getQuote());
-            this.setStats(data.getStats());
-            this.setDividend(data.getDividend());
-            log.info("Updated Stock with symbol: {}", this.symbol);
+        if(YahooFinance.QUOTES_QUERY1V7_ENABLED.equalsIgnoreCase("true")) {
+            StockQuotesQuery1V7Request request = new StockQuotesQuery1V7Request(this.symbol);
+            Stock stock = request.getSingleResult();
+            if (stock != null) {
+                this.setName(stock.getName());
+                this.setCurrency(stock.getCurrency());
+                this.setStockExchange(stock.getStockExchange());
+                this.setQuote(stock.getQuote());
+                this.setStats(stock.getStats());
+                this.setDividend(stock.getDividend());
+                log.info("Updated Stock with symbol: {}", this.symbol);
+            } else {
+                log.error("Failed to update Stock with symbol: {}", this.symbol);
+            }
         } else {
-            log.error("Failed to update Stock with symbol: {}", this.symbol);
+            StockQuotesRequest request = new StockQuotesRequest(this.symbol);
+            StockQuotesData data = request.getSingleResult();
+            if (data != null) {
+                this.setQuote(data.getQuote());
+                this.setStats(data.getStats());
+                this.setDividend(data.getDividend());
+                log.info("Updated Stock with symbol: {}", this.symbol);
+            } else {
+                log.error("Failed to update Stock with symbol: {}", this.symbol);
+            }
         }
     }
 

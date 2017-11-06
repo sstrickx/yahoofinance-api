@@ -1,6 +1,5 @@
-package yahoofinance.quotes.stock;
+package yahoofinance.quotes.csv;
 
-import yahoofinance.quotes.*;
 import java.util.ArrayList;
 import java.util.List;
 

@@ -265,6 +265,13 @@ public class Utils {
         return null;
     }
 
+    public static Calendar unixToCalendar(long timestamp) {
+        log.debug("unixToCalendar " + timestamp);
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(timestamp * 1000);
+        return calendar;
+    }
+
     public static String getURLParameters(Map<String, String> params) {
         StringBuilder sb = new StringBuilder();
 

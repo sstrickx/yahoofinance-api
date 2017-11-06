@@ -6,6 +6,7 @@ import okhttp3.mockwebserver.MockWebServer;
 import org.junit.BeforeClass;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import yahoofinance.YahooFinance;
 
 import java.io.IOException;
 
@@ -42,6 +43,7 @@ public class MockedServersTest {
         System.setProperty("yahoofinance.baseurl.quotes", quotesBaseUrl);
         System.setProperty("yahoofinance.baseurl.histquotes", histQuotesBaseUrl);
         System.setProperty("yahoofinance.histquotes2.enabled", "false");
+        System.setProperty("yahoofinance.quotesquery1v7.enabled", "false");
 
         final Dispatcher dispatcher = new YahooFinanceDispatcher();
         quotesServer.setDispatcher(dispatcher);

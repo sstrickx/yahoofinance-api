@@ -146,7 +146,7 @@ public class HistQuotesQuery2V8Request {
         params.put("interval", this.interval.getTag());
         params.put("events", "div|split");
 
-        String url = YahooFinance.HISTQUOTESQUERY2V8_BASE_URL + URLEncoder.encode(this.symbol , "UTF-8") + "?" + Utils.getURLParameters(params);
+        String url = YahooFinance.HISTQUOTES_QUERY2V8_BASE_URL + URLEncoder.encode(this.symbol , "UTF-8") + "?" + Utils.getURLParameters(params);
 
         // Get CSV from Yahoo
         log.info("Sending request: " + url);

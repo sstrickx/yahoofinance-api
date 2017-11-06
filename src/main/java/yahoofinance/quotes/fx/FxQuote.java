@@ -1,6 +1,8 @@
 
 package yahoofinance.quotes.fx;
 
+import yahoofinance.quotes.csv.FxQuotesRequest;
+
 import java.io.IOException;
 import java.math.BigDecimal;
 

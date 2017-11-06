@@ -1,4 +1,4 @@
-package yahoofinance.quotes;
+package yahoofinance.quotes.csv;
 
 /**
  *

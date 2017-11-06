@@ -1,12 +1,11 @@
 
-package yahoofinance.quotes.fx;
+package yahoofinance.quotes.csv;
 
 import java.util.ArrayList;
 import java.util.List;
 import yahoofinance.Utils;
 import yahoofinance.YahooFinance;
-import yahoofinance.quotes.QuotesProperty;
-import yahoofinance.quotes.QuotesRequest;
+import yahoofinance.quotes.fx.FxQuote;
 
 /**
  *

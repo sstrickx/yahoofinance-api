@@ -8,9 +8,11 @@ import java.util.Map;
 import yahoofinance.histquotes.HistQuotesRequest;
 import yahoofinance.histquotes.Interval;
 import yahoofinance.quotes.fx.FxQuote;
-import yahoofinance.quotes.fx.FxQuotesRequest;
-import yahoofinance.quotes.stock.StockQuotesData;
-import yahoofinance.quotes.stock.StockQuotesRequest;
+import yahoofinance.quotes.csv.FxQuotesRequest;
+import yahoofinance.quotes.csv.StockQuotesData;
+import yahoofinance.quotes.csv.StockQuotesRequest;
+import yahoofinance.quotes.query1v7.FxQuotesQuery1V7Request;
+import yahoofinance.quotes.query1v7.StockQuotesQuery1V7Request;
 
 /**
  * YahooFinance can be used to retrieve quotes and some extra information on stocks.
@@ -43,10 +45,12 @@ import yahoofinance.quotes.stock.StockQuotesRequest;
 public class YahooFinance {
     
     public static final String QUOTES_BASE_URL = System.getProperty("yahoofinance.baseurl.quotes", "http://download.finance.yahoo.com/d/quotes.csv");
+    public static final String QUOTES_QUERY1V7_BASE_URL = System.getProperty("yahoofinance.baseurl.quotesquery1v7", "https://query1.finance.yahoo.com/v7/finance/quote");
+    public static final String QUOTES_QUERY1V7_ENABLED = System.getProperty("yahoofinance.quotesquery1v7.enabled", "true");
     public static final String HISTQUOTES_BASE_URL = System.getProperty("yahoofinance.baseurl.histquotes", "https://ichart.yahoo.com/table.csv");
     public static final String HISTQUOTES2_ENABLED = System.getProperty("yahoofinance.histquotes2.enabled", "true");
     public static final String HISTQUOTES2_BASE_URL = System.getProperty("yahoofinance.baseurl.histquotes2", "https://query1.finance.yahoo.com/v7/finance/download/");
-    public static final String HISTQUOTESQUERY2V8_BASE_URL = System.getProperty("yahoofinance.baseurl.histquotesquery2v8", "https://query2.finance.yahoo.com/v8/finance/chart/");
+    public static final String HISTQUOTES_QUERY2V8_BASE_URL = System.getProperty("yahoofinance.baseurl.histquotesquery2v8", "https://query2.finance.yahoo.com/v8/finance/chart/");
     public static final String HISTQUOTES2_SCRAPE_URL = System.getProperty("yahoofinance.scrapeurl.histquotes2", "https://finance.yahoo.com/quote/%5EGSPC/options");
     public static final String HISTQUOTES2_CRUMB_URL = System.getProperty("yahoofinance.crumburl.histquotes2", "https://query1.finance.yahoo.com/v1/test/getcrumb");
     public static final String HISTQUOTES2_CRUMB = System.getProperty("yahoofinance.crumb", "");
@@ -59,8 +63,8 @@ public class YahooFinance {
     
     /**
     * Sends a basic quotes request to Yahoo Finance. This will return a {@link Stock} object
-    * with its {@link yahoofinance.quotes.stock.StockQuote}, {@link yahoofinance.quotes.stock.StockStats} 
-    * and {@link yahoofinance.quotes.stock.StockDividend} member fields 
+    * with its {@link yahoofinance.quotes.stock.StockQuote}, {@link yahoofinance.quotes.stock.StockStats}
+    * and {@link yahoofinance.quotes.stock.StockDividend} member fields
     * filled in with the available data.
     * Returns null if the data can't be retrieved from Yahoo Finance.
     * 
@@ -173,8 +177,8 @@ public class YahooFinance {
     /**
     * Sends a basic quotes request to Yahoo Finance. This will return a {@link Map} object
     * that links the symbols to their respective {@link Stock} objects.
-    * The Stock objects have their {@link yahoofinance.quotes.stock.StockQuote}, {@link yahoofinance.quotes.stock.StockStats} 
-    * and {@link yahoofinance.quotes.stock.StockDividend} member fields 
+    * The Stock objects have their {@link yahoofinance.quotes.stock.StockQuote}, {@link yahoofinance.quotes.stock.StockStats}
+    * and {@link yahoofinance.quotes.stock.StockDividend} member fields
     * filled in with the available data.
     * <p>
     * All the information is retrieved in a single request to Yahoo Finance.
@@ -328,8 +332,13 @@ public class YahooFinance {
      * @throws java.io.IOException when there's a connection problem
      */
     public static FxQuote getFx(String symbol) throws IOException {
-        FxQuotesRequest request = new FxQuotesRequest(symbol);
-        return request.getSingleResult();
+        if(YahooFinance.QUOTES_QUERY1V7_ENABLED.equalsIgnoreCase("true")) {
+            FxQuotesQuery1V7Request request = new FxQuotesQuery1V7Request(symbol);
+            return request.getSingleResult();
+        } else {
+            FxQuotesRequest request = new FxQuotesRequest(symbol);
+            return request.getSingleResult();
+        }
     }
     
     /**
@@ -344,8 +353,14 @@ public class YahooFinance {
      * @see             #getFx(java.lang.String) 
      */
     public static Map<String, FxQuote> getFx(String[] symbols) throws IOException {
-        FxQuotesRequest request = new FxQuotesRequest(Utils.join(symbols, ","));
-        List<FxQuote> quotes = request.getResult();
+        List<FxQuote> quotes;
+        if(YahooFinance.QUOTES_QUERY1V7_ENABLED.equalsIgnoreCase("true")) {
+            FxQuotesQuery1V7Request request = new FxQuotesQuery1V7Request(Utils.join(symbols, ","));
+            quotes = request.getResult();
+        } else {
+            FxQuotesRequest request = new FxQuotesRequest(Utils.join(symbols, ","));
+            quotes = request.getResult();
+        }
         Map<String, FxQuote> result = new HashMap<String, FxQuote>();
         for(FxQuote quote : quotes) {
             result.put(quote.getSymbol(), quote);
@@ -354,21 +369,28 @@ public class YahooFinance {
     }
     
     private static Map<String, Stock> getQuotes(String query, boolean includeHistorical) throws IOException {
-        StockQuotesRequest request = new StockQuotesRequest(query);
-        List<StockQuotesData> quotes = request.getResult();
         Map<String, Stock> result = new HashMap<String, Stock>();
-        
-        for(StockQuotesData data : quotes) {
-            Stock s = data.getStock();
-            result.put(s.getSymbol(), s);
+        if(YahooFinance.QUOTES_QUERY1V7_ENABLED.equalsIgnoreCase("true")) {
+            StockQuotesQuery1V7Request request = new StockQuotesQuery1V7Request(query);
+            List<Stock> stocks = request.getResult();
+            for(Stock stock : stocks) {
+                result.put(stock.getSymbol(), stock);
+            }
+        } else {
+            StockQuotesRequest request = new StockQuotesRequest(query);
+            List<StockQuotesData> quotes = request.getResult();
+            for(StockQuotesData data : quotes) {
+                Stock s = data.getStock();
+                result.put(s.getSymbol(), s);
+            }
         }
-        
+
         if(includeHistorical) {
             for(Stock s : result.values()) {
                 s.getHistory();
             }
         }
-        
+
         return result;
     }
     

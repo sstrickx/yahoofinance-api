@@ -1,4 +1,4 @@
-package yahoofinance.quotes;
+package yahoofinance.quotes.csv;
 
 import java.io.BufferedReader;
 import java.io.IOException;
