@@ -103,6 +103,10 @@ public class StockQuotesQuery1V7Request extends QuotesRequest<Stock> {
 
         // stats.setShortRatio(Utils.getBigDecimal(getStringValue(node,"symbol")));
 
+        if(node.has("earningsTimestamp")) {
+            stats.setEarningsAnnouncement(Utils.unixToCalendar(node.get("earningsTimestamp").asLong()));
+        }
+
         return stats;
     }
 
