@@ -90,7 +90,7 @@ public class YahooFinance {
      */
     public static Stock get(String symbol, boolean includeHistorical) throws IOException {
         Map<String, Stock> result = YahooFinance.getQuotes(symbol, includeHistorical);
-        return result.get(symbol);
+        return result.get(symbol.toUpperCase());
     }
     
     /**
