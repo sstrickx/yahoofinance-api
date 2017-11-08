@@ -3,11 +3,13 @@ package yahoofinance.quotes.query1v7;
 import com.fasterxml.jackson.databind.JsonNode;
 import yahoofinance.Stock;
 import yahoofinance.Utils;
+import yahoofinance.exchanges.ExchangeTimeZone;
 import yahoofinance.quotes.stock.StockDividend;
 import yahoofinance.quotes.stock.StockQuote;
 import yahoofinance.quotes.stock.StockStats;
 
 import java.math.BigDecimal;
+import java.util.Arrays;
 import java.util.TimeZone;
 
 /**
@@ -50,6 +52,8 @@ public class StockQuotesQuery1V7Request extends QuotesRequest<Stock> {
         return null;
     }
 
+
+
     private StockQuote getQuote(JsonNode node) {
         String symbol = node.get("symbol").asText();
         StockQuote quote = new StockQuote(symbol);
@@ -65,7 +69,12 @@ public class StockQuotesQuery1V7Request extends QuotesRequest<Stock> {
         quote.setDayHigh(Utils.getBigDecimal(getStringValue(node,"regularMarketDayHigh")));
         quote.setDayLow(Utils.getBigDecimal(getStringValue(node,"regularMarketDayLow")));
 
-        quote.setTimeZone(TimeZone.getTimeZone(getStringValue(node,"exchangeTimezoneName")));
+        if(node.has("exchangeTimezoneName")) {
+            quote.setTimeZone(TimeZone.getTimeZone(node.get("exchangeTimezoneName").asText()));
+        } else {
+            quote.setTimeZone(ExchangeTimeZone.getStockTimeZone(symbol));
+        }
+
         if(node.has("regularMarketTime")) {
             quote.setLastTradeTime(Utils.unixToCalendar(node.get("regularMarketTime").asLong()));
         }
