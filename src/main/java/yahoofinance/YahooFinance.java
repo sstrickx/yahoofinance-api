@@ -171,7 +171,7 @@ public class YahooFinance {
      */
     public static Stock get(String symbol, Calendar from, Calendar to, Interval interval) throws IOException {
         Map<String, Stock> result = YahooFinance.getQuotes(symbol, from, to, interval);
-        return result.get(symbol);
+        return result.get(symbol.toUpperCase());
     }
     
     /**
