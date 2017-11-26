@@ -125,23 +125,25 @@ public class StockQuotesQuery1V7Request extends QuotesRequest<Stock> {
     }
 
     private StockDividend getDividend(JsonNode node) {
-        String symbol = getStringValue(node,"symbol");
-        StockDividend dividend = new StockDividend(symbol);
+		String symbol = this.getStringValue(node, "symbol");
+		StockDividend dividend = new StockDividend(symbol);
 
-        if(!node.has("dividendDate")) {
-            return dividend;
-        }
+		if (node.has("dividendDate")) {
+			long dividendTimestamp = node.get("dividendDate").asLong();
+			dividend.setPayDate(Utils.unixToCalendar(dividendTimestamp));
+			// dividend.setExDate(Utils.unixToCalendar(node.get("dividendDate").asLong()));
+		}
+		if (node.has("trailingAnnualDividendRate")) {
+			dividend.setAnnualYield(Utils.getBigDecimal(this.getStringValue(node, "trailingAnnualDividendRate")));
+		}
+		if (node.has("trailingAnnualDividendYield")) {
+			BigDecimal yield = Utils.getBigDecimal(this.getStringValue(node, "trailingAnnualDividendYield"));
+			if (yield != null) {
+				dividend.setAnnualYieldPercent(yield.multiply(ONE_HUNDRED));
+			}
+		}
 
-        long dividendTimestamp = node.get("dividendDate").asLong();
-        dividend.setPayDate(Utils.unixToCalendar(dividendTimestamp));
-        // dividend.setExDate(Utils.unixToCalendar(node.get("dividendDate").asLong()));
-        dividend.setAnnualYield(Utils.getBigDecimal(getStringValue(node,"trailingAnnualDividendRate")));
-        BigDecimal yield = Utils.getBigDecimal(getStringValue(node,"trailingAnnualDividendYield"));
-        if(yield != null) {
-            dividend.setAnnualYieldPercent(yield.multiply(ONE_HUNDRED));
-        }
-
-        return dividend;
-    }
+		return dividend;
+	}
 
 }
