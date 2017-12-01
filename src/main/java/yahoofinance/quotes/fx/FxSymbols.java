@@ -15,7 +15,7 @@ public class FxSymbols {
     public static final String USDSGD = "USDSGD=X";
     public static final String USDNZD = "USDNZD=X";
     public static final String USDHKD = "USDHKD=X";
-    public static final String USDHKD = "USDTRY=X";
+    public static final String USDTRY = "USDTRY=X";
     
     public static final String GBPUSD = "GBPUSD=X";
     public static final String GBPEUR = "GBPEUR=X";
@@ -26,7 +26,7 @@ public class FxSymbols {
     public static final String GBPSGD = "GBPSGD=X";
     public static final String GBPNZD = "GBPNZD=X";
     public static final String GBPHKD = "GBPHKD=X";
-    public static final String USDHKD = "GBPTRY=X";
+    public static final String GBPTRY = "GBPTRY=X";
 
     public static final String EURUSD = "EURUSD=X";
     public static final String EURGBP = "EURGBP=X";
@@ -37,7 +37,7 @@ public class FxSymbols {
     public static final String EURSGD = "EURSGD=X";
     public static final String EURNZD = "EURNZD=X";
     public static final String EURHKD = "EURHKD=X";
-    public static final String USDHKD = "EURTRY=X";
+    public static final String EURTRY = "EURTRY=X";
 
     public static final String AUDUSD = "AUDUSD=X";
     public static final String AUDGBP = "AUDGBP=X";
@@ -67,7 +67,7 @@ public class FxSymbols {
     public static final String JPYSGD = "JPYSGD=X";
     public static final String JPYNZD = "JPYNZD=X";
     public static final String JPYHKD = "JPYHKD=X";
-    public static final String JPYHKD = "JPYTRY=X";
+    public static final String JPYTRY = "JPYTRY=X";
 
     public static final String CADUSD = "CADUSD=X";
     public static final String CADGBP = "CADGBP=X";
