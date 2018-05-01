@@ -1,9 +1,7 @@
 package yahoofinance.util;
 
 import java.io.IOException;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.net.URLConnection;
+import java.net.*;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -18,6 +16,10 @@ public class RedirectableRequest {
 
     private int connectTimeout = 10000;
     private int readTimeout = 10000;
+
+    static {
+        CookieHandler.setDefault(new CookieManager(null, CookiePolicy.ACCEPT_ALL));
+    }
 
     public RedirectableRequest(URL request) {
         this(request, 2);
