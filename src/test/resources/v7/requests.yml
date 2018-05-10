@@ -1,0 +1,16 @@
+requests:
+    - url: /v7/finance/quote?symbols=aapl
+      responseCode: 200
+      responseResource: v7/simpleQuoteRequest/aapl-closed.json
+    - url: /v7/finance/quote?symbols=air.pa
+      responseCode: 200
+      responseResource: v7/simpleQuoteRequest/air.pa.json
+    - url: /v7/finance/quote?symbols=amzn
+      responseCode: 200
+      responseResource: v7/simpleQuoteRequest/amzn-closed.json
+    - url: /v7/finance/quote?symbols=intc
+      responseCode: 200
+      responseResource: v7/simpleQuoteRequest/intc-post.json
+    - url: /v7/finance/quote?symbols=msft
+      responseCode: 200
+      responseResource: v7/simpleQuoteRequest/msft-pre.json
