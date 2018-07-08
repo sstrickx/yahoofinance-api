@@ -1,6 +1,7 @@
 
 package yahoofinance.quotes.stock;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Calendar;
 
@@ -11,7 +12,7 @@ import yahoofinance.Utils;
  * 
  * @author Stijn Strickx
  */
-public class StockStats {
+public class StockStats implements Serializable {
     
     private final String symbol;
     

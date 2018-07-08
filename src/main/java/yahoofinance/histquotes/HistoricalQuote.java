@@ -1,6 +1,7 @@
 
 package yahoofinance.histquotes;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -10,7 +11,7 @@ import java.util.Calendar;
  * 
  * @author Stijn Strickx
  */
-public class HistoricalQuote {
+public class HistoricalQuote implements Serializable {
     
     private String symbol;
     
