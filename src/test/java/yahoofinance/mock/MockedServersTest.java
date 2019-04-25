@@ -2,11 +2,9 @@ package yahoofinance.mock;
 
 import okhttp3.mockwebserver.Dispatcher;
 import okhttp3.mockwebserver.MockWebServer;
-
 import org.junit.BeforeClass;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import yahoofinance.YahooFinance;
 
 import java.io.IOException;
 
@@ -22,6 +20,7 @@ public class MockedServersTest {
 
     public static MockWebServer quotesServer;
     public static MockWebServer histQuotesServer;
+    public static MockWebServer optionsServer;
 
     @BeforeClass
     public static void startServers() {
@@ -31,17 +30,22 @@ public class MockedServersTest {
         started = true;
         quotesServer = new MockWebServer();
         histQuotesServer = new MockWebServer();
+        optionsServer = new MockWebServer();
         try {
             quotesServer.start();
             histQuotesServer.start();
+            optionsServer.start();
+
         } catch (IOException e) {
             log.error("Unable to start mock web server", e);
         }
         String quotesBaseUrl = "http://localhost:" + quotesServer.getPort() + "/d/quotes.csv";
         String histQuotesBaseUrl = "http://localhost:" + histQuotesServer.getPort() + "/table.csv";
+        String optionsBaseUrl = "http://localhost:" + histQuotesServer.getPort();
 
         System.setProperty("yahoofinance.baseurl.quotes", quotesBaseUrl);
         System.setProperty("yahoofinance.baseurl.histquotes", histQuotesBaseUrl);
+        System.setProperty("yahoofinance.baseurl.options", optionsBaseUrl);
         System.setProperty("yahoofinance.histquotes2.enabled", "false");
         System.setProperty("yahoofinance.quotesquery1v7.enabled", "false");
 

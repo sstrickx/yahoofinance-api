@@ -75,3 +75,19 @@ requests:
       responseCode: 200
       responseResource: historicalQuoteRequest/INTC_1Y_M.csv
 
+
+      #
+      # HISTORICAL QUOTE REQUESTS
+      #
+
+
+    - url: /IBM
+      responseCode: 200
+      responseResource: optionsRequest/IBM.json
+    - url: /IBM?date=1556236800
+      responseCode: 200
+      responseResource: optionsRequest/IBM1556236800.json
+    - url: /IBM?date=1556841600
+      responseCode: 200
+      responseResource: optionsRequest/IBM1556841600.json
+
