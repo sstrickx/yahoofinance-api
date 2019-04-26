@@ -13,6 +13,7 @@ import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class OptionsRequest extends YahooRequest {
@@ -86,19 +87,23 @@ public class OptionsRequest extends YahooRequest {
                 .withContractSymbol(node.get("contractSymbol").asText())
                 .withStrike(node.get("strike").asDouble())
                 .withCurrency(node.get("currency").asText())
-                .withLastPrice(node.get("lastPrice").asDouble())
-                .withChange(node.get("change").asDouble())
-                .withPercentChange(node.get("percentChange").asDouble())
-                .withVolume(node.get("volume").asInt())
-                .withOpenInterest(node.get("openInterest").asInt())
-                .withBid(node.get("bid").asDouble())
-                .withAsk(node.get("ask").asDouble())
                 .withContractSize(node.get("contractSize").asText())
                 .withExpiration(Instant.ofEpochSecond(node.get("expiration").asLong()).atZone(ZoneId.of("UTC")).toLocalDate())
                 .withLastTradeDate(Instant.ofEpochSecond(node.get("lastTradeDate").asLong()).atZone(ZoneId.of("America/New_York")))
-                .withImpliedVolatility(node.get("impliedVolatility").asDouble())
                 .withInTheMoney(node.get("inTheMoney").asBoolean())
+                .withImpliedVolatility(asOptional(node,"impliedVolatility").map(JsonNode::asDouble).orElse(0d))
+                .withLastPrice(asOptional(node,"lastPrice").map(JsonNode::asDouble).orElse(0d))
+                .withChange(asOptional(node,"change").map(JsonNode::asDouble).orElse(0d))
+                .withPercentChange(asOptional(node,"percentChange").map(JsonNode::asDouble).orElse(0d))
+                .withVolume(asOptional(node,"volume").map(JsonNode::asInt).orElse(0))
+                .withOpenInterest(asOptional(node,"openInterest").map(JsonNode::asInt).orElse(0))
+                .withBid(asOptional(node,"bid").map(JsonNode::asDouble).orElse(0d))
+                .withAsk(asOptional(node,"ask").map(JsonNode::asDouble).orElse(0d))
                 .build();
+    }
+
+    private Optional<JsonNode> asOptional(JsonNode node, String field) {
+        return Optional.ofNullable(node.get(field));
     }
 
 }
