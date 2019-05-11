@@ -4,12 +4,13 @@ import com.fasterxml.jackson.databind.JsonNode;
 import yahoofinance.Stock;
 import yahoofinance.Utils;
 import yahoofinance.exchanges.ExchangeTimeZone;
+import yahoofinance.quotes.stock.ExtendedHoursStockQuote;
+import yahoofinance.quotes.stock.ExtendedHoursStockQuoteType;
 import yahoofinance.quotes.stock.StockDividend;
 import yahoofinance.quotes.stock.StockQuote;
 import yahoofinance.quotes.stock.StockStats;
 
 import java.math.BigDecimal;
-import java.util.Arrays;
 import java.util.TimeZone;
 
 /**
@@ -52,7 +53,33 @@ public class StockQuotesQuery1V7Request extends QuotesRequest<Stock> {
         return null;
     }
 
+    private String getExtendedHoursPrefix(JsonNode node) {
+        String marketState = getStringValue(node, "marketState");
+        if (marketState.equals("PRE")) {
+            return "pre";
+        }
+        if (marketState.equals("POST")) {
+            return "post";
+        }
+        if (marketState.equals("CLOSED")) {
+            return "post";
+        }
+        return null;
+    }
 
+    private ExtendedHoursStockQuote getExtendedHoursQuote(JsonNode node) {
+        String prefix = getExtendedHoursPrefix(node);
+        if (prefix == null) {
+            return null;
+        }
+        ExtendedHoursStockQuote extendedHoursStockQuote = new ExtendedHoursStockQuote();
+        extendedHoursStockQuote.setChangePercent(Utils.getBigDecimal(getStringValue(node, prefix + "MarketChangePercent")));
+        extendedHoursStockQuote.setTime(Utils.unixToCalendar(Utils.getLong(getStringValue(node,prefix + "MarketTime"))));
+        extendedHoursStockQuote.setPrice(Utils.getBigDecimal(getStringValue(node, prefix + "MarketPrice")));
+        extendedHoursStockQuote.setPriceChange(Utils.getBigDecimal(getStringValue(node,prefix + "MarketChange")));
+        extendedHoursStockQuote.setType(ExtendedHoursStockQuoteType.valueOf(getStringValue(node, "marketState")));
+        return extendedHoursStockQuote;
+    }
 
     private StockQuote getQuote(JsonNode node) {
         String symbol = node.get("symbol").asText();
@@ -68,6 +95,8 @@ public class StockQuotesQuery1V7Request extends QuotesRequest<Stock> {
         quote.setPreviousClose(Utils.getBigDecimal(getStringValue(node,"regularMarketPreviousClose")));
         quote.setDayHigh(Utils.getBigDecimal(getStringValue(node,"regularMarketDayHigh")));
         quote.setDayLow(Utils.getBigDecimal(getStringValue(node,"regularMarketDayLow")));
+
+        quote.setExtendedHoursQuote(getExtendedHoursQuote(node));
 
         if(node.has("exchangeTimezoneName")) {
             quote.setTimeZone(TimeZone.getTimeZone(node.get("exchangeTimezoneName").asText()));

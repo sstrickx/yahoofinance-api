@@ -32,6 +32,8 @@ public class StockQuote {
     private BigDecimal previousClose;
     private BigDecimal dayLow;
     private BigDecimal dayHigh;
+
+    private ExtendedHoursStockQuote extendedHoursQuote;
     
     private BigDecimal yearLow;
     private BigDecimal yearHigh;
@@ -252,7 +254,11 @@ public class StockQuote {
     public BigDecimal getPreviousClose() {
         return previousClose;
     }
-    
+
+    public ExtendedHoursStockQuote getExtendedHoursQuote() {
+        return extendedHoursQuote;
+    }
+
     public void setPreviousClose(BigDecimal previousClose) {
         this.previousClose = previousClose;
     }
@@ -271,6 +277,10 @@ public class StockQuote {
     
     public void setDayHigh(BigDecimal dayHigh) {
         this.dayHigh = dayHigh;
+    }
+
+    public void setExtendedHoursQuote(ExtendedHoursStockQuote extendedHoursQuote) {
+        this.extendedHoursQuote = extendedHoursQuote;
     }
     
     public BigDecimal getYearLow() {

@@ -25,7 +25,14 @@ public class YahooFinanceDispatcher extends Dispatcher {
 
     private Map<String, ResponseResource> pathToResponseResource;
 
+    private final String requestsYamlResourcePath;
+
     public YahooFinanceDispatcher() {
+        this("requests.yml");
+    }
+
+    public YahooFinanceDispatcher(String requestsYamlResourcePath) {
+        this.requestsYamlResourcePath = requestsYamlResourcePath;
         this.pathToResponseResource = new HashMap<String, ResponseResource>();
         this.loadRequests();
     }
@@ -44,7 +51,7 @@ public class YahooFinanceDispatcher extends Dispatcher {
         Yaml yaml = new Yaml();
         Map<String, List<Map<String, Object>>> requests;
         try {
-            String requestsYaml = Resources.toString(Resources.getResource("requests.yml"), Charsets.UTF_8);
+            String requestsYaml = Resources.toString(Resources.getResource(requestsYamlResourcePath), Charsets.UTF_8);
             requests = (Map<String, List<Map<String, Object>>>) yaml.load(requestsYaml);
         } catch (IOException e) {
             log.warn("Unable to process requests.yml. No requests mocked.", e);
