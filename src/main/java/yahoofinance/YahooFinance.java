@@ -1,18 +1,21 @@
 package yahoofinance;
 
+import yahoofinance.histquotes.HistQuotesRequest;
+import yahoofinance.histquotes.Interval;
+import yahoofinance.quotes.csv.FxQuotesRequest;
+import yahoofinance.quotes.csv.StockQuotesData;
+import yahoofinance.quotes.csv.StockQuotesRequest;
+import yahoofinance.quotes.fx.FxQuote;
+import yahoofinance.quotes.options.OptionsResponse;
+import yahoofinance.quotes.query1v7.FxQuotesQuery1V7Request;
+import yahoofinance.quotes.query1v7.OptionsRequest;
+import yahoofinance.quotes.query1v7.StockQuotesQuery1V7Request;
+
 import java.io.IOException;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import yahoofinance.histquotes.HistQuotesRequest;
-import yahoofinance.histquotes.Interval;
-import yahoofinance.quotes.fx.FxQuote;
-import yahoofinance.quotes.csv.FxQuotesRequest;
-import yahoofinance.quotes.csv.StockQuotesData;
-import yahoofinance.quotes.csv.StockQuotesRequest;
-import yahoofinance.quotes.query1v7.FxQuotesQuery1V7Request;
-import yahoofinance.quotes.query1v7.StockQuotesQuery1V7Request;
 
 /**
  * YahooFinance can be used to retrieve quotes and some extra information on stocks.
@@ -46,6 +49,7 @@ public class YahooFinance {
     
     public static final String QUOTES_BASE_URL = System.getProperty("yahoofinance.baseurl.quotes", "http://download.finance.yahoo.com/d/quotes.csv");
     public static final String QUOTES_QUERY1V7_BASE_URL = System.getProperty("yahoofinance.baseurl.quotesquery1v7", "https://query1.finance.yahoo.com/v7/finance/quote");
+    public static final String QUOTES_OPTIONS_BASE_URL = System.getProperty("yahoofinance.baseurl.options", "https://query1.finance.yahoo.com/v7/finance/options");
     public static final String QUOTES_QUERY1V7_ENABLED = System.getProperty("yahoofinance.quotesquery1v7.enabled", "true");
     public static final String HISTQUOTES_BASE_URL = System.getProperty("yahoofinance.baseurl.histquotes", "https://ichart.yahoo.com/table.csv");
     public static final String HISTQUOTES2_ENABLED = System.getProperty("yahoofinance.histquotes2.enabled", "true");
@@ -373,7 +377,22 @@ public class YahooFinance {
         }
         return result;
     }
-    
+
+    /**
+     * Sends a basic quotes request to Yahoo Finance. This will return a {@link Stock} object
+     * with its {@link yahoofinance.quotes.stock.StockQuote}, {@link yahoofinance.quotes.stock.StockStats}
+     * and {@link yahoofinance.quotes.stock.StockDividend} member fields
+     * filled in with the available data.
+     * Returns null if the data can't be retrieved from Yahoo Finance.
+     *
+     * @param symbol     the symbol of the stock for which you want to retrieve information
+     * @return           a {@link Stock} object containing the requested information
+     * @throws java.io.IOException when there's a connection problem
+     */
+    public static OptionsResponse getOptionsChain(String symbol) throws IOException {
+        return new OptionsRequest(symbol).getResult();
+    }
+
     private static Map<String, Stock> getQuotes(String query, boolean includeHistorical) throws IOException {
         Map<String, Stock> result = new HashMap<String, Stock>();
         if(YahooFinance.QUOTES_QUERY1V7_ENABLED.equalsIgnoreCase("true")) {
