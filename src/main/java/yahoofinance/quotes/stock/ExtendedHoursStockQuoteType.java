@@ -4,4 +4,5 @@ public enum ExtendedHoursStockQuoteType {
     PRE,
     POST,
     CLOSED,
+    POSTPOST,
 }
