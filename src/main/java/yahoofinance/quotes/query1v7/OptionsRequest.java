@@ -43,8 +43,12 @@ public class OptionsRequest extends YahooRequest {
 
             if(node.has("optionChain") && node.get("optionChain").has("result")) {
                 node = node.get("optionChain").get("result").get(0);
-                final OptionsChain optionsChain = parseJson(node);
-                optionsChainList.add(optionsChain);
+                if (node.has("options")) {
+                    final OptionsChain optionsChain = parseJson(node);
+                    optionsChainList.add(optionsChain);
+                } else {
+                    throw new IOException("Invalid response");
+                }
             } else {
                 throw new IOException("Invalid response");
             }
