@@ -75,4 +75,25 @@ public class HistoricalSplit {
         return "SPLIT: " + this.symbol + "@" + dateStr + ": " + this.numerator + " / " + this.denominator;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        HistoricalSplit that = (HistoricalSplit) o;
+
+        if (symbol != null ? !symbol.equals(that.symbol) : that.symbol != null) return false;
+        if (date != null ? !date.equals(that.date) : that.date != null) return false;
+        if (numerator != null ? !numerator.equals(that.numerator) : that.numerator != null) return false;
+        return denominator != null ? denominator.equals(that.denominator) : that.denominator == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = symbol != null ? symbol.hashCode() : 0;
+        result = 31 * result + (date != null ? date.hashCode() : 0);
+        result = 31 * result + (numerator != null ? numerator.hashCode() : 0);
+        result = 31 * result + (denominator != null ? denominator.hashCode() : 0);
+        return result;
+    }
 }

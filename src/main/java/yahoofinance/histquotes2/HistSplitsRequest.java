@@ -119,9 +119,9 @@ public class HistSplitsRequest {
         return result;
     }
 
-    private HistoricalSplit parseCSVLine(String line) {
+    HistoricalSplit parseCSVLine(String line) {
         String[] data = line.split(YahooFinance.QUOTES_CSV_DELIMITER);
-    	String[] parts = data[1].split("/");
+    	String[] parts = data[1].split(":");
         return new HistoricalSplit(this.symbol,
                 Utils.parseHistDate(data[0]),
                 Utils.getBigDecimal(parts[0]),
