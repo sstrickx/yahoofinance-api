@@ -15,6 +15,7 @@ import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -74,14 +75,34 @@ public class CrumbManager {
         boolean postFind = false;
         // Read source to get params data for post request
         while( (line =br.readLine())!=null ) {
+                // This hack allows us to quickly jump over lines that we do not care
+                // So, before the postFind, we quickly lookup for the keyword: "action"
+                // After the postFind, we quickly lookup for the keyword: "value"
+                // Without those keywords the matcher will fail, so not even worth
+                // revisiting the condition because the matcher.find() is a costly operation
+                // and will certainly return false without those keywords
+        	if(!postFind){
+                    if(!line.contains("action")){
+                        continue;
+                    }
+                }else{
+                    if(!line.contains("value")){
+                        continue;
+                    }
+                }
+                
+                // The matcher.find() operation is computationally expensive,
+                // so we should avoid doing it frequently,
+                // therefore we added the code above!
+                
         	matcher = patternPostForm.matcher(line);
-        	if(matcher.find()){
+        	if(matcher.find()){ // $$$
         		postFind = true;
         	}
         	
         	if(postFind){
         		matcher = patternInput.matcher(line);
-        		if(matcher.find()){
+        		if(matcher.find()){ // $$$
         			String name = matcher.group(3);
         			String value = matcher.group(5);        			
         			datas.put(name, value);		
@@ -180,6 +201,22 @@ public class CrumbManager {
     public static void refresh() throws IOException {
         setCookie();
         setCrumb();
+/*        
+        // Code used to find the bottlenech in the code
+        long timestamp = System.currentTimeMillis();
+        setCookie();
+        long first = System.currentTimeMillis() - timestamp;
+        setCrumb();
+        long second = System.currentTimeMillis() - timestamp - first;
+
+        java.util.logging.Logger.getLogger(CrumbManager.class.getName()).log(
+                Level.INFO, "The values are:\n1: " + first + "\n2: " + second);
+*/        
+        /* Example of a returned output from the above code:
+        INFO: The values are:
+        1: 3057
+        2: 84
+        */
     }
 
     public static synchronized String getCrumb() throws IOException {
