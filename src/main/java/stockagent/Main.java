@@ -1,4 +1,7 @@
-package yahoofinance;
+package stockagent;
+
+import yahoofinance.Stock;
+import yahoofinance.YahooFinance;
 
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -26,5 +29,10 @@ public class Main {
         BigDecimal dividend2 = stock.getDividend().getAnnualYieldPercent();
 
         stock2.print();
+
+
+        //simulate some dates and environment through some time with
+        //List of stocks and quotes
+
     }
 }
