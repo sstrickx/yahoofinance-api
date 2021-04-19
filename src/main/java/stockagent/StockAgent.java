@@ -41,7 +41,7 @@ public interface StockAgent {
     public List<Stock> getPorfolio();
 
 
-    public int getBuyingPower();
+    public double getBuyingPower();
 
 
 
