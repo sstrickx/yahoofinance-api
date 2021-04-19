@@ -34,9 +34,8 @@ public class RuleBasedAgent implements StockAgent {
     }
 
     @Override
-
     //Return stocks owned and amount of each we own
-    public List<Stock> getPorfolio() {
+    public Hashmap<Stock, Integer> getPorfolio() {
         return porfolio;
     }
 

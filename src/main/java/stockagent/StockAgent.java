@@ -3,6 +3,7 @@ package stockagent;
 import yahoofinance.Stock;
 import yahoofinance.YahooFinance;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -38,10 +39,10 @@ public interface StockAgent {
     public void sellStock();
 
 
-    public List<Stock> getPorfolio();
+    public HashMap<Stock, Integer> getPorfolio();
 
 
-    public int getBuyingPower();
+    public double getBuyingPower();
 
 
 
