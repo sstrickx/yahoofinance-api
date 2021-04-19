@@ -2,12 +2,10 @@ package stockagent;
 
 
 import yahoofinance.Stock;
-import yahoofinance.YahooFinance;
 
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class RuleBasedAgent implements StockAgent {
 
@@ -34,17 +32,33 @@ public class RuleBasedAgent implements StockAgent {
     }
 
     @Override
+<<<<<<< HEAD
     //Return stocks owned and amount of each we own
     public Hashmap<Stock, Integer> getPorfolio() {
         return porfolio;
+=======
+    public List<Stock> getPorfolio() {
+        return null;
+>>>>>>> ef714621b4e66d22d25df906ccf1a3f4bd656fe7
     }
 
-
-    //buying power left
     @Override
     public double getBuyingPower() {
-        return buyingPower;
+        return 0;
     }
+
+
+    //Return stocks owned and amount of each we own
+//    public HashMap<Stock, Integer> getPorfolio() {
+//        return porfolio;
+//    }
+//
+//
+//    //buying power left
+//    @Override
+//    public double getBuyingPower() {
+//        return buyingPower;
+//    }
 
     //watch list of stocks 
     //List of stocks it owns
