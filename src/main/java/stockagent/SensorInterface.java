@@ -23,10 +23,10 @@ public interface SensorInterface {
 
     //GetStockPricing
         //Give us closing price of the stock
-    public BigDecimal getStockPrice(Stock stock) throws IOException;
+    public BigDecimal getStockPrice(String stock) throws IOException;
 
 
-    public List<HistoricalQuote>getHistory(Stock ticker) throws IOException;
+    public List<HistoricalQuote>getHistory(String ticker) throws IOException;
 
 
 

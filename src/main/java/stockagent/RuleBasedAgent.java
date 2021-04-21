@@ -3,6 +3,7 @@ package stockagent;
 
 import yahoofinance.Stock;
 import yahoofinance.YahooFinance;
+<<<<<<< HEAD
 import yahoofinance.histquotes.HistoricalQuote;
 
 import java.io.IOException;
@@ -16,58 +17,102 @@ public class RuleBasedAgent implements StockAgent, SensorInterface {
 
     private double buyingPower;
     private HashMap<Stock, Integer> porfolio = new HashMap<Stock,Integer>();
+=======
+
+import java.io.IOException;
+import java.math.BigDecimal;
+import java.util.*;
+
+public class RuleBasedAgent {
+
+    //private double buyingPower;
+>>>>>>> 7a54e3d38e488500f984602c38b03569fa420907
 
 
+    //better version of portfolio?
+    //private HashMap <Stock, Integer> portfolio = new HashMap<Stock,Integer>();
 
-    public RuleBasedAgent(double buyingPower) throws IOException {
-        this.buyingPower = buyingPower;
+
+    private Portfolio portfolio;
+    private MarketSensor sensor;
+
+
+    Random random = new Random();
+
+    public RuleBasedAgent(Portfolio portfolio, MarketSensor sensor) throws IOException {
+        this.portfolio = portfolio;
+        this.sensor = sensor;
+
     }
-
-
-
-
 
 
 
     //need to figure out how to get specific pricing for a day instead of getting the entire list in getStockPrice
-    @Override
-    public void buyStock(LocalSensor sensor, Stock symbol) throws IOException {
+
+    public void buyStock(MarketSensor sensor, String symbol) throws IOException {
+        Stock stock = YahooFinance.get(symbol);
         BigDecimal pricing = sensor.getStockPrice(symbol);
 
-        double currMoney = getBuyingPower()*.10;
+        double currMoney = (portfolio.getBuyingPower())*.10;
 
+        double num = portfolio.getBuyingPower();
 
         if(currMoney > pricing.doubleValue()) {
             int shares = (int) (currMoney/pricing.doubleValue());
 
-            porfolio.put(symbol, shares);
+            //possibly change
 
-            buyingPower-=currMoney;
+
+            portfolio.getPorfolio().put(stock, shares);
+            portfolio.getPriceBoughtAt().put(stock, (pricing.doubleValue()));
+            portfolio.setBuyingPower(num-currMoney);
+
+
+
+
         }
 
         else{
-            System.out.println("COULDN'T BUY STOCK DUE TO INSUFFICIENT FUNDS" + symbol);
+            System.out.println("COULDN'T BUY STOCK DUE TO INSUFFICIENT FUNDS " + symbol);
 
         }
 
     }
 
-    @Override
-    public void sellStock() {
+//    public void sellStock(MarketSensor sensor, String symbol) throws IOException {
+//        Stock stock = YahooFinance.get(symbol);
+//        BigDecimal currPrice = sensor.getStockPrice(symbol);
+//
+//        double valueBoughtAt = portfolio.getPriceBoughtAt().get(stock);
+//
+//        if(currPrice.doubleValue() > valueBoughtAt){
+//            buyingPower += currPrice.doubleValue()*portfolio.getPorfolio().get(stock);
+//            portfolio.getPorfolio().remove(stock);
+//            portfolio.getPriceBoughtAt().remove(stock);
+//
+//
+//        }
+//
+//        else{
+//            System.out.println("SELLING FOR LESS THAN BOUGHT AT ");
+//
+//        }
+//
+//
+//    }
+    public Stock chooseStock(MarketSensor sensor){
+        List<String> key = new ArrayList<String>(sensor.getStocks().keySet());
+        String randomKey = key.get(random.nextInt(key.size()));
+        Stock value = sensor.getStocks().get(randomKey);
+
+
+        return value;
 
     }
 
-    @Override
-    public HashMap<Stock, Integer> getPorfolio() {
-        return porfolio;
-    }
-
-    @Override
-    public double getBuyingPower() {
-        return buyingPower;
-    }
 
 
+<<<<<<< HEAD
 
 
 
@@ -115,21 +160,9 @@ public class RuleBasedAgent implements StockAgent, SensorInterface {
 //    public double getBuyingPower() {
 //        return buyingPower;
 //    }
+=======
+>>>>>>> 7a54e3d38e488500f984602c38b03569fa420907
 
-    //watch list of stocks 
-    //List of stocks it owns
-        //value of the stocks 
-        //amount of stocks per company it owns 
-    
-    //getPortfolio of stocks 
-   
-    //start buying power "balance" (money it starts with) - cannot buy if balance is less than zero 
-    
-    //function that buys stock - cannot buy stock if it can't afford it 
-        //amount of shares bought is a percentage of our buying power "balance" 
-    
-    //function that sells stock
-        //if stock goes up to a certain percentage from bought date 
-        //if stock plumets pass buying price (certain percentage) 
+
 
 }

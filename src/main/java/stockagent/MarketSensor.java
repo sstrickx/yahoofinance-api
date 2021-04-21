@@ -12,15 +12,18 @@ import java.util.List;
 import java.util.Map;
 
 
-public class LocalSensor implements SensorInterface{
-//
-    private String[] symbols = new String[] {"INTC", "BABA", "TSLA", "AIR.PA", "YHOO"};
+public class MarketSensor implements SensorInterface{
+
+    private String[] symbols = new String[] {"INTC", "BABA", "TSLA", "GOOG"};
     private Map<String, Stock> stocks = YahooFinance.get(symbols);
     private Calendar from = Calendar.getInstance();
     private Calendar to = Calendar.getInstance();
-    private int yearAgo = -1;
+    private Interval daily = Interval.DAILY;
 
-    public LocalSensor() throws IOException {
+
+    public MarketSensor() throws IOException {
+        from.add(Calendar.YEAR, -1);
+
     }
 
 
@@ -30,13 +33,18 @@ public class LocalSensor implements SensorInterface{
 
     }
 
+<<<<<<< HEAD:src/main/java/stockagent/LocalSensor.java
     //GetStockPricing
     //Give us closing prices of the stock
 
 
+=======
+//    //GetStockPricing
+//    //Give us closing prices of the stock
+>>>>>>> 7a54e3d38e488500f984602c38b03569fa420907:src/main/java/stockagent/MarketSensor.java
     //Maybe better if we can getStockPrice for a specific day?
 
-    public BigDecimal getStockPrice(Stock ticker) throws IOException {
+    public BigDecimal getStockPrice(String ticker) throws IOException {
 
         List<HistoricalQuote>historicalQuotes = getHistory(ticker);
 
@@ -51,12 +59,16 @@ public class LocalSensor implements SensorInterface{
 
 
 
-    public List<HistoricalQuote>getHistory(Stock ticker) throws IOException {
-        from.add(Calendar.YEAR, yearAgo);
-        List<HistoricalQuote>historicalQuotes = stocks.get(ticker).getHistory(from, to, Interval.DAILY);
+    public List<HistoricalQuote>getHistory(String ticker) throws IOException {
+        List<HistoricalQuote>historicalQuotes = stocks.get(ticker).getHistory(from, to, daily);
+
 
         return historicalQuotes;
     }
+
+
+
+
 
 
 
