@@ -48,8 +48,8 @@ public class RuleBasedAgent {
             //possibly change
 
 
-            portfolio.getPorfolio().put(stock, shares);
 
+            portfolio.getPorfolio().put(stock, shares);
             portfolio.getPriceBoughtAt().put(stock, (pricing.doubleValue()));
             portfolio.setBuyingPower(num-currMoney);
 
