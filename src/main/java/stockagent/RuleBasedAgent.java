@@ -72,8 +72,8 @@ public class RuleBasedAgent {
         double valueBoughtAt = portfolio.getPriceBoughtAt().get(stock);
 
         if(currPrice.doubleValue() > valueBoughtAt){
-            portfolio.setBuyingPower(currPrice.doubleValue()*portfolio.getPorfolio().get(stock));
-            portfolio.getPorfolio().remove(stock);
+            portfolio.setBuyingPower(currPrice.doubleValue()*portfolio.getPortfolio().get(stock));
+            portfolio.getPortfolio().remove(stock);
             portfolio.getPriceBoughtAt().remove(stock);
 
 
