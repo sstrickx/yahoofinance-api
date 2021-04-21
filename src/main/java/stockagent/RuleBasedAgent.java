@@ -32,7 +32,6 @@ public class RuleBasedAgent{
         String randomKey = key.get(random.nextInt(key.size()));
         Stock value = sensor.getStocks().get(randomKey);
 
-
         return value;
 
     }

@@ -54,8 +54,7 @@ public class MarketSensor implements SensorInterface{
 
     public List<HistoricalQuote>getHistory(String ticker) throws IOException {
         List<HistoricalQuote>historicalQuotes = stocks.get(ticker).getHistory(from, to, daily);
-
-
+        
         return historicalQuotes;
     }
 
