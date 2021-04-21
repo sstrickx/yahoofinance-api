@@ -17,49 +17,47 @@ public class Main {
 
         //Possibly use simulator class? Like we did in the pathfinder to set up our prices for stocks in the year
         //then here we can just run everything
+//
+//        String[] symbols = new String[] {"INTC", "BABA", "TSLA", "GOOG"};
+//
+//
+//        List<Stock>stockList = new ArrayList<Stock>();
+//        for(int i =0; i < symbols.length; i++){
+//            stockList.add(YahooFinance.get(symbols[i]));
+//        }
+//        Portfolio portfolio = new Portfolio(10000);
+//        MarketSensor sensor = new MarketSensor();
+//
+//        RuleBasedAgent agent = new RuleBasedAgent(portfolio, sensor);
+//
+//
+//        //System.out.println(agent.chooseStock(sensor));
+//
+//
+//
+//        List<List<HistoricalQuote>>data = new ArrayList<List<HistoricalQuote>>();
+//
+//        for(int i =0; i < stockList.size(); i++){
+//
+//            data.add(sensor.getHistory(symbols[i]));
+//
+//        }
+//
+//
+//        System.out.println(data);
+//
+//
+//    }
 
-
+        Simulator simulator = new Simulator();
 
         String[] symbols = new String[] {"INTC", "BABA", "TSLA", "GOOG"};
 
 
-        List<Stock>stockList = new ArrayList<Stock>();
-        for(int i =0; i < symbols.length; i++){
-            stockList.add(YahooFinance.get(symbols[i]));
-        }
 
+        List<Stock>stockList = simulator.getStockInfo(symbols);
 
-        //System.out.println(stockList);
-
-        Portfolio portfolio = new Portfolio(10000);
-        MarketSensor sensor = new MarketSensor();
-
-        RuleBasedAgent agent = new RuleBasedAgent(portfolio, sensor);
-
-
-        //System.out.println(agent.chooseStock(sensor));
-
-
-
-        List<List<HistoricalQuote>>data = new ArrayList<List<HistoricalQuote>>();
-
-        for(int i =0; i < stockList.size(); i++){
-
-            data.add(sensor.getHistory(symbols[i]));
-
-        }
-
-
-        System.out.println(data);
-
-
-    }
-
-
-
-
-
-
+        System.out.println(simulator.getHistoricalData(stockList));
 
 
 
@@ -67,4 +65,6 @@ public class Main {
 
 
     }
+
+}
 
