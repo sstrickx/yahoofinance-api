@@ -15,26 +15,26 @@ public class Main {
 
 
     public static void main(String[] args) throws IOException {
-        Stock stock = YahooFinance.get("INTC");
-
-        BigDecimal price = stock.getQuote().getPrice();
-        BigDecimal change = stock.getQuote().getChangeInPercent();
-        BigDecimal peg = stock.getStats().getPeg();
-        BigDecimal dividend = stock.getDividend().getAnnualYieldPercent();
-
-       // stock.print();
-
-
-
-        Stock stock2 = YahooFinance.get("AAPL");
-
-        BigDecimal price2 = stock.getQuote().getPrice();
-        BigDecimal change2 = stock.getQuote().getChangeInPercent();
-        BigDecimal peg2 = stock.getStats().getPeg();
-        BigDecimal dividend2 = stock.getDividend().getAnnualYieldPercent();
-
-        //stock2.print();
-
+//        Stock stock = YahooFinance.get("INTC");
+//
+//        BigDecimal price = stock.getQuote().getPrice();
+//        BigDecimal change = stock.getQuote().getChangeInPercent();
+//        BigDecimal peg = stock.getStats().getPeg();
+//        BigDecimal dividend = stock.getDividend().getAnnualYieldPercent();
+//
+//       // stock.print();
+//
+//
+//
+//        Stock stock2 = YahooFinance.get("AAPL");
+//
+//        BigDecimal price2 = stock.getQuote().getPrice();
+//        BigDecimal change2 = stock.getQuote().getChangeInPercent();
+//        BigDecimal peg2 = stock.getStats().getPeg();
+//        BigDecimal dividend2 = stock.getDividend().getAnnualYieldPercent();
+//
+//        //stock2.print();
+//
 
         //simulate some dates and environment through some time with
         //List of stocks and quotes
@@ -44,17 +44,18 @@ public class Main {
         Map<String, Stock> stocks = YahooFinance.get(symbols);
 
 
-        Calendar from = Calendar.getInstance();
-        Calendar to = Calendar.getInstance();
-        from.add(Calendar.YEAR, -1); // from 1 year ago
+//        System.out.println((stocks));
+//        Calendar from = Calendar.getInstance();
+//        Calendar to = Calendar.getInstance();
+//        from.add(Calendar.YEAR, -1); // from 1 year ago
+//
+//        Stock google = YahooFinance.get(stocks.get(i));
+//        List<HistoricalQuote> googleHistQuotes = google.getHistory(from, to, Interval.DAILY);
 
-        Stock google = YahooFinance.get("GOOG");
-        List<HistoricalQuote> googleHistQuotes = google.getHistory(from, to, Interval.DAILY);
-
-
-        for(int i =0; i < googleHistQuotes.size()-1; i++) {
-            System.out.println(googleHistQuotes.get(i).getClose());
-        }
+//
+//        for(int i =0; i < googleHistQuotes.size()-1; i++) {
+//            System.out.println(googleHistQuotes.get(i).getClose());
+//        }
         //System.out.println(googleHistQuotes);
         //RuleBasedAgent agent = new RuleBasedAgent(10000);
 
