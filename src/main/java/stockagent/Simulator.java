@@ -14,9 +14,8 @@ public class Simulator {
 
     private List<Stock> stockList = new ArrayList<Stock>();
 
-    private Portfolio portfolio = new Portfolio(10000);
+    private Portfolio portfolio = new Portfolio(1000000);
     private MarketSensor sensor = new MarketSensor();
-    private RuleBasedAgent agent = new RuleBasedAgent(portfolio, sensor);
 
     public Simulator() throws IOException {
         this.portfolio = portfolio;
@@ -51,4 +50,13 @@ public class Simulator {
 
     }
 
+
+    public Portfolio getPortfolio() {
+        return portfolio;
+    }
+
+
+    public MarketSensor getSensor() {
+        return sensor;
+    }
 }

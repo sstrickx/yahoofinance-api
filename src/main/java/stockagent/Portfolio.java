@@ -78,7 +78,15 @@ public class Portfolio implements TraderPortfolio {
         }
         @Override
         public HashMap<Stock, Integer> getPorfolio() {
-            return portfolio;
+
+            for(int i=0; i < portfolio.size()-1; i++){
+                System.out.println(portfolio.get(i));
+            }
+
+
+            return null;
+
+
         }
 
 

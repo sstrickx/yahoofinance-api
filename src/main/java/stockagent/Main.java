@@ -50,15 +50,32 @@ public class Main {
 //    }
 
         Simulator simulator = new Simulator();
-
         String[] symbols = new String[] {"INTC", "BABA", "TSLA", "GOOG"};
-
-
-
         List<Stock>stockList = simulator.getStockInfo(symbols);
 
-        System.out.println(simulator.getHistoricalData(stockList));
 
+
+
+
+        //System.out.println(simulator.getHistoricalData(stockList));
+
+
+
+        RuleBasedAgent agent = new RuleBasedAgent(simulator.getPortfolio(), simulator.getSensor());
+
+        //System.out.println(agent.chooseStock(simulator.getSensor()).getSymbol());
+
+
+        for(int i =0; i < simulator.getHistoricalData(stockList).size(); i++){
+
+            simulator.getPortfolio().buyStock(simulator.getSensor(), agent.chooseStock(simulator.getSensor()).getSymbol());
+
+
+
+
+        }
+
+        simulator.getPortfolio();
 
 
 
