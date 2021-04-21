@@ -3,6 +3,7 @@ package stockagent;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 import java.util.Map.Entry;
 
@@ -24,10 +25,10 @@ public class RandomAgent {
         while(portfolio.getBuyingPower() > 0){
 
             int i = 0;
-            HashMap<Stock, Integer> purchasableStocks = portfolio.getPorfolio();
+            Map<String, Stock> purchasableStocks = sensor.getStocks();
 
-            for(Entry<Stock, Integer> entry: purchasableStocks.entrySet()) {
-                Stock stock = entry.getKey();
+            for(Entry<String, Stock> entry: purchasableStocks.entrySet()) {
+                Stock stock = entry.getValue();
                 double price = stock.getHistory().get(i).getClose().doubleValue();
 
                 int shares = randnum.nextInt(10);
