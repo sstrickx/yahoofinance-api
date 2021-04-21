@@ -2,6 +2,7 @@
 https://docs.google.com/document/d/1TroFGd6kVxd9nBFP8ytaitdginuaTjSVi07jxi7q4ec/edit
 
 You can find our sensors in: src/main/java/stockagent
+
 Actuator interface:
 TraderPortfolio.java
 
