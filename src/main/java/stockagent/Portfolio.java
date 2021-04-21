@@ -79,14 +79,17 @@ public class Portfolio implements TraderPortfolio {
         @Override
         public HashMap<Stock, Integer> getPorfolio() {
 
-            for(int i=0; i < portfolio.size()-1; i++){
-                System.out.println(portfolio.get(i));
-            }
+            return portfolio;
 
 
-            return null;
+        }
 
+    public HashMap<Stock, Double> getPriceBoughtAt() {
+        return priceBoughtAt;
+    }
 
+    public void setBuyingPower(double num){
+            this.buyingPower = num;
         }
 
 
