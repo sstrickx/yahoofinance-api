@@ -7,10 +7,6 @@ import java.util.HashMap;
 
 public interface TraderPortfolio {
 
-    public void buyStock(MarketSensor sensor, String symbol) throws IOException;
-
-    public void sellStock(MarketSensor sensor, String symbol) throws IOException;
-
 
     public double getBuyingPower();
 
