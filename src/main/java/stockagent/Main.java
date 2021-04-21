@@ -17,7 +17,7 @@ public class Main {
 
         //Possibly use simulator class? Like we did in the pathfinder to set up our prices for stocks in the year
         //then here we can just run everything
-//
+
 //        String[] symbols = new String[] {"INTC", "BABA", "TSLA", "GOOG"};
 //
 //
@@ -63,19 +63,18 @@ public class Main {
 
         RuleBasedAgent agent = new RuleBasedAgent(simulator.getPortfolio(), simulator.getSensor());
 
-        //System.out.println(agent.chooseStock(simulator.getSensor()).getSymbol());
+        System.out.println(agent.chooseStock(simulator.getSensor()).getSymbol());
 
 
         for(int i =0; i < simulator.getHistoricalData(stockList).size(); i++){
 
-            simulator.getPortfolio().buyStock(simulator.getSensor(), agent.chooseStock(simulator.getSensor()).getSymbol());
-
+            agent.buyStock(simulator.getSensor(), agent.chooseStock(simulator.getSensor()).getSymbol());
 
 
 
         }
 
-        simulator.getPortfolio();
+        System.out.println(simulator.getPortfolio().getBuyingPower());
 
 
 
