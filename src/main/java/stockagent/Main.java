@@ -3,11 +3,10 @@ package stockagent;
 import yahoofinance.Stock;
 import yahoofinance.YahooFinance;
 import yahoofinance.histquotes.HistoricalQuote;
-import yahoofinance.histquotes.Interval;
 
 import java.io.IOException;
-import java.math.BigDecimal;
-import java.util.Calendar;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -15,61 +14,73 @@ public class Main {
 
 
     public static void main(String[] args) throws IOException {
-        Stock stock = YahooFinance.get("INTC");
 
-        BigDecimal price = stock.getQuote().getPrice();
-        BigDecimal change = stock.getQuote().getChangeInPercent();
-        BigDecimal peg = stock.getStats().getPeg();
-        BigDecimal dividend = stock.getDividend().getAnnualYieldPercent();
+        //Possibly use simulator class? Like we did in the pathfinder to set up our prices for stocks in the year
+        //then here we can just run everything
 
-       // stock.print();
+//        String[] symbols = new String[] {"INTC", "BABA", "TSLA", "GOOG"};
+//
+//
+//        List<Stock>stockList = new ArrayList<Stock>();
+//        for(int i =0; i < symbols.length; i++){
+//            stockList.add(YahooFinance.get(symbols[i]));
+//        }
+//        Portfolio portfolio = new Portfolio(10000);
+//        MarketSensor sensor = new MarketSensor();
+//
+//        RuleBasedAgent agent = new RuleBasedAgent(portfolio, sensor);
+//
+//
+//        //System.out.println(agent.chooseStock(sensor));
+//
+//
+//
+//        List<List<HistoricalQuote>>data = new ArrayList<List<HistoricalQuote>>();
+//
+//        for(int i =0; i < stockList.size(); i++){
+//
+//            data.add(sensor.getHistory(symbols[i]));
+//
+//        }
+//
+//
+//        System.out.println(data);
+//
+//
+//    }
+
+        Simulator simulator = new Simulator();
+        String[] symbols = new String[] {"INTC", "BABA", "TSLA", "GOOG"};
+        List<Stock>stockList = simulator.getStockInfo(symbols);
 
 
 
-        Stock stock2 = YahooFinance.get("AAPL");
-
-        BigDecimal price2 = stock.getQuote().getPrice();
-        BigDecimal change2 = stock.getQuote().getChangeInPercent();
-        BigDecimal peg2 = stock.getStats().getPeg();
-        BigDecimal dividend2 = stock.getDividend().getAnnualYieldPercent();
-
-        //stock2.print();
 
 
-        //simulate some dates and environment through some time with
-        //List of stocks and quotes
+        //System.out.println(simulator.getHistoricalData(stockList));
 
 
-        String[] symbols = new String[] {"INTC", "BABA", "TSLA", "AIR.PA", "YHOO"};
-        Map<String, Stock> stocks = YahooFinance.get(symbols);
+
+        RuleBasedAgent agent = new RuleBasedAgent(simulator.getPortfolio(), simulator.getSensor());
+
+        System.out.println(agent.chooseStock(simulator.getSensor()).getSymbol());
 
 
-        Calendar from = Calendar.getInstance();
-        Calendar to = Calendar.getInstance();
-        from.add(Calendar.YEAR, -1); // from 1 year ago
+        for(int i =0; i < simulator.getHistoricalData(stockList).size(); i++){
 
-        Stock google = YahooFinance.get("GOOG");
-        List<HistoricalQuote> googleHistQuotes = google.getHistory(from, to, Interval.DAILY);
+            agent.buyStock(simulator.getSensor(), agent.chooseStock(simulator.getSensor()).getSymbol());
 
 
-        for(int i =0; i < googleHistQuotes.size()-1; i++) {
-            System.out.println(googleHistQuotes.get(i).getClose());
+
         }
-        //System.out.println(googleHistQuotes);
-        //RuleBasedAgent agent = new RuleBasedAgent(10000);
 
-
-    //system can ask agent what to buy and sell rn
-        //or agent to be able to have access to information and it buys and sells now and has to be inside some bigger thing
-        //to make those decisions
-
-
-
-
+        System.out.println(simulator.getPortfolio().getBuyingPower());
 
 
 
 
 
     }
+
 }
+
