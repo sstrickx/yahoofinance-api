@@ -13,14 +13,16 @@ import java.util.Map;
 
 
 public class LocalSensor implements SensorInterface{
-//
+
     private String[] symbols = new String[] {"INTC", "BABA", "TSLA", "AIR.PA", "YHOO"};
     private Map<String, Stock> stocks = YahooFinance.get(symbols);
     private Calendar from = Calendar.getInstance();
     private Calendar to = Calendar.getInstance();
-    private int yearAgo = -1;
+
 
     public LocalSensor() throws IOException {
+        from.add(Calendar.YEAR, -1);
+
     }
 
 
@@ -36,7 +38,7 @@ public class LocalSensor implements SensorInterface{
 
     //Maybe better if we can getStockPrice for a specific day?
 
-    public BigDecimal getStockPrice(Stock ticker) throws IOException {
+    public BigDecimal getStockPrice(String ticker) throws IOException {
 
         List<HistoricalQuote>historicalQuotes = getHistory(ticker);
 
@@ -51,12 +53,14 @@ public class LocalSensor implements SensorInterface{
 
 
 
-    public List<HistoricalQuote>getHistory(Stock ticker) throws IOException {
-        from.add(Calendar.YEAR, yearAgo);
+    public List<HistoricalQuote>getHistory(String ticker) throws IOException {
         List<HistoricalQuote>historicalQuotes = stocks.get(ticker).getHistory(from, to, Interval.DAILY);
 
         return historicalQuotes;
     }
+
+
+
 
 
 

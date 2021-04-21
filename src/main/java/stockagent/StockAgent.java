@@ -34,7 +34,7 @@ public interface StockAgent {
     //have a default action (buy a standard amount of shares) (some percentage of your buying power)
 
 
-    public void buyStock(LocalSensor sensor, Stock symbol) throws IOException;
+    public void buyStock(LocalSensor sensor, String symbol) throws IOException;
 
 
 
