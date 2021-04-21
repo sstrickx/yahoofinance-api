@@ -28,7 +28,7 @@ public class Portfolio implements TraderPortfolio {
 
 
         @Override
-        public HashMap<Stock, Integer> getPorfolio() {
+        public HashMap<Stock, Integer> getPortfolio() {
 
 
 

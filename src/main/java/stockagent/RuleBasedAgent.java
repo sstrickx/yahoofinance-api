@@ -3,21 +3,6 @@ package stockagent;
 
 import yahoofinance.Stock;
 import yahoofinance.YahooFinance;
-<<<<<<< HEAD
-import yahoofinance.histquotes.HistoricalQuote;
-
-import java.io.IOException;
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-public class RuleBasedAgent implements StockAgent, SensorInterface {
-
-    private double buyingPower;
-    private HashMap<Stock, Integer> porfolio = new HashMap<Stock,Integer>();
-=======
 
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -26,7 +11,6 @@ import java.util.*;
 public class RuleBasedAgent {
 
     //private double buyingPower;
->>>>>>> 7a54e3d38e488500f984602c38b03569fa420907
 
 
     //better version of portfolio?
@@ -63,7 +47,7 @@ public class RuleBasedAgent {
             //possibly change
 
 
-            portfolio.getPorfolio().put(stock, shares);
+            portfolio.getPortfolio().put(stock, shares);
             portfolio.getPriceBoughtAt().put(stock, (pricing.doubleValue()));
             portfolio.setBuyingPower(num-currMoney);
 
@@ -112,56 +96,6 @@ public class RuleBasedAgent {
 
 
 
-<<<<<<< HEAD
-
-
-
-
-
-    @Override
-    public Map<String, Stock> getStocks() {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-
-
-
-
-
-
-    @Override
-    public BigDecimal getStockPrice(Stock stock) throws IOException {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-
-
-
-
-
-
-    @Override
-    public List<HistoricalQuote> getHistory(Stock ticker) throws IOException {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-
-    //Return stocks owned and amount of each we own
-//    public HashMap<Stock, Integer> getPorfolio() {
-//        return porfolio;
-//    }
-//
-//
-//    //buying power left
-//    @Override
-//    public double getBuyingPower() {
-//        return buyingPower;
-//    }
-=======
->>>>>>> 7a54e3d38e488500f984602c38b03569fa420907
 
 
 

@@ -28,20 +28,11 @@ public class MarketSensor implements SensorInterface{
 
 
     public Map<String, Stock>getStocks(){
-
         return stocks;
-
     }
 
-<<<<<<< HEAD:src/main/java/stockagent/LocalSensor.java
     //GetStockPricing
     //Give us closing prices of the stock
-
-
-=======
-//    //GetStockPricing
-//    //Give us closing prices of the stock
->>>>>>> 7a54e3d38e488500f984602c38b03569fa420907:src/main/java/stockagent/MarketSensor.java
     //Maybe better if we can getStockPrice for a specific day?
 
     public BigDecimal getStockPrice(String ticker) throws IOException {
