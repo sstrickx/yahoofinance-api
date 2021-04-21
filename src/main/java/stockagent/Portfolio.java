@@ -14,7 +14,6 @@ public class Portfolio implements TraderPortfolio {
 
         private double buyingPower;
 
-
         //better version of portfolio?
         private HashMap <Stock, Integer> portfolio = new HashMap<Stock,Integer>();
 
@@ -33,7 +32,6 @@ public class Portfolio implements TraderPortfolio {
 
 
 
-
             return portfolio;
 
 
@@ -44,6 +42,11 @@ public class Portfolio implements TraderPortfolio {
         @Override
         public double getBuyingPower() {
             return buyingPower;
+        }
+
+
+        public void setBuyingPower(double num){
+            this.buyingPower = num;
         }
 
 

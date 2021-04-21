@@ -20,13 +20,12 @@ public class RuleBasedAgent {
     private Portfolio portfolio;
     private MarketSensor sensor;
 
+
     Random random = new Random();
 
     public RuleBasedAgent(Portfolio portfolio, MarketSensor sensor) throws IOException {
         this.portfolio = portfolio;
         this.sensor = sensor;
-
-
 
     }
 
@@ -50,9 +49,8 @@ public class RuleBasedAgent {
 
             portfolio.getPorfolio().put(stock, shares);
             portfolio.getPriceBoughtAt().put(stock, (pricing.doubleValue()));
+            portfolio.setBuyingPower(num-currMoney);
 
-            //figure out buying power subtract?
-            //portfolio.getBuyingPower() = currMoney ;
 
 
 
@@ -65,17 +63,17 @@ public class RuleBasedAgent {
 
     }
 
-    public void sellStock(MarketSensor sensor, String symbol) throws IOException {
+//    public void sellStock(MarketSensor sensor, String symbol) throws IOException {
 //        Stock stock = YahooFinance.get(symbol);
 //        BigDecimal currPrice = sensor.getStockPrice(symbol);
 //
 //        double valueBoughtAt = portfolio.getPriceBoughtAt().get(stock);
 //
 //        if(currPrice.doubleValue() > valueBoughtAt){
-//            portfolio.getPorfolio() += currPrice.doubleValue()*portfolio.getPorfolio().get(stock);
-//            portfolio.remove(stock);
-//            priceBoughtAt.remove(stock);
-
+//            buyingPower += currPrice.doubleValue()*portfolio.getPorfolio().get(stock);
+//            portfolio.getPorfolio().remove(stock);
+//            portfolio.getPriceBoughtAt().remove(stock);
+//
 //
 //        }
 //
@@ -83,9 +81,9 @@ public class RuleBasedAgent {
 //            System.out.println("SELLING FOR LESS THAN BOUGHT AT ");
 //
 //        }
-
-
-    }
+//
+//
+//    }
     public Stock chooseStock(MarketSensor sensor){
         List<String> key = new ArrayList<String>(sensor.getStocks().keySet());
         String randomKey = key.get(random.nextInt(key.size()));

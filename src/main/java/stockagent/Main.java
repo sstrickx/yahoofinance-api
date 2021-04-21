@@ -63,7 +63,7 @@ public class Main {
 
         RuleBasedAgent agent = new RuleBasedAgent(simulator.getPortfolio(), simulator.getSensor());
 
-        //System.out.println(agent.chooseStock(simulator.getSensor()).getSymbol());
+        System.out.println(agent.chooseStock(simulator.getSensor()).getSymbol());
 
 
         for(int i =0; i < simulator.getHistoricalData(stockList).size(); i++){
@@ -72,10 +72,9 @@ public class Main {
 
 
 
-
         }
 
-        System.out.println(simulator.getPortfolio());
+        System.out.println(simulator.getPortfolio().getBuyingPower());
 
 
 
