@@ -3,16 +3,19 @@ package stockagent;
 
 import yahoofinance.Stock;
 import yahoofinance.YahooFinance;
+import yahoofinance.histquotes.HistoricalQuote;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class RuleBasedAgent implements StockAgent, SensorInterface {
 
     private double buyingPower;
-    private List<Stock> porfolio = new ArrayList<Stock>();
+    private HashMap<Stock, Integer> porfolio = new HashMap<Stock,Integer>();
 
 
 
@@ -23,9 +26,30 @@ public class RuleBasedAgent implements StockAgent, SensorInterface {
 
 
 
+
+
+
+    //need to figure out how to get specific pricing for a day instead of getting the entire list in getStockPrice
     @Override
-    public void buyStock(String symbol, int shares) {
-        
+    public void buyStock(LocalSensor sensor, Stock symbol) throws IOException {
+        BigDecimal pricing = sensor.getStockPrice(symbol);
+
+        double currMoney = getBuyingPower()*.10;
+
+
+        if(currMoney > pricing.doubleValue()) {
+            int shares = (int) (currMoney/pricing.doubleValue());
+
+            porfolio.put(symbol, shares);
+
+            buyingPower-=currMoney;
+        }
+
+        else{
+            System.out.println("COULDN'T BUY STOCK DUE TO INSUFFICIENT FUNDS" + symbol);
+
+        }
+
     }
 
     @Override
@@ -34,7 +58,7 @@ public class RuleBasedAgent implements StockAgent, SensorInterface {
     }
 
     @Override
-    public List<Stock> getPorfolio() {
+    public HashMap<Stock, Integer> getPorfolio() {
         return porfolio;
     }
 
@@ -46,8 +70,11 @@ public class RuleBasedAgent implements StockAgent, SensorInterface {
 
 
 
+
+
+
     @Override
-    public List<Stock> getStocks() {
+    public Map<String, Stock> getStocks() {
         // TODO Auto-generated method stub
         return null;
     }
@@ -55,10 +82,25 @@ public class RuleBasedAgent implements StockAgent, SensorInterface {
 
 
 
+
+
+
     @Override
-    public double getStockPrice(Stock stock) {
+    public BigDecimal getStockPrice(Stock stock) throws IOException {
         // TODO Auto-generated method stub
-        return 0;
+        return null;
+    }
+
+
+
+
+
+
+
+    @Override
+    public List<HistoricalQuote> getHistory(Stock ticker) throws IOException {
+        // TODO Auto-generated method stub
+        return null;
     }
 
 

@@ -3,6 +3,8 @@ package stockagent;
 import yahoofinance.Stock;
 import yahoofinance.YahooFinance;
 
+import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -32,13 +34,13 @@ public interface StockAgent {
     //have a default action (buy a standard amount of shares) (some percentage of your buying power)
 
 
-    public void buyStock(String symbol, int shares);
+    public void buyStock(LocalSensor sensor, Stock symbol) throws IOException;
 
 
     public void sellStock();
 
 
-    public List<Stock> getPorfolio();
+    public HashMap<Stock, Integer> getPorfolio();
 
 
     public double getBuyingPower();
