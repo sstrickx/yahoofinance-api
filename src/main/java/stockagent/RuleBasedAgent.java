@@ -6,12 +6,11 @@ import yahoofinance.YahooFinance;
 
 import java.io.IOException;
 import java.math.BigDecimal;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class RuleBasedAgent{
 
-    private double buyingPower;
+    //private double buyingPower;
 
 
     //better version of portfolio?
@@ -19,8 +18,22 @@ public class RuleBasedAgent{
 
 
 
+    Random random = new Random();
+
     public RuleBasedAgent(Portfolio portfolio, MarketSensor sensor) throws IOException {
-        this.buyingPower = buyingPower;
+        //this.buyingPower = buyingPower;
+
+
+
+    }
+
+    public Stock chooseStock(MarketSensor sensor){
+        List<String> key = new ArrayList<String>(sensor.getStocks().keySet());
+        String randomKey = key.get(random.nextInt(key.size()));
+        Stock value = sensor.getStocks().get(randomKey);
+
+
+        return value;
 
     }
 

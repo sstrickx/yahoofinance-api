@@ -6,7 +6,9 @@ import yahoofinance.histquotes.HistoricalQuote;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Main {
 
@@ -18,7 +20,7 @@ public class Main {
 
 
 
-        String[] symbols = new String[] {"INTC", "BABA", "TSLA"};
+        String[] symbols = new String[] {"INTC", "BABA", "TSLA", "GOOG"};
 
 
         List<Stock>stockList = new ArrayList<Stock>();
@@ -26,50 +28,35 @@ public class Main {
             stockList.add(YahooFinance.get(symbols[i]));
         }
 
+
         //System.out.println(stockList);
 
-
-        RuleBasedAgent agent = new RuleBasedAgent(10000);
+        Portfolio portfolio = new Portfolio(10000);
         MarketSensor sensor = new MarketSensor();
 
+        RuleBasedAgent agent = new RuleBasedAgent(portfolio, sensor);
 
-        List<List<HistoricalQuote>>prices = new ArrayList<List<HistoricalQuote>>();
+
+        //System.out.println(agent.chooseStock(sensor));
+
+
+
+        List<List<HistoricalQuote>>data = new ArrayList<List<HistoricalQuote>>();
+
         for(int i =0; i < stockList.size(); i++){
-            prices.add(sensor.getHistory(symbols[i]));
+
+            data.add(sensor.getHistory(symbols[i]));
 
         }
 
 
+        System.out.println(data);
 
-        for(int i =0; i < prices.size(); i++) {
 
-            System.out.println(prices.get(i).get(i));
-
-        }
-        //System.out.println(prices);
+    }
 
 
 
-
-
-//        Calendar from = Calendar.getInstance();
-//        Calendar to = Calendar.getInstance();
-//        from.add(Calendar.YEAR, -1); // from 1 year ago
-//
-//        Stock google = YahooFinance.get(stocks.get(i));
-//        List<HistoricalQuote> googleHistQuotes = google.getHistory(from, to, Interval.DAILY);
-
-//
-//        for(int i =0; i < googleHistQuotes.size()-1; i++) {
-//            System.out.println(googleHistQuotes.get(i).getClose());
-//        }
-        //System.out.println(googleHistQuotes);
-        //RuleBasedAgent agent = new RuleBasedAgent(10000);
-
-
-    //system can ask agent what to buy and sell rn
-        //or agent to be able to have access to information and it buys and sells now and has to be inside some bigger thing
-        //to make those decisions
 
 
 
@@ -80,4 +67,4 @@ public class Main {
 
 
     }
-}
+
