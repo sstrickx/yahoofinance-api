@@ -6,7 +6,9 @@ import yahoofinance.histquotes.HistoricalQuote;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Simulator {
 
@@ -16,6 +18,9 @@ public class Simulator {
 
     private Portfolio portfolio = new Portfolio(1000000);
     private MarketSensor sensor = new MarketSensor();
+
+
+
 
     public Simulator() throws IOException {
         this.portfolio = portfolio;
@@ -36,13 +41,13 @@ public class Simulator {
 
 
 
-    public List<List<HistoricalQuote>> getHistoricalData(List<Stock>stockList) throws IOException {
+    public Map<Stock,List<HistoricalQuote>> getHistoricalData(List<Stock>stockList) throws IOException {
 
-        List<List<HistoricalQuote>>data = new ArrayList<List<HistoricalQuote>>();
+        Map<Stock, List<HistoricalQuote>>data = new HashMap<Stock, List<HistoricalQuote>>();
 
         for(int i =0; i < stockList.size(); i++){
 
-            data.add(sensor.getHistory(stockList.get(i).getSymbol()));
+            data.put(stockList.get(i), sensor.getHistory(stockList.get(i).getSymbol()));
 
         }
 
