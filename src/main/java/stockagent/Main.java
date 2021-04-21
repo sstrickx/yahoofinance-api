@@ -3,14 +3,10 @@ package stockagent;
 import yahoofinance.Stock;
 import yahoofinance.YahooFinance;
 import yahoofinance.histquotes.HistoricalQuote;
-import yahoofinance.histquotes.Interval;
 
 import java.io.IOException;
-import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
-import java.util.Map;
 
 public class Main {
 
@@ -34,7 +30,9 @@ public class Main {
 
 
         RuleBasedAgent agent = new RuleBasedAgent(10000);
-        LocalSensor sensor = new LocalSensor();
+        MarketSensor sensor = new MarketSensor();
+
+
         List<List<HistoricalQuote>>prices = new ArrayList<List<HistoricalQuote>>();
         for(int i =0; i < stockList.size(); i++){
             prices.add(sensor.getHistory(symbols[i]));
@@ -44,6 +42,7 @@ public class Main {
 
 
         for(int i =0; i < prices.size(); i++) {
+
             System.out.println(prices.get(i).get(i));
 
         }
