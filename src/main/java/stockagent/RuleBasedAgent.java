@@ -39,6 +39,7 @@ public class RuleBasedAgent {
 
         double currMoney = (portfolio.getBuyingPower())*.10;
 
+
         double num = portfolio.getBuyingPower();
 
         if(currMoney > pricing.doubleValue()) {
@@ -47,7 +48,8 @@ public class RuleBasedAgent {
             //possibly change
 
 
-            portfolio.getPortfolio().put(stock, shares);
+
+            portfolio.getPorfolio().put(stock, shares);
             portfolio.getPriceBoughtAt().put(stock, (pricing.doubleValue()));
             portfolio.setBuyingPower(num-currMoney);
 
