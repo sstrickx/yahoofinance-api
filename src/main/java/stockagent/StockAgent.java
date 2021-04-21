@@ -35,11 +35,10 @@ public interface StockAgent {
     public void buyStock(String symbol, int shares);
 
 
-
     public void sellStock();
 
 
-    public HashMap<Stock, Integer> getPorfolio();
+    public List<Stock> getPorfolio();
 
 
     public double getBuyingPower();
