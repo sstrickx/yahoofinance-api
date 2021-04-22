@@ -27,16 +27,9 @@ public class Portfolio implements TraderPortfolio {
     }
 
 
+            return portfolio;
 
-    //need to figure out how to get specific pricing for a day instead of getting the entire list in getStockPrice
-    //@Override
-    public void buyStock(MarketSensor sensor, String symbol, int shares) throws IOException {
-        Stock stock = YahooFinance.get(symbol);
-        BigDecimal pricing = sensor.getStockPrice(symbol);
-
-
-        double cost = pricing.doubleValue() * shares;
-
+        }
 
         if(cost > pricing.doubleValue()) {
             //int shares = (int) (cost/pricing.doubleValue());
@@ -48,9 +41,9 @@ public class Portfolio implements TraderPortfolio {
 
         }
 
-        else{
-            System.out.println("COULDN'T BUY STOCK DUE TO INSUFFICIENT FUNDS " + symbol);
-
+        @Override
+        public double getBuyingPower() {
+            return buyingPower;
         }
 
     }

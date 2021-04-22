@@ -30,9 +30,14 @@ public class Main {
 
         historicalData = simulator.getHistoricalData(stockList);
 
+
+        System.out.println(simulator.getSensor().getHistory("BABA"));
+
+
         for(int i =0; i < historicalData.size(); i++){
 
-            agent.buyStock(simulator.getSensor(), agent.chooseStock(simulator.getSensor()).getSymbol());
+
+            //agent.buyStock(simulator.getSensor(), agent.chooseStock(simulator.getSensor()).getSymbol());
 
             System.out.println(simulator.getSensor().getStocks());
 
