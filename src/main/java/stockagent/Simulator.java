@@ -5,10 +5,7 @@ import yahoofinance.YahooFinance;
 import yahoofinance.histquotes.HistoricalQuote;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Simulator {
 
@@ -17,13 +14,29 @@ public class Simulator {
     private List<Stock> stockList = new ArrayList<Stock>();
 
     private Portfolio portfolio = new Portfolio(1000000);
-    private MarketSensor sensor = new MarketSensor();
+
+    Calendar from = Calendar.getInstance();
+
+
+
+    Calendar to = Calendar.getInstance();
+    private MarketSensor sensor = new MarketSensor(from, to);
 
 
 
 
-    public Simulator() throws IOException {
+
+
+    //takes stock agent
+    //loop through each day and tell agent what agent to buy
+    //portfolio manager buy and sell
+
+
+
+
+    public Simulator(StockAgent Agent) throws IOException {
         this.portfolio = portfolio;
+        setFrom(from);
     }
 
     public List<Stock> getStockInfo(String [] symbols) throws IOException {
@@ -63,5 +76,10 @@ public class Simulator {
 
     public MarketSensor getSensor() {
         return sensor;
+    }
+
+
+    public void setFrom(Calendar from){
+        from.add(Calendar.HOUR, 24);
     }
 }

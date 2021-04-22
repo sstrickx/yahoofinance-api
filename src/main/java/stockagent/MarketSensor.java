@@ -21,8 +21,11 @@ public class MarketSensor implements SensorInterface{
     private Interval daily = Interval.DAILY;
 
 
-    public MarketSensor() throws IOException {
-        from.add(Calendar.YEAR, -1);
+
+    //be told amt time
+    //get info about time and iterate through days
+    public MarketSensor(Calendar from, Calendar to) throws IOException {
+        from.add(Calendar.HOUR, -24);
 
     }
 

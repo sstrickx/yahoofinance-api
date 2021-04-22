@@ -30,13 +30,9 @@ public class Portfolio implements TraderPortfolio {
         @Override
         public HashMap<Stock, Integer> getPorfolio() {
 
-
-
             return portfolio;
 
-
         }
-
 
 
         @Override
