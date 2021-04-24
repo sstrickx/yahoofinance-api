@@ -1,14 +1,12 @@
 package stockagent;
 
+
 import yahoofinance.Stock;
 import yahoofinance.YahooFinance;
 import yahoofinance.histquotes.HistoricalQuote;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Main {
 
@@ -16,33 +14,58 @@ public class Main {
     public static void main(String[] args) throws IOException {
 
 
-        Simulator simulator = new Simulator();
+
+        StockAgent agent = new RuleBasedAgent();
+
+        Simulator simulator = new Simulator(agent);
+
+        Calendar from = Calendar.getInstance();
+        Calendar to = Calendar.getInstance();
+        MarketSensor sensor = new MarketSensor(from, to);
+
         String[] symbols = new String[] {"INTC", "BABA", "TSLA", "GOOG"};
-        List<Stock>stockList = simulator.getStockInfo(symbols);
-
-        Map<Stock, List<HistoricalQuote>>historicalData = new HashMap<Stock, List<HistoricalQuote>>();
 
 
-        RuleBasedAgent agent = new RuleBasedAgent(simulator.getPortfolio(), simulator.getSensor());
+        List<Stock> stockList  = simulator.getStockInfo(symbols);
+
+
+        System.out.println(stockList);
+
+        Map<Stock, List<HistoricalQuote>>historicalData;
+
+
+
+
+
+
+
+
 
         //System.out.println(agent.chooseStock(simulator.getSensor()).getSymbol());
+
+
+
+
+
+
+
 
 
         historicalData = simulator.getHistoricalData(stockList);
 
 
-        System.out.println(simulator.getSensor().getHistory("BABA"));
+        System.out.println(historicalData);
 
 
-        for(int i =0; i < historicalData.size(); i++){
-
-
-            //agent.buyStock(simulator.getSensor(), agent.chooseStock(simulator.getSensor()).getSymbol());
-
-            System.out.println(simulator.getSensor().getStocks());
-
-
-        }
+//        for(int i =0; i < historicalData.size(); i++){
+//
+//
+//            //agent.buyStock(simulator.getSensor(), agent.chooseStock(simulator.getSensor()).getSymbol());
+//
+//            //System.out.println(simulator.getSensor().getStocks());
+//
+//
+//        }
 
         //System.out.println(simulator.getPortfolio().getBuyingPower());
 

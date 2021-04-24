@@ -17,17 +17,16 @@ public class RuleBasedAgent implements StockAgent{
     //private HashMap <Stock, Integer> portfolio = new HashMap<Stock,Integer>();
 
 
-    private Portfolio portfolio;
     private MarketSensor sensor;
 
 
     Random random = new Random();
 
-    public RuleBasedAgent(Portfolio portfolio, MarketSensor sensor) throws IOException {
+    public RuleBasedAgent() throws IOException {
 
         //DO WE NEED THIS??
-        this.portfolio = portfolio;
-        this.sensor = sensor;
+
+
 
     }
 
@@ -36,6 +35,7 @@ public class RuleBasedAgent implements StockAgent{
         List<String> key = new ArrayList<String>(sensor.getStocks().keySet());
         String randomKey = key.get(random.nextInt(key.size()));
         Stock value = sensor.getStocks().get(randomKey);
+
 
 
         return value;

@@ -10,20 +10,12 @@ import java.util.*;
 public class Simulator {
 
 
-
     private List<Stock> stockList = new ArrayList<Stock>();
-
     private Portfolio portfolio = new Portfolio(1000000);
-
-    Calendar from = Calendar.getInstance();
-
-
-
-    Calendar to = Calendar.getInstance();
+    private PortfolioManager portfolioManager = new PortfolioManager(portfolio);
+    private Calendar from = Calendar.getInstance();
+    private Calendar to = Calendar.getInstance();
     private MarketSensor sensor = new MarketSensor(from, to);
-
-
-
 
 
 
@@ -32,15 +24,12 @@ public class Simulator {
     //portfolio manager buy and sell
 
 
-
-
     public Simulator(StockAgent Agent) throws IOException {
-        this.portfolio = portfolio;
         setFrom(from);
     }
 
-    public List<Stock> getStockInfo(String [] symbols) throws IOException {
-        for(int i =0; i < symbols.length; i++){
+    public List<Stock> getStockInfo(String[] symbols) throws IOException {
+        for (int i = 0; i < symbols.length; i++) {
 
             stockList.add(YahooFinance.get(symbols[i]));
         }
@@ -50,15 +39,11 @@ public class Simulator {
     }
 
 
+    public Map<Stock, List<HistoricalQuote>> getHistoricalData(List<Stock> stockList) throws IOException {
 
+        Map<Stock, List<HistoricalQuote>> data = new HashMap<Stock, List<HistoricalQuote>>();
 
-
-
-    public Map<Stock,List<HistoricalQuote>> getHistoricalData(List<Stock>stockList) throws IOException {
-
-        Map<Stock, List<HistoricalQuote>>data = new HashMap<Stock, List<HistoricalQuote>>();
-
-        for(int i =0; i < stockList.size(); i++){
+        for (int i = 0; i < stockList.size(); i++) {
 
             data.put(stockList.get(i), sensor.getHistory(stockList.get(i).getSymbol()));
 
@@ -79,7 +64,18 @@ public class Simulator {
     }
 
 
-    public void setFrom(Calendar from){
-        from.add(Calendar.HOUR, 24);
+    public void setFrom(Calendar from) {
+        from.add(Calendar.HOUR, -24);
     }
+
+
+    public Calendar getFrom(){
+        return from;
+    }
+
+
+    public Calendar getTo(){
+        return to;
+    }
+
 }
