@@ -44,7 +44,7 @@ public class Main {
 
 
 
-        int j =0;
+
 
 
         simulator.setFrom(from);
@@ -61,22 +61,20 @@ public class Main {
 //        for (Date date = start.getTime(); start.before(end); start.add(Calendar.DATE, 1), date = start.getTime()) {
 
 
-        while(j < 365){
-            historicalData = simulator.getHistoricalData(stockList);
+        historicalData = simulator.getHistoricalData(stockList);
 
 
-            System.out.println(historicalData);
 
 
-            //GETS ALL DATA BUT WON'T BREAK OUT OF THE LOOP
-            j+=1;
+        for(int i =0; i < historicalData.keySet().size(); i++){
 
+//            List<HistoricalQuote> curr = historicalData.get(i);
+//
+//            System.out.println(curr);
+//            for(int j=0; j < curr.size(); j++){
+//                System.out.println(curr.get(i).getClose());
+//            }
         }
-
-
-        //System.out.println(historicalData);
-        System.out.println("DONE");
-
 
 
 
