@@ -14,7 +14,6 @@ import java.util.Map;
 
 public class MarketSensor implements SensorInterface{
 
-    private String[] symbols = new String[] {"INTC", "BABA", "TSLA", "GOOG"};
     private Map<String, Stock> stocks = YahooFinance.get(symbols);
     private Calendar from = Calendar.getInstance();
     private Calendar to = Calendar.getInstance();
@@ -41,6 +40,7 @@ public class MarketSensor implements SensorInterface{
     public BigDecimal getStockPrice(String ticker) throws IOException {
 
         List<HistoricalQuote>historicalQuotes = getHistory(ticker);
+
 
 
         for(int i =0; i < historicalQuotes.size()-1; i++) {
