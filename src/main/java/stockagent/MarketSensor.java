@@ -44,6 +44,7 @@ public class MarketSensor implements SensorInterface{
         List<HistoricalQuote>historicalQuotes = getHistory(ticker);
 
 
+
         for(int i =0; i < historicalQuotes.size()-1; i++) {
             return (historicalQuotes.get(i).getClose());
         }

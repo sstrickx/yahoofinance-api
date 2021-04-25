@@ -34,11 +34,9 @@ public class RuleBasedAgent implements StockAgent{
     public Stock chooseStock(MarketSensor sensor){
         List<String> key = new ArrayList<String>(sensor.getStocks().keySet());
         String randomKey = key.get(random.nextInt(key.size()));
-        Stock value = sensor.getStocks().get(randomKey);
 
 
-
-        return value;
+        return sensor.getStocks().get(randomKey);
 
     }
 

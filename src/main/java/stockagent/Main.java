@@ -29,13 +29,9 @@ public class Main {
         List<Stock> stockList  = simulator.getStockInfo(symbols);
 
 
-        System.out.println(stockList);
+        //System.out.println(stockList);
 
-        Map<Stock, List<HistoricalQuote>>historicalData;
-
-
-
-
+        Map<Stock, List<HistoricalQuote>>historicalData= new HashMap<Stock, List<HistoricalQuote>>();
 
 
 
@@ -48,13 +44,86 @@ public class Main {
 
 
 
+        int j =0;
+
+
+        simulator.setFrom(from);
+
+
+        Calendar start = Calendar.getInstance();
+        start.setTime(from.getTime());
+        Calendar end = Calendar.getInstance();
+        end.setTime(to.getTime());
 
 
 
-        historicalData = simulator.getHistoricalData(stockList);
+
+//        for (Date date = start.getTime(); start.before(end); start.add(Calendar.DATE, 1), date = start.getTime()) {
 
 
-        System.out.println(historicalData);
+        while(j < 365){
+            historicalData = simulator.getHistoricalData(stockList);
+
+
+            System.out.println(historicalData);
+
+
+            //GETS ALL DATA BUT WON'T BREAK OUT OF THE LOOP
+            j+=1;
+
+        }
+
+
+        //System.out.println(historicalData);
+        System.out.println("DONE");
+
+
+
+
+
+
+
+//            for(int i =0; i < stockList.size(); i++){
+//                historicalData.put(stockList.get(i), sensor.getHistory(stockList.get(i).getSymbol()));
+//            }
+
+
+            //System.out.println(historicalData.get(agent.chooseStock(stockList)));
+            //System.out.println(historicalData);
+
+
+        }
+
+        //System.out.println(historicalData);
+
+
+
+
+
+//        while(j < 365) {
+//
+//
+//
+//
+//
+//
+//
+//
+//            historicalData = simulator.getHistoricalData(stockList);
+//            System.out.println(historicalData);
+//
+//
+//
+//
+//
+//
+//            j+=1;
+
+//        }
+
+
+
+
 
 
 //        for(int i =0; i < historicalData.size(); i++){
@@ -75,5 +144,5 @@ public class Main {
 
     }
 
-}
+
 

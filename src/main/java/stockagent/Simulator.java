@@ -3,6 +3,7 @@ package stockagent;
 import yahoofinance.Stock;
 import yahoofinance.YahooFinance;
 import yahoofinance.histquotes.HistoricalQuote;
+import yahoofinance.histquotes.Interval;
 
 import java.io.IOException;
 import java.util.*;
@@ -45,13 +46,17 @@ public class Simulator {
 
         for (int i = 0; i < stockList.size(); i++) {
 
-            data.put(stockList.get(i), sensor.getHistory(stockList.get(i).getSymbol()));
+            data.put(stockList.get(i), stockList.get(i).getHistory(from, to, Interval.DAILY));
 
         }
 
         return data;
 
     }
+
+
+
+
 
 
     public Portfolio getPortfolio() {
@@ -65,7 +70,7 @@ public class Simulator {
 
 
     public void setFrom(Calendar from) {
-        from.add(Calendar.HOUR, -24);
+        from.add(Calendar.YEAR, -1);
     }
 
 
