@@ -14,37 +14,24 @@ public class Main {
     public static void main(String[] args) throws IOException {
 
 
-
         StockAgent agent = new RuleBasedAgent();
+
 
         Simulator simulator = new Simulator(agent);
 
+
+        Portfolio portfolio = new Portfolio(100000);
+        PortfolioManager manager = new PortfolioManager(portfolio);
         Calendar from = Calendar.getInstance();
         Calendar to = Calendar.getInstance();
-        MarketSensor sensor = new MarketSensor(from, to);
 
-        String[] symbols = new String[] {"INTC", "BABA", "TSLA", "GOOG"};
-
-
-        List<Stock> stockList  = simulator.getStockInfo(symbols);
+        String[] symbols = new String[]{"INTC", "BABA", "TSLA", "GOOG"};
 
 
-        //System.out.println(stockList);
-
-        Map<Stock, List<HistoricalQuote>>historicalData= new HashMap<Stock, List<HistoricalQuote>>();
+        List<Stock> stockList = simulator.getStockInfo(symbols);
 
 
-
-
-
-        //System.out.println(agent.chooseStock(simulator.getSensor()).getSymbol());
-
-
-
-
-
-
-
+        Map<Stock, List<HistoricalQuote>> historicalData = new HashMap<Stock, List<HistoricalQuote>>();
 
 
         simulator.setFrom(from);
@@ -56,91 +43,53 @@ public class Main {
         end.setTime(to.getTime());
 
 
-
-
-//        for (Date date = start.getTime(); start.before(end); start.add(Calendar.DATE, 1), date = start.getTime()) {
-
-
         historicalData = simulator.getHistoricalData(stockList);
 
 
 
+        for(Stock stock : historicalData.keySet()){
 
-        for(int i =0; i < historicalData.keySet().size(); i++){
-
-//            List<HistoricalQuote> curr = historicalData.get(i);
-//
-//            System.out.println(curr);
-//            for(int j=0; j < curr.size(); j++){
-//                System.out.println(curr.get(i).getClose());
-//            }
-        }
+            for (HistoricalQuote prices : historicalData.get(stock)) {
 
 
+                stock = agent.chooseStock(simulator.getSensor());
 
 
+                manager.buyStock(simulator.getSensor(), stock.getSymbol());
 
+                stock = agent.chooseStock(simulator.getSensor());
 
-//            for(int i =0; i < stockList.size(); i++){
-//                historicalData.put(stockList.get(i), sensor.getHistory(stockList.get(i).getSymbol()));
-//            }
-
-
-            //System.out.println(historicalData.get(agent.chooseStock(stockList)));
-            //System.out.println(historicalData);
-
-
-        }
-
-        //System.out.println(historicalData);
+                manager.sellStock(simulator.getSensor(), stock.getSymbol());
 
 
 
 
+                System.out.println(manager.getPortfolio(portfolio).getBuyingPower());
+                System.out.println(portfolio.getPortfolio());
+                System.out.println(manager.getPortfolio(portfolio).getPriceBoughtAt());
 
-//        while(j < 365) {
-//
-//
-//
-//
-//
-//
-//
-//
-//            historicalData = simulator.getHistoricalData(stockList);
-//            System.out.println(historicalData);
-//
-//
-//
-//
-//
-//
-//            j+=1;
+                }
 
-//        }
-
-
-
-
-
-
-//        for(int i =0; i < historicalData.size(); i++){
-//
-//
-//            //agent.buyStock(simulator.getSensor(), agent.chooseStock(simulator.getSensor()).getSymbol());
-//
-//            //System.out.println(simulator.getSensor().getStocks());
-//
-//
-//        }
-
-        //System.out.println(simulator.getPortfolio().getBuyingPower());
+            }
 
 
 
 
 
     }
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

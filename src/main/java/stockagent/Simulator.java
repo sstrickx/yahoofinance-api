@@ -59,6 +59,8 @@ public class Simulator {
 
 
 
+
+
     public Portfolio getPortfolio() {
         return portfolio;
     }

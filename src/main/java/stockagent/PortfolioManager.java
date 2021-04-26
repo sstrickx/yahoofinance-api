@@ -34,8 +34,8 @@ public class PortfolioManager {
             //possibly change
 
 
-            portfolio.getPortfolio().put(stock, shares);
-            portfolio.getPriceBoughtAt().put(stock, (pricing.doubleValue()));
+            portfolio.getPortfolio().put(stock.getSymbol(), shares);
+            portfolio.getPriceBoughtAt().put(stock.getSymbol(), (pricing.doubleValue()));
             portfolio.setBuyingPower(num-currMoney);
 
 
@@ -43,10 +43,7 @@ public class PortfolioManager {
 
         }
 
-        else{
-            System.out.println("COULDN'T BUY STOCK DUE TO INSUFFICIENT FUNDS " + symbol);
 
-        }
 
     }
 
@@ -56,20 +53,19 @@ public class PortfolioManager {
 
 
 
-        double valueBoughtAt = portfolio.getPriceBoughtAt().get(stock);
+        if(portfolio.getPriceBoughtAt().containsKey(stock.getSymbol())){
+            double valueBoughtAt = portfolio.getPriceBoughtAt().get(stock.getSymbol());
+            if(currPrice.doubleValue() > valueBoughtAt){
+                portfolio.setBuyingPower(currPrice.doubleValue()*portfolio.getPortfolio().get(stock.getSymbol()));
+                portfolio.getPortfolio().remove(stock.getSymbol());
+                portfolio.getPriceBoughtAt().remove(stock.getSymbol());
 
-        if(currPrice.doubleValue() > valueBoughtAt){
-            portfolio.setBuyingPower(currPrice.doubleValue()*portfolio.getPortfolio().get(stock));
-            portfolio.getPortfolio().remove(stock);
-            portfolio.getPriceBoughtAt().remove(stock);
 
-
-        }
-
-        else{
-            System.out.println("SELLING FOR LESS THAN BOUGHT AT ");
+            }
 
         }
+
+
 
 
     }

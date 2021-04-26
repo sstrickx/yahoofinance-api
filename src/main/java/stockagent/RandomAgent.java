@@ -36,7 +36,7 @@ public class RandomAgent {
                 double cost = price * shares;
 
                 if(cost <= portfolio.getBuyingPower()){
-                    portfolio.buyStock(sensor, stock.getSymbol(), shares);
+                    //portfolio.buyStock(sensor, stock.getSymbol(), shares);
                 }
                 i++;
             }
