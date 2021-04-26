@@ -34,7 +34,7 @@ public class PortfolioManager {
             //possibly change
 
 
-            portfolio.getPorfolio().put(stock, shares);
+            portfolio.getPortfolio().put(stock, shares);
             portfolio.getPriceBoughtAt().put(stock, (pricing.doubleValue()));
             portfolio.setBuyingPower(num-currMoney);
 
@@ -59,8 +59,8 @@ public class PortfolioManager {
         double valueBoughtAt = portfolio.getPriceBoughtAt().get(stock);
 
         if(currPrice.doubleValue() > valueBoughtAt){
-            portfolio.setBuyingPower(currPrice.doubleValue()*portfolio.getPorfolio().get(stock));
-            portfolio.getPorfolio().remove(stock);
+            portfolio.setBuyingPower(currPrice.doubleValue()*portfolio.getPortfolio().get(stock));
+            portfolio.getPortfolio().remove(stock);
             portfolio.getPriceBoughtAt().remove(stock);
 
 
@@ -75,7 +75,7 @@ public class PortfolioManager {
     }
 
 
-    public Portfolio getPorfolio(Portfolio portfolio) {
+    public Portfolio getPortfolio(Portfolio portfolio) {
 
         return portfolio;
 

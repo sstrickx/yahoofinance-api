@@ -14,33 +14,32 @@ import java.util.Map;
 
 public class MarketSensor implements SensorInterface{
 
+    private String[] symbols = new String[] {"INTC", "BABA", "TSLA", "GOOG"};
     private Map<String, Stock> stocks = YahooFinance.get(symbols);
     private Calendar from = Calendar.getInstance();
     private Calendar to = Calendar.getInstance();
     private Interval daily = Interval.DAILY;
 
 
-
-    //be told amt time
-    //get info about time and iterate through days
-    public MarketSensor(Calendar from, Calendar to) throws IOException {
-        from.add(Calendar.HOUR, -24);
+    public MarketSensor() throws IOException {
+        from.add(Calendar.YEAR, -1);
 
     }
 
 
     public Map<String, Stock>getStocks(){
+
         return stocks;
+
     }
 
-    //GetStockPricing
-    //Give us closing prices of the stock
+//    //GetStockPricing
+//    //Give us closing prices of the stock
     //Maybe better if we can getStockPrice for a specific day?
 
     public BigDecimal getStockPrice(String ticker) throws IOException {
 
         List<HistoricalQuote>historicalQuotes = getHistory(ticker);
-
 
 
         for(int i =0; i < historicalQuotes.size()-1; i++) {
