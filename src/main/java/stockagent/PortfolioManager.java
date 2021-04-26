@@ -24,27 +24,36 @@ public class PortfolioManager {
         Stock stock = YahooFinance.get(symbol);
         BigDecimal pricing = sensor.getStockPrice(symbol);
 
-        double currMoney = (portfolio.getBuyingPower())*.10;
+        double currMoney = (portfolio.getBuyingPower()) * .10;
 
         double num = portfolio.getBuyingPower();
 
-        if(currMoney > pricing.doubleValue()) {
-            int shares = (int) (currMoney/pricing.doubleValue());
+        if (currMoney > pricing.doubleValue()) {
+            int shares = (int) (currMoney / pricing.doubleValue());
 
             //possibly change
 
 
-            portfolio.getPortfolio().put(stock.getSymbol(), shares);
-            portfolio.getPriceBoughtAt().put(stock.getSymbol(), (pricing.doubleValue()));
-            portfolio.setBuyingPower(num-currMoney);
+            if (portfolio.getPortfolio().containsKey(stock.getSymbol())) {
+
+                double value = portfolio.getPortfolio().get(stock.getSymbol());
+                value += shares;
+
+                //System.out.println(portfolio.getPortfolio().get(stock.getSymbol()));
+                //portfolio.getPortfolio().replace(stock.getSymbol(), (portfolio.getPortfolio().get(stock.getSymbol())+shares));
+                portfolio.getPortfolio().put(stock.getSymbol(), (int) value);
+                portfolio.getPriceBoughtAt().put(stock.getSymbol(), (pricing.doubleValue()));
+                portfolio.setBuyingPower(num - currMoney);
+            } else {
+
+                portfolio.getPortfolio().put(stock.getSymbol(), shares);
+                portfolio.getPriceBoughtAt().put(stock.getSymbol(), (pricing.doubleValue()));
+                portfolio.setBuyingPower(num - currMoney);
 
 
-
+            }
 
         }
-
-
-
     }
 
     public void sellStock(MarketSensor sensor, String symbol) throws IOException {
@@ -61,6 +70,7 @@ public class PortfolioManager {
                 portfolio.getPriceBoughtAt().remove(stock.getSymbol());
 
 
+
             }
 
         }
@@ -69,7 +79,6 @@ public class PortfolioManager {
 
 
     }
-
 
     public Portfolio getPortfolio(Portfolio portfolio) {
 

@@ -47,9 +47,10 @@ public class Main {
 
 
 
+        int i = 0;
         for(Stock stock : historicalData.keySet()){
 
-            for (HistoricalQuote prices : historicalData.get(stock)) {
+            while(i < 365){
 
 
                 stock = agent.chooseStock(simulator.getSensor());
@@ -59,15 +60,17 @@ public class Main {
 
                 stock = agent.chooseStock(simulator.getSensor());
 
-                manager.sellStock(simulator.getSensor(), stock.getSymbol());
+                //manager.sellStock(simulator.getSensor(), stock.getSymbol());
+
 
 
 
 
                 System.out.println(manager.getPortfolio(portfolio).getBuyingPower());
                 System.out.println(portfolio.getPortfolio());
-                System.out.println(manager.getPortfolio(portfolio).getPriceBoughtAt());
+//                System.out.println(manager.getPortfolio(portfolio).getPriceBoughtAt());
 
+                i+=1;
                 }
 
             }
