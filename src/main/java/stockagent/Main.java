@@ -48,8 +48,9 @@ public class Main {
 
         int i = 0;
         for(Stock stock : historicalData.keySet()){
+            int size = historicalData.get(stock).size();
 
-            while(i < 365){
+            while(i < size){
 
 
                 stock = agent.chooseStock(simulator.getSensor());
