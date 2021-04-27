@@ -2,7 +2,6 @@ package stockagent;
 
 
 import yahoofinance.Stock;
-import yahoofinance.YahooFinance;
 import yahoofinance.histquotes.HistoricalQuote;
 
 import java.io.IOException;
@@ -14,7 +13,7 @@ public class Main {
     public static void main(String[] args) throws IOException {
 
 
-        StockAgent agent = new RuleBasedAgent();
+        StockAgent agent = new RandomAgent();
 
 
         Simulator simulator = new Simulator(agent);
@@ -56,16 +55,21 @@ public class Main {
                 stock = agent.chooseStock(simulator.getSensor());
 
 
-                //System.out.println(stock.getHistory().get(i).getClose());
+
                 manager.buyStock(simulator.getSensor(), stock.getSymbol(), i);
 
                 stock = agent.chooseStock(simulator.getSensor());
 
-                //manager.sellStock(simulator.getSensor(), stock.getSymbol());
+
+                if(portfolio.getPortfolio().size() != 0) {
+                    manager.sellStock(simulator.getSensor(), stock.getSymbol(), i);
+                }
 
 
-                System.out.println(portfolio.getPortfolio());
-                System.out.println(portfolio.getPriceBoughtAt());
+                //System.out.println(portfolio.getBuyingPower());
+                System.out.println(manager.getAssets(portfolio));
+//                System.out.println(portfolio.getPortfolio());
+//                System.out.println(portfolio.getPriceBoughtAt());
 
                 i+=1;
                 }

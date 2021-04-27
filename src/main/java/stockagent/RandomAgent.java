@@ -1,46 +1,52 @@
 package stockagent;
 
-import java.io.IOException;
-import java.math.BigDecimal;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Random;
-import java.util.Map.Entry;
 
 import yahoofinance.Stock;
+import yahoofinance.YahooFinance;
 
-public class RandomAgent {
-    
-    private Portfolio portfolio;
+import java.io.IOException;
+import java.math.BigDecimal;
+import java.util.*;
+
+public class RandomAgent implements StockAgent{
+
+    //private double buyingPower;
+
+
+    //better version of portfolio?
+    //private HashMap <Stock, Integer> portfolio = new HashMap<Stock,Integer>();
+
+
     private MarketSensor sensor;
-    private Random randnum;
 
-    public RandomAgent(Portfolio portfolio, MarketSensor sensor){
-        this.portfolio = portfolio;
-        this.sensor = sensor;
+
+    Random random = new Random();
+
+    public RandomAgent() throws IOException {
+
+        //DO WE NEED THIS??
+
+
+
     }
 
-    public void buyStock() throws IOException{
 
-        while(portfolio.getBuyingPower() > 0){
 
-            int i = 0;
-            Map<String, Stock> purchasableStocks = sensor.getStocks();
+    public Stock chooseStock(MarketSensor sensor){
+        List<String> key = new ArrayList<String>(sensor.getStocks().keySet());
 
-            for(Entry<String, Stock> entry: purchasableStocks.entrySet()) {
-                Stock stock = entry.getValue();
-                double price = stock.getHistory().get(i).getClose().doubleValue();
 
-                int shares = randnum.nextInt(10);
+        String randomKey = key.get(random.nextInt(key.size()));
 
-                double cost = price * shares;
 
-                if(cost <= portfolio.getBuyingPower()){
-                    //portfolio.buyStock(sensor, stock.getSymbol(), shares);
-                }
-                i++;
-            }
 
-        }
+        return sensor.getStocks().get(randomKey);
+
     }
+
+
+
+
+
+
 }
