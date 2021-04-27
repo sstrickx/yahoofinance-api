@@ -2,10 +2,12 @@ package stockagent;
 
 import yahoofinance.Stock;
 import yahoofinance.YahooFinance;
+import yahoofinance.histquotes.HistoricalQuote;
 
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.HashMap;
+import java.util.List;
 
 public class PortfolioManager {
 
@@ -20,9 +22,18 @@ public class PortfolioManager {
 
 
 
-    public void buyStock(MarketSensor sensor, String symbol) throws IOException {
-        Stock stock = YahooFinance.get(symbol);
-        BigDecimal pricing = sensor.getStockPrice(symbol);
+    public void buyStock(MarketSensor sensor, String symbol, int i) throws IOException {
+        //Stock stock = YahooFinance.get(symbol);
+        List<HistoricalQuote>history = sensor.getHistory(symbol);
+
+        //System.out.println(history.get(i));
+
+
+
+        BigDecimal pricing = history.get(i).getClose();
+
+
+        //System.out.println(pricing);
 
         double currMoney = (portfolio.getBuyingPower()) * .10;
 
@@ -31,23 +42,28 @@ public class PortfolioManager {
         if (currMoney > pricing.doubleValue()) {
             int shares = (int) (currMoney / pricing.doubleValue());
 
-            //possibly change
 
 
-            if (portfolio.getPortfolio().containsKey(stock.getSymbol())) {
+            if (portfolio.getPortfolio().containsKey(symbol)) {
 
-                double value = portfolio.getPortfolio().get(stock.getSymbol());
-                value += shares;
+                double sharesValue = portfolio.getPortfolio().get((symbol));
+                double currValue = portfolio.getPriceBoughtAt().get(symbol);
+                double currTotal = sharesValue*currValue;
+                sharesValue += shares;
+                portfolio.getPortfolio().put((symbol), (int) sharesValue);
+                double amount = pricing.doubleValue()*shares;
 
-                //System.out.println(portfolio.getPortfolio().get(stock.getSymbol()));
-                //portfolio.getPortfolio().replace(stock.getSymbol(), (portfolio.getPortfolio().get(stock.getSymbol())+shares));
-                portfolio.getPortfolio().put(stock.getSymbol(), (int) value);
-                portfolio.getPriceBoughtAt().put(stock.getSymbol(), (pricing.doubleValue()));
+                double newTotal = ((currTotal+amount)/sharesValue);
+                portfolio.getPriceBoughtAt().put((symbol), newTotal);
+
+
+
+
                 portfolio.setBuyingPower(num - currMoney);
             } else {
 
-                portfolio.getPortfolio().put(stock.getSymbol(), shares);
-                portfolio.getPriceBoughtAt().put(stock.getSymbol(), (pricing.doubleValue()));
+                portfolio.getPortfolio().put((symbol), shares);
+                portfolio.getPriceBoughtAt().put((symbol), (pricing.doubleValue()));
                 portfolio.setBuyingPower(num - currMoney);
 
 

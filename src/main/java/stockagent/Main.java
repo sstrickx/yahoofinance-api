@@ -56,19 +56,16 @@ public class Main {
                 stock = agent.chooseStock(simulator.getSensor());
 
 
-                manager.buyStock(simulator.getSensor(), stock.getSymbol());
+                //System.out.println(stock.getHistory().get(i).getClose());
+                manager.buyStock(simulator.getSensor(), stock.getSymbol(), i);
 
                 stock = agent.chooseStock(simulator.getSensor());
 
                 //manager.sellStock(simulator.getSensor(), stock.getSymbol());
 
 
-
-
-
-                System.out.println(manager.getPortfolio(portfolio).getBuyingPower());
                 System.out.println(portfolio.getPortfolio());
-//                System.out.println(manager.getPortfolio(portfolio).getPriceBoughtAt());
+                System.out.println(portfolio.getPriceBoughtAt());
 
                 i+=1;
                 }
