@@ -33,8 +33,8 @@ public class MarketSensor implements SensorInterface{
 
     }
 
-//    //GetStockPricing
-//    //Give us closing prices of the stock
+    //GetStockPricing
+    //Give us closing prices of the stock
     //Maybe better if we can getStockPrice for a specific day?
 
     public BigDecimal getStockPrice(String ticker) throws IOException {

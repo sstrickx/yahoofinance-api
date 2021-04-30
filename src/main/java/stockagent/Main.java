@@ -49,7 +49,7 @@ public class Main {
         int i = 0;
         for(Stock stock : historicalData.keySet()){
             int size = historicalData.get(stock).size();
-
+            
             while(i < size){
 
 
@@ -65,12 +65,15 @@ public class Main {
                 if(portfolio.getPortfolio().size() != 0) {
                     manager.sellStock(simulator.getSensor(), stock.getSymbol(), i);
                 }
-
-
-                //System.out.println(portfolio.getBuyingPower());
-                System.out.println(manager.getAssets(portfolio));
-//                System.out.println(portfolio.getPortfolio());
-//                System.out.println(portfolio.getPriceBoughtAt());
+                System.out.println("\n");
+                System.out.println("Balance: ");
+                System.out.println(portfolio.getBuyingPower() + "\n");
+                System.out.println("New Balance: ");
+                System.out.println(manager.getAssets(portfolio) + "\n");
+                System.out.println("Stocks/shares owned/sold: ");
+                System.out.println(portfolio.getPortfolio() + "\n");
+                System.out.println("Stock Price Bought At/sold at: ");
+                System.out.println(portfolio.getPriceBoughtAt() + "\n");
 
                 i+=1;
                 }
