@@ -13,7 +13,7 @@ public class Main {
     public static void main(String[] args) throws IOException {
 
 
-        StockAgent agent = new RandomAgent();
+        StockAgent agent = new ModelBasedAgent();
 
 
         Simulator simulator = new Simulator(agent);
@@ -50,7 +50,7 @@ public class Main {
         for(Stock stock : historicalData.keySet()){
             int size = historicalData.get(stock).size();
             
-            while(i < size){
+            while(i < 4){
 
 
                 stock = agent.chooseStock(simulator.getSensor());
@@ -66,9 +66,9 @@ public class Main {
                     manager.sellStock(simulator.getSensor(), stock.getSymbol(), i);
                 }
                 System.out.println("\n");
-                System.out.println("Balance: ");
+                System.out.println("BuyingPower: ");
                 System.out.println(portfolio.getBuyingPower() + "\n");
-                System.out.println("New Balance: ");
+                System.out.println("Total Assest Value: ");
                 System.out.println(manager.getAssets(portfolio) + "\n");
                 System.out.println("Stocks/shares owned/sold: ");
                 System.out.println(portfolio.getPortfolio() + "\n");
