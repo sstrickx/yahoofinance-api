@@ -62,7 +62,7 @@ public class Main {
                 stock = agent.chooseStock(simulator.getSensor());
 
 
-                if(portfolio.getPortfolio().size() != 0) {
+                if(Portfolio.getPortfolio().size() != 0) {
                     manager.sellStock(simulator.getSensor(), stock.getSymbol(), i);
                 }
                 System.out.println("\n");
@@ -71,14 +71,16 @@ public class Main {
                 System.out.println("Total Assest Value: ");
                 System.out.println(manager.getAssets(portfolio) + "\n");
                 System.out.println("Stocks/shares owned/sold: ");
-                System.out.println(portfolio.getPortfolio() + "\n");
+                System.out.println(Portfolio.getPortfolio() + "\n");
                 System.out.println("Stock Price Bought At/sold at: ");
-                System.out.println(portfolio.getPriceBoughtAt() + "\n");
+                System.out.println(Portfolio.getPriceBoughtAt() + "\n");
 
                 i+=1;
                 }
 
             }
+
+        System.out.println("DONE");
 
 
 

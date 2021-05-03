@@ -35,7 +35,6 @@ public class RandomAgent implements StockAgent{
     public Stock chooseStock(MarketSensor sensor){
         List<String> key = new ArrayList<String>(sensor.getStocks().keySet());
 
-
         String randomKey = key.get(random.nextInt(key.size()));
 
 

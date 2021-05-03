@@ -2,9 +2,7 @@ package stockagent;
 
 import java.io.IOException;
 import java.math.BigDecimal;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import yahoofinance.Stock;
 import yahoofinance.histquotes.HistoricalQuote;
@@ -12,6 +10,7 @@ import yahoofinance.histquotes.Interval;
 
 public class ModelBasedAgent implements StockAgent {
 
+    Random random = new Random();
 
 
     @Override
@@ -24,27 +23,13 @@ public class ModelBasedAgent implements StockAgent {
 
 
 
-
-
-
-
-
-        //System.out.println(portfolio);
-
         Map<Stock, List<HistoricalQuote>> data = new HashMap<Stock, List<HistoricalQuote>>();
 
 
-
-        double value = 0;
-        double greatestChange = 0;
         Stock bestStock = new Stock(null);
 
         Map <String, Stock> stocks = sensor.getStocks();
 
-
-
-        //System.out.println(stocks);
-        
         for (Map.Entry<String, Stock> entry : stocks.entrySet()) {
 
             data.put(entry.getValue(), sensor.getHistory(entry.getKey()));
@@ -53,80 +38,69 @@ public class ModelBasedAgent implements StockAgent {
         }
 
 
-
-
-
-
         for (Map.Entry<Stock, List<HistoricalQuote>> entry : data.entrySet()) {
+
             for (int i = 0; i < entry.getValue().size(); i++) {
 
 
-                if(portfolio.containsKey(entry.getKey().getSymbol())){
-                    double currValue = entry.getValue().get(i).getClose().doubleValue();
-                    double valueBrought = priceBoughtAt.get(entry.getKey().getSymbol());
-                    //System.out.println(valueBrought);
-                    if(currValue > valueBrought){
-                        bestStock = entry.getKey();
 
+
+                if (portfolio.containsKey(entry.getKey().getSymbol())) {
+
+                    double currValue = entry.getValue().get(i).getClose().doubleValue();
+
+                    double valueBrought = priceBoughtAt.get(entry.getKey().getSymbol());
+
+
+
+
+
+                    //If value is more than we bought it at, sell stock
+                    if (currValue > valueBrought) {
+                        bestStock = entry.getKey();
+                        return bestStock;
                     }
 
 
+
                 }
+
+
+
 
                 double currValue = entry.getValue().get(i).getClose().doubleValue();
 
+                double min = entry.getKey().getQuote().getYearLow().doubleValue();
 
-                if(currValue < entry.getValue().get(i).getLow().doubleValue()){
+                double smallestDiff = Integer.MAX_VALUE;
+                if(currValue-min < smallestDiff) {
+                    smallestDiff = (currValue-min);
                     bestStock = entry.getKey();
-                }
-
-                else{
-                    bestStock = entry.getKey();
-
-
 
 
 
                 }
-
-
-
-
+                //System.out.println(max);
 
 //
 //
-//                double currValue = entry.getValue().get(i).getClose().doubleValue();
-//                //System.out.println(currValue);
 //
-//                //System.out.println(currValue);
-//                //value = entry.getKey().getQuote().getChange().doubleValue();
+//                List<String> key = new ArrayList<String>(sensor.getStocks().keySet());
 //
-//                double max = entry.getValue().get(i).getHigh().doubleValue();
+//                String randomKey = key.get(random.nextInt(key.size()));
+//
+//                bestStock = sensor.getStocks().get(randomKey);
 //
 //
-//                double min = entry.getValue().get(i).getLow().doubleValue();
-//                if(currValue >= max){
-//                    bestStock = entry.getKey();
-//                    return bestStock;
-//                }
 //
-//                if(currValue <= min){
-//                    bestStock = entry.getKey();
-//                    return bestStock;
-//                }
 
 
 
 
 
 
-                //System.out.println(entry.getKey().getQuote().getPreviousClose());
-//                System.out.println(value);
 
-//
-//                if (value > greatestChange){
-//                    bestStock = entry.getKey();
-//                }
+
 
         }
 
