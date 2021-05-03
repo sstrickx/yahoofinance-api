@@ -1,24 +1,17 @@
 package stockagent;
 
-import yahoofinance.Stock;
-import yahoofinance.YahooFinance;
-
-import javax.sound.sampled.Port;
-import java.io.IOException;
-import java.math.BigDecimal;
 import java.util.HashMap;
-import java.util.Map;
 
 
 public class Portfolio implements TraderPortfolio {
 
-        private double buyingPower;
+        private static double buyingPower;
 
         //better version of portfolio?
-        private HashMap <String, Integer> portfolio = new HashMap<String, Integer>();
+        private static HashMap <String, Integer> portfolio = new HashMap<String, Integer>();
 
 
-        private HashMap<String, Double>priceBoughtAt = new HashMap<String, Double>();
+        private static HashMap<String, Double>priceBoughtAt = new HashMap<String, Double>();
 
 
 
@@ -27,15 +20,15 @@ public class Portfolio implements TraderPortfolio {
         }
 
 
-        @Override
-        public HashMap<String, Integer> getPortfolio() {
+
+        public static HashMap<String, Integer> getPortfolio() {
 
             return portfolio;
 
         }
 
 
-        @Override
+
         public double getBuyingPower() {
             return buyingPower;
         }
@@ -46,7 +39,7 @@ public class Portfolio implements TraderPortfolio {
         }
 
 
-        public HashMap<String, Double>getPriceBoughtAt(){
+        public static HashMap<String, Double>getPriceBoughtAt(){
             return priceBoughtAt;
         }
 }

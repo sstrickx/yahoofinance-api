@@ -60,6 +60,7 @@ public class PortfolioManager {
 
 
                 portfolio.setBuyingPower(num - currMoney);
+
             } else {
 
                 portfolio.getPortfolio().put((symbol), shares);
