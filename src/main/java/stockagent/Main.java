@@ -57,7 +57,7 @@ public class Main {
         for(Stock stock : historicalData.keySet()){
             int size = historicalData.get(stock).size();
             
-            while(i < 10){
+            while(i < 100){
 
 
                 stock = agent.chooseStock(simulator.getSensor());

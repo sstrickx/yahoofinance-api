@@ -13,31 +13,39 @@ public class ModelBasedAgent implements StockAgent {
     Random random = new Random();
     private Portfolio p = new Portfolio(100000);
 
+    private Map<Stock, List<HistoricalQuote>> data = new HashMap<Stock, List<HistoricalQuote>>();
 
+
+
+
+    public void setData(MarketSensor sensor) throws IOException {
+
+            Map<String, Stock> stocks = sensor.getStocks();
+
+            for (Map.Entry<String, Stock> entry : stocks.entrySet()) {
+
+                data.put(entry.getValue(), sensor.getHistory(entry.getKey()));
+            }
+
+
+    }
 
 
     @Override
     public Stock chooseStock( MarketSensor sensor) throws IOException {
         // TODO Auto-generated method stub
 
+
+        Stock bestStock = new Stock(null);
+
+        setData(sensor);
+
         HashMap<String, Integer> portfolio = p.getPortfolio();
 
         HashMap<String, Double> priceBoughtAt = p.getPriceBoughtAt();
 
 
-        Map<Stock, List<HistoricalQuote>> data = new HashMap<Stock, List<HistoricalQuote>>();
 
-
-        Stock bestStock = new Stock(null);
-
-        Map<String, Stock> stocks = sensor.getStocks();
-
-        for (Map.Entry<String, Stock> entry : stocks.entrySet()) {
-
-            data.put(entry.getValue(), sensor.getHistory(entry.getKey()));
-
-
-        }
 
 
 
