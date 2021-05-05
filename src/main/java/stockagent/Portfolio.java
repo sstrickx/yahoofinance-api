@@ -21,7 +21,7 @@ public class Portfolio implements TraderPortfolio {
 
 
 
-        public static HashMap<String, Integer> getPortfolio() {
+        public  HashMap<String, Integer> getPortfolio() {
 
             return portfolio;
 
@@ -39,7 +39,7 @@ public class Portfolio implements TraderPortfolio {
         }
 
 
-        public static HashMap<String, Double>getPriceBoughtAt(){
+        public HashMap<String, Double>getPriceBoughtAt(){
             return priceBoughtAt;
         }
 }

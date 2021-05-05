@@ -8,13 +8,9 @@ import java.util.HashMap;
 public interface TraderPortfolio {
 
 
-    public static double getBuyingPower() {
-        return 0;
-    }
+    public double getBuyingPower();
 
 
-    public static HashMap<String, Integer> getPortfolio() {
-        return null;
-    }
+    public HashMap<String, Integer> getPortfolio();
 
 }

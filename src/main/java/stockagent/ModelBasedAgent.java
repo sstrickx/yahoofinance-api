@@ -11,15 +11,18 @@ import yahoofinance.histquotes.Interval;
 public class ModelBasedAgent implements StockAgent {
 
     Random random = new Random();
+    private Portfolio p = new Portfolio(100000);
+
+
 
 
     @Override
     public Stock chooseStock( MarketSensor sensor) throws IOException {
         // TODO Auto-generated method stub
 
-        HashMap<String, Integer> portfolio = Portfolio.getPortfolio();
+        HashMap<String, Integer> portfolio = p.getPortfolio();
 
-        HashMap<String, Double> priceBoughtAt = Portfolio.getPriceBoughtAt();
+        HashMap<String, Double> priceBoughtAt = p.getPriceBoughtAt();
 
 
         Map<Stock, List<HistoricalQuote>> data = new HashMap<Stock, List<HistoricalQuote>>();
@@ -61,7 +64,7 @@ public class ModelBasedAgent implements StockAgent {
                 }
 
                 double currValue = entry.getValue().get(i).getClose().doubleValue();
-                System.out.println(currValue);
+                //System.out.println(currValue);
 
                 double min = entry.getKey().getQuote().getYearLow().doubleValue();
 
