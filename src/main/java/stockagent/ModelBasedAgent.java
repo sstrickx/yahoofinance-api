@@ -63,16 +63,17 @@ public class ModelBasedAgent implements StockAgent {
 
                 }
 
-                double currValue = entry.getValue().get(i).getClose().doubleValue();
-                //System.out.println(currValue);
+                else {
 
-                double min = entry.getKey().getQuote().getYearLow().doubleValue();
+                    List<String> key = new ArrayList<String>(sensor.getStocks().keySet());
 
-                if (currValue - min < smallestDiff) {
-                    smallestDiff = (currValue - min);
-                    bestStock = entry.getKey();
+                    String randomKey = key.get(random.nextInt(key.size()));
+
+                    bestStock = sensor.getStocks().get(randomKey);
 
                 }
+
+
 
 
             }

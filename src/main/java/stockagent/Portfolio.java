@@ -17,6 +17,8 @@ public class Portfolio implements TraderPortfolio {
 
         public Portfolio(double buyingPower){
             this.buyingPower = buyingPower;
+
+
         }
 
 

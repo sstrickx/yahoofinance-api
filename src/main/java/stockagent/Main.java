@@ -30,7 +30,8 @@ public class Main {
         List<Stock> stockList = simulator.getStockInfo(symbols);
 
 
-        Map<Stock, List<HistoricalQuote>> historicalData = new HashMap<Stock, List<HistoricalQuote>>();
+        Map<Stock, List<HistoricalQuote>> historicalData = simulator.getHistoricalData(stockList);
+
 
 
         simulator.setFrom(from);
@@ -42,27 +43,35 @@ public class Main {
         end.setTime(to.getTime());
 
 
-        historicalData = simulator.getHistoricalData(stockList);
 
 
+
+        for(Stock stock : historicalData.keySet()) {
+            manager.buyStock(simulator.getSensor(), stock.getSymbol(), 0);
+            manager.buyStock(simulator.getSensor(), stock.getSymbol(), 0);
+
+
+
+
+        }
 
         int i = 0;
         for(Stock stock : historicalData.keySet()){
             int size = historicalData.get(stock).size();
             
-            while(i < 100){
+            while(i < 10){
 
 
                 stock = agent.chooseStock(simulator.getSensor());
-
-
 
                 manager.buyStock(simulator.getSensor(), stock.getSymbol(), i);
 
+
+
                 stock = agent.chooseStock(simulator.getSensor());
 
 
-                if(portfolio.getPortfolio().size() != 0) {
+                if(portfolio.getPortfolio().size() > 0) {
                     manager.sellStock(simulator.getSensor(), stock.getSymbol(), i);
                 }
                 System.out.println("\n");
