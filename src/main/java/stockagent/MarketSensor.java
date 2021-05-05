@@ -14,7 +14,7 @@ import java.util.Map;
 
 public class MarketSensor implements SensorInterface{
 
-    private String[] symbols = new String[] {"INTC", "BABA", "TSLA", "ABT", "ABBV", "ABC", "AME", "GOOG"};
+    private String[] symbols = new String[] {"INTC", "BABA", "TSLA", "ABT", "ABBV", "DASH", "RLX", "ABC", "YSG"};
     private Map<String, Stock> stocks = YahooFinance.get(symbols);
     private Calendar from = Calendar.getInstance();
     private Calendar to = Calendar.getInstance();
@@ -31,6 +31,11 @@ public class MarketSensor implements SensorInterface{
 
         return stocks;
 
+    }
+
+
+    public String [] getSymbols(){
+        return symbols;
     }
 
     //GetStockPricing

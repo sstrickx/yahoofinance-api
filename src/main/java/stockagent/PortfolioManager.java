@@ -85,10 +85,10 @@ public class PortfolioManager {
         if(portfolio.getPortfolio().containsKey(symbol)){
             double valueBoughtAt = portfolio.getPriceBoughtAt().get(symbol);
             int shares = portfolio.getPortfolio().get(symbol);
-
-            portfolio.setBuyingPower((portfolio.getBuyingPower())+((currPrice.doubleValue()-valueBoughtAt)+valueBoughtAt)*shares);
-            portfolio.getPortfolio().remove(symbol);
-            portfolio.getPriceBoughtAt().remove(symbol);
+            if(currPrice.doubleValue() > valueBoughtAt){
+                portfolio.setBuyingPower((portfolio.getBuyingPower())+((currPrice.doubleValue()-valueBoughtAt)+valueBoughtAt)*shares);
+                portfolio.getPortfolio().remove(symbol);
+                portfolio.getPriceBoughtAt().remove(symbol);
 
 
 
@@ -99,7 +99,7 @@ public class PortfolioManager {
 
 
 
-
+    }
 
     public Portfolio getPortfolio(Portfolio portfolio) {
 

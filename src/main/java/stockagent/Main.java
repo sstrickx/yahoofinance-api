@@ -13,7 +13,7 @@ public class Main {
     public static void main(String[] args) throws IOException {
 
 
-        StockAgent agent = new ModelBasedAgent();
+        StockAgent agent = new RandomAgent();
 
 
         Simulator simulator = new Simulator(agent);
@@ -24,10 +24,9 @@ public class Main {
         Calendar from = Calendar.getInstance();
         Calendar to = Calendar.getInstance();
 
-        String[] symbols = new String[]{"INTC", "BABA", "TSLA", "GOOG"};
 
 
-        List<Stock> stockList = simulator.getStockInfo(symbols);
+        List<Stock> stockList = simulator.getStockInfo(simulator.getSensor().getSymbols());
 
 
         Map<Stock, List<HistoricalQuote>> historicalData = simulator.getHistoricalData(stockList);
@@ -47,7 +46,6 @@ public class Main {
 
 
         for(Stock stock : historicalData.keySet()) {
-            manager.buyStock(simulator.getSensor(), stock.getSymbol(), 0);
             manager.buyStock(simulator.getSensor(), stock.getSymbol(), 0);
 
 
@@ -77,11 +75,11 @@ public class Main {
                 System.out.println("\n");
                 System.out.println("BuyingPower: ");
                 System.out.println(portfolio.getBuyingPower() + "\n");
-                System.out.println("Total Assest Value: ");
+                System.out.println("Total Asset Value: ");
                 System.out.println(manager.getAssets(portfolio) + "\n");
-                System.out.println("Stocks/shares owned/sold: ");
+                System.out.println("Stocks/shares owned: ");
                 System.out.println(portfolio.getPortfolio() + "\n");
-                System.out.println("Stock Price Bought At/sold at: ");
+                System.out.println("Stock Price Bought At: ");
                 System.out.println(portfolio.getPriceBoughtAt() + "\n");
 
                 i+=1;

@@ -39,6 +39,8 @@ public class ModelBasedAgent implements StockAgent {
 
         }
 
+
+
         double smallestDiff = Integer.MAX_VALUE;
 
 
