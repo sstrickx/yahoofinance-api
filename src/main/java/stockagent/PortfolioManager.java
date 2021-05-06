@@ -90,8 +90,6 @@ public class PortfolioManager {
                 portfolio.getPortfolio().remove(symbol);
                 portfolio.getPriceBoughtAt().remove(symbol);
 
-
-
             }
 
         }

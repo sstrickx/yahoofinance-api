@@ -12,15 +12,19 @@ import org.junit.Assert.*;
 
 import stockagent.Portfolio;
 import stockagent.PortfolioManager;
+import stockagent.RandomAgent;
 import stockagent.Simulator;
 import yahoofinance.histquotes.HistoricalQuote;
+
 
 
 public class PortfolioTests {
     
     @Test
-    public void addAssetTests() throws IOException{
-        Simulator simulator = new Simulator();
+    public void buyTests() throws IOException{
+
+        RandomAgent agent = new RandomAgent();
+        Simulator simulator = new Simulator(agent);
         String[] symbols = new String[] {"INTC", "BABA", "TSLA", "GOOG"};
         List<Stock>stockList = simulator.getStockInfo(symbols);
 
@@ -34,19 +38,19 @@ public class PortfolioTests {
         //buying power
         assertEquals(100000, testPortfolio.getBuyingPower(), 0.001);
 
-        //stock to add
+        //stock to buy
         Stock baba = stockList.get(1);
         assertEquals("BABA", baba.getSymbol());
 
         //getting price
-        double currPrice = baba.getQuote().getPrice().doubleValue();
+        double currPrice = simulator.getSensor().getHistory(baba.getSymbol()).get(0).getClose().doubleValue();
 
-        //add asset
-        testManager.addAssets(baba.getSymbol(), 3, currPrice);
+        //buy stock
+        testManager.buyStock(simulator.getSensor(), baba.getSymbol(), 0);
 
         //checking portfolio
         assertEquals(1, testPortfolio.getPortfolio().size());
-        assertEquals("BABA", testPortfolio.getPortfolio().keySet().iterator().next().getSymbol());
+        assertEquals("BABA", testPortfolio.getPortfolio().keySet().iterator().next());
         assertEquals(3, testPortfolio.getPortfolio().entrySet().iterator().next().getValue().intValue());
 
         //buying power
