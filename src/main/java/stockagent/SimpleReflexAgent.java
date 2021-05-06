@@ -8,7 +8,7 @@ import yahoofinance.Stock;
 import yahoofinance.histquotes.HistoricalQuote;
 import yahoofinance.histquotes.Interval;
 
-public class ModelBasedAgent implements StockAgent {
+public class SimpleReflexAgent implements StockAgent {
 
     Random random = new Random();
     private Portfolio p = new Portfolio(100000);
