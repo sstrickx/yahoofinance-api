@@ -1,20 +1,27 @@
 package stockagent;
 
+
 import yahoofinance.Stock;
 import yahoofinance.YahooFinance;
 import yahoofinance.histquotes.HistoricalQuote;
+import yahoofinance.histquotes.Interval;
 
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class PortfolioManager {
 
     private Portfolio portfolio;
 
-    public PortfolioManager(Portfolio portfolio){
+    private MarketSensor sensor;
+
+    public PortfolioManager(Portfolio portfolio, MarketSensor sensor){
         this.portfolio = portfolio;
+        this.sensor = sensor;
 
     }
 
@@ -106,13 +113,26 @@ public class PortfolioManager {
     }
 
 
-    public double getAssets(Portfolio portfolio){
+    public double getAssets(Portfolio portfolio, MarketSensor sensor, int i) throws IOException {
+
+
+        Map<String, List<HistoricalQuote>> data = new HashMap<String, List<HistoricalQuote>>();
+
+
+
+        for(String symbol : sensor.getSymbols()){
+            data.put(symbol, sensor.getHistory(symbol));
+        }
 
 
         double currBuyingPower = portfolio.getBuyingPower();
 
         for(String stock : portfolio.getPortfolio().keySet()){
-            currBuyingPower += (portfolio.getPortfolio().get(stock)* portfolio.getPriceBoughtAt().get(stock));
+
+
+            currBuyingPower += (portfolio.getPortfolio().get(stock)* data.get(stock).get(i).getClose().doubleValue());
+            //currBuyingPower += (portfolio.getPortfolio().get(stock)* pricing.doubleValue());
+
         }
 
 

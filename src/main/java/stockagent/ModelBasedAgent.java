@@ -81,6 +81,13 @@ public class ModelBasedAgent implements StockAgent {
 
                     bestStock = sensor.getStocks().get(randomKey);
 
+                    //Possibly find smallest difference for stocks for the last
+                    //7 days lowest price and default to buy that stock?
+
+
+
+
+
                 }
 
 

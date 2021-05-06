@@ -13,10 +13,10 @@ public class Simulator {
 
     private List<Stock> stockList = new ArrayList<Stock>();
     private Portfolio portfolio = new Portfolio(1000000);
-    private PortfolioManager portfolioManager = new PortfolioManager(portfolio);
+    private MarketSensor sensor = new MarketSensor();
+    //private PortfolioManager portfolioManager = new PortfolioManager(portfolio, sensor);
     private Calendar from = Calendar.getInstance();
     private Calendar to = Calendar.getInstance();
-    private MarketSensor sensor = new MarketSensor();
 
 
 
@@ -72,7 +72,7 @@ public class Simulator {
 
 
     public void setFrom(Calendar from) {
-        from.add(Calendar.YEAR, -1);
+        from.add(Calendar.MONTH, -4);
     }
 
 
