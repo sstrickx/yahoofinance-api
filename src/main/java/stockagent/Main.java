@@ -5,6 +5,7 @@ import yahoofinance.Stock;
 import yahoofinance.histquotes.HistoricalQuote;
 
 import java.io.IOException;
+import java.lang.reflect.Modifier;
 import java.util.*;
 
 public class Main {
@@ -13,7 +14,7 @@ public class Main {
     public static void main(String[] args) throws IOException {
 
 
-        StockAgent agent = new RandomAgent();
+        StockAgent agent = new SimpleReflexAgent();
 
 
         Simulator simulator = new Simulator(agent);
@@ -46,16 +47,16 @@ public class Main {
 
 
         manager.buyStock(simulator.getSensor(), "DASH", 0);
-        manager.buyStock(simulator.getSensor(), "ABT", 0);
+        manager.buyStock(simulator.getSensor(), "TSLA", 0);
         manager.buyStock(simulator.getSensor(), "ABBV", 0);
 
 
 
         int i = 0;
         for(Stock stock : historicalData.keySet()){
-            //int size = historicalData.get(stock).size();
+            int size = historicalData.get(stock).size();
             
-            while(i < 100){
+            while(i < size){
 
 
                 stock = agent.chooseStock(simulator.getSensor());
@@ -64,7 +65,7 @@ public class Main {
 
 
 
-                stock = agent.chooseStock(simulator.getSensor());
+                //stock = agent.chooseStock(simulator.getSensor());
 
 
                 if(portfolio.getPortfolio().size() > 0) {

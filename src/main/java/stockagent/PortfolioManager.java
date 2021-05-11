@@ -53,17 +53,22 @@ public class PortfolioManager {
 
             if (portfolio.getPortfolio().containsKey(symbol)) {
 
-                double sharesValue = portfolio.getPortfolio().get((symbol));
-                double currValue = portfolio.getPriceBoughtAt().get(symbol);
-                double currTotal = sharesValue*currValue;
-                sharesValue += shares;
-                portfolio.getPortfolio().put((symbol), (int) sharesValue);
-                double amount = pricing.doubleValue()*shares;
 
-                double newTotal = ((currTotal+amount)/sharesValue);
-                portfolio.getPriceBoughtAt().put((symbol), newTotal);
+                if(portfolio.getPriceBoughtAt().get(symbol) > (pricing.doubleValue()) + (pricing.doubleValue()*.05)) {
 
-                portfolio.setBuyingPower(num - amount);
+                    double sharesValue = portfolio.getPortfolio().get((symbol));
+                    double currValue = portfolio.getPriceBoughtAt().get(symbol);
+                    double currTotal = sharesValue * currValue;
+                    sharesValue += shares;
+                    portfolio.getPortfolio().put((symbol), (int) sharesValue);
+                    double amount = pricing.doubleValue() * shares;
+
+                    double newTotal = ((currTotal + amount) / sharesValue);
+                    portfolio.getPriceBoughtAt().put((symbol), newTotal);
+
+                    portfolio.setBuyingPower(num - amount);
+                }
+
 
             } else {
 
@@ -92,7 +97,7 @@ public class PortfolioManager {
         if(portfolio.getPortfolio().containsKey(symbol)){
             double valueBoughtAt = portfolio.getPriceBoughtAt().get(symbol);
             int shares = portfolio.getPortfolio().get(symbol);
-            if(currPrice.doubleValue() > valueBoughtAt){
+            if(currPrice.doubleValue() > valueBoughtAt*(valueBoughtAt*.15)){
                 portfolio.setBuyingPower((portfolio.getBuyingPower())+((currPrice.doubleValue()-valueBoughtAt)+valueBoughtAt)*shares);
                 portfolio.getPortfolio().remove(symbol);
                 portfolio.getPriceBoughtAt().remove(symbol);
@@ -131,7 +136,6 @@ public class PortfolioManager {
 
 
             currBuyingPower += (portfolio.getPortfolio().get(stock)* data.get(stock).get(i).getClose().doubleValue());
-            //currBuyingPower += (portfolio.getPortfolio().get(stock)* pricing.doubleValue());
 
         }
 
