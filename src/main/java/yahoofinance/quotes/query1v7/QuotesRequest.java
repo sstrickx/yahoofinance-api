@@ -59,7 +59,7 @@ public abstract class QuotesRequest<T> {
 
         Map<String, String> params = new LinkedHashMap<String, String>();
         params.put("symbols", this.symbols);
-
+        params.put("fields", Utils.getQuote1V7Fields());
         String url = YahooFinance.QUOTES_QUERY1V7_BASE_URL + "?" + Utils.getURLParameters(params);
 
         // Get JSON from Yahoo
