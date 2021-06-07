@@ -59,7 +59,7 @@ public class StockQuotesQuery1V7Request extends QuotesRequest<Stock> {
         StockQuote quote = new StockQuote(symbol);
 
         quote.setPrice(Utils.getBigDecimal(getStringValue(node,"regularMarketPrice")));
-        // quote.setLastTradeSize(null);
+        quote.setLastTradeSize(Utils.getLong(getStringValue(node,"lastTradeSize")));
         quote.setAsk(Utils.getBigDecimal(getStringValue(node,"ask")));
         quote.setAskSize(Utils.getLong(getStringValue(node,"askSize")));
         quote.setBid(Utils.getBigDecimal(getStringValue(node,"bid")));
@@ -108,12 +108,12 @@ public class StockQuotesQuery1V7Request extends QuotesRequest<Stock> {
         // stats.setEpsEstimateNextYear(Utils.getBigDecimal(getStringValue(node,"symbol")));
 
         stats.setPriceBook(Utils.getBigDecimal(getStringValue(node,"priceToBook")));
-        // stats.setPriceSales(Utils.getBigDecimal(getStringValue(node,"symbol")));
+        stats.setPriceSales(Utils.getBigDecimal(getStringValue(node,"priceToSales")));
         stats.setBookValuePerShare(Utils.getBigDecimal(getStringValue(node,"bookValue")));
 
-        // stats.setOneYearTargetPrice(Utils.getBigDecimal(getStringValue(node,"symbol")));
-        // stats.setEBITDA(Utils.getBigDecimal(getStringValue(node,"symbol")));
-        // stats.setRevenue(Utils.getBigDecimal(getStringValue(node,"symbol")));
+         //stats.setOneYearTargetPrice(Utils.getBigDecimal(getStringValue(node,"symbol")));
+         stats.setEBITDA(Utils.getBigDecimal(getStringValue(node,"ebitda")));
+         stats.setRevenue(Utils.getBigDecimal(getStringValue(node,"revenue")));
 
         // stats.setShortRatio(Utils.getBigDecimal(getStringValue(node,"symbol")));
 
