@@ -33,5 +33,9 @@ public enum QuoteFields {
    priceToSales,
    bookValue,
    ebitda,
-   revenue
+   revenue,
+   earningsTimestamp,
+   dividendDate,
+   trailingAnnualDividendRate,
+   trailingAnnualDividendYield
 }
