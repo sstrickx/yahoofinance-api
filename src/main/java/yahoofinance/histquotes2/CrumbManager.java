@@ -2,6 +2,7 @@ package yahoofinance.histquotes2;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.CookieHandler;
@@ -68,13 +69,16 @@ public class CrumbManager {
         InputStreamReader is = new InputStreamReader(connection.getInputStream());
         BufferedReader br = new BufferedReader(is);
         String line;
-        Pattern patternPostForm = Pattern.compile("(.*)(action=\"/consent\")(.*)");
+        // Pattern patternPostForm = Pattern.compile("(.*)(action=\"/consent\")(.*)");
+        Pattern patternPostForm = Pattern.compile("actions couple");
         Pattern patternInput = Pattern.compile("(.*)(<input type=\"hidden\" name=\")(.*?)(\" value=\")(.*?)(\">)");
         Matcher matcher;
         Map<String,String> datas = new HashMap<String,String>();
         boolean postFind = false;
         // Read source to get params data for post request
         while( (line =br.readLine())!=null ) {
+                //For debug use:  System.out.println(line);
+            
                 // This hack allows us to quickly jump over lines that we do not care
                 // So, before the postFind, we quickly lookup for the keyword: "action"
                 // After the postFind, we quickly lookup for the keyword: "value"
@@ -116,7 +120,8 @@ public class CrumbManager {
         	 datas.put("namespace",YahooFinance.HISTQUOTES2_COOKIE_NAMESPACE);
         	 datas.put("agree",YahooFinance.HISTQUOTES2_COOKIE_AGREE);
         	 datas.put("originalDoneUrl",YahooFinance.HISTQUOTES2_SCRAPE_URL);
-        	 datas.put("doneUrl",YahooFinance.HISTQUOTES2_COOKIE_OATH_DONEURL+datas.get("sessionId")+"&inline="+datas.get("inline")+"&lang="+datas.get("locale"));
+//        	 datas.put("doneUrl",YahooFinance.HISTQUOTES2_COOKIE_OATH_DONEURL+datas.get("sessionId")+"&inline="+datas.get("inline")+"&lang="+datas.get("locale"));
+        	 datas.put("doneUrl",YahooFinance.HISTQUOTES2_COOKIE_OATH_DONEURL+datas.get("sessionId"));
 			 			
         	 URL requestOath = new URL(YahooFinance.HISTQUOTES2_COOKIE_OATH_URL);
         	 HttpURLConnection connectionOath = null;
@@ -159,7 +164,9 @@ public class CrumbManager {
         CookieStore cookieJar =  ((CookieManager)CookieHandler.getDefault()).getCookieStore();
         List <HttpCookie> cookies = cookieJar.getCookies();
         for (HttpCookie hcookie: cookies) {        	
-        	if(hcookie.toString().matches("B=.*")) {
+//            System.out.println(hcookie.toString());
+//        	if(hcookie.toString().matches("B=.*")) {
+        	if(hcookie.toString().matches("GUCS=.*")) {
                  cookie = hcookie.toString();
                  log.debug("Set cookie from http request: {}", cookie);
                  return;
@@ -185,7 +192,8 @@ public class CrumbManager {
         requestProperties.put("Cookie", cookie);
 
         URLConnection crumbConnection = redirectableCrumbRequest.openConnection(requestProperties);
-        InputStreamReader is = new InputStreamReader(crumbConnection.getInputStream());
+        InputStream inputStream = crumbConnection.getInputStream();
+        InputStreamReader is = new InputStreamReader(inputStream);
         BufferedReader br = new BufferedReader(is);        
         String crumbResult = br.readLine();
 
@@ -199,9 +207,12 @@ public class CrumbManager {
     }
 
     public static void refresh() throws IOException {
+        /*
         setCookie();
         setCrumb();
-/*        
+        */
+
+        /*        
         // Code used to find the bottlenech in the code
         long timestamp = System.currentTimeMillis();
         setCookie();
