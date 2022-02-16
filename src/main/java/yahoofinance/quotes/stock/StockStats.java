@@ -37,6 +37,7 @@ public class StockStats {
     private BigDecimal oneYearTargetPrice;
     
     private BigDecimal shortRatio;
+    private BigDecimal roe;
 
     private Calendar earningsAnnouncement;
     
@@ -46,6 +47,10 @@ public class StockStats {
     
     public BigDecimal getROE() {
         return Utils.getPercent(this.EBITDA, this.marketCap);
+    }
+    
+    public void setRoe(BigDecimal roe) {
+    	this.roe = roe;
     }
 
     public String getSymbol() {
