@@ -116,7 +116,8 @@ public class HistQuotes2Request {
 
         params.put("crumb", CrumbManager.getCrumb());
 
-        String url = YahooFinance.HISTQUOTES2_BASE_URL + URLEncoder.encode(this.symbol , "UTF-8") + "?" + Utils.getURLParameters(params);
+        String baseURL = System.getProperty("yahoofinance.baseurl.histquotes2", "https://query1.finance.yahoo.com/v7/finance/download/");
+        String url = baseURL + URLEncoder.encode(this.symbol , "UTF-8") + "?" + Utils.getURLParameters(params);
 
         // Get CSV from Yahoo
         log.info("Sending request: " + url);
