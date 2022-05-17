@@ -1,6 +1,5 @@
 # Finance Quotes API for Yahoo Finance (Java)
 
-[![Build Status](https://travis-ci.org/sstrickx/yahoofinance-api.svg?branch=master)](https://travis-ci.org/sstrickx/yahoofinance-api)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.yahoofinance-api/YahooFinanceAPI/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.yahoofinance-api/YahooFinanceAPI)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
