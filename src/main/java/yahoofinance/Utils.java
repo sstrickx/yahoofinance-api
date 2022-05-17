@@ -14,6 +14,7 @@ import java.util.TimeZone;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import yahoofinance.quotes.query1v7.QuoteFields;
 
 /**
  *
@@ -335,4 +336,11 @@ public class Utils {
         return buffer.toString();
     }
 
+    public static String getQuote1V7Fields() {
+        StringBuilder fields = new StringBuilder(QuoteFields.values().length);
+        for (QuoteFields field : QuoteFields.values()) {
+            fields.append(field + ",");
+        }
+        return fields.toString();
+    }
 }
