@@ -20,7 +20,7 @@ import java.util.TimeZone;
 public class StockQuotesQuery1V7Request extends QuotesRequest<Stock> {
 
     private static final BigDecimal ONE_HUNDRED = new BigDecimal(100);
-    
+
     public StockQuotesQuery1V7Request(String symbols) {
         super(symbols);
     }
@@ -55,13 +55,13 @@ public class StockQuotesQuery1V7Request extends QuotesRequest<Stock> {
 
     private String getExtendedHoursPrefix(JsonNode node) {
         String marketState = getStringValue(node, "marketState");
+        if (marketState == null) {
+            return null;
+        }
         if (marketState.equals("PRE")) {
             return "pre";
         }
-        if (marketState.equals("POST")) {
-            return "post";
-        }
-        if (marketState.equals("CLOSED")) {
+        if (marketState.equals("POST") || marketState.equals("CLOSED") || marketState.equals("POSTPOST")) {
             return "post";
         }
         return null;
@@ -74,7 +74,7 @@ public class StockQuotesQuery1V7Request extends QuotesRequest<Stock> {
         }
         ExtendedHoursStockQuote extendedHoursStockQuote = new ExtendedHoursStockQuote();
         extendedHoursStockQuote.setChangePercent(Utils.getBigDecimal(getStringValue(node, prefix + "MarketChangePercent")));
-        extendedHoursStockQuote.setTime(Utils.unixToCalendar(Utils.getLong(getStringValue(node,prefix + "MarketTime"))));
+        extendedHoursStockQuote.setTime(Utils.unixToCalendar(Utils.getLong(getStringValue(node, prefix + "MarketTime"))));
         extendedHoursStockQuote.setPrice(Utils.getBigDecimal(getStringValue(node, prefix + "MarketPrice")));
         extendedHoursStockQuote.setPriceChange(Utils.getBigDecimal(getStringValue(node,prefix + "MarketChange")));
         extendedHoursStockQuote.setType(ExtendedHoursStockQuoteType.valueOf(getStringValue(node, "marketState")));
