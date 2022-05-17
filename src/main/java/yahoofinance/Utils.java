@@ -2,6 +2,7 @@ package yahoofinance;
 
 import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.net.URLEncoder;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -21,12 +22,12 @@ import org.slf4j.LoggerFactory;
 public class Utils {
 
     private static final Logger log = LoggerFactory.getLogger(Utils.class);
-  
+
     public static final BigDecimal HUNDRED = new BigDecimal(100);
     public static final BigDecimal THOUSAND = new BigDecimal(1000);
     public static final BigDecimal MILLION = new BigDecimal(1000000);
     public static final BigDecimal BILLION = new BigDecimal(1000000000);
-        
+
     public static String join(String[] data, String d) {
         if (data.length == 0) {
             return "";
@@ -45,7 +46,7 @@ public class Utils {
     }
 
     private static boolean isParseable(String data) {
-        return !(data == null || data.equals("N/A") || data.equals("-") 
+        return !(data == null || data.equals("N/A") || data.equals("-")
                 || data.equals("") || data.equals("nan"));
     }
 
@@ -55,7 +56,7 @@ public class Utils {
         }
         return data;
     }
-    
+
     public static BigDecimal getBigDecimal(String data) {
         BigDecimal result = null;
         if (!Utils.isParseable(data)) {
@@ -86,7 +87,7 @@ public class Utils {
         }
         return result;
     }
-    
+
     public static BigDecimal getBigDecimal(String dataMain, String dataSub) {
         BigDecimal main = getBigDecimal(dataMain);
         BigDecimal sub = getBigDecimal(dataSub);
@@ -161,10 +162,10 @@ public class Utils {
         if (denominator == null || numerator == null || denominator.compareTo(BigDecimal.ZERO) == 0) {
             return BigDecimal.ZERO;
         }
-        return numerator.divide(denominator, 4, BigDecimal.ROUND_HALF_EVEN)
-                .multiply(HUNDRED).setScale(2, BigDecimal.ROUND_HALF_EVEN);
+        return numerator.divide(denominator, 4, RoundingMode.HALF_EVEN)
+                .multiply(HUNDRED).setScale(2, RoundingMode.HALF_EVEN);
     }
-    
+
     public static double getPercent(double numerator, double denominator) {
         if (denominator == 0) {
             return 0;
@@ -235,7 +236,7 @@ public class Utils {
     public static Calendar parseDateTime(String date, String time, TimeZone timeZone) {
         String datetime = date + " " + time;
         SimpleDateFormat format = new SimpleDateFormat("M/d/yyyy h:mma", Locale.US);
-        
+
         format.setTimeZone(timeZone);
         try {
             if (Utils.isParseable(date) && Utils.isParseable(time)) {
@@ -294,7 +295,7 @@ public class Utils {
     }
 
     /**
-     * Strips the unwanted chars from a line returned in the CSV 
+     * Strips the unwanted chars from a line returned in the CSV
      * Used for parsing the FX CSV lines
      *
      * @param line the original CSV line
