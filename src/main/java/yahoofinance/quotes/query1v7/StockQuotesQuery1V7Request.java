@@ -87,6 +87,7 @@ public class StockQuotesQuery1V7Request extends QuotesRequest<Stock> {
         quote.setVolume(Utils.getLong(getStringValue(node,"regularMarketVolume")));
         quote.setAvgVolume(Utils.getLong(getStringValue(node,"averageDailyVolume3Month")));
 
+        quote.setQuoteSourceName(getStringValue(node, "quoteSourceName"));
         return quote;
     }
 
