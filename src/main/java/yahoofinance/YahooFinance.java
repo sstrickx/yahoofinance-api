@@ -61,6 +61,8 @@ public class YahooFinance {
     public static final String HISTQUOTES2_COOKIE_OATH_HOST = System.getProperty("yahoofinance.cookie.oathhost", "guce.oath.com");
     public static final String HISTQUOTES2_COOKIE_OATH_ORIGIN = System.getProperty("yahoofinance.cookie.oathorigin", "https://guce.oath.com");
     public static final String HISTQUOTES2_COOKIE_OATH_DONEURL = System.getProperty("yahoofinance.cookie.oathDoneUrl", "https://guce.yahoo.com/copyConsent?sessionId=");
+
+    public static final String HISTQUOTES_NEWS_URL = System.getProperty("yahoofinance.newsurl.histquotes", "https://query2.finance.yahoo.com/v1/finance/search");
     public static final String QUOTES_CSV_DELIMITER = ",";
     public static final String TIMEZONE = "America/New_York";
     

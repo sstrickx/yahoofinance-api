@@ -38,7 +38,7 @@ public abstract class QuotesRequest<T> {
         return symbols;
     }
 
-    protected abstract T parseJson(JsonNode node);
+    protected abstract T parseJson(JsonNode node) throws IOException;
 
     public T getSingleResult() throws IOException {
         List<T> results = this.getResult();

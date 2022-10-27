@@ -4,12 +4,15 @@ import com.fasterxml.jackson.databind.JsonNode;
 import yahoofinance.Stock;
 import yahoofinance.Utils;
 import yahoofinance.exchanges.ExchangeTimeZone;
+import yahoofinance.quotes.news.NewsRequest;
 import yahoofinance.quotes.stock.StockDividend;
+import yahoofinance.quotes.stock.StockNews;
 import yahoofinance.quotes.stock.StockQuote;
 import yahoofinance.quotes.stock.StockStats;
 
+import java.io.IOException;
 import java.math.BigDecimal;
-import java.util.Arrays;
+import java.util.List;
 import java.util.TimeZone;
 
 /**
@@ -25,7 +28,7 @@ public class StockQuotesQuery1V7Request extends QuotesRequest<Stock> {
     }
 
     @Override
-    protected Stock parseJson(JsonNode node) {
+    protected Stock parseJson(JsonNode node) throws IOException {
         String symbol = node.get("symbol").asText();
         Stock stock = new Stock(symbol);
 
@@ -41,6 +44,7 @@ public class StockQuotesQuery1V7Request extends QuotesRequest<Stock> {
         stock.setQuote(this.getQuote(node));
         stock.setStats(this.getStats(node));
         stock.setDividend(this.getDividend(node));
+        stock.setNews(this.getNews());
 
         return stock;
     }
@@ -146,4 +150,7 @@ public class StockQuotesQuery1V7Request extends QuotesRequest<Stock> {
         return dividend;
     }
 
+    private List<StockNews> getNews() throws IOException {
+        return new NewsRequest(this.getSymbols()).getResult();
+    }
 }
