@@ -18,6 +18,7 @@ import yahoofinance.histquotes2.HistoricalDividend;
 import yahoofinance.histquotes2.HistoricalSplit;
 import yahoofinance.quotes.query1v7.StockQuotesQuery1V7Request;
 import yahoofinance.quotes.stock.StockDividend;
+import yahoofinance.quotes.stock.StockNews;
 import yahoofinance.quotes.stock.StockQuote;
 import yahoofinance.quotes.csv.StockQuotesData;
 import yahoofinance.quotes.csv.StockQuotesRequest;
@@ -39,11 +40,13 @@ public class Stock {
     private StockQuote quote;
     private StockStats stats;
     private StockDividend dividend;
-    
+
     private List<HistoricalQuote> history;
     private List<HistoricalDividend> dividendHistory;
     private List<HistoricalSplit> splitHistory;
-    
+
+    private List<StockNews> news;
+
     public Stock(String symbol) {
         this.symbol = symbol;
     }
@@ -59,6 +62,7 @@ public class Stock {
                 this.setQuote(stock.getQuote());
                 this.setStats(stock.getStats());
                 this.setDividend(stock.getDividend());
+                this.setNews(stock.getNews());
                 log.info("Updated Stock with symbol: {}", this.symbol);
             } else {
                 log.error("Failed to update Stock with symbol: {}", this.symbol);
@@ -523,6 +527,19 @@ public class Stock {
     
     public void setStockExchange(String stockExchange) {
         this.stockExchange = stockExchange;
+    }
+
+    /**
+    * Get the news feed for the stock
+    *
+    * @return the news feed or null if the data is not available
+    */
+    public List<StockNews> getNews() {
+        return this.news;
+    }
+
+    public void setNews(List<StockNews> data) {
+        this.news = data;
     }
     
     @Override
