@@ -104,5 +104,7 @@ public class FxSymbols {
     public static final String HKDCAD = "HKDCAD=X";
     public static final String HKDSGD = "HKDSGD=X";
     public static final String HKDNZD = "HKDNZD=X";
+    public static final String USDINR = "USDINR=X";
+    public static final String CADINR = "CADINR=X";
 
 }
