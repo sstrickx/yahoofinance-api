@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import yahoofinance.histquotes2.CrumbManager;
 
 /**
  *
@@ -61,7 +62,9 @@ public abstract class QuotesRequest<T> {
         params.put("symbols", this.symbols);
 
         String url = YahooFinance.QUOTES_QUERY1V7_BASE_URL + "?" + Utils.getURLParameters(params);
-
+        if (!CrumbManager.getCrumb().isEmpty()) {
+            url = url + "&crumb=" + CrumbManager.getCrumb();
+        }
         // Get JSON from Yahoo
         log.info("Sending request: " + url);
 
