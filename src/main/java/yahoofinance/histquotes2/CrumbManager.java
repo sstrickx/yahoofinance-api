@@ -45,24 +45,35 @@ public class CrumbManager {
         RedirectableRequest redirectableRequest = new RedirectableRequest(request, 5);
         redirectableRequest.setConnectTimeout(YahooFinance.CONNECTION_TIMEOUT);
         redirectableRequest.setReadTimeout(YahooFinance.CONNECTION_TIMEOUT);
-        
-       
-        URLConnection connection = redirectableRequest.openConnection();
-       
-        for(String headerKey : connection.getHeaderFields().keySet()) {        	
-            if("Set-Cookie".equalsIgnoreCase(headerKey)) {
-                for(String cookieField : connection.getHeaderFields().get(headerKey)) {                	
-                    for(String cookieValue : cookieField.split(";")) {
-                        if(cookieValue.matches("B=.*")) {
+
+        HashMap<String, String> reqParams = new HashMap<String, String>();
+        reqParams.put("Accept","text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7");
+        reqParams.put("User-Agent", "Mozilla/5.0 Chrome/115.0.0.0");
+        URLConnection connection = redirectableRequest.openConnection(reqParams);
+        boolean cookieSet = false;
+
+        Map<String, List<String>> headerFields = connection.getHeaderFields();
+        List<String> cookiesHeader = headerFields.get("Set-Cookie");
+        if(cookiesHeader != null && !cookiesHeader.isEmpty()) {
+            for(String cookieField : cookiesHeader) {
+                for(String cookieValue : cookieField.split(";")) {
+                    if(cookieValue.matches("A1=.*")
+                            || cookieValue.matches("A3=.*")
+                            || cookieValue.matches("A1S=.*")) {
+                        if (cookie == null || cookie.isEmpty()) {
                             cookie = cookieValue;
-                            log.debug("Set cookie from http request: {}", cookie);
-                            return;
+                        } else {
+                            cookie = cookie +";" + cookieValue;
                         }
+
+                        log.debug("Set cookie from http request: {}", cookie);
+                        cookieSet = true;
                     }
                 }
             }
         }
-        
+        if(cookieSet ) {return;/* ??? why it was there */}
+
         //  If cookie is not set, we should consent to activate cookie
         InputStreamReader is = new InputStreamReader(connection.getInputStream());
         BufferedReader br = new BufferedReader(is);
