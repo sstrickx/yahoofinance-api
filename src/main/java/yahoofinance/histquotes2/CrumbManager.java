@@ -162,6 +162,7 @@ public class CrumbManager {
 
         Map<String, String> requestProperties = new HashMap<String, String>();
         requestProperties.put("Cookie", cookie);
+        requestProperties.put("User-Agent", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.5.2 Safari/605.1.15");
 
         URLConnection crumbConnection = redirectableCrumbRequest.openConnection(requestProperties);
         InputStreamReader is = new InputStreamReader(crumbConnection.getInputStream());
