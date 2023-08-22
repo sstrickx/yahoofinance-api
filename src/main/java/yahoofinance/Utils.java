@@ -14,6 +14,7 @@ import java.util.TimeZone;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import yahoofinance.histquotes2.CrumbManager;
 
 /**
  *
@@ -291,6 +292,12 @@ public class Utils {
             }
             sb.append(String.format("%s=%s", key, value));
         }
+        try {
+            sb.append("&crumb="+URLEncoder.encode(CrumbManager.getCrumb(), "UTF-8"));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         return sb.toString();
     }
 

@@ -47,6 +47,7 @@ public class RedirectableRequest {
             for(String requestProperty : requestProperties.keySet()) {
                 connection.addRequestProperty(requestProperty, requestProperties.get(requestProperty));
             }
+            connection.addRequestProperty("User-Agent", "Mozilla/5.0 Chrome/115.0.0.0");
 
             // only handle protocol redirects manually...
             connection.setInstanceFollowRedirects(true);
