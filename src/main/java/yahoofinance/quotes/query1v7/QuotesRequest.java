@@ -12,10 +12,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  *
@@ -39,6 +36,17 @@ public abstract class QuotesRequest<T> {
     }
 
     protected abstract T parseJson(JsonNode node);
+
+    protected void parseJsonTo(JsonNode node, Collection<? super T> col) {
+        try {
+            T obj = parseJson(node);
+            if (obj != null) {
+                col.add(obj);
+            }
+        } catch (Throwable e) {
+            log.error("Can't parse json: " + node, e);
+        }
+    }
 
     public T getSingleResult() throws IOException {
         List<T> results = this.getResult();
@@ -76,7 +84,7 @@ public abstract class QuotesRequest<T> {
         if(node.has("quoteResponse") && node.get("quoteResponse").has("result")) {
             node = node.get("quoteResponse").get("result");
             for(int i = 0; i < node.size(); i++) {
-                result.add(this.parseJson(node.get(i)));
+                parseJsonTo(node.get(i), result);
             }
         } else {
             throw new IOException("Invalid response");
@@ -85,4 +93,10 @@ public abstract class QuotesRequest<T> {
         return result;
     }
 
+    protected String getStringValue(JsonNode node, String field) {
+        if(node.has(field)) {
+            return node.get(field).asText();
+        }
+        return null;
+    }
 }

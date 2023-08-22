@@ -18,9 +18,12 @@ public class FxQuotesQuery1V7Request extends QuotesRequest<FxQuote> {
 
     @Override
     protected FxQuote parseJson(JsonNode node) {
-        String symbol = node.get("symbol").asText();
-        BigDecimal price = Utils.getBigDecimal(node.get("regularMarketPrice").asText());
+        if (node.has("symbol")) {
+            String symbol = getStringValue(node, "symbol");
+            BigDecimal price = Utils.getBigDecimal(getStringValue(node, "regularMarketPrice"));
 
-        return new FxQuote(symbol, price);
+            return new FxQuote(symbol, price);
+        }
+        return null;
     }
 }

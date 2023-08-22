@@ -9,7 +9,6 @@ import yahoofinance.quotes.stock.StockQuote;
 import yahoofinance.quotes.stock.StockStats;
 
 import java.math.BigDecimal;
-import java.util.Arrays;
 import java.util.TimeZone;
 
 /**
@@ -26,36 +25,30 @@ public class StockQuotesQuery1V7Request extends QuotesRequest<Stock> {
 
     @Override
     protected Stock parseJson(JsonNode node) {
-        String symbol = node.get("symbol").asText();
-        Stock stock = new Stock(symbol);
+        if (node.has("symbol")) {
+            String symbol = getStringValue(node, "symbol");
+            Stock stock = new Stock(symbol);
 
-        if(node.has("longName")) {
-            stock.setName(node.get("longName").asText());
-        } else {
-            stock.setName(getStringValue(node, "shortName"));
-        }
+            if (node.has("longName")) {
+                stock.setName(node.get("longName").asText());
+            } else {
+                stock.setName(getStringValue(node, "shortName"));
+            }
 
-        stock.setCurrency(getStringValue(node, "currency"));
-        stock.setStockExchange(getStringValue(node, "fullExchangeName"));
+            stock.setCurrency(getStringValue(node, "currency"));
+            stock.setStockExchange(getStringValue(node, "fullExchangeName"));
 
-        stock.setQuote(this.getQuote(node));
-        stock.setStats(this.getStats(node));
-        stock.setDividend(this.getDividend(node));
+            stock.setQuote(this.getQuote(node));
+            stock.setStats(this.getStats(node));
+            stock.setDividend(this.getDividend(node));
 
-        return stock;
-    }
-
-    private String getStringValue(JsonNode node, String field) {
-        if(node.has(field)) {
-            return node.get(field).asText();
+            return stock;
         }
         return null;
     }
 
-
-
     private StockQuote getQuote(JsonNode node) {
-        String symbol = node.get("symbol").asText();
+        String symbol = getStringValue(node, "symbol");
         StockQuote quote = new StockQuote(symbol);
 
         quote.setPrice(Utils.getBigDecimal(getStringValue(node,"regularMarketPrice")));
