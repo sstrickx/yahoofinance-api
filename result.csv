@@ -1,7 +1,6 @@
 "Problem","Package","File","Priority","Line","Description","Rule set","Rule"
 "1","yahoofinance","src\main\java\yahoofinance\Stock.java","3","30","Avoid really long classes.","Design","ExcessiveClassLength"
-"2","yahoofinance","src\main\java\yahoofinance\Stock.java","3","30","Possible God Class (WMC=51, ATFD=18, TCC=7.899%)","Design","GodClass"
-"3","yahoofinance","src\main\java\yahoofinance\Stock.java","3","51","Avoid really long methods.","Design","ExcessiveMethodLength"
+"1","yahoofinance","src\main\java\yahoofinance\StockDataUpdater.java","3","25","Avoid really long methods.","Design","ExcessiveMethodLength"
 "1","yahoofinance","src\main\java\yahoofinance\Utils.java","3","22","Avoid really long classes.","Design","ExcessiveClassLength"
 "2","yahoofinance","src\main\java\yahoofinance\Utils.java","3","22","Possible God Class (WMC=68, ATFD=15, TCC=21.053%)","Design","GodClass"
 "3","yahoofinance","src\main\java\yahoofinance\Utils.java","3","60","Avoid really long methods.","Design","ExcessiveMethodLength"

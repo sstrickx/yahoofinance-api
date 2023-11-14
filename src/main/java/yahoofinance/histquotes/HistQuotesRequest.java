@@ -15,9 +15,12 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import yahoofinance.Utils;
+import yahoofinance.utils.Utils;
 import yahoofinance.YahooFinance;
-import yahoofinance.util.RedirectableRequest;
+import yahoofinance.utils.BigDecimalUtil;
+import yahoofinance.utils.CalendarUtil;
+import yahoofinance.utils.PrimitiveTypesConvertUtils;
+import yahoofinance.utils.RedirectableRequest;
 
 /**
  *
@@ -136,7 +139,6 @@ public class HistQuotesRequest {
 
     private HistoricalQuote parseCSVLine(String line) {
         String[] data = line.split(YahooFinance.QUOTES_CSV_DELIMITER);
-
         return new HistoricalQuote(this.symbol, Utils.parseHistDate(data[0]))
                 .setOpen(Utils.getBigDecimal(data[1]))
                 .setLow(Utils.getBigDecimal(data[3]))

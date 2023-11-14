@@ -13,9 +13,9 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import yahoofinance.Utils;
+import yahoofinance.utils.Utils;
 import yahoofinance.YahooFinance;
-import yahoofinance.util.RedirectableRequest;
+import yahoofinance.utils.RedirectableRequest;
 
 /**
  *

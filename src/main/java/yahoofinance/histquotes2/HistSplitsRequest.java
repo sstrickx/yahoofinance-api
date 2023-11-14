@@ -1,8 +1,10 @@
 package yahoofinance.histquotes2;
 
-import yahoofinance.Utils;
+import yahoofinance.utils.Utils;
 import yahoofinance.YahooFinance;
-import yahoofinance.util.RedirectableRequest;
+import yahoofinance.utils.BigDecimalUtil;
+import yahoofinance.utils.CalendarUtil;
+import yahoofinance.utils.RedirectableRequest;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -123,9 +125,9 @@ public class HistSplitsRequest {
         String[] data = line.split(YahooFinance.QUOTES_CSV_DELIMITER);
     	String[] parts = data[1].split(":");
         return new HistoricalSplit(this.symbol,
-                Utils.parseHistDate(data[0]),
-                Utils.getBigDecimal(parts[0]),
-                Utils.getBigDecimal(parts[1])
+                CalendarUtil.parseHistDate(data[0]),
+                BigDecimalUtil.getBigDecimal(parts[0]),
+                BigDecimalUtil.getBigDecimal(parts[1])
         );
     }
 

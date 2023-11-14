@@ -22,7 +22,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import yahoofinance.YahooFinance;
-import yahoofinance.util.RedirectableRequest;
+import yahoofinance.utils.RedirectableRequest;
 
 /**
  * Created by Stijn on 23/05/2017.

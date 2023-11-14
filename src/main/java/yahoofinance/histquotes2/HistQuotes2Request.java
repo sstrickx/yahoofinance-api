@@ -1,10 +1,13 @@
 package yahoofinance.histquotes2;
 
-import yahoofinance.Utils;
+import yahoofinance.utils.Utils;
 import yahoofinance.YahooFinance;
 import yahoofinance.histquotes.HistoricalQuote;
 import yahoofinance.histquotes.Interval;
-import yahoofinance.util.RedirectableRequest;
+import yahoofinance.utils.BigDecimalUtil;
+import yahoofinance.utils.CalendarUtil;
+import yahoofinance.utils.PrimitiveTypesConvertUtils;
+import yahoofinance.utils.RedirectableRequest;
 
 import java.io.BufferedReader;
 import java.io.IOException;

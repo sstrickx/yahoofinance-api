@@ -39,6 +39,8 @@ public class Stock {
     private StockQuote quote;
     private StockStats stats;
     private StockDividend dividend;
+
+    private final StockDataUpdater dataUpdater;
     
     private List<HistoricalQuote> history;
     private List<HistoricalDividend> dividendHistory;
@@ -46,35 +48,11 @@ public class Stock {
     
     public Stock(String symbol) {
         this.symbol = symbol;
+        this.dataUpdater = new StockDataUpdater(this, symbol);
     }
     
     private void update() throws IOException {
-        if(YahooFinance.QUOTES_QUERY1V7_ENABLED.equalsIgnoreCase("true")) {
-            StockQuotesQuery1V7Request request = new StockQuotesQuery1V7Request(this.symbol);
-            Stock stock = request.getSingleResult();
-            if (stock != null) {
-                this.setName(stock.getName());
-                this.setCurrency(stock.getCurrency());
-                this.setStockExchange(stock.getStockExchange());
-                this.setQuote(stock.getQuote());
-                this.setStats(stock.getStats());
-                this.setDividend(stock.getDividend());
-                log.info("Updated Stock with symbol: {}", this.symbol);
-            } else {
-                log.error("Failed to update Stock with symbol: {}", this.symbol);
-            }
-        } else {
-            StockQuotesRequest request = new StockQuotesRequest(this.symbol);
-            StockQuotesData data = request.getSingleResult();
-            if (data != null) {
-                this.setQuote(data.getQuote());
-                this.setStats(data.getStats());
-                this.setDividend(data.getDividend());
-                log.info("Updated Stock with symbol: {}", this.symbol);
-            } else {
-                log.error("Failed to update Stock with symbol: {}", this.symbol);
-            }
-        }
+        dataUpdater.update();
     }
 
     /**
@@ -114,10 +92,7 @@ public class Stock {
      * @throws java.io.IOException when there's a connection problem
      */
     public StockQuote getQuote(boolean refresh) throws IOException {
-        if(refresh) {
-            this.update();
-        }
-        return this.quote;
+        return dataUpdater.getQuote(refresh);
     }
     
     public void setQuote(StockQuote quote) {
@@ -153,10 +128,7 @@ public class Stock {
      * @throws java.io.IOException when there's a connection problem
      */
     public StockStats getStats(boolean refresh) throws IOException {
-        if(refresh) {
-            this.update();
-        }
-        return this.stats;
+        return dataUpdater.getStats(refresh);
     }
     
     public void setStats(StockStats stats) {
@@ -193,10 +165,7 @@ public class Stock {
      * @throws java.io.IOException when there's a connection problem
      */
     public StockDividend getDividend(boolean refresh) throws IOException {
-        if(refresh) {
-            this.update();
-        }
-        return this.dividend;
+        return dataUpdater.getDividend(refresh);
     }
     
     public void setDividend(StockDividend dividend) {
