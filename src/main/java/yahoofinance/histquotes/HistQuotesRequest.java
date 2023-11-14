@@ -136,15 +136,14 @@ public class HistQuotesRequest {
 
     private HistoricalQuote parseCSVLine(String line) {
         String[] data = line.split(YahooFinance.QUOTES_CSV_DELIMITER);
-        return new HistoricalQuote(this.symbol,
-                Utils.parseHistDate(data[0]),
-                Utils.getBigDecimal(data[1]),
-                Utils.getBigDecimal(data[3]),
-                Utils.getBigDecimal(data[2]),
-                Utils.getBigDecimal(data[4]),
-                Utils.getBigDecimal(data[6]),
-                Utils.getLong(data[5])
-        );
+
+        return new HistoricalQuote(this.symbol, Utils.parseHistDate(data[0]))
+                .setOpen(Utils.getBigDecimal(data[1]))
+                .setLow(Utils.getBigDecimal(data[3]))
+                .setHigh(Utils.getBigDecimal(data[2]))
+                .setClose(Utils.getBigDecimal(data[4]))
+                .setAdjClose(Utils.getBigDecimal(data[6]))
+                .setVolume(Utils.getLong(data[5]));
     }
 
 }
