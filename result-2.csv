@@ -2,9 +2,7 @@ src\main\java\yahoofinance\Stock.java:30:	ExcessiveClassLength:	Avoid really lon
 src\main\java\yahoofinance\YahooFinance.java:46:	ExcessiveClassLength:	Avoid really long classes.
 src\main\java\yahoofinance\YahooFinance.java:378:	ExcessiveMethodLength:	Avoid really long methods.
 src\main\java\yahoofinance\exchanges\ExchangeTimeZone.java:15:	ExcessiveClassLength:	Avoid really long classes.
-src\main\java\yahoofinance\histquotes2\CrumbManager.java:30:	ExcessiveClassLength:	Avoid really long classes.
-src\main\java\yahoofinance\histquotes2\CrumbManager.java:37:	ExcessiveMethodLength:	Avoid really long methods.
-src\main\java\yahoofinance\histquotes2\CrumbManager.java:151:	ExcessiveMethodLength:	Avoid really long methods.
+src\main\java\yahoofinance\histquotes2\CrumbManager.java:27:	ExcessiveClassLength:	Avoid really long classes.
 src\main\java\yahoofinance\histquotes2\HistDividendsRequest.java:24:	ExcessiveClassLength:	Avoid really long classes.
 src\main\java\yahoofinance\histquotes2\HistDividendsRequest.java:74:	ExcessiveMethodLength:	Avoid really long methods.
 src\main\java\yahoofinance\histquotes2\HistQuotes2Request.java:27:	ExcessiveClassLength:	Avoid really long classes.
