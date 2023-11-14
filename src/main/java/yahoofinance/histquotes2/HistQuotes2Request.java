@@ -1,10 +1,13 @@
 package yahoofinance.histquotes2;
 
-import yahoofinance.Utils;
+import yahoofinance.utils.Utils;
 import yahoofinance.YahooFinance;
 import yahoofinance.histquotes.HistoricalQuote;
 import yahoofinance.histquotes.Interval;
-import yahoofinance.util.RedirectableRequest;
+import yahoofinance.utils.BigDecimalUtil;
+import yahoofinance.utils.CalendarUtil;
+import yahoofinance.utils.PrimitiveTypesConvertUtils;
+import yahoofinance.utils.RedirectableRequest;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -145,13 +148,13 @@ public class HistQuotes2Request {
     private HistoricalQuote parseCSVLine(String line) {
         String[] data = line.split(YahooFinance.QUOTES_CSV_DELIMITER);
         return new HistoricalQuote(this.symbol,
-                Utils.parseHistDate(data[0]),
-                Utils.getBigDecimal(data[1]),
-                Utils.getBigDecimal(data[3]),
-                Utils.getBigDecimal(data[2]),
-                Utils.getBigDecimal(data[4]),
-                Utils.getBigDecimal(data[5]),
-                Utils.getLong(data[6])
+                CalendarUtil.parseHistDate(data[0]),
+                BigDecimalUtil.getBigDecimal(data[1]),
+                BigDecimalUtil.getBigDecimal(data[3]),
+                BigDecimalUtil.getBigDecimal(data[2]),
+                BigDecimalUtil.getBigDecimal(data[4]),
+                BigDecimalUtil.getBigDecimal(data[5]),
+                PrimitiveTypesConvertUtils.getLong(data[6])
         );
     }
 

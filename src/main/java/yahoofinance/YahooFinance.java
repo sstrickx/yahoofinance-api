@@ -13,6 +13,7 @@ import yahoofinance.quotes.csv.StockQuotesData;
 import yahoofinance.quotes.csv.StockQuotesRequest;
 import yahoofinance.quotes.query1v7.FxQuotesQuery1V7Request;
 import yahoofinance.quotes.query1v7.StockQuotesQuery1V7Request;
+import yahoofinance.utils.Utils;
 
 /**
  * YahooFinance can be used to retrieve quotes and some extra information on stocks.
