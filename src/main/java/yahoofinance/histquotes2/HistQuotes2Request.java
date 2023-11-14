@@ -147,15 +147,13 @@ public class HistQuotes2Request {
 
     private HistoricalQuote parseCSVLine(String line) {
         String[] data = line.split(YahooFinance.QUOTES_CSV_DELIMITER);
-        return new HistoricalQuote(this.symbol,
-                CalendarUtil.parseHistDate(data[0]),
-                BigDecimalUtil.getBigDecimal(data[1]),
-                BigDecimalUtil.getBigDecimal(data[3]),
-                BigDecimalUtil.getBigDecimal(data[2]),
-                BigDecimalUtil.getBigDecimal(data[4]),
-                BigDecimalUtil.getBigDecimal(data[5]),
-                PrimitiveTypesConvertUtils.getLong(data[6])
-        );
+        return new HistoricalQuote(this.symbol, Utils.parseHistDate(data[0]))
+                .setOpen(Utils.getBigDecimal(data[1]))
+                .setLow(Utils.getBigDecimal(data[3]))
+                .setHigh(Utils.getBigDecimal(data[2]))
+                .setClose(Utils.getBigDecimal(data[4]))
+                .setAdjClose(Utils.getBigDecimal(data[6]))
+                .setVolume(Utils.getLong(data[5]));
     }
 
 }

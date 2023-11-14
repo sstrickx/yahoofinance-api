@@ -116,15 +116,13 @@ public class HistQuotesQuery2V8Request {
             BigDecimal low = lows.get(i).decimalValue();
             BigDecimal close = closes.get(i).decimalValue();
 
-            HistoricalQuote quote = new HistoricalQuote(
-                symbol,
-                calendar,
-                open,
-                low,
-                high,
-                close,
-                adjClose,
-                volume);
+            HistoricalQuote quote = new HistoricalQuote(this.symbol, calendar)
+                    .setOpen(open)
+                    .setLow(low)
+                    .setHigh(high)
+                    .setClose(close)
+                    .setAdjClose(adjClose)
+                    .setVolume(volume);
             result.add(quote);
         }
 
