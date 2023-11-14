@@ -20,7 +20,6 @@
 "2","yahoofinance.query2v8","src\main\java\yahoofinance\query2v8\HistQuotesQuery2V8Request.java","3","94","Avoid really long methods.","Design","ExcessiveMethodLength"
 "3","yahoofinance.query2v8","src\main\java\yahoofinance\query2v8\HistQuotesQuery2V8Request.java","3","132","Avoid really long methods.","Design","ExcessiveMethodLength"
 "1","yahoofinance.quotes.csv","src\main\java\yahoofinance\quotes\csv\QuotesProperty.java","3","7","Avoid really long classes.","Design","ExcessiveClassLength"
-"1","yahoofinance.quotes.csv","src\main\java\yahoofinance\quotes\csv\QuotesRequest.java","3","74","Avoid really long methods.","Design","ExcessiveMethodLength"
 "1","yahoofinance.quotes.csv","src\main\java\yahoofinance\quotes\csv\StockQuotesData.java","3","16","Avoid really long classes.","Design","ExcessiveClassLength"
 "2","yahoofinance.quotes.csv","src\main\java\yahoofinance\quotes\csv\StockQuotesData.java","3","32","Avoid really long methods.","Design","ExcessiveMethodLength"
 "3","yahoofinance.quotes.csv","src\main\java\yahoofinance\quotes\csv\StockQuotesData.java","3","63","Avoid really long methods.","Design","ExcessiveMethodLength"
