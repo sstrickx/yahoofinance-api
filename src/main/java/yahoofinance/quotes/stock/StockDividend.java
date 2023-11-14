@@ -17,17 +17,13 @@ public class StockDividend {
     private Calendar exDate;
     private BigDecimal annualYield;
     private BigDecimal annualYieldPercent;
+
+    public StockDividendBuilder builder(String symbol) {
+        return StockDividendBuilder.builder(symbol);
+    }
     
     public StockDividend(String symbol) {
         this.symbol = symbol;
-    }
-    
-    public StockDividend(String symbol, Calendar payDate, Calendar exDate, BigDecimal annualYield, BigDecimal annualYieldPercent) {
-        this(symbol);
-        this.payDate = payDate;
-        this.exDate = exDate;
-        this.annualYield = annualYield;
-        this.annualYieldPercent = annualYieldPercent;
     }
 
     public String getSymbol() {
