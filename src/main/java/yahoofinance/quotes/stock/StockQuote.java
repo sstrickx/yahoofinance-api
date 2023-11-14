@@ -4,7 +4,9 @@ package yahoofinance.quotes.stock;
 import java.math.BigDecimal;
 import java.util.Calendar;
 import java.util.TimeZone;
-import yahoofinance.Utils;
+
+import yahoofinance.utils.BigDecimalUtil;
+import yahoofinance.utils.CalendarUtil;
 
 /**
  * All getters can return null in case the data is not available from Yahoo Finance.
@@ -61,7 +63,7 @@ public class StockQuote {
      * @return      change relative to previous close
      */
     public BigDecimal getChangeInPercent() {
-        return Utils.getPercent(this.getChange(), this.previousClose);
+        return BigDecimalUtil.getPercent(this.getChange(), this.previousClose);
     }
     
     /**
@@ -80,7 +82,7 @@ public class StockQuote {
      * @return      change from year low relative to year low
      */
     public BigDecimal getChangeFromYearLowInPercent() {
-        return Utils.getPercent(this.getChangeFromYearLow(), this.yearLow);
+        return BigDecimalUtil.getPercent(this.getChangeFromYearLow(), this.yearLow);
     }
     
     /**
@@ -99,7 +101,7 @@ public class StockQuote {
      * @return      change from year high relative to year high
      */
     public BigDecimal getChangeFromYearHighInPercent() {
-        return Utils.getPercent(this.getChangeFromYearHigh(), this.yearHigh);
+        return BigDecimalUtil.getPercent(this.getChangeFromYearHigh(), this.yearHigh);
     }
     
     /**
@@ -118,7 +120,7 @@ public class StockQuote {
      * @return      change from 50 day moving average relative to 50 day moving average
      */
     public BigDecimal getChangeFromAvg50InPercent() {
-        return Utils.getPercent(this.getChangeFromAvg50(), this.priceAvg50);
+        return BigDecimalUtil.getPercent(this.getChangeFromAvg50(), this.priceAvg50);
     }
     
     /**
@@ -137,7 +139,7 @@ public class StockQuote {
      * @return      change from 200 day moving average relative to 200 day moving average
      */
     public BigDecimal getChangeFromAvg200InPercent() {
-        return Utils.getPercent(this.getChangeFromAvg200(), this.priceAvg200);
+        return BigDecimalUtil.getPercent(this.getChangeFromAvg200(), this.priceAvg200);
     }
     
     public String getSymbol() {
@@ -230,7 +232,7 @@ public class StockQuote {
      * @return last trade date time
      */
     public Calendar getLastTradeTime(TimeZone timeZone) {
-        return Utils.parseDateTime(this.lastTradeDateStr, this.lastTradeTimeStr, timeZone);
+        return CalendarUtil.parseDateTime(this.lastTradeDateStr, this.lastTradeTimeStr, timeZone);
     }
 
     public TimeZone getTimeZone() {

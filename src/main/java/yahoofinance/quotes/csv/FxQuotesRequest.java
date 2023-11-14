@@ -3,9 +3,10 @@ package yahoofinance.quotes.csv;
 
 import java.util.ArrayList;
 import java.util.List;
-import yahoofinance.Utils;
+import yahoofinance.utils.Utils;
 import yahoofinance.YahooFinance;
 import yahoofinance.quotes.fx.FxQuote;
+import yahoofinance.utils.BigDecimalUtil;
 
 /**
  *
@@ -27,7 +28,7 @@ public class FxQuotesRequest extends QuotesRequest<FxQuote> {
     protected FxQuote parseCSVLine(String line) {
         String[] split = Utils.stripOverhead(line).split(YahooFinance.QUOTES_CSV_DELIMITER);
         if(split.length >= 2) {
-            return new FxQuote(split[0], Utils.getBigDecimal(split[1]));
+            return new FxQuote(split[0], BigDecimalUtil.getBigDecimal(split[1]));
         }
         return null;
     }
