@@ -8,7 +8,6 @@
 "3","yahoofinance.histquotes2","src\main\java\yahoofinance\histquotes2\CrumbManager.java","3","151","Avoid really long methods.","Design","ExcessiveMethodLength"
 "1","yahoofinance.histquotes2","src\main\java\yahoofinance\histquotes2\HistDividendsRequest.java","3","23","Avoid really long classes.","Design","ExcessiveClassLength"
 "1","yahoofinance.histquotes2","src\main\java\yahoofinance\histquotes2\HistQuotes2Request.java","3","27","Avoid really long classes.","Design","ExcessiveClassLength"
-"2","yahoofinance.histquotes2","src\main\java\yahoofinance\histquotes2\HistQuotes2Request.java","3","103","Avoid really long methods.","Design","ExcessiveMethodLength"
 "1","yahoofinance.histquotes2","src\main\java\yahoofinance\histquotes2\HistSplitsRequest.java","3","24","Avoid really long classes.","Design","ExcessiveClassLength"
 "2","yahoofinance.histquotes2","src\main\java\yahoofinance\histquotes2\HistSplitsRequest.java","3","74","Avoid really long methods.","Design","ExcessiveMethodLength"
 "1","yahoofinance.histquotes2","src\main\java\yahoofinance\histquotes2\HistoricalDividend.java","3","14","The class 'HistoricalDividend' is suspected to be a Data Class (WOC=14.286%, NOPA=0, NOAM=6, WMC=9)","Design","DataClass"

@@ -101,37 +101,23 @@ public class HistQuotes2Request {
     }
 
     public List<HistoricalQuote> getResult() throws IOException {
-
         List<HistoricalQuote> result = new ArrayList<HistoricalQuote>();
-        
         if(this.from.after(this.to)) {
             log.warn("Unable to retrieve historical quotes. "
                     + "From-date should not be after to-date. From: "
                     + this.from.getTime() + ", to: " + this.to.getTime());
             return result;
         }
-
-        Map<String, String> params = new LinkedHashMap<String, String>();
-        params.put("period1", String.valueOf(this.from.getTimeInMillis() / 1000));
-        params.put("period2", String.valueOf(this.to.getTimeInMillis() / 1000));
-
-        params.put("interval", this.interval.getTag());
-
-        params.put("crumb", CrumbManager.getCrumb());
-
+        Map<String, String> params = configureParams();
         String url = YahooFinance.HISTQUOTES2_BASE_URL + URLEncoder.encode(this.symbol , "UTF-8") + "?" + Utils.getURLParameters(params);
-
         // Get CSV from Yahoo
         log.info("Sending request: " + url);
+        URLConnection connection = getUrlConnection(url);
+        parseCSV(connection, result);
+        return result;
+    }
 
-        URL request = new URL(url);
-        RedirectableRequest redirectableRequest = new RedirectableRequest(request, 5);
-        redirectableRequest.setConnectTimeout(YahooFinance.CONNECTION_TIMEOUT);
-        redirectableRequest.setReadTimeout(YahooFinance.CONNECTION_TIMEOUT);
-        Map<String, String> requestProperties = new HashMap<String, String>();
-        requestProperties.put("Cookie", CrumbManager.getCookie());
-        URLConnection connection = redirectableRequest.openConnection(requestProperties);
-
+    private void parseCSV(URLConnection connection, List<HistoricalQuote> result) throws IOException {
         InputStreamReader is = new InputStreamReader(connection.getInputStream());
         BufferedReader br = new BufferedReader(is);
         br.readLine(); // skip the first line
@@ -142,7 +128,28 @@ public class HistQuotes2Request {
             HistoricalQuote quote = this.parseCSVLine(line);
             result.add(quote);
         }
-        return result;
+    }
+
+    private URLConnection getUrlConnection(String url) throws IOException {
+        URL request = new URL(url);
+        RedirectableRequest redirectableRequest = new RedirectableRequest(request, 5);
+        redirectableRequest.setConnectTimeout(YahooFinance.CONNECTION_TIMEOUT);
+        redirectableRequest.setReadTimeout(YahooFinance.CONNECTION_TIMEOUT);
+        Map<String, String> requestProperties = new HashMap<String, String>();
+        requestProperties.put("Cookie", CrumbManager.getCookie());
+        URLConnection connection = redirectableRequest.openConnection(requestProperties);
+        return connection;
+    }
+
+    private Map<String, String> configureParams() throws IOException {
+        Map<String, String> params = new LinkedHashMap<String, String>();
+        params.put("period1", String.valueOf(this.from.getTimeInMillis() / 1000));
+        params.put("period2", String.valueOf(this.to.getTimeInMillis() / 1000));
+
+        params.put("interval", this.interval.getTag());
+
+        params.put("crumb", CrumbManager.getCrumb());
+        return params;
     }
 
     private HistoricalQuote parseCSVLine(String line) {
