@@ -27,13 +27,7 @@ public class StockDataUpdater {
             StockQuotesQuery1V7Request request = new StockQuotesQuery1V7Request(this.symbol);
             Stock stockResponse = request.getSingleResult();
             if (stockResponse != null) {
-                stock.setName(stockResponse.getName());
-                stock.setCurrency(stockResponse.getCurrency());
-                stock.setStockExchange(stockResponse.getStockExchange());
-                stock.setQuote(stockResponse.getQuote());
-                stock.setStats(stockResponse.getStats());
-                stock.setDividend(stockResponse.getDividend());
-                log.info("Updated Stock with symbol: {}", this.symbol);
+                updateStock(stockResponse);
             } else {
                 log.error("Failed to update Stock with symbol: {}", this.symbol);
             }
@@ -41,10 +35,7 @@ public class StockDataUpdater {
             StockQuotesRequest request = new StockQuotesRequest(this.symbol);
             StockQuotesData data = request.getSingleResult();
             if (data != null) {
-                stock.setQuote(data.getQuote());
-                stock.setStats(data.getStats());
-                stock.setDividend(data.getDividend());
-                log.info("Updated Stock with symbol: {}", this.symbol);
+                updateStock(data);
             } else {
                 log.error("Failed to update Stock with symbol: {}", this.symbol);
             }
@@ -83,5 +74,22 @@ public class StockDataUpdater {
         }
 
         return getDividend();
+    }
+
+    private void updateStock(Stock stockResponse){
+        stock.setName(stockResponse.getName());
+        stock.setCurrency(stockResponse.getCurrency());
+        stock.setStockExchange(stockResponse.getStockExchange());
+        stock.setQuote(stockResponse.getQuote());
+        stock.setStats(stockResponse.getStats());
+        stock.setDividend(stockResponse.getDividend());
+        log.info("Updated Stock with symbol: {}", this.symbol);
+    }
+
+    private void updateStock(StockQuotesData data) {
+        stock.setQuote(data.getQuote());
+        stock.setStats(data.getStats());
+        stock.setDividend(data.getDividend());
+        log.info("Updated Stock with symbol: {}", this.symbol);
     }
 }
