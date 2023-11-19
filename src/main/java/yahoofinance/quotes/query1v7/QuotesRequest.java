@@ -56,7 +56,20 @@ public abstract class QuotesRequest<T> {
      */
     public List<T> getResult() throws IOException {
         List<T> result = new ArrayList<T>();
+        InputStreamReader is = getInputStreamReader();
+        JsonNode node = objectMapper.readTree(is);
+        if(node.has("quoteResponse") && node.get("quoteResponse").has("result")) {
+            node = node.get("quoteResponse").get("result");
+            for(int i = 0; i < node.size(); i++) {
+                result.add(this.parseJson(node.get(i)));
+            }
+        } else {
+            throw new IOException("Invalid response");
+        }
+        return result;
+    }
 
+    private InputStreamReader getInputStreamReader() throws IOException {
         Map<String, String> params = new LinkedHashMap<String, String>();
         params.put("symbols", this.symbols);
 
@@ -71,18 +84,7 @@ public abstract class QuotesRequest<T> {
         redirectableRequest.setReadTimeout(YahooFinance.CONNECTION_TIMEOUT);
         URLConnection connection = redirectableRequest.openConnection();
 
-        InputStreamReader is = new InputStreamReader(connection.getInputStream());
-        JsonNode node = objectMapper.readTree(is);
-        if(node.has("quoteResponse") && node.get("quoteResponse").has("result")) {
-            node = node.get("quoteResponse").get("result");
-            for(int i = 0; i < node.size(); i++) {
-                result.add(this.parseJson(node.get(i)));
-            }
-        } else {
-            throw new IOException("Invalid response");
-        }
-
-        return result;
+        return new InputStreamReader(connection.getInputStream());
     }
 
 }

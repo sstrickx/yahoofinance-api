@@ -60,7 +60,6 @@ public class StockQuotesQuery1V7Request extends QuotesRequest<Stock> {
         StockQuote quote = new StockQuote(symbol);
 
         quote.setPrice(BigDecimalUtil.getBigDecimal(getStringValue(node,"regularMarketPrice")));
-        // quote.setLastTradeSize(null);
         quote.setAsk(BigDecimalUtil.getBigDecimal(getStringValue(node,"ask")));
         quote.setAskSize(PrimitiveTypesConvertUtils.getLong(getStringValue(node,"askSize")));
         quote.setBid(BigDecimalUtil.getBigDecimal(getStringValue(node,"bid")));
@@ -96,27 +95,12 @@ public class StockQuotesQuery1V7Request extends QuotesRequest<Stock> {
         StockStats stats = new StockStats(symbol);
 
         stats.setMarketCap(BigDecimalUtil.getBigDecimal(getStringValue(node,"marketCap")));
-        // stats.setSharesFloat(Utils.getLong(getStringValue(node,"sharesOutstanding")));
         stats.setSharesOutstanding(PrimitiveTypesConvertUtils.getLong(getStringValue(node,"sharesOutstanding")));
-        // stats.setSharesOwned(Utils.getLong(getStringValue(node,"symbol")));
-
         stats.setEps(BigDecimalUtil.getBigDecimal(getStringValue(node,"epsTrailingTwelveMonths")));
         stats.setPe(BigDecimalUtil.getBigDecimal(getStringValue(node,"trailingPE")));
-        // stats.setPeg(Utils.getBigDecimal(getStringValue(node,"symbol")));
-
         stats.setEpsEstimateCurrentYear(BigDecimalUtil.getBigDecimal(getStringValue(node,"epsForward")));
-        // stats.setEpsEstimateNextQuarter(Utils.getBigDecimal(getStringValue(node,"symbol")));
-        // stats.setEpsEstimateNextYear(Utils.getBigDecimal(getStringValue(node,"symbol")));
-
         stats.setPriceBook(BigDecimalUtil.getBigDecimal(getStringValue(node,"priceToBook")));
-        // stats.setPriceSales(Utils.getBigDecimal(getStringValue(node,"symbol")));
         stats.setBookValuePerShare(BigDecimalUtil.getBigDecimal(getStringValue(node,"bookValue")));
-
-        // stats.setOneYearTargetPrice(Utils.getBigDecimal(getStringValue(node,"symbol")));
-        // stats.setEBITDA(Utils.getBigDecimal(getStringValue(node,"symbol")));
-        // stats.setRevenue(Utils.getBigDecimal(getStringValue(node,"symbol")));
-
-        // stats.setShortRatio(Utils.getBigDecimal(getStringValue(node,"symbol")));
 
         if(node.has("earningsTimestamp")) {
             stats.setEarningsAnnouncement(CalendarUtil.unixToCalendar(node.get("earningsTimestamp").asLong()));

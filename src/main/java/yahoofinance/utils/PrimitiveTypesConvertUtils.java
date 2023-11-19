@@ -22,24 +22,7 @@ public final class PrimitiveTypesConvertUtils {
             return result;
         }
         try {
-            data = cleanNumberString(data);
-            char lastChar = data.charAt(data.length() - 1);
-            int multiplier = 1;
-            switch (lastChar) {
-                case 'B':
-                    data = data.substring(0, data.length() - 1);
-                    multiplier = 1000000000;
-                    break;
-                case 'M':
-                    data = data.substring(0, data.length() - 1);
-                    multiplier = 1000000;
-                    break;
-                case 'K':
-                    data = data.substring(0, data.length() - 1);
-                    multiplier = 1000;
-                    break;
-            }
-            result = Double.parseDouble(data) * multiplier;
+            result = buildResult(data);
         } catch (NumberFormatException e) {
             Utils.log.warn("Failed to parse: " + data);
             Utils.log.debug("Failed to parse: " + data, e);
@@ -71,5 +54,26 @@ public final class PrimitiveTypesConvertUtils {
             return null;
         }
         return data;
+    }
+
+    private static double buildResult(String data){
+        data = cleanNumberString(data);
+        char lastChar = data.charAt(data.length() - 1);
+        int multiplier = 1;
+        switch (lastChar) {
+            case 'B':
+                data = data.substring(0, data.length() - 1);
+                multiplier = 1000000000;
+                break;
+            case 'M':
+                data = data.substring(0, data.length() - 1);
+                multiplier = 1000000;
+                break;
+            case 'K':
+                data = data.substring(0, data.length() - 1);
+                multiplier = 1000;
+                break;
+        }
+        return Double.parseDouble(data) * multiplier;
     }
 }
