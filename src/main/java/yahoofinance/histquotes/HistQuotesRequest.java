@@ -88,48 +88,17 @@ public class HistQuotesRequest {
     }
 
     public List<HistoricalQuote> getResult() throws IOException {
-
         List<HistoricalQuote> result = new ArrayList<HistoricalQuote>();
-        
         if(this.from.after(this.to)) {
             log.warn("Unable to retrieve historical quotes. "
                     + "From-date should not be after to-date. From: "
                     + this.from.getTime() + ", to: " + this.to.getTime());
             return result;
         }
-        
-        Map<String, String> params = new LinkedHashMap<String, String>();
-        params.put("s", this.symbol);
-
-        params.put("a", String.valueOf(this.from.get(Calendar.MONTH)));
-        params.put("b", String.valueOf(this.from.get(Calendar.DAY_OF_MONTH)));
-        params.put("c", String.valueOf(this.from.get(Calendar.YEAR)));
-
-        params.put("d", String.valueOf(this.to.get(Calendar.MONTH)));
-        params.put("e", String.valueOf(this.to.get(Calendar.DAY_OF_MONTH)));
-        params.put("f", String.valueOf(this.to.get(Calendar.YEAR)));
-
-        params.put("g", this.interval.getTag());
-
-        params.put("ignore", ".csv");
-
-        String url = YahooFinance.HISTQUOTES_BASE_URL + "?" + Utils.getURLParameters(params);
-
-        // Get CSV from Yahoo
-        log.info("Sending request: " + url);
-
-        URL request = new URL(url);
-        RedirectableRequest redirectableRequest = new RedirectableRequest(request, 5);
-        redirectableRequest.setConnectTimeout(YahooFinance.CONNECTION_TIMEOUT);
-        redirectableRequest.setReadTimeout(YahooFinance.CONNECTION_TIMEOUT);
-        URLConnection connection = redirectableRequest.openConnection();
-
-        InputStreamReader is = new InputStreamReader(connection.getInputStream());
-        BufferedReader br = new BufferedReader(is);
+        BufferedReader br = new BufferedReader(getInputStreamReader());
         br.readLine(); // skip the first line
         // Parse CSV
         for (String line = br.readLine(); line != null; line = br.readLine()) {
-
             log.info("Parsing CSV line: " + Utils.unescape(line));
             HistoricalQuote quote = this.parseCSVLine(line);
             result.add(quote);
@@ -137,15 +106,47 @@ public class HistQuotesRequest {
         return result;
     }
 
+    private InputStreamReader getInputStreamReader() throws IOException {
+        String url = getUrl();
+        // Get CSV from Yahoo
+        log.info("Sending request: " + url);
+        return new InputStreamReader(getUrlConnection(url).getInputStream());
+    }
+
+    private static URLConnection getUrlConnection(String url) throws IOException {
+        URL request = new URL(url);
+        RedirectableRequest redirectableRequest = new RedirectableRequest(request, 5);
+        redirectableRequest.setConnectTimeout(YahooFinance.CONNECTION_TIMEOUT);
+        redirectableRequest.setReadTimeout(YahooFinance.CONNECTION_TIMEOUT);
+        return redirectableRequest.openConnection();
+    }
+
+    private String getUrl() {
+        Map<String, String> params = new LinkedHashMap<String, String>();
+        params.put("s", this.symbol);
+
+        params.put("a", String.valueOf(this.from.get(Calendar.MONTH)));
+        params.put("b", String.valueOf(this.from.get(Calendar.DAY_OF_MONTH)));
+        params.put("c", String.valueOf(this.from.get(Calendar.YEAR)));
+        params.put("d", String.valueOf(this.to.get(Calendar.MONTH)));
+        params.put("e", String.valueOf(this.to.get(Calendar.DAY_OF_MONTH)));
+        params.put("f", String.valueOf(this.to.get(Calendar.YEAR)));
+        params.put("g", this.interval.getTag());
+
+        params.put("ignore", ".csv");
+
+        return YahooFinance.HISTQUOTES_BASE_URL + "?" + Utils.getURLParameters(params);
+    }
+
     private HistoricalQuote parseCSVLine(String line) {
         String[] data = line.split(YahooFinance.QUOTES_CSV_DELIMITER);
-        return new HistoricalQuote(this.symbol, Utils.parseHistDate(data[0]))
-                .setOpen(Utils.getBigDecimal(data[1]))
-                .setLow(Utils.getBigDecimal(data[3]))
-                .setHigh(Utils.getBigDecimal(data[2]))
-                .setClose(Utils.getBigDecimal(data[4]))
-                .setAdjClose(Utils.getBigDecimal(data[6]))
-                .setVolume(Utils.getLong(data[5]));
+        return new HistoricalQuote(this.symbol, CalendarUtil.parseHistDate(data[0]))
+                .setOpen(BigDecimalUtil.getBigDecimal(data[1]))
+                .setLow(BigDecimalUtil.getBigDecimal(data[3]))
+                .setHigh(BigDecimalUtil.getBigDecimal(data[2]))
+                .setClose(BigDecimalUtil.getBigDecimal(data[4]))
+                .setAdjClose(BigDecimalUtil.getBigDecimal(data[6]))
+                .setVolume(PrimitiveTypesConvertUtils.getLong(data[5]));
     }
 
 }
