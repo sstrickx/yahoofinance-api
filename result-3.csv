@@ -14,7 +14,6 @@ src\main\java\yahoofinance\query2v8\HistQuotesQuery2V8Request.java:96:	Excessive
 src\main\java\yahoofinance\quotes\csv\QuotesProperty.java:7:	ExcessiveClassLength:	Avoid really long classes.
 src\main\java\yahoofinance\quotes\csv\StockQuotesData.java:16:	ExcessiveClassLength:	Avoid really long classes.
 src\main\java\yahoofinance\quotes\csv\StockQuotesData.java:32:	ExcessiveMethodLength:	Avoid really long methods.
-src\main\java\yahoofinance\quotes\csv\StockQuotesData.java:63:	ExcessiveMethodLength:	Avoid really long methods.
 src\main\java\yahoofinance\quotes\csv\StockQuotesRequest.java:10:	ExcessiveClassLength:	Avoid really long classes.
 src\main\java\yahoofinance\quotes\csv\StockQuotesRequest.java:107:	ExcessiveMethodLength:	Avoid really long methods.
 src\main\java\yahoofinance\quotes\fx\FxSymbols.java:7:	ExcessiveClassLength:	Avoid really long classes.

@@ -62,34 +62,30 @@ public class StockQuotesData {
     
     public StockStats getStats() {
         String symbol = this.getValue(QuotesProperty.Symbol);
-        StockStats stats = new StockStats(symbol);
-        
+        return buildStockStats(new StockStats(symbol));
+    }
+
+    private StockStats buildStockStats(StockStats stats) {
         stats.setMarketCap(BigDecimalUtil.getBigDecimal(this.getValue(QuotesProperty.MarketCapitalization)));
         stats.setSharesFloat(PrimitiveTypesConvertUtils.getLong(this.getValue(QuotesProperty.SharesFloat)));
         stats.setSharesOutstanding(PrimitiveTypesConvertUtils.getLong(this.getValue(QuotesProperty.SharesOutstanding)));
         stats.setSharesOwned(PrimitiveTypesConvertUtils.getLong(this.getValue(QuotesProperty.SharesOwned)));
-        
         stats.setEps(BigDecimalUtil.getBigDecimal(this.getValue(QuotesProperty.DilutedEPS)));
         stats.setPe(BigDecimalUtil.getBigDecimal(this.getValue(QuotesProperty.PERatio)));
         stats.setPeg(BigDecimalUtil.getBigDecimal(this.getValue(QuotesProperty.PEGRatio)));
-        
         stats.setEpsEstimateCurrentYear(BigDecimalUtil.getBigDecimal(this.getValue(QuotesProperty.EPSEstimateCurrentYear)));
         stats.setEpsEstimateNextQuarter(BigDecimalUtil.getBigDecimal(this.getValue(QuotesProperty.EPSEstimateNextQuarter)));
         stats.setEpsEstimateNextYear(BigDecimalUtil.getBigDecimal(this.getValue(QuotesProperty.EPSEstimateNextYear)));
-        
         stats.setPriceBook(BigDecimalUtil.getBigDecimal(this.getValue(QuotesProperty.PriceBook)));
         stats.setPriceSales(BigDecimalUtil.getBigDecimal(this.getValue(QuotesProperty.PriceSales)));
         stats.setBookValuePerShare(BigDecimalUtil.getBigDecimal(this.getValue(QuotesProperty.BookValuePerShare)));
-        
         stats.setOneYearTargetPrice(BigDecimalUtil.getBigDecimal(this.getValue(QuotesProperty.OneyrTargetPrice)));
         stats.setEBITDA(BigDecimalUtil.getBigDecimal(this.getValue(QuotesProperty.EBITDA)));
         stats.setRevenue(BigDecimalUtil.getBigDecimal(this.getValue(QuotesProperty.Revenue)));
-        
         stats.setShortRatio(BigDecimalUtil.getBigDecimal(this.getValue(QuotesProperty.ShortRatio)));
-        
         return stats;
     }
-    
+
     public StockDividend getDividend() {
         String symbol = this.getValue(QuotesProperty.Symbol);
         StockDividend dividend = new StockDividend(symbol);
