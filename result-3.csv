@@ -18,7 +18,6 @@ src\main\java\yahoofinance\quotes\csv\StockQuotesRequest.java:10:	ExcessiveClass
 src\main\java\yahoofinance\quotes\csv\StockQuotesRequest.java:107:	ExcessiveMethodLength:	Avoid really long methods.
 src\main\java\yahoofinance\quotes\fx\FxSymbols.java:7:	ExcessiveClassLength:	Avoid really long classes.
 src\main\java\yahoofinance\quotes\fx\FxSymbols.java:7:	DataClass:	The class 'FxSymbols' is suspected to be a Data Class (WOC=0.000%, NOPA=89, NOAM=0, WMC=0)
-src\main\java\yahoofinance\quotes\query1v7\QuotesRequest.java:57:	ExcessiveMethodLength:	Avoid really long methods.
 src\main\java\yahoofinance\quotes\query1v7\StockQuotesQuery1V7Request.java:20:	ExcessiveClassLength:	Avoid really long classes.
 src\main\java\yahoofinance\quotes\query1v7\StockQuotesQuery1V7Request.java:58:	ExcessiveMethodLength:	Avoid really long methods.
 src\main\java\yahoofinance\quotes\query1v7\StockQuotesQuery1V7Request.java:94:	ExcessiveMethodLength:	Avoid really long methods.
