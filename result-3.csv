@@ -20,8 +20,7 @@ src\main\java\yahoofinance\quotes\fx\FxSymbols.java:7:	ExcessiveClassLength:	Avo
 src\main\java\yahoofinance\quotes\fx\FxSymbols.java:7:	DataClass:	The class 'FxSymbols' is suspected to be a Data Class (WOC=0.000%, NOPA=89, NOAM=0, WMC=0)
 src\main\java\yahoofinance\quotes\query1v7\StockQuotesQuery1V7Request.java:20:	ExcessiveClassLength:	Avoid really long classes.
 src\main\java\yahoofinance\quotes\query1v7\StockQuotesQuery1V7Request.java:58:	ExcessiveMethodLength:	Avoid really long methods.
-src\main\java\yahoofinance\quotes\query1v7\StockQuotesQuery1V7Request.java:94:	ExcessiveMethodLength:	Avoid really long methods.
-src\main\java\yahoofinance\quotes\query1v7\StockQuotesQuery1V7Request.java:128:	ExcessiveMethodLength:	Avoid really long methods.
+src\main\java\yahoofinance\quotes\query1v7\StockQuotesQuery1V7Request.java:112:	ExcessiveMethodLength:	Avoid really long methods.
 src\main\java\yahoofinance\quotes\stock\StockDividend.java:12:	DataClass:	The class 'StockDividend' is suspected to be a Data Class (WOC=18.182%, NOPA=0, NOAM=9, WMC=15)
 src\main\java\yahoofinance\quotes\stock\StockQuote.java:16:	ExcessiveClassLength:	Avoid really long classes.
 src\main\java\yahoofinance\quotes\stock\StockStats.java:14:	ExcessiveClassLength:	Avoid really long classes.
