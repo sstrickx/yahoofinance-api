@@ -32,28 +32,32 @@ public final class BigDecimalUtil {
             return result;
         }
         try {
-            data = PrimitiveTypesConvertUtils.cleanNumberString(data);
-            char lastChar = data.charAt(data.length() - 1);
-            BigDecimal multiplier = BigDecimal.ONE;
-            switch (lastChar) {
-                case 'B':
-                    data = data.substring(0, data.length() - 1);
-                    multiplier = BILLION;
-                    break;
-                case 'M':
-                    data = data.substring(0, data.length() - 1);
-                    multiplier = MILLION;
-                    break;
-                case 'K':
-                    data = data.substring(0, data.length() - 1);
-                    multiplier = THOUSAND;
-                    break;
-            }
-            result = new BigDecimal(data).multiply(multiplier);
+            result = buildResult(data);
         } catch (NumberFormatException e) {
             Utils.log.warn("Failed to parse: " + data);
             Utils.log.debug("Failed to parse: " + data, e);
         }
         return result;
+    }
+
+    private static BigDecimal buildResult(String data){
+        data = PrimitiveTypesConvertUtils.cleanNumberString(data);
+        char lastChar = data.charAt(data.length() - 1);
+        BigDecimal multiplier = BigDecimal.ONE;
+        switch (lastChar) {
+            case 'B':
+                data = data.substring(0, data.length() - 1);
+                multiplier = BILLION;
+                break;
+            case 'M':
+                data = data.substring(0, data.length() - 1);
+                multiplier = MILLION;
+                break;
+            case 'K':
+                data = data.substring(0, data.length() - 1);
+                multiplier = THOUSAND;
+                break;
+        }
+        return new BigDecimal(data).multiply(multiplier);
     }
 }
