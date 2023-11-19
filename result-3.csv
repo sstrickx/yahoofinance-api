@@ -26,7 +26,6 @@ src\main\java\yahoofinance\quotes\stock\StockQuote.java:16:	ExcessiveClassLength
 src\main\java\yahoofinance\quotes\stock\StockStats.java:14:	ExcessiveClassLength:	Avoid really long classes.
 src\main\java\yahoofinance\quotes\stock\StockStats.java:14:	DataClass:	The class 'StockStats' is suspected to be a Data Class (WOC=5.128%, NOPA=0, NOAM=37, WMC=41)
 src\main\java\yahoofinance\utils\CalendarUtil.java:11:	ExcessiveClassLength:	Avoid really long classes.
-src\main\java\yahoofinance\utils\CalendarUtil.java:19:	ExcessiveMethodLength:	Avoid really long methods.
 src\main\java\yahoofinance\utils\PrimitiveTypesConvertUtils.java:19:	ExcessiveMethodLength:	Avoid really long methods.
 src\main\java\yahoofinance\utils\RedirectableRequest.java:12:	DataClass:	The class 'RedirectableRequest' is suspected to be a Data Class (WOC=20.000%, NOPA=0, NOAM=8, WMC=22)
 src\main\java\yahoofinance\utils\RedirectableRequest.java:37:	ExcessiveMethodLength:	Avoid really long methods.

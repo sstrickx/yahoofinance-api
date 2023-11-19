@@ -24,23 +24,7 @@ public class CalendarUtil {
         SimpleDateFormat format = new SimpleDateFormat(getDividendDateFormat(date), Locale.US);
         format.setTimeZone(TimeZone.getTimeZone(YahooFinance.TIMEZONE));
         try {
-            Calendar today = Calendar.getInstance(TimeZone.getTimeZone(YahooFinance.TIMEZONE));
-            Calendar parsedDate = Calendar.getInstance(TimeZone.getTimeZone(YahooFinance.TIMEZONE));
-            parsedDate.setTime(format.parse(date));
-
-            if (parsedDate.get(Calendar.YEAR) == 1970) {
-                // Not really clear which year the dividend date is... making a reasonable guess.
-                int monthDiff = parsedDate.get(Calendar.MONTH) - today.get(Calendar.MONTH);
-                int year = today.get(Calendar.YEAR);
-                if (monthDiff > 6) {
-                    year -= 1;
-                } else if (monthDiff < -6) {
-                    year += 1;
-                }
-                parsedDate.set(Calendar.YEAR, year);
-            }
-
-            return parsedDate;
+            return getParsedDate(date, format);
         } catch (ParseException ex) {
             Utils.log.warn("Failed to parse dividend date: " + date);
             Utils.log.debug("Failed to parse dividend date: " + date, ex);
@@ -107,5 +91,25 @@ public class CalendarUtil {
         } else {
             return "M/d/yy";
         }
+    }
+
+    private static Calendar getParsedDate(String date, SimpleDateFormat format) throws ParseException {
+        Calendar today = Calendar.getInstance(TimeZone.getTimeZone(YahooFinance.TIMEZONE));
+        Calendar parsedDate = Calendar.getInstance(TimeZone.getTimeZone(YahooFinance.TIMEZONE));
+        parsedDate.setTime(format.parse(date));
+
+        if (parsedDate.get(Calendar.YEAR) == 1970) {
+            //                // Not really clear which year the dividend date is... making a reasonable guess.
+            int monthDiff = parsedDate.get(Calendar.MONTH) - today.get(Calendar.MONTH);
+            int year = today.get(Calendar.YEAR);
+            if (monthDiff > 6) {
+                year -= 1;
+            } else if (monthDiff < -6) {
+                year += 1;
+            }
+            parsedDate.set(Calendar.YEAR, year);
+        }
+
+        return parsedDate;
     }
 }
