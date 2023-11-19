@@ -3,7 +3,9 @@ package yahoofinance.query2v8;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
@@ -130,7 +132,6 @@ public class HistQuotesQuery2V8Request {
     }
 
     public String getJson() throws IOException {
-
         if(this.from.after(this.to)) {
             log.warn("Unable to retrieve historical quotes. "
                     + "From-date should not be after to-date. From: "
@@ -138,25 +139,7 @@ public class HistQuotesQuery2V8Request {
             return "";
         }
 
-        Map<String, String> params = new LinkedHashMap<String, String>();
-        params.put("period1", String.valueOf(this.from.getTimeInMillis() / 1000));
-        params.put("period2", String.valueOf(this.to.getTimeInMillis() / 1000));
-        params.put("interval", this.interval.getTag());
-        params.put("events", "div|split");
-
-        String url = YahooFinance.HISTQUOTES_QUERY2V8_BASE_URL + URLEncoder.encode(this.symbol , "UTF-8") + "?" + Utils.getURLParameters(params);
-
-        // Get CSV from Yahoo
-        log.info("Sending request: " + url);
-
-        URL request = new URL(url);
-        RedirectableRequest redirectableRequest = new RedirectableRequest(request, 5);
-        redirectableRequest.setConnectTimeout(YahooFinance.CONNECTION_TIMEOUT);
-        redirectableRequest.setReadTimeout(YahooFinance.CONNECTION_TIMEOUT);
-        URLConnection connection = redirectableRequest.openConnection();
-
-        InputStreamReader is = new InputStreamReader(connection.getInputStream());
-        BufferedReader br = new BufferedReader(is);
+        BufferedReader br = getBufferedReader();
         StringBuilder builder = new StringBuilder();
         for (String line = br.readLine(); line != null; line = br.readLine()) {
             if (builder.length() > 0) {
@@ -165,6 +148,32 @@ public class HistQuotesQuery2V8Request {
             builder.append(line);
         }
         return builder.toString();
+    }
+
+    private BufferedReader getBufferedReader() throws IOException {
+        URL request = getUrl();
+        RedirectableRequest redirectableRequest = new RedirectableRequest(request, 5);
+        redirectableRequest.setConnectTimeout(YahooFinance.CONNECTION_TIMEOUT);
+        redirectableRequest.setReadTimeout(YahooFinance.CONNECTION_TIMEOUT);
+        URLConnection connection = redirectableRequest.openConnection();
+
+        InputStreamReader is = new InputStreamReader(connection.getInputStream());
+        return new BufferedReader(is);
+    }
+
+    private URL getUrl() throws UnsupportedEncodingException, MalformedURLException {
+        Map<String, String> params = new LinkedHashMap<String, String>();
+        params.put("period1", String.valueOf(this.from.getTimeInMillis() / 1000));
+        params.put("period2", String.valueOf(this.to.getTimeInMillis() / 1000));
+        params.put("interval", this.interval.getTag());
+        params.put("events", "div|split");
+
+        String url = YahooFinance.HISTQUOTES_QUERY2V8_BASE_URL + URLEncoder.encode(this.symbol , "UTF-8") + "?" + Utils.getURLParameters(params);
+        // Get CSV from Yahoo
+        log.info("Sending request: " + url);
+
+        URL request = new URL(url);
+        return request;
     }
 
 }

@@ -9,9 +9,8 @@ src\main\java\yahoofinance\histquotes2\HistoricalDividend.java:14:	DataClass:	Th
 src\main\java\yahoofinance\histquotes2\HistoricalSplit.java:13:	DataClass:	The class 'HistoricalSplit' is suspected to be a Data Class (WOC=20.000%, NOPA=0, NOAM=8, WMC=12)
 src\main\java\yahoofinance\histquotes\HistQuotesRequest.java:29:	ExcessiveClassLength:	Avoid really long classes.
 src\main\java\yahoofinance\histquotes\HistoricalQuote.java:13:	ExcessiveClassLength:	Avoid really long classes.
-src\main\java\yahoofinance\query2v8\HistQuotesQuery2V8Request.java:32:	ExcessiveClassLength:	Avoid really long classes.
-src\main\java\yahoofinance\query2v8\HistQuotesQuery2V8Request.java:94:	ExcessiveMethodLength:	Avoid really long methods.
-src\main\java\yahoofinance\query2v8\HistQuotesQuery2V8Request.java:132:	ExcessiveMethodLength:	Avoid really long methods.
+src\main\java\yahoofinance\query2v8\HistQuotesQuery2V8Request.java:34:	ExcessiveClassLength:	Avoid really long classes.
+src\main\java\yahoofinance\query2v8\HistQuotesQuery2V8Request.java:96:	ExcessiveMethodLength:	Avoid really long methods.
 src\main\java\yahoofinance\quotes\csv\QuotesProperty.java:7:	ExcessiveClassLength:	Avoid really long classes.
 src\main\java\yahoofinance\quotes\csv\StockQuotesData.java:16:	ExcessiveClassLength:	Avoid really long classes.
 src\main\java\yahoofinance\quotes\csv\StockQuotesData.java:32:	ExcessiveMethodLength:	Avoid really long methods.
