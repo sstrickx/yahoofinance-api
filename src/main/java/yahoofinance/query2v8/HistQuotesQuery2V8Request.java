@@ -20,11 +20,11 @@ import org.slf4j.LoggerFactory;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import yahoofinance.Utils;
+import yahoofinance.utils.Utils;
 import yahoofinance.YahooFinance;
 import yahoofinance.histquotes.HistoricalQuote;
 import yahoofinance.histquotes2.QueryInterval;
-import yahoofinance.util.RedirectableRequest;
+import yahoofinance.utils.RedirectableRequest;
 
 /**
  * @author Stijn Strickx
@@ -116,15 +116,13 @@ public class HistQuotesQuery2V8Request {
             BigDecimal low = lows.get(i).decimalValue();
             BigDecimal close = closes.get(i).decimalValue();
 
-            HistoricalQuote quote = new HistoricalQuote(
-                symbol,
-                calendar,
-                open,
-                low,
-                high,
-                close,
-                adjClose,
-                volume);
+            HistoricalQuote quote = new HistoricalQuote(this.symbol, calendar)
+                    .setOpen(open)
+                    .setLow(low)
+                    .setHigh(high)
+                    .setClose(close)
+                    .setAdjClose(adjClose)
+                    .setVolume(volume);
             result.add(quote);
         }
 

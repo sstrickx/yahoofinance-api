@@ -1,4 +1,4 @@
-package yahoofinance.util;
+package yahoofinance.utils;
 
 import java.io.IOException;
 import java.net.*;
