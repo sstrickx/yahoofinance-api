@@ -106,8 +106,7 @@ public class CrumbManager {
         URL request = new URL(YahooFinance.HISTQUOTES2_SCRAPE_URL);
         RedirectableRequest redirectableRequest = buildRedirectableRequest(request);
 
-        URLConnection connection = redirectableRequest.openConnection();
-        return connection;
+        return redirectableRequest.openConnection();
     }
 
     private static void sendPostRequest(URLConnection connection, Map<String, String> datas) throws IOException {
@@ -121,7 +120,7 @@ public class CrumbManager {
 
         StringBuilder params = buildParams(datas);
 
-        log.debug("Params = "+ params.toString());
+        log.debug("Params = "+ params);
         connectionOath.setRequestProperty("Content-Length",Integer.toString(params.toString().length()));
         OutputStreamWriter outputStreamWriter = new OutputStreamWriter(connectionOath.getOutputStream());
         outputStreamWriter.write(params.toString());
@@ -131,8 +130,7 @@ public class CrumbManager {
     }
 
     private static HttpURLConnection getHttpURLConnection(URLConnection connection, URL requestOath) throws IOException {
-        HttpURLConnection connectionOath = null;
-        connectionOath = (HttpURLConnection) requestOath.openConnection();
+        HttpURLConnection connectionOath = (HttpURLConnection) requestOath.openConnection();
         connectionOath.setConnectTimeout(YahooFinance.CONNECTION_TIMEOUT);
         connectionOath.setReadTimeout(YahooFinance.CONNECTION_TIMEOUT);
         connectionOath.setRequestMethod( "POST" );
@@ -145,7 +143,7 @@ public class CrumbManager {
     }
 
     private static StringBuilder buildParams(Map<String, String> datas) throws UnsupportedEncodingException {
-        StringBuilder params= new StringBuilder("");
+        StringBuilder params= new StringBuilder();
 
         for ( String key : datas.keySet() ) {
             if(params.length() == 0 ){
@@ -169,14 +167,13 @@ public class CrumbManager {
         BufferedReader br = new BufferedReader(is);
         Pattern patternPostForm = Pattern.compile("action=\"/consent\"");
         Pattern patternInput = Pattern.compile("(<input type=\"hidden\" name=\")(.*?)(\" value=\")(.*?)(\">)");
-        Map<String, String> datas = buildData(br, patternPostForm, patternInput);
-        return datas;
+        return buildData(br, patternPostForm, patternInput);
     }
 
     private static Map<String, String> buildData(BufferedReader br, Pattern patternPostForm, Pattern patternInput) throws IOException {
         String line;
         Matcher matcher;
-        Map<String,String> datas = new HashMap<String,String>();
+        Map<String,String> datas = new HashMap<>();
         boolean postFind = false;
         // Read source to get params data for post request
         while( (line = br.readLine())!=null ) {
@@ -203,7 +200,7 @@ public class CrumbManager {
 
         URL crumbRequest = new URL(YahooFinance.HISTQUOTES2_CRUMB_URL);
         RedirectableRequest redirectableCrumbRequest = buildRedirectableRequest(crumbRequest);
-        Map<String, String> requestProperties = new HashMap<String, String>();
+        Map<String, String> requestProperties = new HashMap<>();
         requestProperties.put("Cookie", cookie);
 
         String crumbResult = buildCrumbResult(redirectableCrumbRequest, requestProperties);
@@ -226,7 +223,6 @@ public class CrumbManager {
         URLConnection crumbConnection = redirectableCrumbRequest.openConnection(requestProperties);
         InputStreamReader is = new InputStreamReader(crumbConnection.getInputStream());
         BufferedReader br = new BufferedReader(is);
-        String crumbResult = br.readLine();
-        return crumbResult;
+        return br.readLine();
     }
 }
