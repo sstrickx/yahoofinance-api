@@ -4,7 +4,7 @@ package yahoofinance.quotes.stock;
 import java.math.BigDecimal;
 import java.util.Calendar;
 
-import yahoofinance.Utils;
+import yahoofinance.utils.BigDecimalUtil;
 
 /**
  * All getters can return null in case the data is not available from Yahoo Finance.
@@ -45,7 +45,7 @@ public class StockStats {
     }
     
     public BigDecimal getROE() {
-        return Utils.getPercent(this.EBITDA, this.marketCap);
+        return BigDecimalUtil.getPercent(this.EBITDA, this.marketCap);
     }
 
     public String getSymbol() {
