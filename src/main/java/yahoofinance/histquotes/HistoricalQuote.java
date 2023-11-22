@@ -11,21 +11,14 @@ import java.util.Calendar;
  * @author Stijn Strickx
  */
 public class HistoricalQuote {
-    
     private String symbol;
-    
     private Calendar date;
-    
     private BigDecimal open;
     private BigDecimal low;
     private BigDecimal high;
     private BigDecimal close;
-    
     private BigDecimal adjClose;
-    
     private Long volume;
-    
-    public HistoricalQuote() {}
 
     public HistoricalQuote(String symbol, Calendar date) {
         this.symbol = symbol;
@@ -71,11 +64,7 @@ public class HistoricalQuote {
         this.low = low;
         return this;
     }
-    
-    /**
-     * 
-     * @return      the intra-day high
-     */
+
     public BigDecimal getHigh() {
         return high;
     }

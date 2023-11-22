@@ -1,10 +1,7 @@
 package yahoofinance.histquotes2;
 
-import yahoofinance.utils.Utils;
+import yahoofinance.utils.*;
 import yahoofinance.YahooFinance;
-import yahoofinance.utils.BigDecimalUtil;
-import yahoofinance.utils.CalendarUtil;
-import yahoofinance.utils.RedirectableRequest;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -21,11 +18,8 @@ import org.slf4j.LoggerFactory;
  * @author Stijn Strickx (modified by Randle McMurphy)
  */
 public class HistDividendsRequest {
-
-
     private static final Logger log = LoggerFactory.getLogger(HistDividendsRequest.class);
     private final String symbol;
-
     private final Calendar from;
     private final Calendar to;
 
@@ -36,7 +30,6 @@ public class HistDividendsRequest {
     }
 
     public static final Calendar DEFAULT_TO = Calendar.getInstance();
-
     // Interval has no meaning here and is not used here
     // But it's better to leave it because Yahoo's standard query URL still contains it
     public static final QueryInterval DEFAULT_INTERVAL = QueryInterval.DAILY;
@@ -80,52 +73,23 @@ public class HistDividendsRequest {
             return result;
         }
         Map<String, String> params = configureParams();
-        String url = YahooFinance.HISTQUOTES2_BASE_URL + URLEncoder.encode(this.symbol, "UTF-8") + "?" + Utils.getURLParameters(params);
-        // Get CSV from Yahoo
-        log.info("Sending request: " + url);
-        URLConnection connection = getUrlConnection(url);
-        parseCSV(connection, result);
-        return result;
-    }
-
-    private Map<String, String> configureParams() throws IOException {
-        Map<String, String> params = new LinkedHashMap<String, String>();
-        params.put("period1", String.valueOf(this.from.getTimeInMillis() / 1000));
-        params.put("period2", String.valueOf(this.to.getTimeInMillis() / 1000));
-
-        // Interval has no meaning here and is not used here
-        // But it's better to leave it because Yahoo's standard query URL still contains it
-        params.put("interval", DEFAULT_INTERVAL.getTag());
-
-        // This will instruct Yahoo to return dividends
-        params.put("events", "div");
-
-        params.put("crumb", CrumbManager.getCrumb());
-        return params;
-    }
-
-    private void parseCSV(URLConnection connection, List<HistoricalDividend> result) throws IOException {
-        InputStreamReader is = new InputStreamReader(connection.getInputStream());
-        BufferedReader br = new BufferedReader(is);
+        BufferedReader br = RequestUtils.getBufferedReaderByParams(params, symbol);
         br.readLine(); // skip the first line
         // Parse CSV
         for (String line = br.readLine(); line != null; line = br.readLine()) {
-
             log.info("Parsing CSV line: " + Utils.unescape(line));
             HistoricalDividend dividend = this.parseCSVLine(line);
             result.add(dividend);
         }
+        return result;
     }
 
-    private URLConnection getUrlConnection(String url) throws IOException {
-        URL request = new URL(url);
-        RedirectableRequest redirectableRequest = new RedirectableRequest(request, 5);
-        redirectableRequest.setConnectTimeout(YahooFinance.CONNECTION_TIMEOUT);
-        redirectableRequest.setReadTimeout(YahooFinance.CONNECTION_TIMEOUT);
-        Map<String, String> requestProperties = new HashMap<String, String>();
-        requestProperties.put("Cookie", CrumbManager.getCookie());
-        URLConnection connection = redirectableRequest.openConnection(requestProperties);
-        return connection;
+    private Map<String, String> configureParams() throws IOException {
+        Map<String, String> params = RequestUtils.configureParamsPeriodsAndInterval(from, to, DEFAULT_INTERVAL);
+        // This will instruct Yahoo to return dividends
+        params.put("events", "div");
+        params.put("crumb", CrumbManager.getCrumb());
+        return params;
     }
 
     private HistoricalDividend parseCSVLine(String line) {
@@ -135,5 +99,4 @@ public class HistDividendsRequest {
                 BigDecimalUtil.getBigDecimal(data[1])
         );
     }
-
 }

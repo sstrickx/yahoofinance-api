@@ -7,7 +7,6 @@ import yahoofinance.histquotes.Interval;
  * @author Stijn Strickx
  */
 public class IntervalMapper {
-
     public static QueryInterval get(Interval interval) {
         switch(interval) {
             case DAILY: return QueryInterval.DAILY;
@@ -16,5 +15,4 @@ public class IntervalMapper {
         }
         return QueryInterval.MONTHLY;
     }
-
 }

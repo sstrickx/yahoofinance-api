@@ -6,7 +6,6 @@ package yahoofinance.histquotes;
  * @author Stijn Strickx
  */
 public enum Interval {
-    
     DAILY("d"),
     WEEKLY("w"),
     MONTHLY("m");
@@ -20,5 +19,4 @@ public enum Interval {
     public String getTag() {
         return this.tag;
     }
-    
 }
