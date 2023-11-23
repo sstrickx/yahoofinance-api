@@ -2,6 +2,7 @@ package yahoofinance.histquotes;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
@@ -15,24 +16,19 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import yahoofinance.Utils;
+import yahoofinance.utils.*;
 import yahoofinance.YahooFinance;
-import yahoofinance.util.RedirectableRequest;
 
 /**
  *
  * @author Stijn Strickx
  */
 public class HistQuotesRequest {
-
     private static final Logger log = LoggerFactory.getLogger(HistQuotesRequest.class);
     private final String symbol;
-
     private final Calendar from;
     private final Calendar to;
-
     private final Interval interval;
-
     public static final Calendar DEFAULT_FROM = Calendar.getInstance();
 
     static {
@@ -85,66 +81,49 @@ public class HistQuotesRequest {
     }
 
     public List<HistoricalQuote> getResult() throws IOException {
-
         List<HistoricalQuote> result = new ArrayList<HistoricalQuote>();
-        
         if(this.from.after(this.to)) {
             log.warn("Unable to retrieve historical quotes. "
                     + "From-date should not be after to-date. From: "
                     + this.from.getTime() + ", to: " + this.to.getTime());
             return result;
         }
-        
-        Map<String, String> params = new LinkedHashMap<String, String>();
-        params.put("s", this.symbol);
-
-        params.put("a", String.valueOf(this.from.get(Calendar.MONTH)));
-        params.put("b", String.valueOf(this.from.get(Calendar.DAY_OF_MONTH)));
-        params.put("c", String.valueOf(this.from.get(Calendar.YEAR)));
-
-        params.put("d", String.valueOf(this.to.get(Calendar.MONTH)));
-        params.put("e", String.valueOf(this.to.get(Calendar.DAY_OF_MONTH)));
-        params.put("f", String.valueOf(this.to.get(Calendar.YEAR)));
-
-        params.put("g", this.interval.getTag());
-
-        params.put("ignore", ".csv");
-
-        String url = YahooFinance.HISTQUOTES_BASE_URL + "?" + Utils.getURLParameters(params);
-
-        // Get CSV from Yahoo
-        log.info("Sending request: " + url);
-
-        URL request = new URL(url);
-        RedirectableRequest redirectableRequest = new RedirectableRequest(request, 5);
-        redirectableRequest.setConnectTimeout(YahooFinance.CONNECTION_TIMEOUT);
-        redirectableRequest.setReadTimeout(YahooFinance.CONNECTION_TIMEOUT);
-        URLConnection connection = redirectableRequest.openConnection();
-
-        InputStreamReader is = new InputStreamReader(connection.getInputStream());
-        BufferedReader br = new BufferedReader(is);
+        BufferedReader br = getBufferedReader();
         br.readLine(); // skip the first line
         // Parse CSV
         for (String line = br.readLine(); line != null; line = br.readLine()) {
-
             log.info("Parsing CSV line: " + Utils.unescape(line));
-            HistoricalQuote quote = this.parseCSVLine(line);
+            HistoricalQuote quote = RequestUtils.parseCSVLine(line, this.symbol);
             result.add(quote);
         }
         return result;
     }
 
-    private HistoricalQuote parseCSVLine(String line) {
-        String[] data = line.split(YahooFinance.QUOTES_CSV_DELIMITER);
-        return new HistoricalQuote(this.symbol,
-                Utils.parseHistDate(data[0]),
-                Utils.getBigDecimal(data[1]),
-                Utils.getBigDecimal(data[3]),
-                Utils.getBigDecimal(data[2]),
-                Utils.getBigDecimal(data[4]),
-                Utils.getBigDecimal(data[6]),
-                Utils.getLong(data[5])
-        );
+    private BufferedReader getBufferedReader() throws IOException {
+        String url = getUrl();
+        return RequestUtils.getBufferedReader(url, getUrlConnection(url).getInputStream());
     }
 
+    private static URLConnection getUrlConnection(String url) throws IOException {
+        URL request = new URL(url);
+        RedirectableRequest redirectableRequest = new RedirectableRequest(request, 5);
+        redirectableRequest.setConnectTimeout(YahooFinance.CONNECTION_TIMEOUT);
+        redirectableRequest.setReadTimeout(YahooFinance.CONNECTION_TIMEOUT);
+        return redirectableRequest.openConnection();
+    }
+
+    private String getUrl() {
+        Map<String, String> params = new LinkedHashMap<String, String>();
+        params.put("s", this.symbol);
+        params.put("a", String.valueOf(this.from.get(Calendar.MONTH)));
+        params.put("b", String.valueOf(this.from.get(Calendar.DAY_OF_MONTH)));
+        params.put("c", String.valueOf(this.from.get(Calendar.YEAR)));
+        params.put("d", String.valueOf(this.to.get(Calendar.MONTH)));
+        params.put("e", String.valueOf(this.to.get(Calendar.DAY_OF_MONTH)));
+        params.put("f", String.valueOf(this.to.get(Calendar.YEAR)));
+        params.put("g", this.interval.getTag());
+        params.put("ignore", ".csv");
+
+        return YahooFinance.HISTQUOTES_BASE_URL + "?" + Utils.getURLParameters(params);
+    }
 }

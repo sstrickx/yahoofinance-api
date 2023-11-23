@@ -11,55 +11,45 @@ import java.util.Calendar;
  * @author Stijn Strickx
  */
 public class HistoricalQuote {
-    
     private String symbol;
-    
     private Calendar date;
-    
     private BigDecimal open;
     private BigDecimal low;
     private BigDecimal high;
     private BigDecimal close;
-    
     private BigDecimal adjClose;
-    
     private Long volume;
-    
-    public HistoricalQuote() {}
 
-    public HistoricalQuote(String symbol, Calendar date, BigDecimal open, BigDecimal low, BigDecimal high, BigDecimal close, BigDecimal adjClose, Long volume) {
+    public HistoricalQuote(String symbol, Calendar date) {
         this.symbol = symbol;
         this.date = date;
-        this.open = open;
-        this.low = low;
-        this.high = high;
-        this.close = close;
-        this.adjClose = adjClose;
-        this.volume = volume;
     }
 
     public String getSymbol() {
         return symbol;
     }
 
-    public void setSymbol(String symbol) {
+    public HistoricalQuote setSymbol(String symbol) {
         this.symbol = symbol;
+        return this;
     }
     
     public Calendar getDate() {
         return date;
     }
 
-    public void setDate(Calendar date) {
+    public HistoricalQuote setDate(Calendar date) {
         this.date = date;
+        return this;
     }
 
     public BigDecimal getOpen() {
         return open;
     }
 
-    public void setOpen(BigDecimal open) {
+    public HistoricalQuote setOpen(BigDecimal open) {
         this.open = open;
+        return this;
     }
 
     /**
@@ -70,28 +60,27 @@ public class HistoricalQuote {
         return low;
     }
 
-    public void setLow(BigDecimal low) {
+    public HistoricalQuote setLow(BigDecimal low) {
         this.low = low;
+        return this;
     }
-    
-    /**
-     * 
-     * @return      the intra-day high
-     */
+
     public BigDecimal getHigh() {
         return high;
     }
 
-    public void setHigh(BigDecimal high) {
+    public HistoricalQuote setHigh(BigDecimal high) {
         this.high = high;
+        return this;
     }
 
     public BigDecimal getClose() {
         return close;
     }
 
-    public void setClose(BigDecimal close) {
+    public HistoricalQuote setClose(BigDecimal close) {
         this.close = close;
+        return this;
     }
 
     /**
@@ -106,16 +95,18 @@ public class HistoricalQuote {
         return adjClose;
     }
 
-    public void setAdjClose(BigDecimal adjClose) {
+    public HistoricalQuote setAdjClose(BigDecimal adjClose) {
         this.adjClose = adjClose;
+        return this;
     }
 
     public Long getVolume() {
         return volume;
     }
 
-    public void setVolume(Long volume) {
+    public HistoricalQuote setVolume(Long volume) {
         this.volume = volume;
+        return this;
     }
     
     @Override

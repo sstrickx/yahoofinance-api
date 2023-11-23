@@ -1,7 +1,6 @@
 package yahoofinance.histquotes2;
 
 import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
@@ -11,11 +10,8 @@ import java.util.Calendar;
  * @author Randle McMurphy
  */
 public class HistoricalSplit {
-	
     private String symbol;
-    
     private Calendar date;
-    
     private BigDecimal numerator;
     private BigDecimal denominator;
     
@@ -44,29 +40,6 @@ public class HistoricalSplit {
         this.date = date;
     }
 
-    public BigDecimal getNumerator() {
-        return numerator;
-    }
-
-    public void setNumerator(BigDecimal numerator) {
-        this.numerator = numerator;
-    }
-
-    public BigDecimal getDenominator() {
-        return denominator;
-    }
-
-    public void setDenominator(BigDecimal denominator) {
-        this.denominator = denominator;
-    }
-
-    /**
-     * 
-     * @return      a calculated split factor value which is equal to numerator divided by denominator
-     */
-    public BigDecimal getSplitFactor() {
-        return numerator.divide(denominator, 10, RoundingMode.HALF_UP);  
-    }
 
     @Override
     public String toString() {

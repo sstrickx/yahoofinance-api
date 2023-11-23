@@ -1,10 +1,9 @@
 package yahoofinance.histquotes2;
 
-import yahoofinance.Utils;
+import yahoofinance.utils.*;
 import yahoofinance.YahooFinance;
 import yahoofinance.histquotes.HistoricalQuote;
 import yahoofinance.histquotes.Interval;
-import yahoofinance.util.RedirectableRequest;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -98,61 +97,29 @@ public class HistQuotes2Request {
     }
 
     public List<HistoricalQuote> getResult() throws IOException {
-
         List<HistoricalQuote> result = new ArrayList<HistoricalQuote>();
-        
         if(this.from.after(this.to)) {
             log.warn("Unable to retrieve historical quotes. "
                     + "From-date should not be after to-date. From: "
                     + this.from.getTime() + ", to: " + this.to.getTime());
             return result;
         }
-
-        Map<String, String> params = new LinkedHashMap<String, String>();
-        params.put("period1", String.valueOf(this.from.getTimeInMillis() / 1000));
-        params.put("period2", String.valueOf(this.to.getTimeInMillis() / 1000));
-
-        params.put("interval", this.interval.getTag());
-
-        params.put("crumb", CrumbManager.getCrumb());
-
-        String url = YahooFinance.HISTQUOTES2_BASE_URL + URLEncoder.encode(this.symbol , "UTF-8") + "?" + Utils.getURLParameters(params);
-
-        // Get CSV from Yahoo
-        log.info("Sending request: " + url);
-
-        URL request = new URL(url);
-        RedirectableRequest redirectableRequest = new RedirectableRequest(request, 5);
-        redirectableRequest.setConnectTimeout(YahooFinance.CONNECTION_TIMEOUT);
-        redirectableRequest.setReadTimeout(YahooFinance.CONNECTION_TIMEOUT);
-        Map<String, String> requestProperties = new HashMap<String, String>();
-        requestProperties.put("Cookie", CrumbManager.getCookie());
-        URLConnection connection = redirectableRequest.openConnection(requestProperties);
-
-        InputStreamReader is = new InputStreamReader(connection.getInputStream());
-        BufferedReader br = new BufferedReader(is);
+        Map<String, String> params = configureParams();
+        BufferedReader br = RequestUtils.getBufferedReaderByParams(params, symbol);
         br.readLine(); // skip the first line
         // Parse CSV
         for (String line = br.readLine(); line != null; line = br.readLine()) {
-
             log.info("Parsing CSV line: " + Utils.unescape(line));
-            HistoricalQuote quote = this.parseCSVLine(line);
+            HistoricalQuote quote = RequestUtils.parseCSVLine(line, this.symbol);
             result.add(quote);
         }
         return result;
     }
 
-    private HistoricalQuote parseCSVLine(String line) {
-        String[] data = line.split(YahooFinance.QUOTES_CSV_DELIMITER);
-        return new HistoricalQuote(this.symbol,
-                Utils.parseHistDate(data[0]),
-                Utils.getBigDecimal(data[1]),
-                Utils.getBigDecimal(data[3]),
-                Utils.getBigDecimal(data[2]),
-                Utils.getBigDecimal(data[4]),
-                Utils.getBigDecimal(data[5]),
-                Utils.getLong(data[6])
-        );
+    private Map<String, String> configureParams() throws IOException {
+        Map<String, String> params = RequestUtils.configureParamsPeriodsAndInterval(from, to, DEFAULT_INTERVAL);
+        params.put("crumb", CrumbManager.getCrumb());
+        return params;
     }
 
 }

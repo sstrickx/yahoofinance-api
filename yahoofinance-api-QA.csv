@@ -1,0 +1,499 @@
+Kind,Name,MaxInheritanceTree,SumCyclomatic,PercentLackOfCohesion,PercentLackOfCohesionModified,AvgCyclomatic,CountClassCoupled,CountLineCode,CountLineComment,CountClassBase,Essential
+File,"BigDecimalUtil.java",,11,,,3,,57,0,,
+File,"CalendarUtil.java",,18,,,3,,87,17,,
+File,"CrumbManager.java",,36,,,2,,187,7,,
+File,"ExchangeTimeZone.java",,5,,,3,,166,18,,
+File,"FxQuote.java",,9,,,1,,39,23,,
+File,"FxQuoteRequestTest.java",,2,,,1,,38,4,,
+File,"FxQuotesQuery1V7Request.java",,2,,,1,,16,4,,
+File,"FxQuotesRequest.java",,3,,,2,,25,4,,
+File,"FxSymbols.java",,0,,,0,,92,3,,
+File,"HistDividendsRequest.java",,9,,,1,,76,13,,
+File,"HistQuotes2Request.java",,14,,,1,,91,11,,
+File,"HistQuotesQuery2V8Request.java",,15,,,1,,142,8,,
+File,"HistQuotesRequest.java",,13,,,1,,103,10,,
+File,"HistSplitsRequest.java",,10,,,1,,83,13,,
+File,"HistoricalDividend.java",,7,,,1,,33,7,,
+File,"HistoricalQuote.java",,18,,,1,,81,17,,
+File,"HistoricalQuoteRequestTest.java",,9,,,1,,122,8,,
+File,"HistoricalSplit.java",,7,,,1,,35,5,,
+File,"Interval.java",,2,,,1,,13,4,,
+File,"IntervalMapper.java",,4,,,4,,12,4,,
+File,"MockedServersTest.java",,3,,,3,,38,6,,
+File,"PrimitiveTypesConvertUtils.java",,16,,,3,,73,0,,
+File,"QueryInterval.java",,2,,,1,,13,4,,
+File,"QuoteRequestFlowTest.java",,4,,,1,,56,4,,
+File,"QuotesProperty.java",,2,,,1,,98,92,,
+File,"QuotesRequest.java",,14,,,1,,85,14,,
+File,"QuotesRequest.java",,8,,,2,,61,13,,
+File,"RedirectableRequest.java",,19,,,2,,82,5,,
+File,"RequestUtils.java",,5,,,1,,56,1,,
+File,"ResponseResource.java",,4,,,1,,30,4,,
+File,"SimpleQuoteRequestTest.java",,3,,,1,,119,8,,
+File,"Stock.java",,45,,,1,,184,287,,
+File,"StockDataUpdater.java",,16,,,2,,80,0,,
+File,"StockDividend.java",,15,,,1,,59,5,,
+File,"StockDividendBuilder.java",,7,,,1,,31,0,,
+File,"StockQuote.java",,59,,,1,,207,66,,
+File,"StockQuotesData.java",,8,,,1,,91,4,,
+File,"StockQuotesQuery1V7Request.java",,15,,,3,,101,5,,
+File,"StockQuotesRequest.java",,10,,,5,,136,27,,
+File,"StockStats.java",,41,,,1,,150,7,,
+File,"Utils.java",,20,,,4,,75,12,,
+File,"YahooFinance.java",,30,,,1,,146,261,,
+File,"YahooFinanceDispatcher.java",,6,,,2,,50,4,,
+File,"pom.xml",,0,,,0,,275,5,,0
+File,"ruleset.xml",,0,,,0,,27,0,,0
+Package,"yahoofinance",,109,,,1,,745,572,,
+Public Class,"yahoofinance.FxQuoteRequestTest",2,2,0,0,1,8,29,4,1,
+Public Method,"yahoofinance.FxQuoteRequestTest.fxFlowTest",,1,,,,,12,0,,1
+Public Method,"yahoofinance.FxQuoteRequestTest.fxQuoteTest",,1,,,,,15,0,,1
+Public Class,"yahoofinance.HistoricalQuoteRequestTest",2,9,21,21,1,13,110,8,1,
+Public Method,"yahoofinance.HistoricalQuoteRequestTest.historicalFlowTest",,1,,,,,17,1,,1
+Public Method,"yahoofinance.HistoricalQuoteRequestTest.historicalQuoteTest",,2,,,,,26,0,,1
+Public Method,"yahoofinance.HistoricalQuoteRequestTest.impossibleRequestTest",,2,,,,,18,2,,1
+Public Method,"yahoofinance.HistoricalQuoteRequestTest.intervalTest",,1,,,,,9,0,,1
+Public Method,"yahoofinance.HistoricalQuoteRequestTest.multiStockTest",,1,,,,,11,0,,1
+Public Method,"yahoofinance.HistoricalQuoteRequestTest.multiYearTest",,1,,,,,16,1,,1
+Public Method,"yahoofinance.HistoricalQuoteRequestTest.setup",,1,,,,,9,0,,1
+Public Class,"yahoofinance.QuoteRequestFlowTest",2,4,0,0,1,11,48,4,1,
+Public Method,"yahoofinance.QuoteRequestFlowTest.dividendRefreshTest",,1,,,,,11,0,,1
+Public Method,"yahoofinance.QuoteRequestFlowTest.multipleQuoteRequestTest",,1,,,,,13,0,,1
+Public Method,"yahoofinance.QuoteRequestFlowTest.quoteRefreshTest",,1,,,,,11,0,,1
+Public Method,"yahoofinance.QuoteRequestFlowTest.statsRefreshTest",,1,,,,,11,0,,1
+Public Class,"yahoofinance.SimpleQuoteRequestTest",2,3,0,0,1,10,111,8,1,
+Public Method,"yahoofinance.SimpleQuoteRequestTest.europeStockQuoteTest",,1,,,,,61,0,,1
+Public Method,"yahoofinance.SimpleQuoteRequestTest.singaporeStockQuoteTest",,1,,,,,24,0,,1
+Public Method,"yahoofinance.SimpleQuoteRequestTest.usStockQuoteTest",,1,,,,,24,4,,1
+Public Class,"yahoofinance.Stock",1,45,91,87,1,20,163,287,1,
+Public Constructor,"yahoofinance.Stock.Stock",,1,,,,,4,0,,1
+Public Method,"yahoofinance.Stock.getCurrency",,1,,,,,3,5,,1
+Public Method,"yahoofinance.Stock.getDividend",,1,,,,,3,6,,1
+Public Method,"yahoofinance.Stock.getDividend",,1,,,,,3,19,,1
+Public Method,"yahoofinance.Stock.getDividendHistory",,2,,,,,6,22,,1
+Public Method,"yahoofinance.Stock.getDividendHistory",,1,,,,,3,12,,1
+Public Method,"yahoofinance.Stock.getDividendHistory",,2,,,,,9,14,,1
+Public Method,"yahoofinance.Stock.getHistory",,2,,,,,6,26,,1
+Public Method,"yahoofinance.Stock.getHistory",,1,,,,,3,13,,1
+Public Method,"yahoofinance.Stock.getHistory",,1,,,,,3,13,,1
+Public Method,"yahoofinance.Stock.getHistory",,1,,,,,3,14,,1
+Public Method,"yahoofinance.Stock.getHistory",,1,,,,,3,14,,1
+Public Method,"yahoofinance.Stock.getHistory",,2,,,,,10,15,,1
+Public Method,"yahoofinance.Stock.getName",,1,,,,,3,5,,1
+Public Method,"yahoofinance.Stock.getQuote",,1,,,,,3,6,,1
+Public Method,"yahoofinance.Stock.getQuote",,1,,,,,3,18,,1
+Public Method,"yahoofinance.Stock.getSplitHistory",,2,,,,,6,22,,1
+Public Method,"yahoofinance.Stock.getSplitHistory",,1,,,,,3,12,,1
+Public Method,"yahoofinance.Stock.getSplitHistory",,2,,,,,9,14,,1
+Public Method,"yahoofinance.Stock.getStats",,1,,,,,3,6,,1
+Public Method,"yahoofinance.Stock.getStats",,1,,,,,3,18,,1
+Public Method,"yahoofinance.Stock.getStockExchange",,1,,,,,3,5,,1
+Public Method,"yahoofinance.Stock.getSymbol",,1,,,,,3,0,,1
+Public Method,"yahoofinance.Stock.isValid",,1,,,,,3,4,,1
+Public Method,"yahoofinance.Stock.print",,4,,,,,14,0,,1
+Public Method,"yahoofinance.Stock.setCurrency",,1,,,,,3,0,,1
+Public Method,"yahoofinance.Stock.setDividend",,1,,,,,3,0,,1
+Public Method,"yahoofinance.Stock.setDividendHistory",,1,,,,,3,0,,1
+Public Method,"yahoofinance.Stock.setHistory",,1,,,,,3,0,,1
+Public Method,"yahoofinance.Stock.setName",,1,,,,,3,0,,1
+Public Method,"yahoofinance.Stock.setQuote",,1,,,,,3,0,,1
+Public Method,"yahoofinance.Stock.setSplitHistory",,1,,,,,3,0,,1
+Public Method,"yahoofinance.Stock.setStats",,1,,,,,3,0,,1
+Public Method,"yahoofinance.Stock.setStockExchange",,1,,,,,3,0,,1
+Public Method,"yahoofinance.Stock.toString",,1,,,,,4,0,,1
+Private Method,"yahoofinance.Stock.update",,1,,,,,3,0,,1
+Public Class,"yahoofinance.StockDataUpdater",1,16,50,15,2,14,70,0,1,
+Public Constructor,"yahoofinance.StockDataUpdater.StockDataUpdater",,1,,,,,4,0,,1
+Public Method,"yahoofinance.StockDataUpdater.getDividend",,2,,,,,6,0,,1
+Public Method,"yahoofinance.StockDataUpdater.getDividend",,1,,,,,3,0,,1
+Public Method,"yahoofinance.StockDataUpdater.getQuote",,2,,,,,6,0,,1
+Public Method,"yahoofinance.StockDataUpdater.getQuote",,1,,,,,3,0,,1
+Public Method,"yahoofinance.StockDataUpdater.getStats",,2,,,,,6,0,,1
+Public Method,"yahoofinance.StockDataUpdater.getStats",,1,,,,,3,0,,1
+Public Method,"yahoofinance.StockDataUpdater.update",,4,,,,,19,0,,1
+Private Method,"yahoofinance.StockDataUpdater.updateStock",,1,,,,,9,0,,1
+Private Method,"yahoofinance.StockDataUpdater.updateStock",,1,,,,,6,0,,1
+Public Class,"yahoofinance.YahooFinance",1,30,0,0,1,18,131,261,1,
+Private Static Method,"yahoofinance.YahooFinance.fetchHistoricalQuotes",,2,,,,,6,0,,1
+Public Static Method,"yahoofinance.YahooFinance.get",,1,,,,,3,11,,1
+Public Static Method,"yahoofinance.YahooFinance.get",,1,,,,,4,12,,1
+Public Static Method,"yahoofinance.YahooFinance.get",,1,,,,,3,10,,1
+Public Static Method,"yahoofinance.YahooFinance.get",,1,,,,,3,11,,1
+Public Static Method,"yahoofinance.YahooFinance.get",,1,,,,,3,12,,1
+Public Static Method,"yahoofinance.YahooFinance.get",,1,,,,,3,13,,1
+Public Static Method,"yahoofinance.YahooFinance.get",,1,,,,,4,14,,1
+Public Static Method,"yahoofinance.YahooFinance.get",,1,,,,,3,15,,1
+Public Static Method,"yahoofinance.YahooFinance.get",,1,,,,,3,17,,1
+Public Static Method,"yahoofinance.YahooFinance.get",,1,,,,,3,15,,1
+Public Static Method,"yahoofinance.YahooFinance.get",,1,,,,,3,15,,1
+Public Static Method,"yahoofinance.YahooFinance.get",,1,,,,,3,16,,1
+Public Static Method,"yahoofinance.YahooFinance.get",,1,,,,,3,17,,1
+Public Static Method,"yahoofinance.YahooFinance.get",,1,,,,,3,18,,1
+Public Static Method,"yahoofinance.YahooFinance.getFx",,2,,,,,9,16,,1
+Public Static Method,"yahoofinance.YahooFinance.getFx",,3,,,,,15,11,,1
+Private Static Method,"yahoofinance.YahooFinance.getQuotes",,4,,,,,14,0,,1
+Private Static Method,"yahoofinance.YahooFinance.getQuotes",,1,,,,,5,0,,1
+Private Static Method,"yahoofinance.YahooFinance.getStockQuotes",,2,,,,,8,0,,1
+Private Static Method,"yahoofinance.YahooFinance.getStockQuotes1V7",,2,,,,,7,0,,1
+Package,"yahoofinance.exchanges",,5,,,3,,166,18,,
+Public Class,"yahoofinance.exchanges.ExchangeTimeZone",1,5,0,0,3,6,160,18,1,
+Public Static Method,"yahoofinance.exchanges.ExchangeTimeZone.get",,2,,,,,7,6,,1
+Public Static Method,"yahoofinance.exchanges.ExchangeTimeZone.getStockTimeZone",,3,,,,,10,8,,3
+Package,"yahoofinance.histquotes",,33,,,1,,197,31,,
+Public Class,"yahoofinance.histquotes.HistQuotesRequest",1,13,70,18,1,19,86,10,1,
+Public Constructor,"yahoofinance.histquotes.HistQuotesRequest.HistQuotesRequest",,1,,,,,3,0,,1
+Public Constructor,"yahoofinance.histquotes.HistQuotesRequest.HistQuotesRequest",,1,,,,,3,0,,1
+Public Constructor,"yahoofinance.histquotes.HistQuotesRequest.HistQuotesRequest",,1,,,,,3,0,,1
+Public Constructor,"yahoofinance.histquotes.HistQuotesRequest.HistQuotesRequest",,1,,,,,6,0,,1
+Public Constructor,"yahoofinance.histquotes.HistQuotesRequest.HistQuotesRequest",,1,,,,,3,0,,1
+Public Constructor,"yahoofinance.histquotes.HistQuotesRequest.HistQuotesRequest",,1,,,,,7,0,,1
+Private Method,"yahoofinance.histquotes.HistQuotesRequest.cleanHistCalendar",,1,,,,,7,4,,1
+Private Method,"yahoofinance.histquotes.HistQuotesRequest.getBufferedReader",,1,,,,,4,0,,1
+Public Method,"yahoofinance.histquotes.HistQuotesRequest.getResult",,3,,,,,17,2,,1
+Private Method,"yahoofinance.histquotes.HistQuotesRequest.getUrl",,1,,,,,13,0,,1
+Private Static Method,"yahoofinance.histquotes.HistQuotesRequest.getUrlConnection",,1,,,,,7,0,,1
+Public Class,"yahoofinance.histquotes.HistoricalQuote",1,18,83,83,1,6,77,17,1,
+Public Constructor,"yahoofinance.histquotes.HistoricalQuote.HistoricalQuote",,1,,,,,4,0,,1
+Public Method,"yahoofinance.histquotes.HistoricalQuote.getAdjClose",,1,,,,,3,8,,1
+Public Method,"yahoofinance.histquotes.HistoricalQuote.getClose",,1,,,,,3,0,,1
+Public Method,"yahoofinance.histquotes.HistoricalQuote.getDate",,1,,,,,3,0,,1
+Public Method,"yahoofinance.histquotes.HistoricalQuote.getHigh",,1,,,,,3,0,,1
+Public Method,"yahoofinance.histquotes.HistoricalQuote.getLow",,1,,,,,3,4,,1
+Public Method,"yahoofinance.histquotes.HistoricalQuote.getOpen",,1,,,,,3,0,,1
+Public Method,"yahoofinance.histquotes.HistoricalQuote.getSymbol",,1,,,,,3,0,,1
+Public Method,"yahoofinance.histquotes.HistoricalQuote.getVolume",,1,,,,,3,0,,1
+Public Method,"yahoofinance.histquotes.HistoricalQuote.setAdjClose",,1,,,,,4,0,,1
+Public Method,"yahoofinance.histquotes.HistoricalQuote.setClose",,1,,,,,4,0,,1
+Public Method,"yahoofinance.histquotes.HistoricalQuote.setDate",,1,,,,,4,0,,1
+Public Method,"yahoofinance.histquotes.HistoricalQuote.setHigh",,1,,,,,4,0,,1
+Public Method,"yahoofinance.histquotes.HistoricalQuote.setLow",,1,,,,,4,0,,1
+Public Method,"yahoofinance.histquotes.HistoricalQuote.setOpen",,1,,,,,4,0,,1
+Public Method,"yahoofinance.histquotes.HistoricalQuote.setSymbol",,1,,,,,4,0,,1
+Public Method,"yahoofinance.histquotes.HistoricalQuote.setVolume",,1,,,,,4,0,,1
+Public Method,"yahoofinance.histquotes.HistoricalQuote.toString",,1,,,,,7,0,,1
+Public Enum Type,"yahoofinance.histquotes.Interval",1,2,,,1,1,12,4,1,
+Constructor,"yahoofinance.histquotes.Interval.Interval",,1,,,,,3,0,,1
+Public Method,"yahoofinance.histquotes.Interval.getTag",,1,,,,,3,0,,1
+Public Implicit Method,"yahoofinance.histquotes.Interval.valueOf",,0,,,,,,,,
+Public Implicit Method,"yahoofinance.histquotes.Interval.values",,0,,,,,,,,
+Package,"yahoofinance.histquotes2",,89,,,1,,530,64,,
+Public Class,"yahoofinance.histquotes2.CrumbManager",1,36,77,63,2,24,168,7,1,
+Private Static Method,"yahoofinance.histquotes2.CrumbManager.buildConnection",,1,,,,,5,0,,1
+Private Static Method,"yahoofinance.histquotes2.CrumbManager.buildCrumbResult",,1,,,,,6,0,,1
+Private Static Method,"yahoofinance.histquotes2.CrumbManager.buildData",,5,,,,,19,1,,1
+Private Static Method,"yahoofinance.histquotes2.CrumbManager.buildParams",,3,,,,,16,0,,1
+Private Static Method,"yahoofinance.histquotes2.CrumbManager.buildRedirectableRequest",,1,,,,,6,0,,1
+Private Static Method,"yahoofinance.histquotes2.CrumbManager.consentToActivateCookie",,1,,,,,7,1,,1
+Public Static Method,"yahoofinance.histquotes2.CrumbManager.getCookie",,2,,,,,6,0,,1
+Public Static Method,"yahoofinance.histquotes2.CrumbManager.getCrumb",,2,,,,,6,0,,1
+Private Static Method,"yahoofinance.histquotes2.CrumbManager.getHttpURLConnection",,1,,,,,12,0,,1
+Private Static Method,"yahoofinance.histquotes2.CrumbManager.getUrlConnection",,6,,,,,17,0,,6
+Public Static Method,"yahoofinance.histquotes2.CrumbManager.refresh",,1,,,,,4,0,,1
+Private Static Method,"yahoofinance.histquotes2.CrumbManager.sendPostRequest",,1,,,,,16,0,,1
+Private Static Method,"yahoofinance.histquotes2.CrumbManager.setCookie",,5,,,,,13,2,,4
+Private Static Method,"yahoofinance.histquotes2.CrumbManager.setCookieWithCookieJar",,3,,,,,12,0,,3
+Private Static Method,"yahoofinance.histquotes2.CrumbManager.setCrumb",,3,,,,,18,0,,1
+Public Class,"yahoofinance.histquotes2.HistDividendsRequest",1,9,48,29,1,18,64,13,1,
+Public Constructor,"yahoofinance.histquotes2.HistDividendsRequest.HistDividendsRequest",,1,,,,,3,0,,1
+Public Constructor,"yahoofinance.histquotes2.HistDividendsRequest.HistDividendsRequest",,1,,,,,5,0,,1
+Public Constructor,"yahoofinance.histquotes2.HistDividendsRequest.HistDividendsRequest",,1,,,,,7,0,,1
+Private Method,"yahoofinance.histquotes2.HistDividendsRequest.cleanHistCalendar",,1,,,,,7,5,,1
+Private Method,"yahoofinance.histquotes2.HistDividendsRequest.configureParams",,1,,,,,6,1,,1
+Public Method,"yahoofinance.histquotes2.HistDividendsRequest.getResult",,3,,,,,17,2,,1
+Private Method,"yahoofinance.histquotes2.HistDividendsRequest.parseCSVLine",,1,,,,,7,0,,1
+Public Class,"yahoofinance.histquotes2.HistQuotes2Request",1,14,77,15,1,17,77,11,1,
+Public Constructor,"yahoofinance.histquotes2.HistQuotes2Request.HistQuotes2Request",,1,,,,,3,0,,1
+Public Constructor,"yahoofinance.histquotes2.HistQuotes2Request.HistQuotes2Request",,1,,,,,3,0,,1
+Public Constructor,"yahoofinance.histquotes2.HistQuotes2Request.HistQuotes2Request",,1,,,,,3,0,,1
+Public Constructor,"yahoofinance.histquotes2.HistQuotes2Request.HistQuotes2Request",,1,,,,,6,0,,1
+Public Constructor,"yahoofinance.histquotes2.HistQuotes2Request.HistQuotes2Request",,1,,,,,3,0,,1
+Public Constructor,"yahoofinance.histquotes2.HistQuotes2Request.HistQuotes2Request",,1,,,,,7,0,,1
+Public Constructor,"yahoofinance.histquotes2.HistQuotes2Request.HistQuotes2Request",,1,,,,,3,0,,1
+Public Constructor,"yahoofinance.histquotes2.HistQuotes2Request.HistQuotes2Request",,1,,,,,3,0,,1
+Public Constructor,"yahoofinance.histquotes2.HistQuotes2Request.HistQuotes2Request",,1,,,,,3,0,,1
+Private Method,"yahoofinance.histquotes2.HistQuotes2Request.cleanHistCalendar",,1,,,,,7,4,,1
+Private Method,"yahoofinance.histquotes2.HistQuotes2Request.configureParams",,1,,,,,5,0,,1
+Public Method,"yahoofinance.histquotes2.HistQuotes2Request.getResult",,3,,,,,18,2,,1
+Public Class,"yahoofinance.histquotes2.HistSplitsRequest",1,10,54,21,1,19,70,13,1,
+Public Constructor,"yahoofinance.histquotes2.HistSplitsRequest.HistSplitsRequest",,1,,,,,3,0,,1
+Public Constructor,"yahoofinance.histquotes2.HistSplitsRequest.HistSplitsRequest",,1,,,,,5,0,,1
+Public Constructor,"yahoofinance.histquotes2.HistSplitsRequest.HistSplitsRequest",,1,,,,,7,0,,1
+Private Method,"yahoofinance.histquotes2.HistSplitsRequest.cleanHistCalendar",,1,,,,,7,4,,1
+Private Method,"yahoofinance.histquotes2.HistSplitsRequest.createUrl",,1,,,,,6,1,,1
+Private Method,"yahoofinance.histquotes2.HistSplitsRequest.getBufferedReader",,1,,,,,4,0,,1
+Public Method,"yahoofinance.histquotes2.HistSplitsRequest.getResult",,3,,,,,17,2,,1
+Private Method,"yahoofinance.histquotes2.HistSplitsRequest.parseCSVLine",,1,,,,,9,0,,1
+Public Class,"yahoofinance.histquotes2.HistoricalDividend",1,7,52,52,1,5,29,7,1,
+Public Constructor,"yahoofinance.histquotes2.HistoricalDividend.HistoricalDividend",,1,,,,,5,0,,1
+Public Constructor,"yahoofinance.histquotes2.HistoricalDividend.HistoricalDividend",,1,,,,,1,0,,1
+Public Method,"yahoofinance.histquotes2.HistoricalDividend.getDate",,1,,,,,3,0,,1
+Public Method,"yahoofinance.histquotes2.HistoricalDividend.getSymbol",,1,,,,,3,0,,1
+Public Method,"yahoofinance.histquotes2.HistoricalDividend.setDate",,1,,,,,3,0,,1
+Public Method,"yahoofinance.histquotes2.HistoricalDividend.setSymbol",,1,,,,,3,0,,1
+Public Method,"yahoofinance.histquotes2.HistoricalDividend.toString",,1,,,,,6,0,,1
+Public Class,"yahoofinance.histquotes2.HistoricalSplit",1,7,57,57,1,5,31,5,1,
+Public Constructor,"yahoofinance.histquotes2.HistoricalSplit.HistoricalSplit",,1,,,,,1,0,,1
+Public Constructor,"yahoofinance.histquotes2.HistoricalSplit.HistoricalSplit",,1,,,,,6,0,,1
+Public Method,"yahoofinance.histquotes2.HistoricalSplit.getDate",,1,,,,,3,0,,1
+Public Method,"yahoofinance.histquotes2.HistoricalSplit.getSymbol",,1,,,,,3,0,,1
+Public Method,"yahoofinance.histquotes2.HistoricalSplit.setDate",,1,,,,,3,0,,1
+Public Method,"yahoofinance.histquotes2.HistoricalSplit.setSymbol",,1,,,,,3,0,,1
+Public Method,"yahoofinance.histquotes2.HistoricalSplit.toString",,1,,,,,6,0,,1
+Public Class,"yahoofinance.histquotes2.IntervalMapper",1,4,0,0,4,2,10,4,1,
+Public Static Method,"yahoofinance.histquotes2.IntervalMapper.get",,4,,,,,8,0,,1
+Public Enum Type,"yahoofinance.histquotes2.QueryInterval",1,2,,,1,1,12,4,1,
+Constructor,"yahoofinance.histquotes2.QueryInterval.QueryInterval",,1,,,,,3,0,,1
+Public Method,"yahoofinance.histquotes2.QueryInterval.getTag",,1,,,,,3,0,,1
+Public Implicit Method,"yahoofinance.histquotes2.QueryInterval.valueOf",,0,,,,,,,,
+Public Implicit Method,"yahoofinance.histquotes2.QueryInterval.values",,0,,,,,,,,
+Package,"yahoofinance.mock",,13,,,2,,118,14,,
+Public Class,"yahoofinance.mock.MockedServersTest",1,3,0,0,3,8,30,6,1,
+Public Static Method,"yahoofinance.mock.MockedServersTest.startServers",,3,,,,,24,2,,1
+Public Class,"yahoofinance.mock.ResponseResource",1,4,33,0,1,8,22,4,1,
+Public Constructor,"yahoofinance.mock.ResponseResource.ResponseResource",,1,,,,,3,0,,1
+Public Constructor,"yahoofinance.mock.ResponseResource.ResponseResource",,1,,,,,4,0,,1
+Public Method,"yahoofinance.mock.ResponseResource.get",,2,,,,,10,0,,1
+Public Class,"yahoofinance.mock.YahooFinanceDispatcher",2,6,0,0,2,15,37,4,1,
+Public Constructor,"yahoofinance.mock.YahooFinanceDispatcher.YahooFinanceDispatcher",,1,,,,,4,0,,1
+Public Method,"yahoofinance.mock.YahooFinanceDispatcher.dispatch",,2,,,,,9,0,,1
+Private Method,"yahoofinance.mock.YahooFinanceDispatcher.loadRequests",,3,,,,,20,0,,1
+Package,"yahoofinance.query2v8",,15,,,1,,142,8,,
+Public Class,"yahoofinance.query2v8.HistQuotesQuery2V8Request",1,15,70,9,1,26,117,8,1,
+Public Constructor,"yahoofinance.query2v8.HistQuotesQuery2V8Request.HistQuotesQuery2V8Request",,1,,,,,3,0,,1
+Public Constructor,"yahoofinance.query2v8.HistQuotesQuery2V8Request.HistQuotesQuery2V8Request",,1,,,,,3,0,,1
+Public Constructor,"yahoofinance.query2v8.HistQuotesQuery2V8Request.HistQuotesQuery2V8Request",,1,,,,,3,0,,1
+Public Constructor,"yahoofinance.query2v8.HistQuotesQuery2V8Request.HistQuotesQuery2V8Request",,1,,,,,6,0,,1
+Public Constructor,"yahoofinance.query2v8.HistQuotesQuery2V8Request.HistQuotesQuery2V8Request",,1,,,,,3,0,,1
+Public Constructor,"yahoofinance.query2v8.HistQuotesQuery2V8Request.HistQuotesQuery2V8Request",,1,,,,,7,0,,1
+Private Method,"yahoofinance.query2v8.HistQuotesQuery2V8Request.cleanHistCalendar",,1,,,,,7,4,,1
+Private Method,"yahoofinance.query2v8.HistQuotesQuery2V8Request.getBufferedReader",,1,,,,,9,0,,1
+Public Method,"yahoofinance.query2v8.HistQuotesQuery2V8Request.getJson",,4,,,,,17,0,,1
+Public Method,"yahoofinance.query2v8.HistQuotesQuery2V8Request.getResult",,2,,,,,34,0,,1
+Private Method,"yahoofinance.query2v8.HistQuotesQuery2V8Request.getUrl",,1,,,,,11,1,,1
+Package,"yahoofinance.quotes",,0,,,0,,0,0,,
+Package,"yahoofinance.quotes.csv",,37,,,1,,435,141,,
+Public Class,"yahoofinance.quotes.csv.FxQuotesRequest",2,3,0,0,2,9,18,4,1,
+Public Constructor,"yahoofinance.quotes.csv.FxQuotesRequest.FxQuotesRequest",,1,,,,,3,0,,1
+Protected Method,"yahoofinance.quotes.csv.FxQuotesRequest.parseCSVLine",,2,,,,,8,0,,1
+Public Enum Type,"yahoofinance.quotes.csv.QuotesProperty",1,2,,,1,1,97,92,1,
+Constructor,"yahoofinance.quotes.csv.QuotesProperty.QuotesProperty",,1,,,,,3,0,,1
+Public Method,"yahoofinance.quotes.csv.QuotesProperty.getTag",,1,,,,,3,0,,1
+Public Implicit Method,"yahoofinance.quotes.csv.QuotesProperty.valueOf",,0,,,,,,,,
+Public Implicit Method,"yahoofinance.quotes.csv.QuotesProperty.values",,0,,,,,,,,
+Public Abstract Generic Class,"yahoofinance.quotes.csv.QuotesRequest",1,14,65,40,1,17,70,14,1,
+Public Constructor,"yahoofinance.quotes.csv.QuotesRequest.QuotesRequest",,1,,,,,4,0,,1
+Generic Parameter,"yahoofinance.quotes.csv.QuotesRequest.T",1,0,0,0,0,0,,,1,
+Private Method,"yahoofinance.quotes.csv.QuotesRequest.getFieldsString",,2,,,,,7,0,,1
+Public Method,"yahoofinance.quotes.csv.QuotesRequest.getProperties",,1,,,,,3,0,,1
+Public Method,"yahoofinance.quotes.csv.QuotesRequest.getQuery",,1,,,,,3,0,,1
+Public Method,"yahoofinance.quotes.csv.QuotesRequest.getResult",,1,,,,,9,7,,1
+Public Method,"yahoofinance.quotes.csv.QuotesRequest.getSingleResult",,2,,,,,7,0,,1
+Private Method,"yahoofinance.quotes.csv.QuotesRequest.getUrlConnection",,1,,,,,8,0,,1
+Private Method,"yahoofinance.quotes.csv.QuotesRequest.parseCSV",,3,,,,,13,1,,1
+Protected Abstract Method,"yahoofinance.quotes.csv.QuotesRequest.parseCSVLine",,0,,,,,1,0,,0
+Private Method,"yahoofinance.quotes.csv.QuotesRequest.setParams",,1,,,,,7,0,,1
+Public Method,"yahoofinance.quotes.csv.QuotesRequest.setProperties",,1,,,,,3,0,,1
+Public Class,"yahoofinance.quotes.csv.StockQuotesData",1,8,71,0,1,11,82,4,1,
+Public Constructor,"yahoofinance.quotes.csv.StockQuotesData.StockQuotesData",,1,,,,,3,0,,1
+Private Method,"yahoofinance.quotes.csv.StockQuotesData.buildStockStats",,1,,,,,20,0,,1
+Public Method,"yahoofinance.quotes.csv.StockQuotesData.getDividend",,1,,,,,9,0,,1
+Public Method,"yahoofinance.quotes.csv.StockQuotesData.getQuote",,1,,,,,25,0,,1
+Public Method,"yahoofinance.quotes.csv.StockQuotesData.getStats",,1,,,,,4,0,,1
+Public Method,"yahoofinance.quotes.csv.StockQuotesData.getStock",,1,,,,,11,0,,1
+Public Method,"yahoofinance.quotes.csv.StockQuotesData.getValue",,2,,,,,7,0,,1
+Public Class,"yahoofinance.quotes.csv.StockQuotesRequest",2,10,0,0,5,6,133,27,1,
+Public Constructor,"yahoofinance.quotes.csv.StockQuotesRequest.StockQuotesRequest",,1,,,,,3,0,,1
+Protected Method,"yahoofinance.quotes.csv.StockQuotesRequest.parseCSVLine",,9,,,,,68,9,,1
+Package,"yahoofinance.quotes.fx",,9,,,1,,131,26,,
+Public Class,"yahoofinance.quotes.fx.FxQuote",1,9,25,25,1,6,35,23,1,
+Public Constructor,"yahoofinance.quotes.fx.FxQuote.FxQuote",,1,,,,,4,0,,1
+Public Constructor,"yahoofinance.quotes.fx.FxQuote.FxQuote",,1,,,,,4,0,,1
+Public Method,"yahoofinance.quotes.fx.FxQuote.getPrice",,1,,,,,3,5,,1
+Public Method,"yahoofinance.quotes.fx.FxQuote.getPrice",,2,,,,,7,14,,1
+Public Method,"yahoofinance.quotes.fx.FxQuote.getSymbol",,1,,,,,3,0,,1
+Public Method,"yahoofinance.quotes.fx.FxQuote.setPrice",,1,,,,,3,0,,1
+Public Method,"yahoofinance.quotes.fx.FxQuote.setSymbol",,1,,,,,3,0,,1
+Public Method,"yahoofinance.quotes.fx.FxQuote.toString",,1,,,,,4,0,,1
+Public Class,"yahoofinance.quotes.fx.FxSymbols",1,0,0,0,0,1,91,3,1,
+Package,"yahoofinance.quotes.query1v7",,25,,,2,,178,22,,
+Public Class,"yahoofinance.quotes.query1v7.FxQuotesQuery1V7Request",2,2,0,0,1,6,11,4,1,
+Public Constructor,"yahoofinance.quotes.query1v7.FxQuotesQuery1V7Request.FxQuotesQuery1V7Request",,1,,,,,3,0,,1
+Protected Method,"yahoofinance.quotes.query1v7.FxQuotesQuery1V7Request.parseJson",,1,,,,,6,0,,1
+Public Abstract Generic Class,"yahoofinance.quotes.query1v7.QuotesRequest",1,8,40,0,2,16,45,13,1,
+Public Constructor,"yahoofinance.quotes.query1v7.QuotesRequest.QuotesRequest",,1,,,,,3,0,,1
+Generic Parameter,"yahoofinance.quotes.query1v7.QuotesRequest.T",1,0,0,0,0,0,,,1,
+Private Method,"yahoofinance.quotes.query1v7.QuotesRequest.getInputStreamReader",,1,,,,,12,1,,1
+Public Method,"yahoofinance.quotes.query1v7.QuotesRequest.getResult",,3,,,,,14,6,,1
+Public Method,"yahoofinance.quotes.query1v7.QuotesRequest.getSingleResult",,2,,,,,7,0,,1
+Public Method,"yahoofinance.quotes.query1v7.QuotesRequest.getSymbols",,1,,,,,3,0,,1
+Protected Abstract Method,"yahoofinance.quotes.query1v7.QuotesRequest.parseJson",,0,,,,,1,0,,0
+Public Class,"yahoofinance.quotes.query1v7.StockQuotesQuery1V7Request",2,15,0,0,3,13,89,5,1,
+Public Constructor,"yahoofinance.quotes.query1v7.StockQuotesQuery1V7Request.StockQuotesQuery1V7Request",,1,,,,,3,0,,1
+Private Method,"yahoofinance.quotes.query1v7.StockQuotesQuery1V7Request.getDividend",,5,,,,,18,1,,1
+Private Method,"yahoofinance.quotes.query1v7.StockQuotesQuery1V7Request.getQuote",,3,,,,,28,0,,1
+Private Method,"yahoofinance.quotes.query1v7.StockQuotesQuery1V7Request.getStats",,2,,,,,15,0,,1
+Private Method,"yahoofinance.quotes.query1v7.StockQuotesQuery1V7Request.getStringValue",,2,,,,,6,0,,1
+Protected Method,"yahoofinance.quotes.query1v7.StockQuotesQuery1V7Request.parseJson",,2,,,,,16,0,,1
+Package,"yahoofinance.quotes.stock",,122,,,1,,447,78,,
+Public Class,"yahoofinance.quotes.stock.StockDividend",1,15,78,78,1,5,56,5,1,
+Public Constructor,"yahoofinance.quotes.stock.StockDividend.StockDividend",,1,,,,,3,0,,1
+Public Method,"yahoofinance.quotes.stock.StockDividend.builder",,1,,,,,3,0,,1
+Public Method,"yahoofinance.quotes.stock.StockDividend.getAnnualYield",,1,,,,,3,0,,1
+Public Method,"yahoofinance.quotes.stock.StockDividend.getAnnualYieldPercent",,1,,,,,3,0,,1
+Public Method,"yahoofinance.quotes.stock.StockDividend.getExDate",,1,,,,,3,0,,1
+Public Method,"yahoofinance.quotes.stock.StockDividend.getPayDate",,1,,,,,3,0,,1
+Public Method,"yahoofinance.quotes.stock.StockDividend.getSymbol",,1,,,,,3,0,,1
+Public Method,"yahoofinance.quotes.stock.StockDividend.setAnnualYield",,1,,,,,3,0,,1
+Public Method,"yahoofinance.quotes.stock.StockDividend.setAnnualYieldPercent",,1,,,,,3,0,,1
+Public Method,"yahoofinance.quotes.stock.StockDividend.setExDate",,1,,,,,3,0,,1
+Public Method,"yahoofinance.quotes.stock.StockDividend.setPayDate",,1,,,,,3,0,,1
+Public Method,"yahoofinance.quotes.stock.StockDividend.toString",,4,,,,,16,0,,1
+Public Class,"yahoofinance.quotes.stock.StockDividendBuilder",1,7,14,0,1,4,28,0,1,
+Private Constructor,"yahoofinance.quotes.stock.StockDividendBuilder.StockDividendBuilder",,1,,,,,3,0,,1
+Public Method,"yahoofinance.quotes.stock.StockDividendBuilder.build",,1,,,,,3,0,,1
+Public Static Method,"yahoofinance.quotes.stock.StockDividendBuilder.builder",,1,,,,,3,0,,1
+Public Method,"yahoofinance.quotes.stock.StockDividendBuilder.setAnnualYield",,1,,,,,4,0,,1
+Public Method,"yahoofinance.quotes.stock.StockDividendBuilder.setAnnualYieldPercent",,1,,,,,4,0,,1
+Public Method,"yahoofinance.quotes.stock.StockDividendBuilder.setExDate",,1,,,,,4,0,,1
+Public Method,"yahoofinance.quotes.stock.StockDividendBuilder.setPayDate",,1,,,,,4,0,,1
+Public Class,"yahoofinance.quotes.stock.StockQuote",1,59,94,94,1,8,201,66,1,
+Public Constructor,"yahoofinance.quotes.stock.StockQuote.StockQuote",,1,,,,,3,0,,1
+Public Method,"yahoofinance.quotes.stock.StockQuote.getAsk",,1,,,,,3,0,,1
+Public Method,"yahoofinance.quotes.stock.StockQuote.getAskSize",,1,,,,,3,0,,1
+Public Method,"yahoofinance.quotes.stock.StockQuote.getAvgVolume",,1,,,,,3,0,,1
+Public Method,"yahoofinance.quotes.stock.StockQuote.getBid",,1,,,,,3,0,,1
+Public Method,"yahoofinance.quotes.stock.StockQuote.getBidSize",,1,,,,,3,0,,1
+Public Method,"yahoofinance.quotes.stock.StockQuote.getChange",,2,,,,,6,4,,1
+Public Method,"yahoofinance.quotes.stock.StockQuote.getChangeFromAvg200",,2,,,,,6,4,,1
+Public Method,"yahoofinance.quotes.stock.StockQuote.getChangeFromAvg200InPercent",,1,,,,,3,4,,1
+Public Method,"yahoofinance.quotes.stock.StockQuote.getChangeFromAvg50",,2,,,,,6,4,,1
+Public Method,"yahoofinance.quotes.stock.StockQuote.getChangeFromAvg50InPercent",,1,,,,,3,4,,1
+Public Method,"yahoofinance.quotes.stock.StockQuote.getChangeFromYearHigh",,2,,,,,6,4,,1
+Public Method,"yahoofinance.quotes.stock.StockQuote.getChangeFromYearHighInPercent",,1,,,,,3,4,,1
+Public Method,"yahoofinance.quotes.stock.StockQuote.getChangeFromYearLow",,2,,,,,6,4,,1
+Public Method,"yahoofinance.quotes.stock.StockQuote.getChangeFromYearLowInPercent",,1,,,,,3,4,,1
+Public Method,"yahoofinance.quotes.stock.StockQuote.getChangeInPercent",,1,,,,,3,4,,1
+Public Method,"yahoofinance.quotes.stock.StockQuote.getDayHigh",,1,,,,,3,0,,1
+Public Method,"yahoofinance.quotes.stock.StockQuote.getDayLow",,1,,,,,3,0,,1
+Public Method,"yahoofinance.quotes.stock.StockQuote.getLastTradeDateStr",,1,,,,,3,0,,1
+Public Method,"yahoofinance.quotes.stock.StockQuote.getLastTradeSize",,1,,,,,3,0,,1
+Public Method,"yahoofinance.quotes.stock.StockQuote.getLastTradeTime",,1,,,,,3,6,,1
+Public Method,"yahoofinance.quotes.stock.StockQuote.getLastTradeTime",,1,,,,,3,7,,1
+Public Method,"yahoofinance.quotes.stock.StockQuote.getLastTradeTimeStr",,1,,,,,3,0,,1
+Public Method,"yahoofinance.quotes.stock.StockQuote.getOpen",,1,,,,,3,0,,1
+Public Method,"yahoofinance.quotes.stock.StockQuote.getPreviousClose",,1,,,,,3,0,,1
+Public Method,"yahoofinance.quotes.stock.StockQuote.getPrice",,1,,,,,3,0,,1
+Public Method,"yahoofinance.quotes.stock.StockQuote.getPriceAvg200",,1,,,,,3,4,,1
+Public Method,"yahoofinance.quotes.stock.StockQuote.getPriceAvg50",,1,,,,,3,4,,1
+Public Method,"yahoofinance.quotes.stock.StockQuote.getSymbol",,1,,,,,3,0,,1
+Public Method,"yahoofinance.quotes.stock.StockQuote.getTimeZone",,1,,,,,3,0,,1
+Public Method,"yahoofinance.quotes.stock.StockQuote.getVolume",,1,,,,,3,0,,1
+Public Method,"yahoofinance.quotes.stock.StockQuote.getYearHigh",,1,,,,,3,0,,1
+Public Method,"yahoofinance.quotes.stock.StockQuote.getYearLow",,1,,,,,3,0,,1
+Public Method,"yahoofinance.quotes.stock.StockQuote.setAsk",,1,,,,,3,0,,1
+Public Method,"yahoofinance.quotes.stock.StockQuote.setAskSize",,1,,,,,3,0,,1
+Public Method,"yahoofinance.quotes.stock.StockQuote.setAvgVolume",,1,,,,,3,0,,1
+Public Method,"yahoofinance.quotes.stock.StockQuote.setBid",,1,,,,,3,0,,1
+Public Method,"yahoofinance.quotes.stock.StockQuote.setBidSize",,1,,,,,3,0,,1
+Public Method,"yahoofinance.quotes.stock.StockQuote.setDayHigh",,1,,,,,3,0,,1
+Public Method,"yahoofinance.quotes.stock.StockQuote.setDayLow",,1,,,,,3,0,,1
+Public Method,"yahoofinance.quotes.stock.StockQuote.setLastTradeDateStr",,1,,,,,3,0,,1
+Public Method,"yahoofinance.quotes.stock.StockQuote.setLastTradeSize",,1,,,,,3,0,,1
+Public Method,"yahoofinance.quotes.stock.StockQuote.setLastTradeTime",,1,,,,,3,0,,1
+Public Method,"yahoofinance.quotes.stock.StockQuote.setLastTradeTimeStr",,1,,,,,3,0,,1
+Public Method,"yahoofinance.quotes.stock.StockQuote.setOpen",,1,,,,,3,0,,1
+Public Method,"yahoofinance.quotes.stock.StockQuote.setPreviousClose",,1,,,,,3,0,,1
+Public Method,"yahoofinance.quotes.stock.StockQuote.setPrice",,1,,,,,3,0,,1
+Public Method,"yahoofinance.quotes.stock.StockQuote.setPriceAvg200",,1,,,,,3,0,,1
+Public Method,"yahoofinance.quotes.stock.StockQuote.setPriceAvg50",,1,,,,,3,0,,1
+Public Method,"yahoofinance.quotes.stock.StockQuote.setTimeZone",,1,,,,,3,0,,1
+Public Method,"yahoofinance.quotes.stock.StockQuote.setVolume",,1,,,,,3,0,,1
+Public Method,"yahoofinance.quotes.stock.StockQuote.setYearHigh",,1,,,,,3,0,,1
+Public Method,"yahoofinance.quotes.stock.StockQuote.setYearLow",,1,,,,,3,0,,1
+Public Method,"yahoofinance.quotes.stock.StockQuote.toString",,1,,,,,4,0,,1
+Public Class,"yahoofinance.quotes.stock.StockStats",1,41,94,94,1,6,146,7,1,
+Public Constructor,"yahoofinance.quotes.stock.StockStats.StockStats",,1,,,,,3,0,,1
+Public Method,"yahoofinance.quotes.stock.StockStats.getBookValuePerShare",,1,,,,,3,0,,1
+Public Method,"yahoofinance.quotes.stock.StockStats.getEBITDA",,1,,,,,3,0,,1
+Public Method,"yahoofinance.quotes.stock.StockStats.getEarningsAnnouncement",,1,,,,,3,0,,1
+Public Method,"yahoofinance.quotes.stock.StockStats.getEps",,1,,,,,3,0,,1
+Public Method,"yahoofinance.quotes.stock.StockStats.getEpsEstimateCurrentYear",,1,,,,,3,0,,1
+Public Method,"yahoofinance.quotes.stock.StockStats.getEpsEstimateNextQuarter",,1,,,,,3,0,,1
+Public Method,"yahoofinance.quotes.stock.StockStats.getEpsEstimateNextYear",,1,,,,,3,0,,1
+Public Method,"yahoofinance.quotes.stock.StockStats.getMarketCap",,1,,,,,3,0,,1
+Public Method,"yahoofinance.quotes.stock.StockStats.getOneYearTargetPrice",,1,,,,,3,0,,1
+Public Method,"yahoofinance.quotes.stock.StockStats.getPe",,1,,,,,3,0,,1
+Public Method,"yahoofinance.quotes.stock.StockStats.getPeg",,1,,,,,3,0,,1
+Public Method,"yahoofinance.quotes.stock.StockStats.getPriceBook",,1,,,,,3,0,,1
+Public Method,"yahoofinance.quotes.stock.StockStats.getPriceSales",,1,,,,,3,0,,1
+Public Method,"yahoofinance.quotes.stock.StockStats.getROE",,1,,,,,3,0,,1
+Public Method,"yahoofinance.quotes.stock.StockStats.getRevenue",,1,,,,,3,0,,1
+Public Method,"yahoofinance.quotes.stock.StockStats.getSharesFloat",,1,,,,,3,0,,1
+Public Method,"yahoofinance.quotes.stock.StockStats.getSharesOutstanding",,1,,,,,3,0,,1
+Public Method,"yahoofinance.quotes.stock.StockStats.getSharesOwned",,1,,,,,3,0,,1
+Public Method,"yahoofinance.quotes.stock.StockStats.getShortRatio",,1,,,,,3,0,,1
+Public Method,"yahoofinance.quotes.stock.StockStats.getSymbol",,1,,,,,3,0,,1
+Public Method,"yahoofinance.quotes.stock.StockStats.setBookValuePerShare",,1,,,,,3,0,,1
+Public Method,"yahoofinance.quotes.stock.StockStats.setEBITDA",,1,,,,,3,0,,1
+Public Method,"yahoofinance.quotes.stock.StockStats.setEarningsAnnouncement",,1,,,,,3,0,,1
+Public Method,"yahoofinance.quotes.stock.StockStats.setEps",,1,,,,,3,0,,1
+Public Method,"yahoofinance.quotes.stock.StockStats.setEpsEstimateCurrentYear",,1,,,,,3,0,,1
+Public Method,"yahoofinance.quotes.stock.StockStats.setEpsEstimateNextQuarter",,1,,,,,3,0,,1
+Public Method,"yahoofinance.quotes.stock.StockStats.setEpsEstimateNextYear",,1,,,,,3,0,,1
+Public Method,"yahoofinance.quotes.stock.StockStats.setMarketCap",,1,,,,,3,0,,1
+Public Method,"yahoofinance.quotes.stock.StockStats.setOneYearTargetPrice",,1,,,,,3,0,,1
+Public Method,"yahoofinance.quotes.stock.StockStats.setPe",,1,,,,,3,0,,1
+Public Method,"yahoofinance.quotes.stock.StockStats.setPeg",,1,,,,,3,0,,1
+Public Method,"yahoofinance.quotes.stock.StockStats.setPriceBook",,1,,,,,3,0,,1
+Public Method,"yahoofinance.quotes.stock.StockStats.setPriceSales",,1,,,,,3,0,,1
+Public Method,"yahoofinance.quotes.stock.StockStats.setRevenue",,1,,,,,3,0,,1
+Public Method,"yahoofinance.quotes.stock.StockStats.setSharesFloat",,1,,,,,3,0,,1
+Public Method,"yahoofinance.quotes.stock.StockStats.setSharesOutstanding",,1,,,,,3,0,,1
+Public Method,"yahoofinance.quotes.stock.StockStats.setSharesOwned",,1,,,,,3,0,,1
+Public Method,"yahoofinance.quotes.stock.StockStats.setShortRatio",,1,,,,,3,0,,1
+Public Method,"yahoofinance.quotes.stock.StockStats.toString",,2,,,,,8,0,,1
+Package,"yahoofinance.utils",,89,,,2,,430,35,,
+Public Final Class,"yahoofinance.utils.BigDecimalUtil",1,11,0,0,3,6,54,0,1,
+Private Static Method,"yahoofinance.utils.BigDecimalUtil.buildResult",,4,,,,,20,0,,1
+Public Static Method,"yahoofinance.utils.BigDecimalUtil.getBigDecimal",,3,,,,,13,0,,1
+Public Static Method,"yahoofinance.utils.BigDecimalUtil.getBigDecimal",,2,,,,,8,0,,1
+Public Static Method,"yahoofinance.utils.BigDecimalUtil.getPercent",,2,,,,,7,0,,1
+Public Class,"yahoofinance.utils.CalendarUtil",1,18,0,0,3,8,80,17,1,
+Private Static Method,"yahoofinance.utils.CalendarUtil.getDividendDateFormat",,4,,,,,11,0,,4
+Private Static Method,"yahoofinance.utils.CalendarUtil.getParsedDate",,4,,,,,16,1,,1
+Public Static Method,"yahoofinance.utils.CalendarUtil.parseDateTime",,3,,,,,16,9,,3
+Public Static Method,"yahoofinance.utils.CalendarUtil.parseDividendDate",,3,,,,,15,7,,3
+Public Static Method,"yahoofinance.utils.CalendarUtil.parseHistDate",,3,,,,,14,0,,3
+Public Static Method,"yahoofinance.utils.CalendarUtil.unixToCalendar",,1,,,,,6,0,,1
+Public Final Class,"yahoofinance.utils.PrimitiveTypesConvertUtils",1,16,0,0,3,5,72,0,1,
+Private Static Method,"yahoofinance.utils.PrimitiveTypesConvertUtils.buildResult",,4,,,,,20,0,,1
+Public Static Method,"yahoofinance.utils.PrimitiveTypesConvertUtils.cleanNumberString",,1,,,,,3,0,,1
+Public Static Method,"yahoofinance.utils.PrimitiveTypesConvertUtils.getDouble",,3,,,,,13,0,,1
+Public Static Method,"yahoofinance.utils.PrimitiveTypesConvertUtils.getInt",,3,,,,,14,0,,1
+Public Static Method,"yahoofinance.utils.PrimitiveTypesConvertUtils.getLong",,3,,,,,14,0,,1
+Public Static Method,"yahoofinance.utils.PrimitiveTypesConvertUtils.getString",,2,,,,,6,0,,1
+Public Class,"yahoofinance.utils.RedirectableRequest",1,19,71,58,2,8,77,5,1,
+Public Constructor,"yahoofinance.utils.RedirectableRequest.RedirectableRequest",,1,,,,,4,0,,1
+Public Constructor,"yahoofinance.utils.RedirectableRequest.RedirectableRequest",,1,,,,,3,0,,1
+Public Method,"yahoofinance.utils.RedirectableRequest.getConnectTimeout",,1,,,,,3,0,,1
+Public Method,"yahoofinance.utils.RedirectableRequest.getProtocolRedirectLimit",,1,,,,,3,0,,1
+Public Method,"yahoofinance.utils.RedirectableRequest.getReadTimeout",,1,,,,,3,0,,1
+Public Method,"yahoofinance.utils.RedirectableRequest.getRequest",,1,,,,,3,0,,1
+Public Method,"yahoofinance.utils.RedirectableRequest.openConnection",,1,,,,,3,0,,1
+Public Method,"yahoofinance.utils.RedirectableRequest.openConnection",,7,,,,,32,1,,3
+Public Method,"yahoofinance.utils.RedirectableRequest.setConnectTimeout",,1,,,,,3,0,,1
+Public Method,"yahoofinance.utils.RedirectableRequest.setProtocolRedirectLimit",,2,,,,,5,0,,1
+Public Method,"yahoofinance.utils.RedirectableRequest.setReadTimeout",,1,,,,,3,0,,1
+Public Method,"yahoofinance.utils.RedirectableRequest.setRequest",,1,,,,,3,0,,1
+Public Class,"yahoofinance.utils.RequestUtils",1,5,0,0,1,21,39,1,1,
+Public Static Method,"yahoofinance.utils.RequestUtils.configureParamsPeriodsAndInterval",,1,,,,,7,0,,1
+Public Static Method,"yahoofinance.utils.RequestUtils.getBufferedReader",,1,,,,,5,0,,1
+Public Static Method,"yahoofinance.utils.RequestUtils.getBufferedReaderByParams",,1,,,,,6,1,,1
+Public Static Method,"yahoofinance.utils.RequestUtils.getUrlConnection",,1,,,,,9,0,,1
+Public Static Method,"yahoofinance.utils.RequestUtils.parseCSVLine",,1,,,,,10,0,,1
+Public Class,"yahoofinance.utils.Utils",1,20,0,0,4,8,68,12,1,
+Public Static Method,"yahoofinance.utils.Utils.getURLParameters",,4,,,,,18,1,,1
+Public Static Method,"yahoofinance.utils.Utils.isParseable",,1,,,,,4,0,,1
+Public Static Method,"yahoofinance.utils.Utils.join",,3,,,,,11,0,,1
+Public Static Method,"yahoofinance.utils.Utils.stripOverhead",,1,,,,,3,7,,1
+Public Static Method,"yahoofinance.utils.Utils.unescape",,11,,,,,29,0,,1

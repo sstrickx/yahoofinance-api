@@ -1,0 +1,36 @@
+src\main\java\yahoofinance\Stock.java:30:	ExcessiveClassLength:	Avoid really long classes.
+src\main\java\yahoofinance\YahooFinance.java:46:	ExcessiveClassLength:	Avoid really long classes.
+src\main\java\yahoofinance\exchanges\ExchangeTimeZone.java:15:	ExcessiveClassLength:	Avoid really long classes.
+src\main\java\yahoofinance\histquotes2\CrumbManager.java:27:	ExcessiveClassLength:	Avoid really long classes.
+src\main\java\yahoofinance\histquotes2\HistQuotes2Request.java:23:	ExcessiveClassLength:	Avoid really long classes.
+src\main\java\yahoofinance\histquotes2\HistoricalDividend.java:14:	DataClass:	The class 'HistoricalDividend' is suspected to be a Data Class (WOC=20.000%, NOPA=0, NOAM=4, WMC=7)
+src\main\java\yahoofinance\histquotes2\HistoricalSplit.java:12:	DataClass:	The class 'HistoricalSplit' is suspected to be a Data Class (WOC=20.000%, NOPA=0, NOAM=4, WMC=7)
+src\main\java\yahoofinance\histquotes\HistQuotesRequest.java:26:	ExcessiveClassLength:	Avoid really long classes.
+src\main\java\yahoofinance\histquotes\HistoricalQuote.java:13:	ExcessiveClassLength:	Avoid really long classes.
+src\main\java\yahoofinance\query2v8\HistQuotesQuery2V8Request.java:34:	ExcessiveClassLength:	Avoid really long classes.
+src\main\java\yahoofinance\query2v8\HistQuotesQuery2V8Request.java:96:	ExcessiveMethodLength:	Avoid really long methods.
+src\main\java\yahoofinance\quotes\csv\QuotesProperty.java:7:	ExcessiveClassLength:	Avoid really long classes.
+src\main\java\yahoofinance\quotes\csv\StockQuotesData.java:16:	ExcessiveClassLength:	Avoid really long classes.
+src\main\java\yahoofinance\quotes\csv\StockQuotesData.java:32:	ExcessiveMethodLength:	Avoid really long methods.
+src\main\java\yahoofinance\quotes\csv\StockQuotesRequest.java:10:	ExcessiveClassLength:	Avoid really long classes.
+src\main\java\yahoofinance\quotes\csv\StockQuotesRequest.java:107:	ExcessiveMethodLength:	Avoid really long methods.
+src\main\java\yahoofinance\quotes\fx\FxSymbols.java:6:	DataClass:	The class 'FxSymbols' is suspected to be a Data Class (WOC=0.000%, NOPA=89, NOAM=0, WMC=0)
+src\main\java\yahoofinance\quotes\query1v7\StockQuotesQuery1V7Request.java:20:	ExcessiveClassLength:	Avoid really long classes.
+src\main\java\yahoofinance\quotes\query1v7\StockQuotesQuery1V7Request.java:58:	ExcessiveMethodLength:	Avoid really long methods.
+src\main\java\yahoofinance\quotes\query1v7\StockQuotesQuery1V7Request.java:112:	ExcessiveMethodLength:	Avoid really long methods.
+src\main\java\yahoofinance\quotes\stock\StockDividend.java:12:	DataClass:	The class 'StockDividend' is suspected to be a Data Class (WOC=18.182%, NOPA=0, NOAM=9, WMC=15)
+src\main\java\yahoofinance\quotes\stock\StockQuote.java:16:	ExcessiveClassLength:	Avoid really long classes.
+src\main\java\yahoofinance\quotes\stock\StockStats.java:14:	ExcessiveClassLength:	Avoid really long classes.
+src\main\java\yahoofinance\quotes\stock\StockStats.java:14:	DataClass:	The class 'StockStats' is suspected to be a Data Class (WOC=5.128%, NOPA=0, NOAM=37, WMC=41)
+src\main\java\yahoofinance\utils\CalendarUtil.java:11:	ExcessiveClassLength:	Avoid really long classes.
+src\main\java\yahoofinance\utils\RedirectableRequest.java:12:	DataClass:	The class 'RedirectableRequest' is suspected to be a Data Class (WOC=20.000%, NOPA=0, NOAM=8, WMC=22)
+src\main\java\yahoofinance\utils\RedirectableRequest.java:37:	ExcessiveMethodLength:	Avoid really long methods.
+src\main\java\yahoofinance\utils\Utils.java:63:	ExcessiveMethodLength:	Avoid really long methods.
+src\test\java\yahoofinance\HistoricalQuoteRequestTest.java:21:	ExcessiveClassLength:	Avoid really long classes.
+src\test\java\yahoofinance\HistoricalQuoteRequestTest.java:38:	ExcessiveMethodLength:	Avoid really long methods.
+src\test\java\yahoofinance\HistoricalQuoteRequestTest.java:81:	ExcessiveMethodLength:	Avoid really long methods.
+src\test\java\yahoofinance\SimpleQuoteRequestTest.java:18:	ExcessiveClassLength:	Avoid really long classes.
+src\test\java\yahoofinance\SimpleQuoteRequestTest.java:21:	ExcessiveMethodLength:	Avoid really long methods.
+src\test\java\yahoofinance\SimpleQuoteRequestTest.java:91:	ExcessiveMethodLength:	Avoid really long methods.
+src\test\java\yahoofinance\SimpleQuoteRequestTest.java:125:	ExcessiveMethodLength:	Avoid really long methods.
+src\test\java\yahoofinance\mock\MockedServersTest.java:27:	ExcessiveMethodLength:	Avoid really long methods.
