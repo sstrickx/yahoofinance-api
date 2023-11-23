@@ -13,9 +13,9 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import yahoofinance.Utils;
+import yahoofinance.utils.Utils;
 import yahoofinance.YahooFinance;
-import yahoofinance.util.RedirectableRequest;
+import yahoofinance.utils.RedirectableRequest;
 
 /**
  *
@@ -74,22 +74,21 @@ public abstract class QuotesRequest<T> {
     public List<T> getResult() throws IOException {
         List<T> result = new ArrayList<T>();
 
-        Map<String, String> params = new LinkedHashMap<String, String>();
-        params.put("s", this.query);
-        params.put("f", this.getFieldsString());
-        params.put("e", ".csv");
+        Map<String, String> params = setParams();
 
         String url = YahooFinance.QUOTES_BASE_URL + "?" + Utils.getURLParameters(params);
 
         // Get CSV from Yahoo
         log.info("Sending request: " + url);
 
-        URL request = new URL(url);
-        RedirectableRequest redirectableRequest = new RedirectableRequest(request, 5);
-        redirectableRequest.setConnectTimeout(YahooFinance.CONNECTION_TIMEOUT);
-        redirectableRequest.setReadTimeout(YahooFinance.CONNECTION_TIMEOUT);
-        URLConnection connection = redirectableRequest.openConnection();
+        URLConnection connection = getUrlConnection(url);
 
+        parseCSV(connection, result);
+
+        return result;
+    }
+
+    private void parseCSV(URLConnection connection, List<T> result) throws IOException {
         InputStreamReader is = new InputStreamReader(connection.getInputStream());
         BufferedReader br = new BufferedReader(is);
 
@@ -104,8 +103,23 @@ public abstract class QuotesRequest<T> {
                 result.add(data);
             }
         }
+    }
 
-        return result;
+    private URLConnection getUrlConnection(String url) throws IOException {
+        URL request = new URL(url);
+        RedirectableRequest redirectableRequest = new RedirectableRequest(request, 5);
+        redirectableRequest.setConnectTimeout(YahooFinance.CONNECTION_TIMEOUT);
+        redirectableRequest.setReadTimeout(YahooFinance.CONNECTION_TIMEOUT);
+        URLConnection connection = redirectableRequest.openConnection();
+        return connection;
+    }
+
+    private Map<String, String> setParams() {
+        Map<String, String> params = new LinkedHashMap<String, String>();
+        params.put("s", this.query);
+        params.put("f", this.getFieldsString());
+        params.put("e", ".csv");
+        return params;
     }
 
 }

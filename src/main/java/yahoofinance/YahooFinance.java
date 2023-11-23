@@ -13,6 +13,7 @@ import yahoofinance.quotes.csv.StockQuotesData;
 import yahoofinance.quotes.csv.StockQuotesRequest;
 import yahoofinance.quotes.query1v7.FxQuotesQuery1V7Request;
 import yahoofinance.quotes.query1v7.StockQuotesQuery1V7Request;
+import yahoofinance.utils.Utils;
 
 /**
  * YahooFinance can be used to retrieve quotes and some extra information on stocks.
@@ -377,18 +378,9 @@ public class YahooFinance {
     private static Map<String, Stock> getQuotes(String query, boolean includeHistorical) throws IOException {
         Map<String, Stock> result = new HashMap<String, Stock>();
         if(YahooFinance.QUOTES_QUERY1V7_ENABLED.equalsIgnoreCase("true")) {
-            StockQuotesQuery1V7Request request = new StockQuotesQuery1V7Request(query);
-            List<Stock> stocks = request.getResult();
-            for(Stock stock : stocks) {
-                result.put(stock.getSymbol(), stock);
-            }
+            getStockQuotes1V7(query, result);
         } else {
-            StockQuotesRequest request = new StockQuotesRequest(query);
-            List<StockQuotesData> quotes = request.getResult();
-            for(StockQuotesData data : quotes) {
-                Stock s = data.getStock();
-                result.put(s.getSymbol(), s);
-            }
+            getStockQuotes(query, result);
         }
 
         if(includeHistorical) {
@@ -399,7 +391,24 @@ public class YahooFinance {
 
         return result;
     }
-    
+
+    private static void getStockQuotes(String query, Map<String, Stock> result) throws IOException {
+        StockQuotesRequest request = new StockQuotesRequest(query);
+        List<StockQuotesData> quotes = request.getResult();
+        for(StockQuotesData data : quotes) {
+            Stock s = data.getStock();
+            result.put(s.getSymbol(), s);
+        }
+    }
+
+    private static void getStockQuotes1V7(String query, Map<String, Stock> result) throws IOException {
+        StockQuotesQuery1V7Request request = new StockQuotesQuery1V7Request(query);
+        List<Stock> stocks = request.getResult();
+        for(Stock stock : stocks) {
+            result.put(stock.getSymbol(), stock);
+        }
+    }
+
     private static Map<String, Stock> getQuotes(String query, Calendar from, Calendar to, Interval interval) throws IOException {
         Map<String, Stock> stocks = YahooFinance.getQuotes(query, false);
         stocks = YahooFinance.fetchHistoricalQuotes(stocks, from, to, interval);
